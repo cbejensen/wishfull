@@ -9,7 +9,7 @@ export function Header(props) {
         <img src="" alt="WISHFULL"/>
       </Link>
       <nav role="navigation">
-        <NavLink to="/dashboard">Dashboard</NavLink>
+        <NavLink to="/home">Home</NavLink>
         {/* <NavLink to="/find-a-friend">Find A Friend</NavLink>
         <NavLink to="/about">About</NavLink> */}
       </nav>

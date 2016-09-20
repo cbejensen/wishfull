@@ -22,14 +22,13 @@ firebase.initializeApp(config);
 // componenets
 import App from './components/App';
 import Home from './components/Home/Home';
-import Dashboard from './components/Dashboard/Dashboard';
+import Main from './components/Main/Main';
 
 render((
   <Router history={hashHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Home}/>
-      <Route path="/dashboard" component={Dashboard}/>
-      {/* <Route path="/list" component={WishList}/> */}
+    <Route path='/' component={App}>
+      <IndexRoute component={Main}/>
+      <Route path='/:user' component={Home}/>
     </Route>
   </Router>
 ), document.getElementById('app'))

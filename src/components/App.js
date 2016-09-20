@@ -4,6 +4,9 @@ import './App.css';
 
 export default function App(props) {
     return (
-      <Header />
+      <div>
+        <Header />
+        {props.children}
+      </div>
     );
 }

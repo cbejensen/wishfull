@@ -6,7 +6,7 @@ import * as firebase from 'firebase';
 export function Dashboard(props) {
   return (
     <div>
-      This is the dashboard. Test is: {props.test}
+      This is the main page. Test is: {props.test}
     </div>
   )
 }
