@@ -1,13 +1,10 @@
 import React from 'react';
+import WishList from '../WishList/WishList'
 
-class Home extends React.Component {
-  render() {
+export default function Home(props) {
     return (
       <div>
-        Home
+        <WishList />
       </div>
     );
-  }
 }
-
-export default Home;

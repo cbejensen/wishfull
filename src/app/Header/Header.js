@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router'
-import NavLink from '../NavLink/NavLink'
+import NavLink from '../../components/NavLink/NavLink'
 import { Nav, Navbar, NavItem } from 'react-bootstrap'
 
 export function Header(props) {
