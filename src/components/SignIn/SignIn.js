@@ -1,7 +1,12 @@
 import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
+import { browserHistory } from 'react-router';
 import * as firebase from 'firebase';
 
 const SignInContainer = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object
+  },
   getInitialState() {
     return {
       email: '',
@@ -16,6 +21,7 @@ const SignInContainer = React.createClass({
         console.log('not signed in')
       }
     });
+    console.log(this.context)
   },
   handleEmailChange(e) {
     this.setState({email: e.target.value});
@@ -26,11 +32,25 @@ const SignInContainer = React.createClass({
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state.email, this.state.password);
+    // firebase.auth().signInWithEmailAndPassword(
+    // this.state.email, this.state.password).catch(function(error) {
+    //   var errorCode = error.code;
+    //   var errorMessage = error.message;
+    //   console.log(errorCode, errorMessage)
+    // });
     firebase.auth().signInWithEmailAndPassword(
-      this.state.email, this.state.password).catch(function(error) {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    console.log(errorCode, errorMessage)
+    this.state.email, this.state.password).then(function() {
+      const path = '/home/' + 'cbejensen';
+      browserHistory.push(path);
+    }, function(error) {
+      console.log(error.code, error.message)
+    });
+  },
+  handleSignOut() {
+    firebase.auth().signOut().then(() => {
+      console.log('success')
+    }, error => {
+      console.log(error)
     });
   },
   render() {
@@ -39,24 +59,27 @@ const SignInContainer = React.createClass({
       password={this.state.password}
       changeEmail={this.handleEmailChange}
       changePassword={this.handlePasswordChange}
-      submit={this.handleSubmit}/>
+      submit={this.handleSubmit}
+      signOut={this.handleSignOut}/>
   }
 });
 
 export function SignIn(props) {
-  console.log(props);
   return (
-    <form onSubmit={props.submit}>
-      Email: <input
-        type="text"
-        value={props.email}
-        onChange={props.changeEmail}/>
-      Password: <input
-        type="text"
-        value={props.password}
-        onChange={props.changePassword}/>
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <form onSubmit={props.submit}>
+        Email: <input
+          type="text"
+          value={props.email}
+          onChange={props.changeEmail}/>
+        Password: <input
+          type="text"
+          value={props.password}
+          onChange={props.changePassword}/>
+        <button type="submit">Submit</button>
+      </form>
+      <button onClick={props.signOut}>Sign out</button>
+    </div>
   );
 }
 

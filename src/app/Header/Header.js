@@ -1,9 +1,56 @@
 import React from 'react';
-import { Link } from 'react-router'
-import NavLink from '../../components/NavLink/NavLink'
+import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap'
 import { Nav, Navbar, NavItem } from 'react-bootstrap'
+import * as fireabse from 'firebase';
+
+const HeaderContainer = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object
+  },
+  getInitialState() {
+    return {
+      signedIn: (null !== firebase.auth().currentUser)
+    }
+  },
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({
+        signedIn: (null !== user)
+      })
+      if (user) {
+        console.log('Signed In');
+      } else {
+        console.log('Not Signed In');
+      }
+    });
+  },
+  handleSignOut() {
+    firebase.auth().signOut().then(() => {
+      console.log('success')
+    }, error => {
+      console.log(error)
+    });
+  },
+  render() {
+    return <Header signedIn={this.state.signedIn}
+    signOut={this.handleSignOut}/>
+  }
+});
 
 export function Header(props) {
+  let signInOrOut;
+  if (props.signedIn) {
+    signInOrOut = (
+      <NavItem onClick={props.signOut}>Sign Out</NavItem>
+    );
+  } else {
+    signInOrOut = (
+      <LinkContainer to="/sign-in">
+        <NavItem>Sign In</NavItem>
+      </LinkContainer>
+    )
+  };
   return (
     <Navbar>
       <Navbar.Header>
@@ -16,29 +63,19 @@ export function Header(props) {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
-          <NavItem>
-            <NavLink to="/home">Home</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/search">Search</NavLink>
-          </NavItem>
+          <LinkContainer to="/home">
+            <NavItem>Home</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/search">
+            <NavItem>Search</NavItem>
+          </LinkContainer>
         </Nav>
         <Nav pullRight>
-          <NavItem>
-            <NavLink to="/sign-in">Sign In</NavLink>
-          </NavItem>
+          {signInOrOut}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
-}
-
-class HeaderContainer extends React.Component {
-
-
-  render() {
-    return <Header />
-  }
 }
 
 export default HeaderContainer;
