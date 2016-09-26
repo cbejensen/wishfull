@@ -13,7 +13,7 @@ const HeaderContainer = React.createClass({
       signedIn: (null !== firebase.auth().currentUser)
     }
   },
-  componentWillMount() {
+  componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({
         signedIn: (null !== user)
