@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap'
 import { Nav, Navbar, NavItem } from 'react-bootstrap'
-import * as fireabse from 'firebase';
+import * as firebase from 'firebase';
 
 const HeaderContainer = React.createClass({
   contextTypes: {
@@ -42,7 +42,9 @@ export function Header(props) {
   let signInOrOut;
   if (props.signedIn) {
     signInOrOut = (
-      <NavItem onClick={props.signOut}>Sign Out</NavItem>
+      <LinkContainer to="/">
+        <NavItem onClick={props.signOut}>Sign Out</NavItem>
+      </LinkContainer>
     );
   } else {
     signInOrOut = (

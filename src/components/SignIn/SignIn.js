@@ -1,5 +1,4 @@
 import React from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
 import { browserHistory } from 'react-router';
 import * as firebase from 'firebase';
 
@@ -31,26 +30,12 @@ const SignInContainer = React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.email, this.state.password);
-    // firebase.auth().signInWithEmailAndPassword(
-    // this.state.email, this.state.password).catch(function(error) {
-    //   var errorCode = error.code;
-    //   var errorMessage = error.message;
-    //   console.log(errorCode, errorMessage)
-    // });
     firebase.auth().signInWithEmailAndPassword(
     this.state.email, this.state.password).then(function() {
-      const path = '/home/' + 'cbejensen';
+      const path = '/home'
       browserHistory.push(path);
     }, function(error) {
       console.log(error.code, error.message)
-    });
-  },
-  handleSignOut() {
-    firebase.auth().signOut().then(() => {
-      console.log('success')
-    }, error => {
-      console.log(error)
     });
   },
   render() {
@@ -78,7 +63,6 @@ export function SignIn(props) {
           onChange={props.changePassword}/>
         <button type="submit">Submit</button>
       </form>
-      <button onClick={props.signOut}>Sign out</button>
     </div>
   );
 }

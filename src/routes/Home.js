@@ -6,7 +6,7 @@ const Home = React.createClass({
     console.log(this)
     return (
       <div>
-        <h1>My Wish List</h1>
+        <h1>{this.props.params.user}'s Wish List</h1>
         <WishList />
       </div>
     );
