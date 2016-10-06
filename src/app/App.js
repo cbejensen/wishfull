@@ -1,12 +1,29 @@
 import React from 'react';
-import Header from './Header/Header'
+import Header from './Header/Header';
+import * as firebase from 'firebase';
 import './App.css';
 
-export default function App(props) {
+const App = React.createClass({
+  getInitialState() {
+    return {
+      user: {}
+    }
+  },
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({
+        user: user
+      })
+    });
+  },
+  render() {
     return (
       <div>
-        <Header />
-        {props.children}
+        <Header {...this.state}/>
+        {React.cloneElement(this.props.children, { user: this.state.user })}
       </div>
-    );
-}
+    )
+  }
+});
+
+export default App;

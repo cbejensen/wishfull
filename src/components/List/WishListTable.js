@@ -1,5 +1,5 @@
 import React from 'react';
-import * as firebase from 'firebase';
+import { checkAuth } from '../../utils/firebaseHelpers'
 import { Table } from 'react-bootstrap';
 
 const WishListContainer = React.createClass({
@@ -8,16 +8,16 @@ const WishListContainer = React.createClass({
       data: []
     }
   },
-
   componentDidMount() {
-    const listData = firebase.database().ref().child('lists/cbejensen');
-    listData.on('value', function(snapshot) {
-      this.setState({
-        data: snapshot.val()
-      });
-    }.bind(this));
+    // const user = checkAuth();
+    // console.log(user)
+    // const listData = firebase.database().ref().child('lists/cbejensen');
+    // listData.on('value', function(snapshot) {
+    //   this.setState({
+    //     data: snapshot.val()
+    //   });
+    // }.bind(this));
   },
-
   render() {
     return <WishList data={this.state.data}/>
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
+import { Button } from 'react-bootstrap'
 import * as firebase from 'firebase';
 
 const SignInContainer = React.createClass({
@@ -11,16 +12,6 @@ const SignInContainer = React.createClass({
       email: '',
       password: ''
     }
-  },
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        console.log('signed in')
-      } else {
-        console.log('not signed in')
-      }
-    });
-    console.log(this.context)
   },
   handleEmailChange(e) {
     this.setState({email: e.target.value});
@@ -42,29 +33,42 @@ const SignInContainer = React.createClass({
     return <SignIn
       email={this.state.email}
       password={this.state.password}
-      changeEmail={this.handleEmailChange}
-      changePassword={this.handlePasswordChange}
-      submit={this.handleSubmit}
-      signOut={this.handleSignOut}/>
+      handleEmailChange={this.handleEmailChange}
+      handlePasswordChange={this.handlePasswordChange}
+      handleSubmit={this.handleSubmit} />
   }
 });
 
 export function SignIn(props) {
   return (
     <div>
-      <form onSubmit={props.submit}>
+      <form onSubmit={props.handleSubmit}>
         Email: <input
           type="text"
           value={props.email}
-          onChange={props.changeEmail}/>
+          onChange={props.handleEmailChange}/>
         Password: <input
           type="text"
           value={props.password}
-          onChange={props.changePassword}/>
-        <button type="submit">Submit</button>
+          onChange={props.handlePasswordChange}/>
+        <SignInButton />
       </form>
+      <ForgotPassword />
     </div>
   );
+}
+
+export function ForgotPassword(props) {
+  return (
+    <div>
+      ... but I forgot my password
+      {/* TODO: add forgot pwd function */}
+    </div>
+  )
+}
+
+export function SignInButton(props) {
+  return <Button type="submit">Sign In</Button>
 }
 
 export default SignInContainer;

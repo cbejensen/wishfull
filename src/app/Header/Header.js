@@ -10,40 +10,26 @@ const HeaderContainer = React.createClass({
   },
   getInitialState() {
     return {
-      signedIn: (null !== firebase.auth().currentUser)
+      user: this.props.user
     }
   },
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({
-        signedIn: (null !== user)
-      })
-      if (user) {
-        console.log('Signed In');
-      } else {
-        console.log('Not Signed In');
-      }
-    });
-  },
   handleSignOut() {
-    firebase.auth().signOut().then(() => {
-      console.log('success')
-    }, error => {
+    firebase.auth().signOut().then(() => {}, error => {
       console.log(error)
     });
   },
   render() {
-    return <Header signedIn={this.state.signedIn}
-    signOut={this.handleSignOut}/>
+    return <Header handleSignOut={this.handleSignOut}
+      user={this.props.user} />
   }
 });
 
 export function Header(props) {
   let signInOrOut;
-  if (props.signedIn) {
+  if (props.user) {
     signInOrOut = (
-      <LinkContainer to="/">
-        <NavItem onClick={props.signOut}>Sign Out</NavItem>
+      <LinkContainer to="/sign-in">
+        <NavItem onClick={props.handleSignOut}>Sign Out</NavItem>
       </LinkContainer>
     );
   } else {
@@ -58,7 +44,7 @@ export function Header(props) {
       <Navbar.Header>
         <Navbar.Brand>
           <Link to="/">
-            <img src="" alt="WISHFULL"/>
+            WISHFULL
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle />
