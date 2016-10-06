@@ -1,19 +1,9 @@
 import React from 'react';
 import * as firebase from 'firebase';
 
-import WishList from '../components/WishList/WishList'
-
-function getUser() {
-  const userId = firebase.auth().currentUser.uid;
-  return firebase.database().ref('/users/' + userId).once('value').then(snapshot => {
-    return snapshot.val();
-  });
-}
+import { List } from '../components/List'
 
 const HomeContainer = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.object
-  },
   getInitialState() {
     return {
       user: {}
@@ -22,14 +12,11 @@ const HomeContainer = React.createClass({
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        getUser().then(userInfo => {
-          console.log(this)
-          this.setState({
-            user: userInfo
-          })
-        });
+        this.setState({
+          user: user
+        })
       } else {
-        this.context.router.push('/')
+        // TODO: go to sign-in page
       }
     });
   },
@@ -41,8 +28,8 @@ const HomeContainer = React.createClass({
 export function Home(props) {
   return (
     <div>
-      <h1>{props.user.name}'s Wish List</h1>
-      <WishList />
+      <h1>{props.user.email}'s Wish List</h1>
+      <List user={props.user}/>
     </div>
   );
 }
