@@ -1,7 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase';
 
-import { List } from '../components/List'
+import { WishList } from '../components/List'
 
 const HomeContainer = React.createClass({
   getInitialState() {
@@ -29,7 +29,7 @@ export function Home(props) {
   return (
     <div>
       <h1>{props.user.email}'s Wish List</h1>
-      <List user={props.user}/>
+      <WishList />
     </div>
   );
 }
