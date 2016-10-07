@@ -2,9 +2,6 @@ import React from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 const ListFilterContainer = React.createClass({
-  componentDidMount() {
-    console.log('got it')
-  },
   render() {
     return <ListFilter />
   }

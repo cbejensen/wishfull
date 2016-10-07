@@ -20,7 +20,9 @@ const App = React.createClass({
     return (
       <div>
         <Header {...this.state}/>
-        {React.cloneElement(this.props.children, { user: this.state.user })}
+        <div className="main-container">
+          {React.cloneElement(this.props.children, { user: this.state.user })}
+        </div>
       </div>
     )
   }
