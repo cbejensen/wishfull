@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { Grid } from 'react-bootstrap';
+import * as firebase from 'firebase';
 
 import ListSearch from './ListSearch';
 import ListFilter from './ListFilter';

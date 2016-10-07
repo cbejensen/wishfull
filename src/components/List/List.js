@@ -6,7 +6,7 @@ export default function List(props) {
   const items = Object.keys(props.data).map(function(index) {
     const item = props.data[index];
     return (
-      <Item item={item}/>
+      <Item item={item} key={index}/>
     )
   });
   return <Grid>{items}</Grid>
