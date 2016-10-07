@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Grid } from 'react-bootstrap';
+
 import ListSearch from './ListSearch';
 import ListFilter from './ListFilter';
 import Item from './Item';
@@ -43,7 +45,7 @@ export function List(props) {
   const items = Object.keys(props.data).map(function(index) {
     const item = props.data[index];
     return (
-      <Item title={item.title} key={index}/>
+      <Item item={item} key={index}/>
     )
   });
   return (
@@ -52,8 +54,7 @@ export function List(props) {
         onChange={props.handleSearchChange} />
       <ListFilter value={props.filter}
         onChange={props.handleFilterChange} />
-      <br />Items:
-      {items}
+      <Grid>{items}</Grid>
     </div>
   );
 }
