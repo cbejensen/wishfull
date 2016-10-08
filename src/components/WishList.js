@@ -47,11 +47,16 @@ export function WishList(props) {
         onChange={props.handleSearchChange} />
       <ListFilter value={props.filter}
         onChange={props.handleFilterChange} />
-      <Button onClick={props.addItem}>+ Add Item</Button>
+      <Button onClick={props.addItem}>New Wish</Button>
       <List items={props.items} />
     </div>
   );
-  return <div>No items in wish list yet!</div>
+  return (
+    <div>
+      No items in wish list yet!
+      <Button onClick={props.addItem}>Make a Wish!</Button>
+    </div>
+  )
 }
 
 export default WishListContainer;

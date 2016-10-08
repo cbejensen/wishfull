@@ -9,7 +9,7 @@ const NewWishContainer = React.createClass({
     return {
       title: '',
       description: '',
-      link: '',
+      url: '',
       price: 0,
       priority: 1,
     }
@@ -39,11 +39,11 @@ const NewWishContainer = React.createClass({
         value={this.state.description}
         onChange={this.handleChange.bind(this, 'description')}
         help='Describe what the product is and why you want it' />
-      <FormInput label='Link'
-        value={this.state.link}
-        onChange={this.handleChange.bind(this, 'link')}
+      <FormInput label='URL'
+        value={this.state.url}
+        onChange={this.handleChange.bind(this, 'url')}
         placeholder='http://example.com'
-        help='Copy and paste a URL link to this item on the web' />
+        help='Copy and paste a link to this item on the web' />
       <FormInput label='Price'
         value={this.state.price}
         onChange={this.handleChange.bind(this, 'price')}
