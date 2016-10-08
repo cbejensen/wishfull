@@ -1,16 +1,7 @@
 import React from 'react';
 import { createUser } from '../../utils/firebaseHelpers';
-import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
-
-// function FieldGroup({ id, label, help, ...props }) {
-//   return (
-//     <FormGroup controlId={id}>
-//       <ControlLabel>{label}</ControlLabel>
-//       <FormControl {...props} />
-//       {help && <HelpBlock>{help}</HelpBlock>}
-//     </FormGroup>
-//   );
-// };
+import { Button } from 'react-bootstrap';
+import FormInput from '../FormInput'
 
 const CreateAccountContainer = React.createClass({
   getInitialState() {
@@ -28,13 +19,6 @@ const CreateAccountContainer = React.createClass({
     else if (length < 6) return 'error';
     else return 'success';
   },
-  validateConfirmPassword() {
-    const pwd = this.state.password;
-    const confirmPwd = this.state.confirmPassword;
-    if (confirmPwd.length === 0) return null;
-    else if (pwd === confirmPwd) return 'success';
-    else return 'error';
-  },
   handleFirstNameChange(e) {
     this.setState({firstName: e.target.value});
   },
@@ -46,9 +30,6 @@ const CreateAccountContainer = React.createClass({
   },
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
-  },
-  handleConfirmPasswordChange(e) {
-    this.setState({confirmPassword: e.target.value});
   },
   handleSubmit(e) {
     e.preventDefault();
@@ -68,54 +49,30 @@ const CreateAccountContainer = React.createClass({
   render() {
     return <CreateAccount {...this.state}
       validatePassword={this.validatePassword}
-      validateConfirmPassword={this.validateConfirmPassword}
       handleFirstNameChange={this.handleFirstNameChange}
       handleLastNameChange={this.handleLastNameChange}
       handleEmailChange={this.handleEmailChange}
       handlePasswordChange={this.handlePasswordChange}
-      handleConfirmPasswordChange={this.handleConfirmPasswordChange}
-      handleSubmit={this.handleSubmit} />
+      handleSubmit={this.handleSubmit}/>
   }
 });
 
 export function CreateAccount(props) {
   return (
     <form onSubmit={props.handleSubmit}>
-      <FormGroup>
-        <ControlLabel>First Name</ControlLabel>
-        <FormControl
-          type="text"
-          value={props.firstName}
-          onChange={props.handleFirstNameChange} />
-      </FormGroup>
-      <FormGroup>
-        <ControlLabel>Last Name</ControlLabel>
-        <FormControl
-          type="text"
-          value={props.lastName}
-          onChange={props.handleLastNameChange} />
-      </FormGroup>
-      <FormGroup>
-        <ControlLabel>E-mail</ControlLabel>
-        <FormControl
-          type="text"
-          value={props.email}
-          onChange={props.handleEmailChange} />
-      </FormGroup>
-      <FormGroup validationState={props.validatePassword()}>
-        <ControlLabel>Password</ControlLabel>
-        <FormControl
-          type="text"
-          value={props.password}
-          onChange={props.handlePasswordChange} />
-      </FormGroup>
-      <FormGroup validationState={props.validateConfirmPassword()}>
-        <ControlLabel>Confirm Password</ControlLabel>
-        <FormControl
-          type="text"
-          value={props.confirmPassword}
-          onChange={props.handleConfirmPasswordChange} />
-      </FormGroup>
+      <FormInput label='First Name'
+        val={props.firstName}
+        handleChange={props.handleFirstNameChange} />
+      <FormInput label='Last Name'
+        val={props.lastName}
+        handleChange={props.handleLastNameChange} />
+      <FormInput label='E-mail'
+        val={props.email}
+        handleChange={props.handleEmailChange} />
+      <FormInput validationState={props.validatePassword()}
+        label='Password'
+        val={props.password}
+        handleChange={props.handlePasswordChange} />
       <Button type="submit">Create Account</Button>
     </form>
   );
