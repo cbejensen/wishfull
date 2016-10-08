@@ -1,11 +1,12 @@
 import * as firebase from 'firebase';
 
-export const createUser = function(user) {
-  function throwError(err) {
-    return Promise.reject(err).then(err => {}, err => {
-      throw Error(err);
-    })
-  }
+function throwError(err) {
+  return Promise.reject(err).then(err => {}, err => {
+    throw Error(err);
+  })
+}
+
+export const createUser = user => {
   if (user.firstName === '') {
     return throwError('First name is required.')
   } else if (user.lastName === '') {
@@ -20,4 +21,13 @@ export const createUser = function(user) {
       throw Error(err.message);
     });
   }
+}
+
+export const addWish = (wish, uid) => {
+  const wishRef = firebase.database().ref(`lists/${uid}/`).push();
+  return wishRef.set(wish).then(res => {
+    return 'success';
+  }, err => {
+    throw Error(err.message);
+  })
 }
