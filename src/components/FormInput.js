@@ -1,14 +1,13 @@
 import React from 'react';
-import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
 
-export default function (props) {
+export default function ({ validationState, label, help, val, ...props }) {
   return (
-    <FormGroup validationState={props.validationState}>
-      <ControlLabel>{props.label}</ControlLabel>
-      <FormControl
-        type="text"
-        value={props.val}
-        onChange={props.handleChange} />
+    <FormGroup validationState={validationState}>
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl value={val} {...props} />
+      {validationState && <FormControl.Feedback />}
+      {help && <HelpBlock>{help}</HelpBlock>}
     </FormGroup>
   );
 }

@@ -22,11 +22,10 @@ const SignInContainer = React.createClass({
   handleSubmit(e) {
     e.preventDefault();
     firebase.auth().signInWithEmailAndPassword(
-    this.state.email, this.state.password).then(function() {
-      const path = '/home'
-      browserHistory.push(path);
-    }, function(error) {
-      console.log(error.code, error.message)
+    this.state.email, this.state.password).then(user => {
+      browserHistory.push(`/${user.uid}`);
+    }, error => {
+      console.log(error.code, error.message);
     });
   },
   render() {

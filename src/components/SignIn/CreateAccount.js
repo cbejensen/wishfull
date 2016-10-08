@@ -61,18 +61,18 @@ export function CreateAccount(props) {
   return (
     <form onSubmit={props.handleSubmit}>
       <FormInput label='First Name'
-        val={props.firstName}
-        handleChange={props.handleFirstNameChange} />
+        value={props.firstName}
+        onChange={props.handleFirstNameChange} />
       <FormInput label='Last Name'
-        val={props.lastName}
-        handleChange={props.handleLastNameChange} />
+        value={props.lastName}
+        onChange={props.handleLastNameChange} />
       <FormInput label='E-mail'
-        val={props.email}
-        handleChange={props.handleEmailChange} />
+        value={props.email}
+        onChange={props.handleEmailChange} />
       <FormInput validationState={props.validatePassword()}
         label='Password'
-        val={props.password}
-        handleChange={props.handlePasswordChange} />
+        value={props.password}
+        onChange={props.handlePasswordChange} />
       <Button type="submit">Create Account</Button>
     </form>
   );
