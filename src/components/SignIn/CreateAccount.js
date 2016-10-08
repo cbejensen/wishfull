@@ -2,6 +2,7 @@ import React from 'react';
 import { createUser } from '../../utils/firebaseHelpers';
 import { Button } from 'react-bootstrap';
 import FormInput from '../FormInput'
+import { browserHistory } from 'react-router';
 
 const CreateAccountContainer = React.createClass({
   getInitialState() {
@@ -10,7 +11,6 @@ const CreateAccountContainer = React.createClass({
       lastName: '',
       email: '',
       password: '',
-      confirmPassword: ''
     }
   },
   validatePassword() {
@@ -37,10 +37,10 @@ const CreateAccountContainer = React.createClass({
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword
+      password: this.state.password
     }).then(res => {
       console.log(res);
+      browserHistory.push(`/${res.uid}`)
     }, err => {
       console.log(err);
       alert(err);

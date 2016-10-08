@@ -31,7 +31,7 @@ const HomeContainer = React.createClass({
 export function Home(props) {
   return (
     <div>
-      <h1>{props.user.email}'s Wish List</h1>
+      <h1>Your Wish List</h1>
       <WishList user={props.user} />
     </div>
   );
