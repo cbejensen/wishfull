@@ -10,11 +10,10 @@ export const createUser = function(user) {
     return throwError('First name is required.')
   } else if (user.lastName === '') {
     return throwError('Last name is required.')
-  } else if (user.password !== user.confirmPassword) {
-    return throwError('Passwords do not match.')
   } else {
     return firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then(res => {
+      user.password = null;
       firebase.database().ref('users/' + res.uid).set(user);
       return res;
     }, err => {

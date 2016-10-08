@@ -12,7 +12,7 @@ const WishListContainer = React.createClass({
     return {
       search: '',
       filter: '',
-      items: {}
+      items: null
     }
   },
   componentDidMount() {
@@ -43,7 +43,7 @@ const WishListContainer = React.createClass({
 });
 
 export function WishList(props) {
-  return (
+  if (props.items) return (
     <div>
       <ListSearch text={props.search}
         onChange={props.handleSearchChange} />
@@ -53,6 +53,7 @@ export function WishList(props) {
       <List items={props.items} />
     </div>
   );
+  return <div>No items in wish list yet!</div>
 }
 
 export default WishListContainer;
