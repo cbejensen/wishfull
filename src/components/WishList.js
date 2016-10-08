@@ -3,9 +3,7 @@ import * as firebase from 'firebase';
 import { browserHistory } from 'react-router';
 import { Button } from 'react-bootstrap';
 
-import ListSearch from './ListSearch';
-import ListFilter from './ListFilter';
-import List from './List';
+import { List, ListFilter, ListSearch } from './List';
 
 const WishListContainer = React.createClass({
   getInitialState() {

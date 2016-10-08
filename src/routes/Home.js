@@ -2,7 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import * as firebase from 'firebase';
 
-import { WishList } from '../components/List'
+import WishList from '../components/WishList'
 
 const HomeContainer = React.createClass({
   getInitialState() {
@@ -16,7 +16,6 @@ const HomeContainer = React.createClass({
         this.setState({
           user: user
         })
-        console.log(this.state)
       } else {
         browserHistory.push('sign-in')
       }
