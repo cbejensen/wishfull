@@ -5,13 +5,22 @@ import { Nav, Navbar, NavItem } from 'react-bootstrap'
 import * as firebase from 'firebase';
 
 const HeaderContainer = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.object
-  },
   getInitialState() {
     return {
-      user: this.props.user
+      user: null,
+      ready: false
     }
+  },
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({
+        user: user,
+        ready: true
+      })
+    });
+  },
+  componentWillUnmount() {
+    firebase.auth().off();
   },
   handleSignOut() {
     firebase.auth().signOut().then(() => {}, error => {
@@ -19,23 +28,26 @@ const HeaderContainer = React.createClass({
     });
   },
   render() {
+    if (!this.state.user) return <Header user={null} />
     return <Header handleSignOut={this.handleSignOut}
-      user={this.props.user} />
+      user={this.state.user} />
   }
 });
 
 export function Header(props) {
   let signInOrOut;
+  let homePath;
   if (props.user) {
     signInOrOut = (
       <NavItem onClick={props.handleSignOut}>Sign Out</NavItem>
     );
+    homePath = `/${props.user.uid}`;
   } else {
     signInOrOut = (
       <NavItem>Sign In</NavItem>
     )
+    homePath = '/sign-in';
   };
-  const homePath = `/${props.user.uid}`;
   return (
     <Navbar>
       <Navbar.Header>

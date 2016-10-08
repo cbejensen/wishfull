@@ -17,6 +17,7 @@ const HomeContainer = React.createClass({
           user: user
         })
       } else {
+        console.log('home is rerouting to sign-in')
         browserHistory.push('sign-in')
       }
     });
