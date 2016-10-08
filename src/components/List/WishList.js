@@ -1,5 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase';
+import { browserHistory } from 'react-router';
+import { Button } from 'react-bootstrap';
 
 import ListSearch from './ListSearch';
 import ListFilter from './ListFilter';
@@ -10,21 +12,16 @@ const WishListContainer = React.createClass({
     return {
       search: '',
       filter: '',
-      data: {}
+      items: {}
     }
   },
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        const itemsRef = firebase.database().ref('lists/' + user.uid);
-        itemsRef.on('value', snap => {
-          this.setState({
-            data: snap.val()
-          })
-        });
-      } else {
-        // TODO: go to sign-in page
-      }
+    const path = `lists/${this.props.user.uid}`
+    const itemsRef = firebase.database().ref(path);
+    itemsRef.on('value', snap => {
+      this.setState({
+        items: snap.val()
+      })
     });
   },
   handleSearchChange(e) {
@@ -33,10 +30,15 @@ const WishListContainer = React.createClass({
   handleFilterChange(e) {
     this.setState({filter: e.target.value});
   },
+  addItem() {
+    const path = `/${this.props.user.uid}/new-wish`
+    browserHistory.push(path)
+  },
   render() {
     return <WishList {...this.state}
       handleSearchChange={this.handleSearchChange}
-      handleFilterChange={this.handleFilterChange}/>
+      handleFilterChange={this.handleFilterChange}
+      addItem={this.addItem}/>
   }
 });
 
@@ -47,7 +49,8 @@ export function WishList(props) {
         onChange={props.handleSearchChange} />
       <ListFilter value={props.filter}
         onChange={props.handleFilterChange} />
-      <List data={props.data} />
+      <Button onClick={props.addItem}>+ Add Item</Button>
+      <List items={props.items} />
     </div>
   );
 }

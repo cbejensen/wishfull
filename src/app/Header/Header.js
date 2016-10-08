@@ -28,22 +28,19 @@ export function Header(props) {
   let signInOrOut;
   if (props.user) {
     signInOrOut = (
-      <LinkContainer to="/sign-in">
-        <NavItem onClick={props.handleSignOut}>Sign Out</NavItem>
-      </LinkContainer>
+      <NavItem onClick={props.handleSignOut}>Sign Out</NavItem>
     );
   } else {
     signInOrOut = (
-      <LinkContainer to="/sign-in">
-        <NavItem>Sign In</NavItem>
-      </LinkContainer>
+      <NavItem>Sign In</NavItem>
     )
   };
+  const homePath = `/${props.user.uid}`;
   return (
     <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="/">
+          <Link to='/'>
             WISHFULL
           </Link>
         </Navbar.Brand>
@@ -51,15 +48,17 @@ export function Header(props) {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
-          <LinkContainer to="/home">
+          <LinkContainer to={homePath}>
             <NavItem>Home</NavItem>
           </LinkContainer>
-          <LinkContainer to="/search">
+          <LinkContainer to='/search'>
             <NavItem>Search</NavItem>
           </LinkContainer>
         </Nav>
         <Nav pullRight>
-          {signInOrOut}
+          <LinkContainer to='/sign-in'>
+            {signInOrOut}
+          </LinkContainer>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
