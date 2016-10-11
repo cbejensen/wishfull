@@ -6,12 +6,14 @@ import Main from './Main';
 import Home from './Home';
 import SignIn from './SignIn';
 import NewWish from './NewWish';
+import AllLists from './AllLists';
 
 const routes = (
   <Router history={browserHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={Main}/>
-      <Route path='/sign-in' component={SignIn}/>
+      <Route path='/sign-in' component={SignIn} />
+      <Route path='/all-lists' component={AllLists} />
       <Route path='/:user' component={Home} />
       <Route path='/:user/new-wish' component={NewWish} />
     </Route>

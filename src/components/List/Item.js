@@ -18,7 +18,7 @@ export default function Item({ item }) {
         {title}
       </Col>
       <Col xs={4}>
-        ${item.price ? item.price : null}
+        {item.price ? '$' + item.price : null}
       </Col>
       <Col xs={4}>
         Priority: {item.priority ? item.priority : null}

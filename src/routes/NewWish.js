@@ -38,6 +38,7 @@ const NewWishContainer = React.createClass({
       <FormInput label='Description'
         value={this.state.description}
         onChange={this.handleChange.bind(this, 'description')}
+        componentClass="textarea"
         help='Describe what the product is and why you want it' />
       <FormInput label='URL'
         value={this.state.url}

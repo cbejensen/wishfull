@@ -63,8 +63,8 @@ export function Header(props) {
           <LinkContainer to={homePath}>
             <NavItem>Home</NavItem>
           </LinkContainer>
-          <LinkContainer to='/search'>
-            <NavItem>Search</NavItem>
+          <LinkContainer to='/all-lists'>
+            <NavItem>All Wish Lists</NavItem>
           </LinkContainer>
         </Nav>
         <Nav pullRight>

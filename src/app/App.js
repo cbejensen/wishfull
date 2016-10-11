@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from './Header/Header';
-import * as firebase from 'firebase';
 import './App.css';
 
 const App = React.createClass({

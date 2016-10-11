@@ -2,7 +2,7 @@ import { render } from 'react-dom';
 import routes from './routes/routes';
 
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap/dist/css/bootstrap.css'
 
 import * as firebase from 'firebase';
 var config = {

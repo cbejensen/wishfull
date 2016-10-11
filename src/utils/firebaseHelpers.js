@@ -31,3 +31,17 @@ export const addWish = (wish, uid) => {
     throw Error(err.message);
   })
 }
+
+export const getList = uid => {
+  let arr = [];
+  const listRef = firebase.database().ref('lists/' + uid);
+  listRef.on('value', snap => {
+    const list = snap.val();
+    for (var item in list) {
+      if (list.hasOwnProperty(item)) {
+        arr.push(list[item]);
+      }
+    }
+    return arr;
+  })
+};
