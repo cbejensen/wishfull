@@ -43,10 +43,10 @@ const WishListContainer = React.createClass({
 export function WishList(props) {
   if (props.items) return (
     <div>
-      <ListSearch text={props.search}
+      {/* <ListSearch text={props.search}
         onChange={props.handleSearchChange} />
       <ListFilter value={props.filter}
-        onChange={props.handleFilterChange} />
+        onChange={props.handleFilterChange} /> */}
       <Button onClick={props.addItem}>New Wish</Button>
       <List items={props.items} />
     </div>
