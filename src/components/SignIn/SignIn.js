@@ -1,6 +1,6 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import { Button } from 'react-bootstrap'
+import { Form, FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 import * as firebase from 'firebase';
 
 const SignInContainer = React.createClass({
@@ -41,18 +41,27 @@ const SignInContainer = React.createClass({
 export function SignIn(props) {
   return (
     <div>
-      <form onSubmit={props.handleSubmit}>
-        Email: <input
-          type="text"
-          value={props.email}
-          onChange={props.handleEmailChange}/>
-        Password: <input
-          type="text"
-          value={props.password}
-          onChange={props.handlePasswordChange}/>
+      <Form inline onSubmit={props.handleSubmit}>
+        <FormGroup controlId="formInlineEmail">
+          <ControlLabel>E-mail</ControlLabel>
+          {' '}
+          <FormControl
+            type="text"
+            value={props.email}
+            onChange={props.handleEmailChange} />
+        </FormGroup>
+        {' '}
+        <FormGroup controlId="formInlinePassword">
+          <ControlLabel>Password</ControlLabel>
+          {' '}
+          <FormControl type="password"
+            value={props.password}
+            onChange={props.handlePasswordChange} />
+        </FormGroup>
+        {' '}
         <SignInButton />
-      </form>
-      <ForgotPassword />
+      </Form>
+      {/* <ForgotPassword /> */}
     </div>
   );
 }

@@ -70,6 +70,7 @@ export function CreateAccount(props) {
         value={props.email}
         onChange={props.handleEmailChange} />
       <FormInput validationState={props.validatePassword()}
+        type='password'
         label='Password'
         value={props.password}
         onChange={props.handlePasswordChange} />

@@ -5,6 +5,12 @@ import { Button } from 'react-bootstrap';
 
 import { List, ListFilter, ListSearch } from './List';
 
+const newWishBtn = {
+  position: 'absolute',
+  right: '60px',
+  top: '70px'
+}
+
 const WishListContainer = React.createClass({
   getInitialState() {
     return {
@@ -33,6 +39,7 @@ const WishListContainer = React.createClass({
     browserHistory.push(path)
   },
   render() {
+    if (!this.state.items) return <div>Loading...</div>
     return <WishList {...this.state}
       handleSearchChange={this.handleSearchChange}
       handleFilterChange={this.handleFilterChange}
@@ -41,22 +48,27 @@ const WishListContainer = React.createClass({
 });
 
 export function WishList(props) {
-  if (props.items) return (
-    <div>
-      {/* <ListSearch text={props.search}
-        onChange={props.handleSearchChange} />
-      <ListFilter value={props.filter}
-        onChange={props.handleFilterChange} /> */}
-      <Button onClick={props.addItem}>New Wish</Button>
-      <List items={props.items} />
-    </div>
-  );
+  let list;
+  let btnText;
+  if (props.items) {
+    list = (
+      <List items={props.items} /> ),
+    btnText = 'Add Wish'
+  } else {
+    list = 'No wishes yet!',
+    btnText = 'Make A Wish!'
+  }
   return (
     <div>
-      No items in wish list yet!
-      <Button onClick={props.addItem}>Make a Wish!</Button>
+      <Button onClick={props.addItem} style={newWishBtn}>{btnText}</Button>
+      {list}
     </div>
-  )
+  );
 }
+
+{/* <ListSearch text={props.search}
+  onChange={props.handleSearchChange} />
+<ListFilter value={props.filter}
+  onChange={props.handleFilterChange} /> */}
 
 export default WishListContainer;
