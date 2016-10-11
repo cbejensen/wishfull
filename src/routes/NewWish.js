@@ -51,7 +51,10 @@ const NewWishContainer = React.createClass({
         help='Do not include a dollar sign' />
       <FormGroup>
         <ControlLabel>Priority</ControlLabel>
-        <FormControl componentClass="select" placeholder="select">
+        <FormControl value={this.state.priority}
+          onChange={this.handleChange.bind(this, 'priority')}
+          componentClass="select"
+          placeholder="select">
           <option value={1}>1</option>
           <option value={2}>2</option>
           <option value={3}>3</option>
