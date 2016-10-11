@@ -26,7 +26,7 @@ const AllListsContainer = React.createClass({
     });
   },
   render() {
-    if (!this.state.users) return <div>nothing</div>
+    if (!this.state.users) return <div>Loading...</div>
     return <AllLists users={this.state.users}/>
   }
 });
