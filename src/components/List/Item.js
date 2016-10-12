@@ -6,7 +6,7 @@ export default function Item({ item }) {
   let title;
   if (item.url) {
     title = (
-      <a className="h3" href={item.url} target="_blank">
+      <a className="h3" href={item.url} target="_blank" style={{color: '#0000AB'}}>
         {item.title}
       </a>
     )

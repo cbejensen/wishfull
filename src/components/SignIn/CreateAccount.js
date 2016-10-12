@@ -74,7 +74,7 @@ export function CreateAccount(props) {
         label='Password'
         value={props.password}
         onChange={props.handlePasswordChange} />
-      <Button type="submit">Create Account</Button>
+      <Button type="submit" onClick={props.handleSubmit}>Create Account</Button>
     </form>
   );
 }
