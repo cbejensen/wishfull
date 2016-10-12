@@ -59,7 +59,7 @@ export function SignIn(props) {
             onChange={props.handlePasswordChange} />
         </FormGroup>
         {' '}
-        <SignInButton />
+        <SignInButton onClick={props.handleSubmit}/>
       </Form>
       {/* <ForgotPassword /> */}
     </div>
