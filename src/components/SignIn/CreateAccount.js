@@ -38,11 +38,9 @@ const CreateAccountContainer = React.createClass({
       lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password
-    }).then(res => {
-      console.log(res);
-      browserHistory.push(`/${res.uid}`)
+    }).then(user => {
+      browserHistory.push(`/${user.uid}`)
     }, err => {
-      console.log(err);
       alert(err);
     });
   },
@@ -74,7 +72,7 @@ export function CreateAccount(props) {
         label='Password'
         value={props.password}
         onChange={props.handlePasswordChange} />
-      <Button type="submit" onClick={props.handleSubmit}>Create Account</Button>
+      <Button type="submit">Create Account</Button>
     </form>
   );
 }
