@@ -21,8 +21,8 @@ const SignInContainer = React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(
-    this.state.email, this.state.password).then(user => {
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+    .then(user => {
       browserHistory.push(`/${user.uid}`);
     }, error => {
       console.log(error.code, error.message);
@@ -59,7 +59,7 @@ export function SignIn(props) {
             onChange={props.handlePasswordChange} />
         </FormGroup>
         {' '}
-        <SignInButton onClick={props.handleSubmit}/>
+        <Button type="submit">Sign In</Button>
       </Form>
       {/* <ForgotPassword /> */}
     </div>
@@ -73,10 +73,6 @@ export function ForgotPassword(props) {
       {/* TODO: add forgot pwd function */}
     </div>
   )
-}
-
-export function SignInButton(props) {
-  return <Button type="submit">Sign In</Button>
 }
 
 export default SignInContainer;
