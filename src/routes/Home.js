@@ -1,5 +1,6 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
+import { Grid, Row, Col } from 'react-bootstrap';
 import * as firebase from 'firebase';
 
 import WishList from '../components/WishList'
@@ -7,32 +8,37 @@ import WishList from '../components/WishList'
 const HomeContainer = React.createClass({
   getInitialState() {
     return {
-      user: null
+      uid: null
     }
   },
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({
-          user: user
+          uid: user.uid
         })
       } else {
-        console.log('home is rerouting to sign-in')
         browserHistory.push('sign-in')
       }
     });
   },
+  // componentWillUnmount() {
+  //   const unsubscribe = firebase.auth().onAuthStateChanged(user);
+  //   unsubscribe();
+  // },
+  // TODO: turn off listener
   render() {
-    if (!this.state.user) return null;
-    return <Home user={this.state.user}/>
+    if (!this.state.uid) return null;
+    return <Home uid={this.state.uid}/>
   }
 })
 
 export function Home(props) {
+  const path = `${props.uid}/new-wish`
   return (
     <div>
-      <h1>Your Wish List</h1>
-      <WishList user={props.user} />
+      <div className="h1" style={{textAlign: 'center'}}>Your Wish List</div>
+      <WishList uid={props.uid} />
     </div>
   );
 }

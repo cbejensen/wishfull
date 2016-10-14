@@ -16,10 +16,10 @@ export default function Item({ item }) {
   return (
     <div>
       <Row>
-        <Col xs={10}>
+        <Col xs={9}>
           {title}
         </Col>
-        <Col xs={2}>
+        <Col xs={3}>
           <div className="priorityBox">
             {item.priority ? item.priority : null}
           </div>

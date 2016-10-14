@@ -1,21 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap'
-import { Nav, Navbar, NavItem } from 'react-bootstrap'
+import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import * as firebase from 'firebase';
 
 const HeaderContainer = React.createClass({
   getInitialState() {
     return {
-      user: null,
-      ready: false
+      user: null
     }
   },
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({
-        user: user,
-        ready: true
+        user: user
       })
     });
   },
@@ -40,15 +38,24 @@ export function Header(props) {
   if (props.user) {
     signInOrOut = (
       <NavItem onClick={props.handleSignOut}>Sign Out</NavItem>
-    );
-    homePath = `/${props.user.uid}`;
+    )
   } else {
     signInOrOut = (
       <NavItem>Sign In</NavItem>
     )
-    homePath = '/sign-in';
   };
   return (
+    // <Nav bsStyle="tabs">
+    //   <LinkContainer to="/home">
+    //     <NavItem>Home</NavItem>
+    //   </LinkContainer>
+    //   <LinkContainer to="all-lists">
+    //     <NavItem>All Wish Lists</NavItem>
+    //   </LinkContainer>
+    //   <LinkContainer to="sign-in">
+    //     {signInOrOut}
+    //   </LinkContainer>
+    // </Nav>
     <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
@@ -60,15 +67,15 @@ export function Header(props) {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
-          <LinkContainer to={homePath}>
+          <LinkContainer to="/home">
             <NavItem>Home</NavItem>
           </LinkContainer>
-          <LinkContainer to='/all-lists'>
+          <LinkContainer to="/all-lists">
             <NavItem>All Wish Lists</NavItem>
           </LinkContainer>
         </Nav>
         <Nav pullRight>
-          <LinkContainer to='/sign-in'>
+          <LinkContainer to="/sign-in">
             {signInOrOut}
           </LinkContainer>
         </Nav>
