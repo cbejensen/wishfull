@@ -1,30 +1,26 @@
 import React from 'react';
 import * as firebase from 'firebase';
 import { browserHistory } from 'react-router';
-import { Button } from 'react-bootstrap';
-
+import { Button, Grid, Row, Col } from 'react-bootstrap';
 import { List, ListFilter, ListSearch } from './List';
-
-const newWishBtn = {
-  position: 'absolute',
-  right: '60px',
-  top: '70px'
-}
+import AddItemBtn from './List/AddItemBtn';
 
 const WishListContainer = React.createClass({
   getInitialState() {
     return {
       search: '',
       filter: '',
-      items: null
+      items: null,
+      loading: true
     }
   },
   componentDidMount() {
-    const path = `lists/${this.props.user.uid}`
+    const path = `lists/${this.props.uid}`
     const itemsRef = firebase.database().ref(path);
     itemsRef.on('value', snap => {
       this.setState({
-        items: snap.val()
+        items: snap.val(),
+        loading: false
       })
     });
   },
@@ -39,36 +35,40 @@ const WishListContainer = React.createClass({
     browserHistory.push(path)
   },
   render() {
-    if (!this.state.items) return <div>Loading...</div>
+    if (this.state.loading) return <div style={{textAlign: 'center'}}>Loading...</div>
+    if (this.state.items === null) return (
+      <div>
+        <div>No wishes yet!</div>
+        <AddItemBtn uid={this.props.uid} text="Make a Wish!"></AddItemBtn>
+      </div>
+    )
     return <WishList {...this.state}
       handleSearchChange={this.handleSearchChange}
       handleFilterChange={this.handleFilterChange}
-      addItem={this.addItem}/>
+      uid={this.props.uid}/>
   }
 });
 
 export function WishList(props) {
-  let list;
-  let btnText;
-  if (props.items) {
-    list = (
-      <List items={props.items} /> ),
-    btnText = 'Add Wish'
-  } else {
-    list = 'No wishes yet!',
-    btnText = 'Make A Wish!'
-  }
+  const path = `${props.uid}/new-wish`;
   return (
-    <div>
-      <Button onClick={props.addItem} style={newWishBtn}>{btnText}</Button>
-      {list}
-    </div>
+    <Grid>
+      <Row>
+        <Col xs={3} style={{textAlign: 'center'}}>
+          <ListFilter value={props.filter}
+            onChange={props.handleFilterChange} />
+        </Col>
+        <Col xs={6}>
+          <ListSearch text={props.search}
+            onChange={props.handleSearchChange} />
+        </Col>
+        <Col xs={3} style={{textAlign: 'center'}}>
+          <AddItemBtn uid={props.uid} text="Add Wish" />
+        </Col>
+      </Row>
+      <Row style={{marginTop: '20px'}}><List items={props.items} /></Row>
+    </Grid>
   );
 }
-
-{/* <ListSearch text={props.search}
-  onChange={props.handleSearchChange} />
-<ListFilter value={props.filter}
-  onChange={props.handleFilterChange} /> */}
 
 export default WishListContainer;
