@@ -1,7 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase';
 import { browserHistory } from 'react-router';
-import { Button, Grid, Row, Col } from 'react-bootstrap';
+import { Button, Grid, Row, Col, Modal } from 'react-bootstrap';
 import { List, ListFilter, ListSearch } from './List';
 import AddItemBtn from './List/AddItemBtn';
 
@@ -10,8 +10,8 @@ const WishListContainer = React.createClass({
     return {
       search: '',
       filter: '',
-      items: null,
-      loading: true
+      items: 'loading',
+      editing: false
     }
   },
   componentDidMount() {
@@ -20,7 +20,6 @@ const WishListContainer = React.createClass({
     itemsRef.on('value', snap => {
       this.setState({
         items: snap.val(),
-        loading: false
       })
     });
   },
@@ -34,40 +33,76 @@ const WishListContainer = React.createClass({
     const path = `/${this.props.user.uid}/new-wish`
     browserHistory.push(path)
   },
+  editItem(key) {
+    const items = this.state.items;
+    for (var itemKey in items) {
+      if (items.hasOwnProperty(itemKey) && itemKey === key) {
+        this.setState({
+          editing: items[itemKey]
+        })
+      }
+    }
+  },
   render() {
-    if (this.state.loading) return <div style={{textAlign: 'center'}}>Loading...</div>
-    if (this.state.items === null) return (
-      <div>
-        <div>No wishes yet!</div>
+    if (this.state.items === 'loading') return <div style={{textAlign: 'center'}}>Loading...</div>
+    if (!this.state.items) return (
+      <div style={{textAlign: 'center'}}>
+        <h3>No wishes yet!</h3>
         <AddItemBtn uid={this.props.uid} text="Make a Wish!"></AddItemBtn>
       </div>
     )
+    console.log('state updated')
     return <WishList {...this.state}
       handleSearchChange={this.handleSearchChange}
       handleFilterChange={this.handleFilterChange}
-      uid={this.props.uid}/>
+      uid={this.props.uid}
+      editItem={this.editItem} />
   }
 });
 
 export function WishList(props) {
   const path = `${props.uid}/new-wish`;
+  // TODO: make modal function
+  const editItemModal = (
+    <Modal.Dialog>
+      <Modal.Header>
+        <Modal.Title>{props.editing.title}</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>
+        One fine body...
+      </Modal.Body>
+
+      <Modal.Footer>
+        <Button>Close</Button>
+        <Button bsStyle="primary">Save changes</Button>
+      </Modal.Footer>
+
+    </Modal.Dialog>
+  )
+  console.log(props.editing)
   return (
-    <Grid>
-      <Row>
-        <Col xs={3} style={{textAlign: 'center'}}>
-          <ListFilter value={props.filter}
-            onChange={props.handleFilterChange} />
-        </Col>
-        <Col xs={6}>
-          <ListSearch text={props.search}
-            onChange={props.handleSearchChange} />
-        </Col>
-        <Col xs={3} style={{textAlign: 'center'}}>
-          <AddItemBtn uid={props.uid} text="Add Wish" />
-        </Col>
-      </Row>
-      <Row style={{marginTop: '20px'}}><List items={props.items} /></Row>
-    </Grid>
+    <span>
+      <Grid>
+        <Row>
+          <Col xs={3} style={{textAlign: 'center'}}>
+            <ListFilter value={props.filter}
+              onChange={props.handleFilterChange} />
+          </Col>
+          <Col xs={6}>
+            <ListSearch text={props.search}
+              onChange={props.handleSearchChange} />
+          </Col>
+          <Col xs={3} style={{textAlign: 'center'}}>
+            <AddItemBtn uid={props.uid} text="Add Wish" />
+          </Col>
+        </Row>
+        <Row style={{marginTop: '20px'}}>
+          <List items={props.items} editItem={props.editItem}/>
+        </Row>
+      </Grid>
+      {props.editing ? editItemModal : null}
+    </span>
   );
 }
 

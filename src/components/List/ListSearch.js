@@ -14,7 +14,7 @@ const ListSearchContainer = React.createClass({
 export function ListSearch(props) {
   return (
     <input style={searchStyle}
-      placeholder="Search"/>
+      placeholder="Search" />
   );
 }
 
