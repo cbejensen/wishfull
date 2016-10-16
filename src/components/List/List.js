@@ -3,10 +3,10 @@ import { Grid } from 'react-bootstrap';
 import Item from './Item';
 
 export default function List(props) {
-  const items = Object.keys(props.items).map(index => {
-    const item = props.items[index];
+  const items = Object.keys(props.items).map(key => {
+    const item = props.items[key];
     return (
-      <Item item={item} key={index}/>
+      <Item item={item} key={key} id={key} editItem={props.editItem}/>
     )
   });
   return <Grid>{items}</Grid>
