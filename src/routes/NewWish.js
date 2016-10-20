@@ -1,7 +1,7 @@
 import React from 'react';
 import FormInput from '../components/FormInput';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
-import { addWish } from '../utils/firebaseHelpers';
+import { addWish, updateWish, getList, getWish } from '../utils/firebaseHelpers';
 import { browserHistory } from 'react-router';
 
 const NewWishContainer = React.createClass({
@@ -10,8 +10,23 @@ const NewWishContainer = React.createClass({
       title: '',
       description: '',
       url: '',
-      price: 0,
-      priority: 1,
+      price: '',
+      priority: 1
+    }
+  },
+  componentDidMount() {
+    if (this.props.params.wish) {
+      getWish(this.props.params.uid, this.props.params.wish).then(wish => {
+        this.setState({
+          title: wish.title,
+          description: wish.description,
+          url: wish.url,
+          price: wish.price,
+          priority: wish.priority
+        })
+      }, err => {
+        browserHistory.push('/home');
+      })
     }
   },
   handleChange(field, e) {
@@ -21,38 +36,54 @@ const NewWishContainer = React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
-    addWish(this.state, this.props.params.user).then(res => {
-      console.log(res)
-      browserHistory.push(`/${this.props.params.user}`)
-    }, err => {
-      alert(err)
-    })
+    if (this.props.params.wish) {
+      updateWish(this.props.params.uid, this.props.params.wish, this.state)
+      .then(res => {
+        browserHistory.push('/home');
+      }, err => {
+        alert('There was an error processing your request. Please try again.');
+      })
+    } else {
+      addWish(this.state, this.props.params.uid).then(res => {
+        browserHistory.push(`/${this.props.params.uid}`)
+      }, err => {
+        alert(err)
+      })
+    }
+
   },
   render() {
-    return (
-    <form onSubmit={this.handleSubmit}>
+    return <NewWish {...this.state}
+      handleChange={this.handleChange}
+      handleSubmit={this.handleSubmit} />
+  }
+});
+
+export function NewWish(props) {
+  return (
+    <form onSubmit={props.handleSubmit}>
       <FormInput label='Title'
-        value={this.state.title}
-        onChange={this.handleChange.bind(this, 'title')}
+        value={props.title}
+        onChange={props.handleChange.bind(null, 'title')}
         required />
       <FormInput label='Description'
-        value={this.state.description}
-        onChange={this.handleChange.bind(this, 'description')}
+        value={props.description}
+        onChange={props.handleChange.bind(null, 'description')}
         componentClass="textarea"
         help='Describe what the product is and why you want it' />
       <FormInput label='URL'
-        value={this.state.url}
-        onChange={this.handleChange.bind(this, 'url')}
-        placeholder='http://example.com'
-        help='Copy and paste a link to this item on the web' />
+        value={props.url}
+        onChange={props.handleChange.bind(null, 'url')}
+        placeholder='example.com'
+        help='Copy and paste a link to props item on the web' />
       <FormInput label='Price'
-        value={this.state.price}
-        onChange={this.handleChange.bind(this, 'price')}
+        value={props.price}
+        onChange={props.handleChange.bind(null, 'price')}
         help='Do not include a dollar sign' />
       <FormGroup>
         <ControlLabel>Priority</ControlLabel>
-        <FormControl value={this.state.priority}
-          onChange={this.handleChange.bind(this, 'priority')}
+        <FormControl value={props.priority}
+          onChange={props.handleChange.bind(null, 'priority')}
           componentClass="select"
           placeholder="select">
           <option value={1}>1</option>
@@ -73,8 +104,7 @@ const NewWishContainer = React.createClass({
       </FormGroup>
       <Button type="submit">Wish!</Button>
     </form>
-    )
-  }
-});
+  )
+}
 
 export default NewWishContainer;
