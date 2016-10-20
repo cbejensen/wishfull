@@ -45,7 +45,7 @@ const NewWishContainer = React.createClass({
       })
     } else {
       addWish(this.state, this.props.params.uid).then(res => {
-        browserHistory.push(`/${this.props.params.uid}`)
+        browserHistory.push('/home')
       }, err => {
         alert(err)
       })

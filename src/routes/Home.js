@@ -38,7 +38,7 @@ export function Home(props) {
   return (
     <div>
       <div className="h1" style={{textAlign: 'center'}}>Your Wish List</div>
-      <WishList uid={props.uid} />
+      <WishList uid={props.uid} editing={true} />
     </div>
   );
 }
