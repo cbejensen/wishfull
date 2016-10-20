@@ -39,7 +39,7 @@ const CreateAccountContainer = React.createClass({
       email: this.state.email,
       password: this.state.password
     }).then(user => {
-      browserHistory.push(`/${user.uid}`)
+      browserHistory.push('/home')
     }, err => {
       alert(err);
     });
