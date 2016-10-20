@@ -11,7 +11,6 @@ const WishListContainer = React.createClass({
       search: '',
       filter: '',
       items: 'loading',
-      editing: false
     }
   },
   componentDidMount() {
@@ -34,14 +33,7 @@ const WishListContainer = React.createClass({
     browserHistory.push(path)
   },
   editItem(key) {
-    const items = this.state.items;
-    for (var itemKey in items) {
-      if (items.hasOwnProperty(itemKey) && itemKey === key) {
-        this.setState({
-          editing: items[itemKey]
-        })
-      }
-    }
+    browserHistory.push(`${this.props.uid}/edit-wish/${key}`)
   },
   render() {
     if (this.state.items === 'loading') return <div style={{textAlign: 'center'}}>Loading...</div>
@@ -63,23 +55,6 @@ const WishListContainer = React.createClass({
 export function WishList(props) {
   const path = `${props.uid}/new-wish`;
   // TODO: make modal function
-  const editItemModal = (
-    <Modal.Dialog>
-      <Modal.Header>
-        <Modal.Title>{props.editing.title}</Modal.Title>
-      </Modal.Header>
-
-      <Modal.Body>
-        One fine body...
-      </Modal.Body>
-
-      <Modal.Footer>
-        <Button>Close</Button>
-        <Button bsStyle="primary">Save changes</Button>
-      </Modal.Footer>
-
-    </Modal.Dialog>
-  )
   console.log(props.editing)
   return (
     <span>
@@ -101,7 +76,6 @@ export function WishList(props) {
           <List items={props.items} editItem={props.editItem}/>
         </Row>
       </Grid>
-      {props.editing ? editItemModal : null}
     </span>
   );
 }
