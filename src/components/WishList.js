@@ -29,7 +29,7 @@ const WishListContainer = React.createClass({
     this.setState({filter: e.target.value});
   },
   addItem() {
-    const path = `/${this.props.user.uid}/new-wish`
+    const path = `/${this.props.uid}/new-wish`
     browserHistory.push(path)
   },
   editItem(key) {
