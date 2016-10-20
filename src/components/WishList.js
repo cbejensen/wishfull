@@ -60,15 +60,15 @@ export function WishList(props) {
     <span>
       <Grid>
         <Row>
-          <Col xs={3} style={{textAlign: 'center'}}>
+          {/* <Col xs={3} style={{textAlign: 'center'}}>
             <ListFilter value={props.filter}
               onChange={props.handleFilterChange} />
           </Col>
           <Col xs={6}>
             <ListSearch text={props.search}
               onChange={props.handleSearchChange} />
-          </Col>
-          <Col xs={3} style={{textAlign: 'center'}}>
+          </Col> */}
+          <Col xs={12} style={{textAlign: 'center'}}>
             <AddItemBtn uid={props.uid} text="Add Wish" />
           </Col>
         </Row>
