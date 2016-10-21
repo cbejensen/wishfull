@@ -15,7 +15,7 @@ export const createUser = user => {
     return firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then(res => {
       user.password = null;
-      ref.child('users/' + res.uid).set(user);
+      firebase.database().ref(`users/${res.uid}`).set(user);
       return res;
     }, err => {
       throw Error(err.message);
