@@ -1,10 +1,10 @@
 import React from 'react';
-import FormInput from '../components/FormInput';
-import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
-import { addWish, updateWish, getList, getWish } from '../utils/firebaseHelpers';
+import FormInput from '../FormInput';
+import { FormGroup, ControlLabel, FormControl, HelpBlock, Grid, Row, Col, Button } from 'react-bootstrap';
+import { addWish, updateWish, getList, getWish } from '../../utils/firebaseHelpers';
 import { browserHistory } from 'react-router';
 
-const NewWishContainer = React.createClass({
+const WishFormContainer = React.createClass({
   getInitialState() {
     return {
       title: '',
@@ -15,8 +15,8 @@ const NewWishContainer = React.createClass({
     }
   },
   componentDidMount() {
-    if (this.props.params.wish) {
-      getWish(this.props.params.uid, this.props.params.wish).then(wish => {
+    if (this.props.wishId) {
+      getWish(this.props.uid, this.props.wishId).then(wish => {
         this.setState({
           title: wish.title,
           description: wish.description,
@@ -25,6 +25,7 @@ const NewWishContainer = React.createClass({
           priority: wish.priority
         })
       }, err => {
+        console.log(err)
         browserHistory.push('/home');
       })
     }
@@ -36,30 +37,29 @@ const NewWishContainer = React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
-    if (this.props.params.wish) {
-      updateWish(this.props.params.uid, this.props.params.wish, this.state)
+    if (!this.props.wishId) {
+      addWish(this.state, this.props.uid).then(res => {
+        browserHistory.push('/home')
+      }, err => {
+        alert(err)
+      })
+    } else {
+      updateWish(this.props.uid, this.props.wishId, this.state)
       .then(res => {
         browserHistory.push('/home');
       }, err => {
         alert('There was an error processing your request. Please try again.');
       })
-    } else {
-      addWish(this.state, this.props.params.uid).then(res => {
-        browserHistory.push('/home')
-      }, err => {
-        alert(err)
-      })
     }
-
   },
   render() {
-    return <NewWish {...this.state}
+    return <WishForm {...this.state}
       handleChange={this.handleChange}
       handleSubmit={this.handleSubmit} />
   }
 });
 
-export function NewWish(props) {
+export function WishForm(props) {
   return (
     <form onSubmit={props.handleSubmit}>
       <FormInput label='Title'
@@ -102,9 +102,18 @@ export function NewWish(props) {
           10 = I practically need this to survive
         </HelpBlock>
       </FormGroup>
-      <Button type="submit">Wish!</Button>
+      <Grid>
+        <Row style={{textAlign: 'center'}}>
+          <Col xs={12} sm={4}>
+            <Button bsStyle="primary" type="submit">Save</Button>
+          </Col>
+          <Col xs={12} sm={4}>
+            <Button bsStyle="warning" onClick={() => {browserHistory.push('/home')}}>Cancel</Button>
+          </Col>
+        </Row>
+      </Grid>
     </form>
   )
 }
 
-export default NewWishContainer;
+export default WishFormContainer;

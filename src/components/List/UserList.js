@@ -9,10 +9,8 @@ const UserListContainer = React.createClass({
     }
   },
   componentDidMount() {
-    console.log(this.props)
     const listRef = firebase.database().ref('lists/' + this.props.uid);
     listRef.on('value', snap => {
-      console.log(snap.val())
       this.setState({
         list: snap.val()
       })
