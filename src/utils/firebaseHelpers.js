@@ -51,6 +51,7 @@ export const getList = uid => {
 };
 
 export const getWish = (uid, itemId) => {
+  console.log(uid, itemId)
   return getList(uid).then(list => {
     return list[itemId];
   }, err => {

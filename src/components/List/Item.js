@@ -1,10 +1,15 @@
 import React from 'react';
 import { Button, Row, Col } from 'react-bootstrap';
-import './index.css'
+import './index.css';
 
 export default function Item(props) {
-  let title;
-  let editBtn;
+  let title, editBtn;
+  const bougt = props.item.bought;
+  const priority = (
+    <div className="priorityBox">
+      {props.item.priority}
+    </div>
+  )
   if (props.item.url) {
     title = (
       <a className="h3" href={props.item.url} target="_blank" style={{color: '#0000AB'}}>
@@ -24,14 +29,15 @@ export default function Item(props) {
           {title}
         </Col>
         <Col xs={3}>
-          <div className="priorityBox">
-            {props.item.priority ? props.item.priority : null}
-          </div>
+          {props.item.priority ? priority : null}
         </Col>
       </Row>
       <Row>
-        <Col xs={12} style={{fontWeight: 'bolder'}}>
+        <Col xs={1} style={{fontWeight: 'bolder'}}>
           {props.item.price ? '$' + props.item.price : null}
+        </Col>
+        <Col xs={11} style={{color: '#FEC926'}}>
+          {props.item.bought ? 'Already fulfilled by ' + props.item.bought : null}
         </Col>
       </Row>
       <Row style={{marginBottom: '5px'}}>

@@ -2,8 +2,8 @@ import React from 'react';
 import * as firebase from 'firebase';
 import { browserHistory } from 'react-router';
 import { Button, Grid, Row, Col, Modal } from 'react-bootstrap';
-import { List, ListFilter, ListSearch } from './List';
-import AddItemBtn from './List/AddItemBtn';
+import { List, ListFilter, ListSearch } from '../List';
+import AddItemBtn from '../List/AddItemBtn';
 
 const WishListContainer = React.createClass({
   getInitialState() {
@@ -29,11 +29,12 @@ const WishListContainer = React.createClass({
     this.setState({filter: e.target.value});
   },
   addItem() {
-    const path = `/${this.props.uid}/new-wish`
-    browserHistory.push(path)
+    const path = `/${this.props.uid}/wish-form`;
+    browserHistory.push(path);
   },
   editItem(key) {
-    browserHistory.push(`${this.props.uid}/edit-wish/${key}`)
+    const path = `${this.props.uid}/wish-form/${key}`;
+    browserHistory.push(path);
   },
   render() {
     if (this.state.items === 'loading') return <div style={{textAlign: 'center'}}>Loading...</div>

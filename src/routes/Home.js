@@ -2,8 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { Grid, Row, Col } from 'react-bootstrap';
 import * as firebase from 'firebase';
-
-import WishList from '../components/WishList'
+import { WishList } from '../components/WishList';
 
 const HomeContainer = React.createClass({
   getInitialState() {
