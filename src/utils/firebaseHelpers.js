@@ -6,29 +6,47 @@ function throwError(err) {
   })
 }
 
+export const getAuth = () => {
+  return firebase.auth().onAuthStateChanged(user => {
+    return user;
+  }, err => {
+    return err;
+  });
+}
+
 export const createUser = user => {
   if (user.firstName === '') {
     return throwError('First name is required.')
   } else if (user.lastName === '') {
     return throwError('Last name is required.')
   } else {
-    return firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+    return firebase.auth()
+    .createUserWithEmailAndPassword(user.email, user.password)
     .then(res => {
       user.password = null;
       firebase.database().ref(`users/${res.uid}`).set(user);
       return res;
     }, err => {
-      throw Error(err.message);
+      return err;
     });
   }
 }
 
-export const addWish = (wish, uid) => {
-  const wishRef = firebase.database().ref(`lists/${uid}/`).push();
-  return wishRef.set(wish).then(res => {
-    return 'success';
+export const getUser = uid => {
+  const ref = firebase.database().ref(`users/${uid}`);
+  return ref.once('value').then(snap => {
+    return snap.val();
   }, err => {
-    throw Error(err.message);
+    return err;
+  })
+}
+
+export const addWish = (wish, uid) => {
+  const wishRef = firebase.database().ref(`lists/${uid}`).push();
+  return wishRef.set(wish).then(res => {
+    return res;
+  }, err => {
+    return err;
   })
 }
 
@@ -43,7 +61,7 @@ export const updateWish = (uid, wishRef, wish) => {
 
 export const getList = uid => {
   const listRef = firebase.database().ref(`lists/${uid}`);
-  return listRef.once('value').then(function(snap) {
+  return listRef.once('value').then(snap => {
     return snap.val()
   }, err => {
     return err;
@@ -57,4 +75,20 @@ export const getWish = (uid, itemId) => {
   }, err => {
     return err;
   })
+}
+
+export const getOtherUsers = userId => {
+  const usersRef = firebase.database().ref('users');
+  return usersRef.once('value').then(snap => {
+    const data = snap.val();
+    // get rid of userID to only find other uid's
+    delete data[userId];
+    return Object.keys(data).map(uid => {
+      const user = data[uid];
+      user.uid = uid;
+      return user;
+    })
+  }, err => {
+    return err;
+  });
 }
