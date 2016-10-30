@@ -1,7 +1,7 @@
 import React from 'react';
 import FormInput from '../FormInput';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Grid, Row, Col, Button } from 'react-bootstrap';
-import { addWish, updateWish, getList, getWish } from '../../utils/firebaseHelpers';
+import { addWish, updateWish, getWish } from '../../utils/firebaseHelpers';
 import { browserHistory } from 'react-router';
 
 const WishFormContainer = React.createClass({

@@ -34,7 +34,6 @@ const HeaderContainer = React.createClass({
 
 export function Header(props) {
   let signInOrOut;
-  let homePath;
   if (props.user) {
     signInOrOut = (
       <NavItem onClick={props.handleSignOut}>Sign Out</NavItem>
@@ -45,17 +44,6 @@ export function Header(props) {
     )
   };
   return (
-    // <Nav bsStyle="tabs">
-    //   <LinkContainer to="/home">
-    //     <NavItem>Home</NavItem>
-    //   </LinkContainer>
-    //   <LinkContainer to="all-lists">
-    //     <NavItem>All Wish Lists</NavItem>
-    //   </LinkContainer>
-    //   <LinkContainer to="sign-in">
-    //     {signInOrOut}
-    //   </LinkContainer>
-    // </Nav>
     <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
@@ -70,7 +58,7 @@ export function Header(props) {
           <LinkContainer to="/home">
             <NavItem>Home</NavItem>
           </LinkContainer>
-          <LinkContainer to="/all-lists">
+          <LinkContainer to="/all-wish-lists">
             <NavItem>All Wish Lists</NavItem>
           </LinkContainer>
         </Nav>

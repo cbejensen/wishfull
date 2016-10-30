@@ -6,7 +6,7 @@ const App = React.createClass({
   render() {
     return (
       <div>
-        <Header {...this.state}/>
+        <Header />
         <div className="main-container">
           {this.props.children}
         </div>
