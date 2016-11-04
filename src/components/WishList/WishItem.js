@@ -2,6 +2,7 @@ import React from 'react';
 import EditWishBtn from './EditWishBtn';
 import FulfillWishBtn from './FulfillWishBtn';
 import { Row, Col } from 'react-bootstrap';
+import './index.css'
 
 export default function WishItem(props) {
   // TODO: replace title, priority, btn with ternary statements

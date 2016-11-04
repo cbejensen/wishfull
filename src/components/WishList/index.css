@@ -1,0 +1,8 @@
+.priorityBox {
+  color: red;
+  border: 1px solid red;
+  padding: 5px;
+  width: 35px;
+  text-align: center;
+  margin: auto;
+}
