@@ -16,9 +16,9 @@ const routes = (
       <Route path='/home' component={Home} />
       <Route path='/sign-in' component={SignIn} />
       <Route path='/create-account' component={CreateAccount} />
-      <Route path='/:uid/wish-form' component={WishForm} />
-      <Route path='/:uid/wish-form/:wishId' component={WishForm} />
-      <Route path='/:uid' component={User} />
+      <Route path='/users/:uid/wish-form' component={WishForm} />
+      <Route path='/users/:uid/wish-form/:wishId' component={WishForm} />
+      <Route path='/users/:uid' component={User} />
     </Route>
   </Router>
 )

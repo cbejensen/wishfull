@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 
 class AddWishBtn extends React.Component {
   addWish() {
-    const path = `${this.props.uid}/wish-form`;
+    const path = `users/${this.props.uid}/wish-form`;
     browserHistory.push(path);
   }
   render() {

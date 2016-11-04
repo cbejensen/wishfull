@@ -12,7 +12,6 @@ class UserView extends React.Component {
     const uid = this.props.params.uid;
     getUser(uid).then(user => {
       this.setState({user: user})
-      console.log(user)
     }, err => {
       console.log(err);
     })

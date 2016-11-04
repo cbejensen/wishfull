@@ -1,15 +1,19 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-// import { Grid, Row, Col } from 'react-bootstrap';
+import { Nav, NavItem } from 'react-bootstrap';
 import * as firebase from 'firebase';
 import { WishListContainer } from '../components/WishList';
+import { FriendList } from '../components/FriendList';
 
-const HomeContainer = React.createClass({
-  getInitialState() {
-    return {
-      user: null
-    }
-  },
+class HomeView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null,
+      activeTab: 1
+    };
+    this.handleTabSelect = this.handleTabSelect.bind(this);
+  }
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -20,25 +24,43 @@ const HomeContainer = React.createClass({
         browserHistory.push('sign-in')
       }
     });
-  },
+  }
+  handleTabSelect(e) {
+    this.setState({
+      activeTab: e
+    })
+  }
   // componentWillUnmount() {
-  //   const unsubscribe = firebase.auth().onAuthStateChanged(user);
+  //   const unsubscribe = firebase.auth().onAuthStateChanged(() => {});
   //   unsubscribe();
-  // },
-  // TODO: turn off listener
+  // }
   render() {
     if (!this.state.user) return null;
-    return <Home user={this.state.user}/>
+    let title, activeComponent;
+    if (this.state.activeTab === 1) {
+      title = 'Your Wish List';
+      activeComponent = (
+        <WishListContainer uid={this.state.user.uid} mutable={true} />
+      )
+    } else {
+      title = 'Your Friends';
+      // activeComponent = <FriendList uid={this.state.user.uid}/>
+      activeComponent = (
+        <FriendList uid={this.state.user.uid} />
+      )
+    }
+    return (
+      <div>
+        <Nav bsStyle="tabs" activeKey={this.state.activeTab}
+          onSelect={this.handleTabSelect} justified >
+          <NavItem eventKey={1}>My List</NavItem>
+          <NavItem eventKey={2}>My Friends</NavItem>
+        </Nav>
+        <div className="h1" style={{textAlign: 'center'}}>{title}</div>
+        {activeComponent}
+      </div>
+    );
   }
-})
-
-export function Home(props) {
-  return (
-    <div>
-      <div className="h1" style={{textAlign: 'center'}}>Your Wish List</div>
-      <WishListContainer uid={props.user.uid} mutable={true} />
-    </div>
-  );
 }
 
-export default HomeContainer;
+export default HomeView;

@@ -77,17 +77,18 @@ export const getWish = (uid, itemId) => {
   })
 }
 
-export const getOtherUsers = userId => {
-  const usersRef = firebase.database().ref('users');
+export const getFriends = uid => {
+  // let array = [];
+  // const getFriend = id => {
+  //   const friendsRef = firebase.database().ref(`users/${id}`);
+  //   friendsRef.once('value').then(friendSnap => {
+  //     return friendSnap.val();
+  //   })
+  // }
+  const usersRef = firebase.database().ref(`users/${uid}/friends`);
   return usersRef.once('value').then(snap => {
-    const data = snap.val();
-    // get rid of userID to only find other uid's
-    delete data[userId];
-    return Object.keys(data).map(uid => {
-      const user = data[uid];
-      user.uid = uid;
-      return user;
-    })
+    console.log(snap.val())
+    return snap.val();
   }, err => {
     return err;
   });

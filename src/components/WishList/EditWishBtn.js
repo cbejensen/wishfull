@@ -7,7 +7,7 @@ class EditWishBtn extends React.Component {
   editWish() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        const path = `${user.uid}/wish-form/${this.props.id}`;
+        const path = `users/${user.uid}/wish-form/${this.props.id}`;
         browserHistory.push(path);
       } else {
         browserHistory.push('sign-in')
