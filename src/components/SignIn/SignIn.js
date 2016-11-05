@@ -1,4 +1,5 @@
 import React from 'react';
+import FormInput from '../FormInput';
 import { browserHistory } from 'react-router';
 import { Form, FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 import * as firebase from 'firebase';
@@ -42,22 +43,16 @@ export function SignIn(props) {
   return (
     <div>
       <Form inline onSubmit={props.handleSubmit}>
-        <FormGroup controlId="formInlineEmail">
-          <ControlLabel>E-mail</ControlLabel>
-          {' '}
-          <FormControl
-            type="text"
-            value={props.email}
-            onChange={props.handleEmailChange} />
-        </FormGroup>
+        <FormInput style={{marginLeft: '5px'}} label='E-mail'
+          value={props.email}
+          onChange={props.handleEmailChange}
+          required />
         {' '}
-        <FormGroup controlId="formInlinePassword">
-          <ControlLabel>Password</ControlLabel>
-          {' '}
-          <FormControl type="password"
-            value={props.password}
-            onChange={props.handlePasswordChange} />
-        </FormGroup>
+        <FormInput style={{marginLeft: '5px'}} label='Password'
+          type='password'
+          value={props.password}
+          onChange={props.handlePasswordChange}
+          required />
         {' '}
         <Button type="submit">Sign In</Button>
       </Form>

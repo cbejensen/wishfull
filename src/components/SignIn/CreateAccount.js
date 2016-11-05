@@ -58,18 +58,19 @@ const CreateAccountContainer = React.createClass({
 export function CreateAccount(props) {
   return (
     <form onSubmit={props.handleSubmit}>
-      <FormInput label='First Name'
+      <FormInput label='First Name' required
         value={props.firstName}
         onChange={props.handleFirstNameChange} />
-      <FormInput label='Last Name'
+      <FormInput label='Last Name' required
         value={props.lastName}
         onChange={props.handleLastNameChange} />
-      <FormInput label='E-mail'
+      <FormInput label='E-mail' required
         value={props.email}
         onChange={props.handleEmailChange} />
-      <FormInput validationState={props.validatePassword()}
+      <FormInput label='Password' required
         type='password'
-        label='Password'
+        help='Must be at least 6 characters'
+        validationState={props.validatePassword()}
         value={props.password}
         onChange={props.handlePasswordChange} />
       <Button type="submit">Create Account</Button>
