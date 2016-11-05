@@ -1,15 +1,14 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { browserHistory } from 'react-router';
+import { Link } from 'react-router';
 
-class AddWishBtn extends React.Component {
-  addWish() {
-    const path = `users/${this.props.uid}/wish-form`;
-    browserHistory.push(path);
-  }
-  render() {
-    return <Button>Make New Wish</Button>
-  }
+export default function AddWishBtn(props) {
+  const path = `users/${props.uid}/wish-form`;
+  return (
+    <Link to={path}>
+      <Button>
+        Make A Wish
+      </Button>
+    </Link>
+  )
 }
-
-export default AddWishBtn;

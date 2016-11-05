@@ -17,7 +17,6 @@ const WishListContainer = React.createClass({
     const path = `lists/${this.props.uid}`
     const itemsRef = firebase.database().ref(path);
     itemsRef.on('value', snap => {
-      console.log(snap.val())
       this.setState({
         items: snap.val(),
       })
@@ -72,7 +71,7 @@ export function WishListInner(props) {
         {props.mutable ? addWishBtn : null}
       </Row>
       <Row style={{marginTop: '20px'}}>
-        <WishList items={props.items} mutable={props.mutable} />
+        <WishList uid={props.uid} items={props.items} mutable={props.mutable} />
       </Row>
     </Grid>
   );

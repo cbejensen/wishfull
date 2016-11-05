@@ -6,7 +6,7 @@ export default function WishList(props) {
   const items = Object.keys(props.items).map(id => {
     const item = props.items[id];
     return (
-      <WishItem item={item} key={id} id={id} mutable={props.mutable}/>
+      <WishItem uid={props.uid} item={item} key={id} id={id} mutable={props.mutable}/>
     )
   });
   return <Grid>{items}</Grid>
