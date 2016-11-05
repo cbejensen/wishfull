@@ -1,11 +1,44 @@
 import React from 'react';
 import EditWishBtn from './EditWishBtn';
 import FulfillWishBtn from './FulfillWishBtn';
+import { getUser, fulfillWish } from '../../utils/firebaseHelpers'
 import { Row, Col } from 'react-bootstrap';
 import './index.css'
 
-export default function WishItem(props) {
-  // TODO: replace title, priority, btn with ternary statements
+class WishItemContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fulfilledBy: props.item.fulfilledBy
+    }
+    this.handleFulfill = this.handleFulfill.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.item.fulfilledBy) {
+      getUser(nextProps.item.fulfilledBy).then(user => {
+        const name = `${user.firstName} ${user.lastName}`;
+        this.setState({
+          fulfilledBy: name
+        })
+      }, err => {
+        console.log(err);
+      })
+    }
+  }
+  handleFulfill() {
+    const user = firebase.auth().currentUser;
+    fulfillWish(this.props.uid, this.props.id, user.uid).then(res => {
+      console.log(res)
+    })
+  }
+  render() {
+    return <WishItem {...this.props}
+      fulfilledBy={this.state.fulfilledBy}
+      handleFulfill={this.handleFulfill}/>
+  }
+};
+
+export function WishItem(props) {
   let title, priority, btn;
   if (props.item.priority) priority = (
     <div className="priorityBox">
@@ -13,9 +46,9 @@ export default function WishItem(props) {
     </div>
   )
   if (props.mutable) {
-    btn = <EditWishBtn id={props.id} />
+    btn = <EditWishBtn uid={props.uid} id={props.id} />
   } else {
-    btn = <FulfillWishBtn id={props.id} />
+    btn = <FulfillWishBtn handleFulfill={props.handleFulfill} />
   }
   if (props.item.url) {
     title = (
@@ -41,7 +74,7 @@ export default function WishItem(props) {
           {props.item.price ? '$' + props.item.price : null}
         </Col>
         <Col xs={11} style={{color: '#FEC926'}}>
-          {props.item.bought ? 'Already fulfilled by ' + props.item.bought : null}
+          {props.item.fulfilledBy ? 'Already fulfilled by ' + props.fulfilledBy : null}
         </Col>
       </Row>
       <Row style={{marginBottom: '5px'}}>
@@ -55,3 +88,5 @@ export default function WishItem(props) {
     </div>
   );
 }
+
+export default WishItemContainer;

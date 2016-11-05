@@ -43,7 +43,7 @@ export const getUser = uid => {
 
 export const addWish = (wish, uid) => {
   const wishRef = firebase.database().ref(`lists/${uid}`).push();
-  return wishRef.set(wish).then(res => {
+  return wishRef.update(wish).then(res => {
     return res;
   }, err => {
     return err;
@@ -72,6 +72,17 @@ export const getWish = (uid, itemId) => {
   console.log(uid, itemId)
   return getList(uid).then(list => {
     return list[itemId];
+  }, err => {
+    return err;
+  })
+}
+
+export const fulfillWish = (uid, wishId, fulfiller) => {
+  const path = `lists/${uid}/${wishId}`;
+  console.log(path)
+  const ref = firebase.database().ref(path);
+  return ref.update({fulfilledBy: fulfiller}).then(res => {
+    return res;
   }, err => {
     return err;
   })
