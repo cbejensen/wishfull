@@ -17,9 +17,6 @@ const HeaderContainer = React.createClass({
       })
     });
   },
-  componentWillUnmount() {
-    firebase.auth().off();
-  },
   handleSignOut() {
     firebase.auth().signOut().then(() => {}, error => {
       console.log(error)
@@ -57,9 +54,6 @@ export function Header(props) {
         <Nav>
           <LinkContainer to="/home">
             <NavItem>Home</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/all-wish-lists">
-            <NavItem>All Wish Lists</NavItem>
           </LinkContainer>
         </Nav>
         <Nav pullRight>
