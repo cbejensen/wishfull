@@ -1,19 +1,23 @@
 import React from 'react';
 import FormInput from '../FormInput';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Grid, Row, Col, Button } from 'react-bootstrap';
-import { addWish, updateWish, getWish } from '../../utils/firebaseHelpers';
-import { browserHistory } from 'react-router';
+import { addWish, updateWish, getWish, deleteWish } from '../../utils/firebaseHelpers';
+import { browserHistory, Link } from 'react-router';
 
-const WishFormContainer = React.createClass({
-  getInitialState() {
-    return {
+class WishFormContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       title: '',
       description: '',
       url: '',
       price: '',
       priority: 1
     }
-  },
+    this.handleChange = this.handleChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   componentDidMount() {
     if (this.props.wishId) {
       getWish(this.props.uid, this.props.wishId).then(wish => {
@@ -29,12 +33,17 @@ const WishFormContainer = React.createClass({
         browserHistory.push('/home');
       })
     }
-  },
+  }
   handleChange(field, e) {
     const newState = {};
     newState[field] = e.target.value;
     this.setState(newState);
-  },
+  }
+  handleDelete(e) {
+    const confirmed = confirm('WARNING\nThis wish will be permanently deleted.')
+    if (confirmed) deleteWish(this.props.uid, this.props.wishId);
+    browserHistory.push('/home')
+  }
   handleSubmit(e) {
     e.preventDefault();
     if (!this.props.wishId) {
@@ -51,13 +60,14 @@ const WishFormContainer = React.createClass({
         alert('There was an error processing your request. Please try again.');
       })
     }
-  },
+  }
   render() {
     return <WishForm {...this.state}
       handleChange={this.handleChange}
+      handleDelete={this.handleDelete}
       handleSubmit={this.handleSubmit} />
   }
-});
+};
 
 export function WishForm(props) {
   return (
@@ -104,11 +114,18 @@ export function WishForm(props) {
       </FormGroup>
       <Grid>
         <Row style={{textAlign: 'center'}}>
-          <Col xs={12} sm={4}>
+          <Col xs={12} sm={4} style={{marginBottom: '30px'}}>
             <Button bsStyle="primary" type="submit">Save</Button>
           </Col>
-          <Col xs={12} sm={4}>
-            <Button bsStyle="warning" onClick={() => {browserHistory.push('/home')}}>Cancel</Button>
+          <Col xs={12} sm={4} style={{marginBottom: '30px'}}>
+            <Link to='/home'>
+              <Button bsStyle="warning">Cancel</Button>
+            </Link>
+          </Col>
+          <Col xs={12} sm={4} style={{marginBottom: '30px'}}>
+            <Button bsStyle="danger" onClick={props.handleDelete}>
+              Delete
+            </Button>
           </Col>
         </Row>
       </Grid>
