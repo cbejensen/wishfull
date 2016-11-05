@@ -31,7 +31,7 @@ class FriendList extends React.Component {
       <Grid>
         {Object.keys(this.state.friends).map(id => {
           return (
-            <Row key={id}>
+            <Row key={id} style={{textAlign: 'center'}}>
               <FriendItem id={id} />
             </Row>
           )
