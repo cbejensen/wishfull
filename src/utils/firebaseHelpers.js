@@ -78,15 +78,18 @@ export const getWish = (uid, itemId) => {
 }
 
 export const fulfillWish = (uid, wishId, fulfiller) => {
-  console.log(uid, wishId, fulfiller)
   const path = `lists/${uid}/${wishId}`;
-  console.log(path)
   const ref = firebase.database().ref(path);
   return ref.update({fulfilledBy: fulfiller}).then(res => {
     return res;
   }, err => {
     return err;
   })
+}
+
+export const deleteWish = (uid, wishId) => {
+  const path = `lists/${uid}/${wishId}`;
+  firebase.database().ref(path).remove();
 }
 
 export const getFriends = uid => {

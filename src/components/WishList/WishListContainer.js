@@ -5,14 +5,17 @@ import { Link } from 'react-router';
 import WishList from './WishList';
 import AddWishBtn from './AddWishBtn';
 
-const WishListContainer = React.createClass({
-  getInitialState() {
-    return {
+class WishListContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       search: '',
       filter: '',
       items: 'loading'
     }
-  },
+    this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
+  }
   componentDidMount() {
     const path = `lists/${this.props.uid}`
     const itemsRef = firebase.database().ref(path);
@@ -21,13 +24,18 @@ const WishListContainer = React.createClass({
         items: snap.val(),
       })
     });
-  },
+  }
+  componentWillUnmount() {
+    const path = `lists/${this.props.uid}`
+    const itemsRef = firebase.database().ref(path);
+    itemsRef.off();
+  }
   handleSearchChange(e) {
     this.setState({search: e.target.value});
-  },
+  }
   handleFilterChange(e) {
     this.setState({filter: e.target.value});
-  },
+  }
   render() {
     if (this.state.items === 'loading') return (
       <div style={{textAlign: 'center'}}>Loading...</div>
@@ -49,7 +57,7 @@ const WishListContainer = React.createClass({
       uid={this.props.uid}
       mutable={this.props.mutable} />
   }
-});
+};
 
 export function WishListInner(props) {
   const addWishBtn = (
