@@ -3,6 +3,7 @@ import EditWishBtn from './EditWishBtn';
 import FulfillWishBtn from './FulfillWishBtn';
 import { getUser, fulfillWish } from '../../utils/firebaseHelpers'
 import { Row, Col } from 'react-bootstrap';
+import * as firebase from 'firebase';
 import './index.css'
 
 class WishItemContainer extends React.Component {
@@ -25,11 +26,21 @@ class WishItemContainer extends React.Component {
       })
     }
   }
+  componentWillUnmount() {
+    const unsubscribe = firebase.auth().onAuthStateChanged(() => {});
+    unsubscribe();
+  }
   handleFulfill() {
-    const user = firebase.auth().currentUser;
-    fulfillWish(this.props.uid, this.props.id, user.uid).then(res => {
-      console.log(res)
-    })
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        fulfillWish(this.props.uid, this.props.id, user.uid)
+        .then(res => {}, err => {
+          console.log(err);
+        })
+      } else {
+        alert('You must be signed in first!');
+      }
+    });
   }
   render() {
     return <WishItem {...this.props}

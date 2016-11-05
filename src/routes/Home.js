@@ -25,15 +25,15 @@ class HomeView extends React.Component {
       }
     });
   }
+  componentWillUnmount() {
+    const unsubscribe = firebase.auth().onAuthStateChanged(() => {});
+    unsubscribe();
+  }
   handleTabSelect(e) {
     this.setState({
       activeTab: e
     })
   }
-  // componentWillUnmount() {
-  //   const unsubscribe = firebase.auth().onAuthStateChanged(() => {});
-  //   unsubscribe();
-  // }
   render() {
     if (!this.state.user) return null;
     let title, activeComponent;
@@ -53,7 +53,7 @@ class HomeView extends React.Component {
       <div>
         <Nav bsStyle="tabs" activeKey={this.state.activeTab}
           onSelect={this.handleTabSelect} justified >
-          <NavItem eventKey={1}>My List</NavItem>
+          <NavItem eventKey={1}>My Wish List</NavItem>
           <NavItem eventKey={2}>My Friends</NavItem>
         </Nav>
         <div className="h1" style={{textAlign: 'center'}}>{title}</div>
