@@ -31,7 +31,7 @@ class WishItemContainer extends React.Component {
     unsubscribe();
   }
   handleFulfill() {
-    firebase.auth().onAuthStateChanged(user => {
+    const removeAuthListener = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         fulfillWish(this.props.uid, this.props.id, user.uid)
         .then(res => {}, err => {
@@ -41,6 +41,7 @@ class WishItemContainer extends React.Component {
         alert('You must be signed in first!');
       }
     });
+    removeAuthListener();
   }
   render() {
     return <WishItem {...this.props}
