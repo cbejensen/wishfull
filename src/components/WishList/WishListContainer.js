@@ -2,7 +2,7 @@ import React from 'react';
 import * as firebase from 'firebase';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router';
-import WishList from './WishList';
+import WishItem from './WishItem';
 import AddWishBtn from './AddWishBtn';
 
 class WishListContainer extends React.Component {
@@ -11,12 +11,21 @@ class WishListContainer extends React.Component {
     this.state = {
       search: '',
       filter: '',
-      items: 'loading'
+      items: 'loading',
+      showFulfilled: false
     }
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
   }
   componentDidMount() {
+    const removeAuthListener = firebase.auth().onAuthStateChanged(user => {
+      if (user && user.uid !== this.props.uid) {
+        this.setState({
+          showFulfilled: true
+        })
+      }
+    })
+    removeAuthListener();
     const path = `lists/${this.props.uid}`
     const itemsRef = firebase.database().ref(path);
     itemsRef.on('value', snap => {
@@ -79,7 +88,19 @@ export function WishListInner(props) {
         {props.mutable ? addWishBtn : null}
       </Row>
       <Row style={{marginTop: '20px'}}>
-        <WishList uid={props.uid} items={props.items} mutable={props.mutable} />
+        <Grid>
+          {Object.keys(props.items).map(id => {
+            const item = props.items[id];
+            return (
+                <WishItem uid={props.uid}
+                  item={item}
+                  id={id}
+                  key={id}
+                  mutable={props.mutable}
+                  showFulfilled={props.showFulfilled}/>
+            )
+          })}
+        </Grid>
       </Row>
     </Grid>
   );
