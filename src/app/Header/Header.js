@@ -56,6 +56,11 @@ export function Header(props) {
             <NavItem>Home</NavItem>
           </LinkContainer>
         </Nav>
+        <Nav>
+          <LinkContainer to="/friends">
+            <NavItem>Friends</NavItem>
+          </LinkContainer>
+        </Nav>
         <Nav pullRight>
           <LinkContainer to="/sign-in">
             {signInOrOut}

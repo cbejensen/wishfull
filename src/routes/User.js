@@ -12,7 +12,7 @@ class UserView extends React.Component {
   }
   componentDidMount() {
     const uid = this.props.params.uid;
-    firebase.auth().onAuthStateChanged(user => {
+    this.removeAuthListener = firebase.auth().onAuthStateChanged(user => {
       if (user.uid === uid) {
         browserHistory.push('/home')
       }
@@ -24,8 +24,7 @@ class UserView extends React.Component {
     })
   }
   componentWillUnmount() {
-    const unsubscribe = firebase.auth().onAuthStateChanged(() => {});
-    unsubscribe();
+    this.removeAuthListener();
   }
   render() {
     if (!this.state.user) return <div>Loading...</div>;
