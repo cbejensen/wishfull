@@ -26,6 +26,7 @@ const SignInContainer = React.createClass({
     .then(user => {
       browserHistory.push('/home');
     }, error => {
+      alert(error.message)
       console.log(error.code, error.message);
     });
   },
