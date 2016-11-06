@@ -80,7 +80,7 @@ export const getWish = (uid, itemId) => {
 export const fulfillWish = (uid, wishId, fulfiller) => {
   const path = `lists/${uid}/${wishId}`;
   const ref = firebase.database().ref(path);
-  return ref.update({fulfilledBy: fulfiller}).then(res => {
+  return ref.update({fulfilled: fulfiller}).then(res => {
     return res;
   }, err => {
     return err;

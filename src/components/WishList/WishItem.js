@@ -1,6 +1,7 @@
 import React from 'react';
 import EditWishBtn from './EditWishBtn';
 import FulfillWishBtn from './FulfillWishBtn';
+import Fulfilled from './Fulfilled';
 import { getUser, fulfillWish } from '../../utils/firebaseHelpers'
 import { Row, Col } from 'react-bootstrap';
 import * as firebase from 'firebase';
@@ -10,25 +11,9 @@ class WishItemContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fulfilledBy: props.item.fulfilledBy
+      showFulfilled: this.props.showFulfilled
     }
     this.handleFulfill = this.handleFulfill.bind(this);
-  }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.item.fulfilledBy) {
-      getUser(nextProps.item.fulfilledBy).then(user => {
-        const name = `${user.firstName} ${user.lastName}`;
-        this.setState({
-          fulfilledBy: name
-        })
-      }, err => {
-        console.log(err);
-      })
-    }
-  }
-  componentWillUnmount() {
-    const unsubscribe = firebase.auth().onAuthStateChanged(() => {});
-    unsubscribe();
   }
   handleFulfill() {
     const removeAuthListener = firebase.auth().onAuthStateChanged(user => {
@@ -44,13 +29,15 @@ class WishItemContainer extends React.Component {
     removeAuthListener();
   }
   render() {
-    return <WishItem {...this.props}
-      fulfilledBy={this.state.fulfilledBy}
+    return <WishItem item={this.props.item}
+      mutalbe={this.props.mutable}
+      showFulfilled={this.state.showFulfilled}
       handleFulfill={this.handleFulfill}/>
   }
 };
 
 export function WishItem(props) {
+  console.log(props.showFulfilled, props.item.fulfilled)
   let title, priority, btn;
   if (props.item.priority) priority = (
     <div className="priorityBox">
@@ -82,11 +69,12 @@ export function WishItem(props) {
         </Col>
       </Row>
       <Row>
-        <Col xs={1} style={{fontWeight: 'bolder'}}>
-          {props.item.price ? '$' + props.item.price : null}
+        <Col sm={1} xs={4} style={{fontWeight: 'bolder'}}>
+          {props.item.price && '$' + props.item.price}
         </Col>
-        <Col xs={11} style={{color: '#FEC926'}}>
-          {props.item.fulfilledBy ? 'Already fulfilled by ' + props.fulfilledBy : null}
+        <Col sm={11} xs={8} style={{color: '#FEC926'}}>
+          {(props.showFulfilled && props.item.fulfilled) &&
+            <Fulfilled uid={props.item.fulfilled} />}
         </Col>
       </Row>
       <Row style={{marginBottom: '5px'}}>

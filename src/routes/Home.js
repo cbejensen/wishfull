@@ -24,10 +24,10 @@ class HomeView extends React.Component {
         browserHistory.push('sign-in')
       }
     });
-    this.stopAuthListener = authListener;
+    this.removeAuthListener = authListener;
   }
   componentWillUnmount() {
-    this.stopAuthListener();
+    this.removeAuthListener();
   }
   handleTabSelect(e) {
     this.setState({
