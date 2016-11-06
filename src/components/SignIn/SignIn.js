@@ -43,13 +43,13 @@ const SignInContainer = React.createClass({
 export function SignIn(props) {
   return (
     <div>
-      <Form inline onSubmit={props.handleSubmit}>
-        <FormInput style={{marginLeft: '5px'}} label='E-mail'
+      <Form onSubmit={props.handleSubmit}>
+        <FormInput label='E-mail'
           value={props.email}
           onChange={props.handleEmailChange}
           required />
         {' '}
-        <FormInput style={{marginLeft: '5px'}} label='Password'
+        <FormInput label='Password'
           type='password'
           value={props.password}
           onChange={props.handlePasswordChange}

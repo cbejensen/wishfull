@@ -43,7 +43,6 @@ class HomeView extends React.Component {
       )
     } else {
       title = 'Your Friends';
-      // activeComponent = <FriendList uid={this.state.user.uid}/>
       activeComponent = (
         <FriendList uid={this.state.user.uid} />
       )
