@@ -15,7 +15,7 @@ class HomeView extends React.Component {
     this.handleTabSelect = this.handleTabSelect.bind(this);
   }
   componentDidMount() {
-    const authListener = firebase.auth().onAuthStateChanged(user => {
+    this.removeAuthListener = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({
           user: user
@@ -24,7 +24,6 @@ class HomeView extends React.Component {
         browserHistory.push('sign-in')
       }
     });
-    this.removeAuthListener = authListener;
   }
   componentWillUnmount() {
     this.removeAuthListener();

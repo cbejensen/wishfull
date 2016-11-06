@@ -4,6 +4,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import App from '../app/App';
 import Main from './Main';
 import Home from './Home';
+import Friends from './Friends';
 import User from './User';
 import SignIn from './SignIn';
 import WishForm from './WishForm';
@@ -14,6 +15,7 @@ const routes = (
     <Route path='/' component={App}>
       <IndexRoute component={Main}/>
       <Route path='/home' component={Home} />
+      <Route path='/friends' component={Friends} />
       <Route path='/sign-in' component={SignIn} />
       <Route path='/create-account' component={CreateAccount} />
       <Route path='/users/:uid/wish-form' component={WishForm} />

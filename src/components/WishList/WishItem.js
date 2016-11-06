@@ -2,7 +2,7 @@ import React from 'react';
 import EditWishBtn from './EditWishBtn';
 import FulfillWishBtn from './FulfillWishBtn';
 import Fulfilled from './Fulfilled';
-import { getUser, fulfillWish } from '../../utils/firebaseHelpers'
+import { fulfillWish } from '../../utils/firebaseHelpers'
 import { Row, Col } from 'react-bootstrap';
 import * as firebase from 'firebase';
 import './index.css'
@@ -30,14 +30,15 @@ class WishItemContainer extends React.Component {
   }
   render() {
     return <WishItem item={this.props.item}
-      mutalbe={this.props.mutable}
+      uid={this.props.uid}
+      id={this.props.id}
+      mutable={this.props.mutable}
       showFulfilled={this.state.showFulfilled}
       handleFulfill={this.handleFulfill}/>
   }
 };
 
 export function WishItem(props) {
-  console.log(props.showFulfilled, props.item.fulfilled)
   let title, priority, btn;
   if (props.item.priority) priority = (
     <div className="priorityBox">
