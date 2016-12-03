@@ -30,12 +30,15 @@ const HeaderContainer = React.createClass({
 });
 
 export function Header(props) {
+  let getFriendsPath;
   let signInOrOut;
   if (props.user) {
+    getFriendsPath = `/get-friends/${props.user.uid}`;
     signInOrOut = (
       <NavItem onClick={props.handleSignOut}>Sign Out</NavItem>
     )
   } else {
+    getFriendsPath = `/sign-in`
     signInOrOut = (
       <NavItem>Sign In</NavItem>
     )
@@ -59,6 +62,11 @@ export function Header(props) {
         <Nav>
           <LinkContainer to="/friends">
             <NavItem>Friends</NavItem>
+          </LinkContainer>
+        </Nav>
+        <Nav>
+          <LinkContainer to={getFriendsPath}>
+            <NavItem>Get Some Friends</NavItem>
           </LinkContainer>
         </Nav>
         <Nav pullRight>
