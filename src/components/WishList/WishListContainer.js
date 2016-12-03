@@ -54,9 +54,7 @@ class WishListContainer extends React.Component {
       return (
         <div style={{textAlign: 'center'}}>
           <h3>No wishes yet!</h3>
-          <button>
-            <Link to={path}>Make a Wish!</Link>
-          </button>
+          {this.state.showFulfilled ? null : <AddWishBtn uid={this.props.uid} />}
         </div>
       )
     }
