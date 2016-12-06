@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import * as firebase from 'firebase';
 
@@ -58,13 +58,9 @@ export function Header(props) {
           <LinkContainer to="/home">
             <NavItem>Home</NavItem>
           </LinkContainer>
-        </Nav>
-        <Nav>
           <LinkContainer to="/friends">
             <NavItem>Friends</NavItem>
           </LinkContainer>
-        </Nav>
-        <Nav>
           <LinkContainer to={getFriendsPath}>
             <NavItem>Get Some Friends</NavItem>
           </LinkContainer>

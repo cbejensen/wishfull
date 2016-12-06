@@ -7,7 +7,6 @@ import * as firebase from 'firebase';
 class UserView extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {user: null}
   }
   componentDidMount() {
