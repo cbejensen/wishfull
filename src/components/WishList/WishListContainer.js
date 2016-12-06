@@ -90,12 +90,12 @@ export function WishListInner(props) {
           {Object.keys(props.items).map(id => {
             const item = props.items[id];
             return (
-                <WishItem uid={props.uid}
-                  item={item}
-                  id={id}
-                  key={id}
-                  mutable={props.mutable}
-                  showFulfilled={props.showFulfilled}/>
+              <WishItem uid={props.uid}
+                item={item}
+                id={id}
+                key={id}
+                mutable={props.mutable}
+                showFulfilled={props.showFulfilled}/>
             )
           })}
         </Grid>

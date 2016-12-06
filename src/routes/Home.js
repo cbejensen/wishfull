@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router';
 import { Nav, NavItem } from 'react-bootstrap';
 import * as firebase from 'firebase';
 import { WishListContainer } from '../components/WishList';
-import { FriendList } from '../components/FriendList';
+import { FriendList } from '../components/UserList';
 
 class HomeView extends React.Component {
   constructor(props) {
