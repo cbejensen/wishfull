@@ -1,6 +1,6 @@
 import React from 'react';
 import { getFriends } from '../../utils/firebaseHelpers';
-import User from './User';
+import User from './UserListItem';
 
 class UserList extends React.Component {
   render() {
@@ -8,7 +8,8 @@ class UserList extends React.Component {
       <div>
         {Object.keys(this.props.users).map(id => {
           return (
-            <User key={id} id={id} />
+            <User key={id} id={id}
+              handleClickUser={this.props.handleClickUser.bind(null, id)}/>
           )
         })}
       </div>

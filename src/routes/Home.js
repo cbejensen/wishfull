@@ -1,18 +1,22 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import { Nav, NavItem } from 'react-bootstrap';
-import * as firebase from 'firebase';
+import { Nav, NavItem, Button } from 'react-bootstrap';
 import { WishListContainer } from '../components/WishList';
-import { FriendList } from '../components/UserList';
+import { FriendList } from '../components/User';
+import { uploadFile } from '../utils/firebaseHelpers';
+import * as firebase from 'firebase';
 
 class HomeView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: null,
-      activeTab: 1
+      activeTab: 1,
+      avatar: null
     };
     this.handleTabSelect = this.handleTabSelect.bind(this);
+    this.handleAvatarSelect = this.handleAvatarSelect.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     this.removeAuthListener = firebase.auth().onAuthStateChanged(user => {
@@ -33,18 +37,35 @@ class HomeView extends React.Component {
       activeTab: e
     })
   }
+  handleAvatarSelect(e) {
+    var file = e.target.files[0]
+
+    console.log(file)
+    this.setState({
+      avatar: e.target.files[0]
+    })
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.avatar) {
+      const file = this.state.avatar;
+      const path = `images/avatars/${this.state.user.uid}`;
+      uploadFile(file, path);
+    }
+  }
   render() {
     if (!this.state.user) return null;
-    let title, activeComponent;
+    let activeComponent;
     if (this.state.activeTab === 1) {
-      title = 'Your Wish List';
       activeComponent = (
         <WishListContainer uid={this.state.user.uid} mutable={true} />
       )
     } else {
-      title = 'Your Friends';
       activeComponent = (
-        <FriendList uid={this.state.user.uid} />
+        <form onSubmit={this.handleSubmit}>
+          <input type="file" onChange={this.handleAvatarSelect} />
+          <Button bsClass="primary" type="submit">Submit</Button>
+        </form>
       )
     }
     return (
@@ -52,9 +73,8 @@ class HomeView extends React.Component {
         <Nav bsStyle="tabs" activeKey={this.state.activeTab}
           onSelect={this.handleTabSelect} justified >
           <NavItem eventKey={1}>My Wish List</NavItem>
-          <NavItem eventKey={2}>My Friends</NavItem>
+          <NavItem eventKey={2}>Change Avatar</NavItem>
         </Nav>
-        <div className="h1" style={{textAlign: 'center'}}>{title}</div>
         {activeComponent}
       </div>
     );
