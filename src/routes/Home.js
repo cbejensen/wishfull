@@ -1,9 +1,10 @@
 import React from 'react';
+import { UserListItem } from '../components/User';
 import { browserHistory } from 'react-router';
 import { Nav, NavItem, Button } from 'react-bootstrap';
 import { WishListContainer } from '../components/WishList';
 import { FriendList } from '../components/User';
-import { uploadFile } from '../utils/firebaseHelpers';
+import { getFile, uploadFile } from '../utils/firebaseHelpers';
 import * as firebase from 'firebase';
 
 class HomeView extends React.Component {
@@ -12,7 +13,9 @@ class HomeView extends React.Component {
     this.state = {
       user: null,
       activeTab: 1,
-      avatar: null
+      avatar: null,
+      pendingAvatar: null,
+      loading: false
     };
     this.handleTabSelect = this.handleTabSelect.bind(this);
     this.handleAvatarSelect = this.handleAvatarSelect.bind(this);
@@ -21,8 +24,11 @@ class HomeView extends React.Component {
   componentDidMount() {
     this.removeAuthListener = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({
-          user: user
+        getFile(`images/avatars/${user.uid}`).then(avatar => {
+          this.setState({
+            user: user,
+            avatar: avatar
+          })
         })
       } else {
         browserHistory.push('sign-in')
@@ -39,21 +45,37 @@ class HomeView extends React.Component {
   }
   handleAvatarSelect(e) {
     var file = e.target.files[0]
-
-    console.log(file)
     this.setState({
-      avatar: e.target.files[0]
+      pendingAvatar: e.target.files[0]
     })
   }
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.avatar) {
-      const file = this.state.avatar;
+    if (this.state.pendingAvatar) {
+      this.setState({loading: 'Loading...'})
+      const file = this.state.pendingAvatar;
       const path = `images/avatars/${this.state.user.uid}`;
-      uploadFile(file, path);
+      uploadFile(file, path).then(res => {
+        alert('Success!');
+        getFile(`images/avatars/${this.state.user.uid}`).then(avatar => {
+          this.setState({
+            avatar: avatar,
+            loading: false
+          })
+        })
+      }, err => {
+        alert('There was an error. Please try again.')
+        console.log(err)
+      })
+    } else {
+      alert('Please choose a picture first')
     }
   }
   render() {
+    const style = {
+      textAlign: 'center',
+      paddingTop: '10px'
+    }
     if (!this.state.user) return null;
     let activeComponent;
     if (this.state.activeTab === 1) {
@@ -62,9 +84,13 @@ class HomeView extends React.Component {
       )
     } else {
       activeComponent = (
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} style={style}>
           <input type="file" onChange={this.handleAvatarSelect} />
-          <Button bsClass="primary" type="submit">Submit</Button>
+          <Button bsStyle="primary" type="submit"
+            style={{margin: '20px'}}>Submit</Button>
+          {this.state.loading && this.state.loading}
+          <UserListItem id={this.state.user.uid}/>
+          Refresh page after submitting new avatar.
         </form>
       )
     }

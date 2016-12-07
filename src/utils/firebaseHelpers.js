@@ -130,10 +130,10 @@ export const updateFriend = (uid, friendId) => {
 }
 
 export const uploadFile = (file, path) => {
-  storageRef.child(path).put(file).then(snap => {
-    console.log('Uploaded file!');
+  return storageRef.child(path).put(file).then(snap => {
+    return snap;
   }, err => {
-    console.log(err);
+    return err;
   });
 }
 
