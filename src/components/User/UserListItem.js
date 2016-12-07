@@ -29,7 +29,8 @@ class UserContainer extends React.Component {
     const url = `url("${this.state.avatar}")`
     const style = {
       backgroundImage: url,
-      backgroundPosition: 'center'
+      backgroundPosition: 'center',
+      backgroundSize: 'cover'
     }
     if (!this.state.user) return null;
     const name = this.state.user.firstName + ' ' + this.state.user.lastName;
