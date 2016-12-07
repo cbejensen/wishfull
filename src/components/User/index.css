@@ -1,0 +1,33 @@
+.UserListItem-row {
+  height: 125px;
+  padding: 20px 0;
+  cursor: pointer;
+}
+
+.UserListItem-row:hover {
+  box-shadow: 0 0 20px 2px gray;
+}
+
+.UserListItem-img-col {
+  text-align: right;
+}
+
+.UserListItem-img {
+  height: 85px;
+  width: 85px;
+  border-radius: 100%;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.UserListItem-name-col {
+  height: 100%;
+  text-align: left;
+}
+
+.UserListItem-name-col div {
+  font-size: 2em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

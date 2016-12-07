@@ -1,6 +1,6 @@
 import React from 'react';
 import UserList from './UserList';
-import { getAllUsers } from '../../utils/firebaseHelpers';
+import { getAllUsers, updateFriend } from '../../utils/firebaseHelpers';
 
 class AllUsersList extends React.Component {
   constructor(props) {
@@ -19,14 +19,24 @@ class AllUsersList extends React.Component {
           }
         }
       }
-      this.setState({users: users})
+      this.setState({
+        users: users
+      })
     }, err => {
       console.log(err)
     })
   }
+  changeFriend(friendId, e) {
+    updateFriend(this.props.uid, friendId).then(res => {
+      alert('Success!')
+    }, err => {
+      console.log(err);
+    })
+  }
   render() {
     if (!this.state.users) return <div>Loading...</div>
-    return <UserList users={this.state.users} />
+    return <UserList users={this.state.users}
+      handleClickUser={this.changeFriend.bind(this)}/>
   }
 };
 

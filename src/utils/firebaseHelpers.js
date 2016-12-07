@@ -7,18 +7,12 @@ var config = {
 };
 firebase.initializeApp(config);
 
+const storageRef = firebase.storage().ref();
+
 function throwError(err) {
   return Promise.reject(err).then(err => {}, err => {
     throw Error(err);
   })
-}
-
-export const getAuth = () => {
-  return firebase.auth().onAuthStateChanged(user => {
-    return user;
-  }, err => {
-    return err;
-  });
 }
 
 export const createUser = user => {
@@ -100,16 +94,8 @@ export const deleteWish = (uid, wishId) => {
 }
 
 export const getFriends = uid => {
-  // let array = [];
-  // const getFriend = id => {
-  //   const friendsRef = firebase.database().ref(`users/${id}`);
-  //   friendsRef.once('value').then(friendSnap => {
-  //     return friendSnap.val();
-  //   })
-  // }
   const usersRef = firebase.database().ref(`users/${uid}/friends`);
   return usersRef.once('value').then(snap => {
-    console.log(snap.val())
     return snap.val();
   }, err => {
     return err;
@@ -140,5 +126,21 @@ export const updateFriend = (uid, friendId) => {
     }
   }, err => {
     return err;
+  })
+}
+
+export const uploadFile = (file, path) => {
+  storageRef.child(path).put(file).then(snap => {
+    console.log('Uploaded file!');
+  }, err => {
+    console.log(err);
+  });
+}
+
+export const getFile = path => {
+  return storageRef.child(path).getDownloadURL().then(url => {
+    return url;
+  }, err => {
+    return false;
   })
 }

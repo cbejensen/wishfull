@@ -1,5 +1,5 @@
 import React from 'react';
-import { FriendList } from '../components/UserList';
+import { FriendList } from '../components/User';
 import { browserHistory } from 'react-router';
 import * as firebase from 'firebase';
 
