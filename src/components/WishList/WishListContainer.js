@@ -1,8 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router';
-import WishItem from './WishItem';
+import WishItemContainer from './WishItemContainer';
 import AddWishBtn from './AddWishBtn';
 
 class WishListContainer extends React.Component {
@@ -50,7 +49,6 @@ class WishListContainer extends React.Component {
       <div style={{textAlign: 'center'}}>Loading...</div>
     )
     if (!this.state.items) {
-      const path = `users/${this.props.uid}/wish-form`;
       return (
         <div style={{textAlign: 'center'}}>
           <h3>No wishes yet!</h3>
@@ -90,7 +88,7 @@ export function WishListInner(props) {
           {Object.keys(props.items).map(id => {
             const item = props.items[id];
             return (
-              <WishItem uid={props.uid}
+              <WishItemContainer uid={props.uid}
                 item={item}
                 id={id}
                 key={id}

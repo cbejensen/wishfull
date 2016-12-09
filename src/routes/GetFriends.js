@@ -1,6 +1,6 @@
 import React from 'react';
 import { AllUsersList } from '../components/User';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 
 class GetFriends extends React.Component {
   render() {

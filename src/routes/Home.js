@@ -3,7 +3,6 @@ import { UserListItem } from '../components/User';
 import { browserHistory } from 'react-router';
 import { Nav, NavItem, Button } from 'react-bootstrap';
 import { WishListContainer } from '../components/WishList';
-import { FriendList } from '../components/User';
 import { getFile, uploadFile } from '../utils/firebaseHelpers';
 import * as firebase from 'firebase';
 
@@ -44,9 +43,9 @@ class HomeView extends React.Component {
     })
   }
   handleAvatarSelect(e) {
-    var file = e.target.files[0]
+    var img = e.target.files[0]
     this.setState({
-      pendingAvatar: e.target.files[0]
+      pendingAvatar: img
     })
   }
   handleSubmit(e) {

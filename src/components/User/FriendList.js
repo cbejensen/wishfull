@@ -1,6 +1,5 @@
 import React from 'react';
 import { getFriends } from '../../utils/firebaseHelpers';
-import { Grid, Row } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import UserList from './UserList';
 
