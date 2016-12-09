@@ -1,15 +1,14 @@
 import React from 'react';
-import { Image } from 'react-bootstrap';
 import './index.css';
 
-class Avatar extends React.Component {
-  render() {
-    return (
-      <Image src={this.props.img}
-        className="User-img"
-        circle />
-    )
+function Avatar(props) {
+  const url = `url("${props.avatar}")`
+  const style = {
+    backgroundImage: url,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover'
   }
+  return <div style={style} className="Avatar"></div>
 };
 
 export default Avatar;

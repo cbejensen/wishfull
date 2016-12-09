@@ -1,5 +1,4 @@
 import React from 'react';
-import { getFriends } from '../../utils/firebaseHelpers';
 import User from './UserListItem';
 
 class UserList extends React.Component {
