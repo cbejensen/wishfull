@@ -1,8 +1,7 @@
 import React from 'react';
 import WishItem from './WishItem';
-import { fulfillWish } from '../../utils/firebaseHelpers'
+import { fulfillWish } from 'utils/firebaseHelpers';
 import * as firebase from 'firebase';
-import './index.css'
 
 class WishItemContainer extends React.Component {
   constructor(props) {
@@ -26,12 +25,14 @@ class WishItemContainer extends React.Component {
     removeAuthListener();
   }
   render() {
-    return <WishItem item={this.props.item}
-      uid={this.props.uid}
-      id={this.props.id}
-      mutable={this.props.mutable}
+    let props = this.props;
+    return <WishItem item={props.item}
+      uid={props.uid}
+      id={props.id}
+      index={props.index}
+      mutable={props.mutable}
       showFulfilled={this.state.showFulfilled}
-      handleFulfill={this.handleFulfill}/>
+      handleFulfill={this.handleFulfill} />
   }
 };
 

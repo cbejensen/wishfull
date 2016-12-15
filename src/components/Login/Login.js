@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 import { Form, Button } from 'react-bootstrap'
 import * as firebase from 'firebase';
 
-const SignInContainer = React.createClass({
+const LoginContainer = React.createClass({
   contextTypes: {
     router: React.PropTypes.object
   },
@@ -31,7 +31,7 @@ const SignInContainer = React.createClass({
     });
   },
   render() {
-    return <SignIn
+    return <Login
       email={this.state.email}
       password={this.state.password}
       handleEmailChange={this.handleEmailChange}
@@ -40,7 +40,7 @@ const SignInContainer = React.createClass({
   }
 });
 
-export function SignIn(props) {
+export function Login(props) {
   return (
     <div>
       <Form onSubmit={props.handleSubmit}>
@@ -71,4 +71,4 @@ export function ForgotPassword(props) {
   )
 }
 
-export default SignInContainer;
+export default LoginContainer;

@@ -10,17 +10,20 @@ class AllUsersList extends React.Component {
     }
   }
   componentDidMount() {
+    let usersArray = [];
     getAllUsers().then(users => {
       // remove logged in user from list
       for (var key in users) {
         if ({}.hasOwnProperty.call(users, key)) {
-          if(key === this.props.uid) {
-            delete users[key];
+          if (key !== this.props.uid) {
+            let user = users[key];
+            user.uid = key;
+            usersArray.push(user);
           }
         }
       }
       this.setState({
-        users: users
+        users: usersArray
       })
     }, err => {
       console.log(err)

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router'
 
-import { SignIn as Form } from '../components/SignIn'
+import { Login as LoginForm } from '../components/Login'
 
-export default function SignIn(props) {
+export default function Login(props) {
   return (
     <div>
       <h2>I have an account </h2>
-      <Form />
+      <LoginForm />
       <hr />
       <h2>I don't have an account</h2>
       <Link to="/create-account">

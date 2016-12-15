@@ -1,19 +1,24 @@
 import React from 'react';
-import User from './UserListItem';
+import UserHeading from './UserHeading';
 
-class UserList extends React.Component {
-  render() {
-    return (
-      <div>
-        {Object.keys(this.props.users).map(id => {
-          return (
-            <User key={id} id={id}
-              handleClickUser={this.props.handleClickUser.bind(null, id)}/>
-          )
-        })}
-      </div>
-    )
-  }
+const UserList = props => {
+  return (
+    <div>
+      {props.users.map(user => {
+        const name = user.firstName + ' ' + user.lastName;
+        return (
+          <UserHeading key={user.uid}
+            uid={user.uid}
+            title={name}
+            handleClickUser={props.handleClickUser.bind(null, user.uid)}/>
+        )
+      })}
+    </div>
+  )
 };
+
+UserList.propTypes = {
+  users: React.PropTypes.array.isRequired
+}
 
 export default UserList;

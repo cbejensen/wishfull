@@ -1,8 +1,6 @@
 import React from 'react';
+import WishList from './WishList';
 import * as firebase from 'firebase';
-import { Grid, Row, Col } from 'react-bootstrap';
-import WishItemContainer from './WishItemContainer';
-import AddWishBtn from './AddWishBtn';
 
 class WishListContainer extends React.Component {
   constructor(props) {
@@ -56,50 +54,12 @@ class WishListContainer extends React.Component {
         </div>
       )
     }
-    return <WishListInner {...this.state}
+    return <WishList {...this.state}
       handleSearchChange={this.handleSearchChange}
       handleFilterChange={this.handleFilterChange}
       uid={this.props.uid}
       mutable={this.props.mutable} />
   }
 };
-
-export function WishListInner(props) {
-  const addWishBtn = (
-    <Col xs={12} style={{textAlign: 'center'}}>
-      <AddWishBtn uid={props.uid} />
-    </Col>
-  )
-  return (
-    <Grid>
-      <Row>
-        {/* <Col xs={3} style={{textAlign: 'center'}}>
-          <ListFilter value={props.filter}
-            onChange={props.handleFilterChange} />
-        </Col>
-        <Col xs={6}>
-          <ListSearch text={props.search}
-            onChange={props.handleSearchChange} />
-        </Col> */}
-        {props.mutable ? addWishBtn : null}
-      </Row>
-      <Row style={{marginTop: '20px'}}>
-        <Grid>
-          {Object.keys(props.items).map(id => {
-            const item = props.items[id];
-            return (
-              <WishItemContainer uid={props.uid}
-                item={item}
-                id={id}
-                key={id}
-                mutable={props.mutable}
-                showFulfilled={props.showFulfilled}/>
-            )
-          })}
-        </Grid>
-      </Row>
-    </Grid>
-  );
-}
 
 export default WishListContainer;

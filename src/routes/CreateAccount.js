@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreateAccount as Form } from '../components/SignIn'
+import { CreateAccount as Form } from '../components/Login'
 
 export default function CreateAccount(props) {
   return (
