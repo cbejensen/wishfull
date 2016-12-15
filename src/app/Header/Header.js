@@ -31,15 +31,15 @@ const HeaderContainer = React.createClass({
 
 export function Header(props) {
   let getFriendsPath;
-  let signInOrOut;
+  let LoginOrOut;
   if (props.user) {
     getFriendsPath = `/get-friends/${props.user.uid}`;
-    signInOrOut = (
+    LoginOrOut = (
       <NavItem onClick={props.handleSignOut}>Sign Out</NavItem>
     )
   } else {
     getFriendsPath = `/sign-in`
-    signInOrOut = (
+    LoginOrOut = (
       <NavItem>Sign In</NavItem>
     )
   };
@@ -67,7 +67,7 @@ export function Header(props) {
         </Nav>
         <Nav pullRight>
           <LinkContainer to="/sign-in">
-            {signInOrOut}
+            {LoginOrOut}
           </LinkContainer>
         </Nav>
       </Navbar.Collapse>

@@ -1,31 +1,25 @@
-.Avatar {
-  height: 85px;
-  width: 85px;
-  border-radius: 100%;
-  overflow: hidden;
-  display: inline-block;
-}
-
-.UserListItem-row {
+.UserHeading-row {
   height: 125px;
   padding: 20px 0;
   cursor: pointer;
+  transition: .4s;
 }
 
-.UserListItem-row:hover {
+.UserHeading-row:hover {
   box-shadow: 0 0 20px 2px gray;
+  font-size: 1.2em;
 }
 
-.UserListItem-img-col {
+.UserHeading-img-col {
   text-align: right;
 }
 
-.UserListItem-name-col {
+.UserHeading-name-col {
   height: 100%;
   text-align: left;
 }
 
-.UserListItem-name-col div {
+.UserHeading-name-col div {
   font-size: 2em;
   position: absolute;
   top: 50%;

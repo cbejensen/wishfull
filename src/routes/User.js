@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import { getUser } from '../utils/firebaseHelpers';
-import { WishListContainer } from '../components/WishList';
+import { WishList } from '../components/WishList';
 import * as firebase from 'firebase';
 
 class UserView extends React.Component {
@@ -12,6 +12,8 @@ class UserView extends React.Component {
   componentDidMount() {
     const uid = this.props.params.uid;
     this.removeAuthListener = firebase.auth().onAuthStateChanged(user => {
+      // if user page is same as auth user
+      // redirect to home page
       if (user.uid === uid) {
         browserHistory.push('/home')
       }
@@ -31,7 +33,7 @@ class UserView extends React.Component {
     return (
       <div>
         <div className="h1" style={{textAlign: 'center'}}>{name}</div>
-        <WishListContainer uid={this.props.params.uid} mutable={false} />
+        <WishList uid={this.props.params.uid} mutable={false} />
       </div>
     );
   }
