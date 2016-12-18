@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUser } from '../../utils/firebaseHelpers';
+import { getUser } from 'utils/firebaseHelpers';
 
 class FulfilledContainer extends React.Component {
   constructor(props) {

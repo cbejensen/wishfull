@@ -36,7 +36,18 @@ export const getUser = uid => {
   })
 }
 
+const validateWish = wish => {
+  wish.price = convertToNum(wish.price);
+  wish.priority = parseInt(wish.priority);
+  return wish;
+}
+
+const convertToNum = val => {
+  return +val;
+}
+
 export const addWish = (wish, uid) => {
+  wish = validateWish(wish);
   const wishRef = firebase.database().ref(`lists/${uid}`).push();
   return wishRef.update(wish).then(res => {
     return res;
@@ -46,6 +57,7 @@ export const addWish = (wish, uid) => {
 }
 
 export const updateWish = (uid, wishRef, wish) => {
+  wish = validateWish(wish);
   return firebase.database().ref(`/lists/${uid}/${wishRef}`).set(wish)
   .then(res => {
     return res;

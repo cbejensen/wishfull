@@ -1,7 +1,7 @@
 import React from 'react';
 import EditWishBtn from '../EditWishBtn';
 import FulfillWishBtn from '../FulfillWishBtn';
-import { Fulfilled } from '../Fulfilled';
+import Fulfilled from '../Fulfilled';
 import { Row, Col } from 'react-bootstrap';
 import './WishItem.css';
 
@@ -9,24 +9,15 @@ class WishItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      headerHeight: ''
+      expanded: false
     }
-  }
-  componentDidMount() {
-    const headerClass = 'WishItem-header-' + this.props.index;
-    const e = document.getElementById(headerClass);
-    this.setState({headerHeight: e.offsetHeight});
   }
   render() {
     let props = this.props,
-        title = props.item.title,
-        price = props.item.price,
-        priority = props.item.priority,
-        description = props.item.description,
-        url = props.item.url,
         priorityColor,
-        btn;
-    switch (priority) {
+        btn,
+        fulfilled;
+    switch (props.priority) {
       case 1:
         priorityColor = 'rgb(255, 245, 0)';
         break;
@@ -54,17 +45,19 @@ class WishItem extends React.Component {
       case 9:
         priorityColor = 'rgb(255, 50, 0)';
         break;
-      case 10:
+      case '10':
+        console.log('yaya')
         priorityColor = 'rgb(255, 0, 0)';
         break;
+      default:
+        priorityColor = 'rgb(67, 67, 67)';
     }
     const styles = {
       header: {
-        height: this.state.headerHeight,
-        color: '#434343',
         margin: '0 0',
-        paddingTop: '10px',
-        paddingBottom: '10px',
+        padding: '10px 15px'
+      },
+      priorityBackground: {
         backgroundColor: priorityColor
       },
       priorityText: {
@@ -76,52 +69,38 @@ class WishItem extends React.Component {
     } else {
       btn = <FulfillWishBtn handleFulfill={props.handleFulfill} />
     }
-    if (url) {
-      title = (
-        <a href={url} target="_blank" >
-          {title}
-        </a>
-      )
+    if (props.showFulfilled && props.item.fulfilled) {
+      fulfilled = <Fulfilled uid={props.item.fulfilled} />
     }
     return (
         <Row className="WishItem-row">
           <Col xs={12}>
             <div className="WishItem-container">
-              <Row id={'WishItem-header-' + props.index}
-                style={styles.header}
-                className={'priority-background-color-' + priority}>
-                <Col xs={9} sm={10} className="WishItem-col">
-                  <div className="WishItem-title-container">
-                    <span className="WishItem-title">
-                      {title}
-                    </span>
+              <div
+                style={styles.header}>
+                <div className="WishItem-priority-container">
+                  <div className="WishItem-priority-word">
+                    PRIORITY
                   </div>
-                  <div className="WishItem-price-container">
-                    <span className="WishItem-price">
-                      {price ? `$${price}` : ''}
-                    </span>
+                  <div className="WishItem-priority"
+                    style={styles.priorityText}>
+                    {props.item.priority}
                   </div>
-                </Col>
-                <Col xs={3} sm={2} className="WishItem-col">
-                  <div className="WishItem-priority-word-container">
-                    <div className="WishItem-priority-word"
-                      style={styles.priorityText}>
-                      PRIORITY
-                    </div>
-                  </div>
-                  <div className="WishItem-priority-container">
-                    <div className="WishItem-priority"
-                      style={styles.priorityText}>
-                      {priority}
-                    </div>
-                  </div>
-                </Col>
-              </Row>
+                </div>
+                <div className="WishItem-title">
+                  {props.item.title}
+                </div>
+                <div className="WishItem-price">
+                  {props.item.price ? `$${props.item.price}` : ''}
+                </div>
+              </div>
               <Row className="WishItem-body">
                 <Col xs={12} className="WishItem-col">
-                  {description}
+                  {props.item.description}
                 </Col>
               </Row>
+              {fulfilled}
+              {btn}
             </div>
           </Col>
         </Row>

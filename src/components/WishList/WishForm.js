@@ -11,7 +11,7 @@ class WishFormContainer extends React.Component {
       title: '',
       description: '',
       url: '',
-      price: '',
+      price: '.',
       priority: 1
     }
     this.handleChange = this.handleChange.bind(this);

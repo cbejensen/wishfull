@@ -56,7 +56,7 @@ class HomeContainer extends React.Component {
       <CheckAuth>
         <Home user={this.props.user}
           activeTab={this.state.activeTab}
-          handleTabSelect={this.handleTabSelect.bind(null, e)}/>
+          handleTabSelect={e => {this.handleTabSelect.bind(null, e)}}/>
       </CheckAuth>
     )
   }

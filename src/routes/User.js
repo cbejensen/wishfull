@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import { getUser } from '../utils/firebaseHelpers';
-import { WishList } from '../components/WishList';
+import { getUser } from 'utils/firebaseHelpers';
+import { WishList } from '../components/WishList/WishList';
 import * as firebase from 'firebase';
 
 class UserView extends React.Component {
