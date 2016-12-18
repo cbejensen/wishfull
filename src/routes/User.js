@@ -1,5 +1,6 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
+import { Grid } from 'react-bootstrap';
 import { getUser } from 'utils/firebaseHelpers';
 import { WishList } from '../components/WishList/WishList';
 import * as firebase from 'firebase';
@@ -31,10 +32,10 @@ class UserView extends React.Component {
     if (!this.state.user) return <div>Loading...</div>;
     const name = this.state.user.firstName + ' ' + this.state.user.lastName;
     return (
-      <div>
+      <Grid>
         <div className="h1" style={{textAlign: 'center'}}>{name}</div>
         <WishList uid={this.props.params.uid} mutable={false} />
-      </div>
+      </Grid>
     );
   }
 }
