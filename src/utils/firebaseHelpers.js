@@ -36,34 +36,57 @@ export const getUser = uid => {
   })
 }
 
-const validateWish = wish => {
-  wish.price = convertToNum(wish.price);
+function verifyWish(wish) {
+  wish.price = verifyPrice(wish.price);
   wish.priority = parseInt(wish.priority);
-  return wish;
+  const url = verifyUrl(wish.url);
+  return url ? true : false;
 }
 
-const convertToNum = val => {
-  return +val;
+function verifyUrl(value) {
+  return /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(value);
+}
+
+function verifyPrice(val) {
+  if (typeof val === 'number') {
+    return val
+  } else {
+    const start = val.substring(0, 1);
+    if (start === '$') {
+      val = val.substring(1);
+      return +val;
+    }
+    return +val;
+  }
 }
 
 export const addWish = (wish, uid) => {
-  wish = validateWish(wish);
-  const wishRef = firebase.database().ref(`lists/${uid}`).push();
-  return wishRef.update(wish).then(res => {
-    return res;
-  }, err => {
-    throw err;
-  })
+  const verified = verifyWish(wish);
+  if (verified) {
+    const wishRef = firebase.database().ref(`lists/${uid}`).push();
+    return wishRef.update(wish).then(res => {
+      return res;
+    }, err => {
+      throw err;
+    })
+  } else {
+    return new Error('Error');
+  }
 }
 
 export const updateWish = (uid, wishRef, wish) => {
-  wish = validateWish(wish);
-  return firebase.database().ref(`/lists/${uid}/${wishRef}`).set(wish)
-  .then(res => {
-    return res;
-  }, err => {
-    throw err;
-  })
+  console.log(wish)
+  const verified = verifyWish(wish);
+  if (verified) {
+    return firebase.database().ref(`/lists/${uid}/${wishRef}`).set(wish)
+    .then(res => {
+      return res;
+    }, err => {
+      throw err;
+    })
+  } else {
+    return new Error('Error');
+  }
 }
 
 export const getList = uid => {
@@ -76,7 +99,6 @@ export const getList = uid => {
 };
 
 export const getWish = (uid, itemId) => {
-  console.log(uid, itemId)
   return getList(uid).then(list => {
     return list[itemId];
   }, err => {
@@ -118,7 +140,6 @@ export const getAllUsers = () => {
 }
 
 export const updateFriend = (uid, friendId) => {
-  console.log(uid, friendId)
   const ref = firebase.database().ref(`users/${uid}/friends/${friendId}`);
   return ref.once('value').then(snap => {
     if (snap.val()) {
