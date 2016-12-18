@@ -7,12 +7,14 @@ import { browserHistory, Link } from 'react-router';
 class WishFormContainer extends React.Component {
   constructor(props) {
     super(props);
+    // TODO: add security rules to encapsulate fulfilled
     this.state = {
       title: '',
       description: '',
       url: '',
-      price: '.',
-      priority: 1
+      price: '',
+      priority: 1,
+      fulfilled: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -26,7 +28,8 @@ class WishFormContainer extends React.Component {
           description: wish.description,
           url: wish.url,
           price: wish.price,
-          priority: wish.priority
+          priority: wish.priority,
+          fulfilled: wish.fulfilled
         })
       }, err => {
         console.log(err)
