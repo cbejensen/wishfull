@@ -9,130 +9,27 @@
   overflow: hidden;
 }
 
-.WishItem-col {
-  height: 100%;
-}
-
-.WishItem-header {
-  background-color: red;
-  color: #434343;
-}
-
 .WishItem-title {
   font-size: 1.5em;
   text-decoration: none;
+  color: #434343;
 }
 
-.WishItem-priority-word-container {
-  height: 10%;
+.WishItem-priority-container {
+  float: right;
   text-align: center;
-  position: relative;
 }
 
 .WishItem-priority-word {
   font-size: 0.7em;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.WishItem-priority-container {
-  height: 90%;
-  text-align: center;
-  position: relative;
 }
 
 .WishItem-priority {
-  font-size: 2em;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  font-size: 2.5em;
 }
 
 .WishItem-body {
   margin: 0 0;
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-/* priority-based colors */
-.priority-background-color-1 {
-  background-color: rgb(255, 245, 0);
-}
-
-.priority-background-color-2 {
-  background-color: rgb(255, 220, 0);
-}
-
-.priority-background-color-3 {
-  background-color: rgb(255, 200, 0);
-}
-
-.priority-background-color-4 {
-  background-color: rgb(255, 175, 0);
-}
-
-.priority-background-color-5 {
-  background-color: rgb(255, 150, 0);
-}
-
-.priority-background-color-6 {
-  background-color: rgb(255, 125, 0);
-}
-
-.priority-background-color-7 {
-  background-color: rgb(255, 100, 0);
-}
-
-.priority-background-color-8 {
-  background-color: rgb(255, 80, 0);
-}
-
-.priority-background-color-9 {
-  background-color: rgb(255, 50, 0);
-}
-
-.priority-background-color-10 {
-  background-color: rgb(255, 0, 0);
-}
-
-.priority-text-color-1 {
-  color: rgb(255, 245, 0);
-}
-
-.priority-text-color-2 {
-  color: rgb(255, 220, 0);
-}
-
-.priority-text-color-3 {
-  color: rgb(255, 200, 0);
-}
-
-.priority-text-color-4 {
-  color: rgb(255, 175, 0);
-}
-
-.priority-text-color-5 {
-  color: rgb(255, 150, 0);
-}
-
-.priority-text-color-6 {
-  color: rgb(255, 125, 0);
-}
-
-.priority-text-color-7 {
-  color: rgb(255, 100, 0);
-}
-
-.priority-text-color-8 {
-  color: rgb(255, 80, 0);
-}
-
-.priority-text-color-9 {
-  color: rgb(255, 50, 0);
-}
-
-.priority-text-color-10 {
-  color: rgb(255, 0, 0);
 }
