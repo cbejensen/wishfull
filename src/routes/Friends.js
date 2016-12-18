@@ -1,6 +1,7 @@
 import React from 'react';
 import { FriendList } from '../components/User';
 import { browserHistory } from 'react-router';
+import { Grid } from 'react-bootstrap';
 import * as firebase from 'firebase';
 
 class Friends extends React.Component {
@@ -26,7 +27,11 @@ class Friends extends React.Component {
   }
   render() {
     if (!this.state.user) return <div>Loading...</div>
-    return <FriendList uid={this.state.user.uid} />
+    return (
+      <Grid>
+        <FriendList uid={this.state.user.uid} />
+      </Grid>
+    )
   }
 };
 

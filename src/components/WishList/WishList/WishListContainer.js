@@ -9,8 +9,10 @@ class WishListContainer extends React.Component {
       search: '',
       filter: '',
       items: 'loading',
-      showFulfilled: false
+      showFulfilled: false,
+      selectedWish: -1
     }
+    this.handleSelectWish = this.handleSelectWish.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
   }
@@ -36,6 +38,14 @@ class WishListContainer extends React.Component {
     const itemsRef = firebase.database().ref(path);
     itemsRef.off();
   }
+  handleSelectWish(wishIndex) {
+    if (wishIndex === this.state.selectedWish) {
+      // if user deselects wish already selected
+      this.setState({selectedWish: -1})
+    } else {
+      this.setState({selectedWish: wishIndex})
+    }
+  }
   handleSearchChange(e) {
     this.setState({search: e.target.value});
   }
@@ -55,6 +65,7 @@ class WishListContainer extends React.Component {
       )
     }
     return <WishList {...this.state}
+      handleSelectWish={this.handleSelectWish}
       handleSearchChange={this.handleSearchChange}
       handleFilterChange={this.handleFilterChange}
       uid={this.props.uid}

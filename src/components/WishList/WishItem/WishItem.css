@@ -2,15 +2,8 @@
   margin-top: 15px;
 }
 
-.WishItem-container {
-  border-radius: 15px;
-  width: 100%;
-  border: 4px solid rgba(181, 181, 181, 0.3);
-  overflow: hidden;
-}
-
 .WishItem-title {
-  font-size: 1.5em;
+  font-size: 1.3em;
   text-decoration: none;
   color: #434343;
 }
@@ -18,6 +11,7 @@
 .WishItem-priority-container {
   float: right;
   text-align: center;
+  margin-left: 10px;
 }
 
 .WishItem-priority-word {
@@ -25,11 +19,13 @@
 }
 
 .WishItem-priority {
-  font-size: 2.5em;
+  font-size: 2.3em;
 }
 
-.WishItem-body {
-  margin: 0 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.WishItem-price {
+  min-height: 15px;
+}
+
+.WishItem-btn-group {
+  text-align: right;
 }

@@ -22,14 +22,15 @@ export function WishList(props) {
       {props.mutable ? addWishBtn : null}
       {Object.keys(props.items).map((id, index) => {
         const item = props.items[id];
+        let selected = false;
+        if (props.selectedWish === index) selected = true;
         return (
           <Col xs={12} key={id}>
-            <WishItem uid={props.uid}
+            <WishItem {...props}
               item={item}
               id={id}
               index={index}
-              mutable={props.mutable}
-              showFulfilled={props.showFulfilled}/>
+              selected={selected} />
           </Col>
         )
       })}
