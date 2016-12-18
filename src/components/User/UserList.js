@@ -5,11 +5,9 @@ const UserList = props => {
   return (
     <div>
       {props.users.map(user => {
-        const name = user.firstName + ' ' + user.lastName;
         return (
           <UserHeading key={user.uid}
-            uid={user.uid}
-            title={name}
+            user={user}
             handleClickUser={props.handleClickUser.bind(null, user.uid)}/>
         )
       })}

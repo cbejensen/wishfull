@@ -64,7 +64,7 @@ class WishItemContainer extends React.Component {
       case 9:
         priorityColor = 'rgb(255, 50, 0)';
         break;
-      case '10':
+      case 10:
         priorityColor = 'rgb(255, 0, 0)';
         break;
       default:

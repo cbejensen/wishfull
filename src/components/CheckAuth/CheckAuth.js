@@ -1,5 +1,6 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
+import { getUser } from 'utils/firebaseHelpers';
 import * as firebase from 'firebase';
 
 class CheckAuth extends React.Component {
@@ -10,10 +11,15 @@ class CheckAuth extends React.Component {
     }
   }
   componentDidMount() {
-    this.removeAuthListener = firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({
-          user: user
+    this.removeAuthListener = firebase.auth().onAuthStateChanged(auth => {
+      if (auth) {
+        getUser(auth.uid).then(user => {
+          user.uid = auth.uid;
+          this.setState({
+            user: user
+          })
+        }, err => {
+          console.log(err);
         })
       } else {
         browserHistory.push('/sign-in')
