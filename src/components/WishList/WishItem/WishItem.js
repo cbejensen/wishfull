@@ -25,6 +25,9 @@ class WishItem extends React.Component {
     ).offsetHeight;
     this.setState({height: headerHeight + 15});
   }
+  openLink(e) {
+    e.stopPropagation();
+  }
   render() {
     let props = this.props,
         btn,
@@ -77,10 +80,10 @@ class WishItem extends React.Component {
         <Col xs={12}>
           <div style={styles.container}
             onMouseEnter={props.handleMouseEnter}
-            onMouseLeave={props.handleMouseLeave}
-            onClick={props.handleSelectWish.bind(null, props.index)}>
+            onMouseLeave={props.handleMouseLeave}>
             <div id={"WishItem-header-" + this.props.index}
-              style={styles.header}>
+              style={styles.header}
+              onClick={props.handleSelectWish.bind(null, props.index)}>
               <div className="WishItem-priority-container">
                 <div className="WishItem-priority-word">
                   PRIORITY
@@ -95,6 +98,9 @@ class WishItem extends React.Component {
               </div>
               <div className="WishItem-price">
                 {props.item.price ? `$${props.item.price}` : ''}
+                <span style={{marginLeft: 10}} onClick={this.openLink}>
+                  <a href={props.item.url} target="_blank">Open link</a>
+                </span>
               </div>
             </div>
             <div id={"WishItem-body-" + this.props.index}
