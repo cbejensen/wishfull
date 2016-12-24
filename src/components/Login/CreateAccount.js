@@ -70,7 +70,7 @@ export function CreateAccount(props) {
       <FormInput label='Password' required
         type='password'
         help='Must be at least 6 characters'
-        validationState={props.validatePassword()}
+        getValidation={props.validatePassword()}
         value={props.password}
         onChange={props.handlePasswordChange} />
       <Button type="submit">Create Account</Button>

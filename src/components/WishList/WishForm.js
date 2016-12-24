@@ -1,24 +1,28 @@
-import React from 'react';
-import FormInput from '../FormInput';
-import { FormGroup, ControlLabel, FormControl, HelpBlock, Grid, Row, Col, Button } from 'react-bootstrap';
-import { addWish, updateWish, getWish, deleteWish } from '../../utils/firebaseHelpers';
-import { browserHistory, Link } from 'react-router';
+import React from 'react'
+import FormInput from '../FormInput'
+import { FormGroup, ControlLabel, FormControl, HelpBlock, Grid, Row, Col, Button } from 'react-bootstrap'
+import { addWish, updateWish, getWish, deleteWish } from '../../utils/firebaseHelpers'
+import { browserHistory, Link } from 'react-router'
+import { validateWish,
+  validatePrice as validatePriceHelper,
+  validateUrl as validateUrlHelper } from 'utils/validateHelpers'
 
 class WishFormContainer extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     // TODO: add security rules to encapsulate fulfilled
     this.state = {
       title: '',
       description: '',
       url: '',
       price: '',
-      priority: 1,
-      fulfilled: false
+      priority: 5
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.validateUrl = this.validateUrl.bind(this)
+    this.validatePrice = this.validatePrice.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
     if (this.props.wishId) {
@@ -27,50 +31,76 @@ class WishFormContainer extends React.Component {
           title: wish.title,
           description: wish.description,
           url: wish.url,
-          price: wish.price,
-          priority: wish.priority,
-          fulfilled: wish.fulfilled
+          price: wish.price.toString(),
+          priority: wish.priority.toString()
         })
       }, err => {
-        console.log(err)
-        browserHistory.push('/home');
+        browserHistory.push('/home')
       })
     }
   }
   handleChange(field, e) {
-    const newState = {};
-    newState[field] = e.target.value;
-    this.setState(newState);
+    let val = e.target.value
+    this.setState({
+      [field]: val
+    })
+  }
+  validateUrl() {
+    let url = this.state.url
+    if (url === '') return null
+    let verified = validateUrlHelper(url)
+    return verified ? 'success' : 'error'
+  }
+  validatePrice() {
+    let price = this.state.price
+    if (price === '') {
+      return null
+    } else {
+      let verified = validatePriceHelper(price)
+      return verified ? 'success' : 'error'
+    }
   }
   handleDelete(e) {
     const confirmed = confirm('WARNING\nThis wish will be permanently deleted.')
-    if (confirmed) deleteWish(this.props.uid, this.props.wishId);
+    if (confirmed) deleteWish(this.props.uid, this.props.wishId)
     browserHistory.push('/home')
   }
   handleSubmit(e) {
-    e.preventDefault();
-    if (!this.props.wishId) {
-      addWish(this.state, this.props.uid).then(res => {
-        browserHistory.push('/home')
-      }, err => {
-        alert(err)
-      })
-    } else {
-      updateWish(this.props.uid, this.props.wishId, this.state)
-      .then(res => {
-        browserHistory.push('/home');
-      }, err => {
-        alert('There was an error processing your request. Please try again.');
-      })
+    e.preventDefault()
+    let wish = this.state;
+    if (wish.price) {
+      wish.price = parseInt(wish.price.replace(/,/g, ''), 10)
     }
+    wish.priority = parseInt(wish.priority, 10)
+    validateWish(wish).then(res => {
+      console.log(wish)
+      if (!this.props.wishId) {
+        addWish(wish, this.props.uid).then(res => {
+          browserHistory.push('/home')
+        }, err => {
+          alert('There was an error processing your request. Please try again.')
+        })
+      } else {
+        updateWish(this.props.uid, this.props.wishId, wish)
+        .then(res => {
+          browserHistory.push('/home')
+        }, err => {
+          alert('There was an error processing your request. Please try again.')
+        })
+      }
+    }, err => {
+      alert(err);
+    })
   }
   render() {
     return <WishForm {...this.state}
       handleChange={this.handleChange}
+      validateUrl={this.validateUrl}
+      validatePrice={this.validatePrice}
       handleDelete={this.handleDelete}
       handleSubmit={this.handleSubmit} />
   }
-};
+}
 
 export function WishForm(props) {
   return (
@@ -87,28 +117,30 @@ export function WishForm(props) {
       <FormInput label='URL'
         value={props.url}
         onChange={props.handleChange.bind(null, 'url')}
+        getValidation={props.validateUrl()}
         placeholder='example.com'
-        help='Copy and paste a link to props item on the web' />
+        help='Copy and paste a link to this item on the web' />
       <FormInput label='Price'
         value={props.price}
         onChange={props.handleChange.bind(null, 'price')}
-        help='Do not include a dollar sign' />
+        getValidation={props.validatePrice()}
+        help='Only whole numbers' />
       <FormGroup>
         <ControlLabel>Priority</ControlLabel>
         <FormControl value={props.priority}
           onChange={props.handleChange.bind(null, 'priority')}
           componentClass="select"
           placeholder="select">
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-          <option value={6}>6</option>
-          <option value={7}>7</option>
-          <option value={8}>8</option>
-          <option value={9}>9</option>
-          <option value={10}>10</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
         </FormControl>
         <HelpBlock>
           1 = I barely even want this <br />
@@ -136,4 +168,4 @@ export function WishForm(props) {
   )
 }
 
-export default WishFormContainer;
+export default WishFormContainer
