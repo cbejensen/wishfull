@@ -1,4 +1,5 @@
 import React from 'react';
+import { Search } from 'components/Search';
 import { Link } from 'react-router';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -44,34 +45,37 @@ export function Header(props) {
     )
   };
   return (
-    <Navbar>
-      <Navbar.Header>
-        <Navbar.Brand>
-          <Link to='/'>
-            WISHFULL
-          </Link>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-      </Navbar.Header>
-      <Navbar.Collapse>
-        <Nav>
-          <LinkContainer to="/home">
-            <NavItem>Home</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/friends">
-            <NavItem>Friends</NavItem>
-          </LinkContainer>
-          <LinkContainer to={getFriendsPath}>
-            <NavItem>Get Some Friends</NavItem>
-          </LinkContainer>
-        </Nav>
-        <Nav pullRight>
-          <LinkContainer to="/sign-in">
-            {LoginOrOut}
-          </LinkContainer>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <div>
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to='/'>
+              WISHFULL
+            </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <LinkContainer to="/home">
+              <NavItem>Home</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/friends">
+              <NavItem>Friends</NavItem>
+            </LinkContainer>
+            <LinkContainer to={getFriendsPath}>
+              <NavItem>Get Some Friends</NavItem>
+            </LinkContainer>
+          </Nav>
+          <Nav pullRight>
+            <LinkContainer to="/sign-in">
+              {LoginOrOut}
+            </LinkContainer>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      {props.user ? <Search uid={props.user.uid}/> : null}
+    </div>
   );
 }
 

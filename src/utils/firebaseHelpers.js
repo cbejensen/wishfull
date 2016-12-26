@@ -30,7 +30,9 @@ export const createUser = user => {
 export const getUser = uid => {
   const ref = firebase.database().ref(`users/${uid}`);
   return ref.once('value').then(snap => {
-    return snap.val();
+    let user = snap.val();
+    user.uid = uid;
+    return user;
   }, err => {
     throw err;
   })
@@ -86,7 +88,7 @@ export const deleteWish = (uid, wishId) => {
   firebase.database().ref(path).remove();
 }
 
-export const getFriends = uid => {
+export const getFriendIds = uid => {
   const usersRef = firebase.database().ref(`users/${uid}/friends`);
   return usersRef.once('value').then(snap => {
     return snap.val();
@@ -134,5 +136,89 @@ export const getFile = path => {
     return url;
   }, err => {
     throw err;
+  })
+}
+
+// SEARCHING
+
+export const searchFriends = (str, uid) => {
+  return getFriendIds(uid).then(friendIds => {
+    let promiseArray = [];
+    for (var key in friendIds) {
+      if ({}.hasOwnProperty.call(friendIds, key)) {
+        promiseArray.push(getUser(key))
+      }
+    }
+    return Promise.all(promiseArray).then(friends => {
+      const filteredFriends = filterUsersByName(str, friends);
+      return {
+        type: 'friends',
+        data: filteredFriends
+      }
+    }, err => {
+      console.log(err)
+    })
+  }, err => {
+    console.log(err)
+  })
+}
+
+export const searchUsers = (str) => {
+  return getAllUsers().then(users => {
+    const usersArray = Object.keys(users).map(key => users[key])
+    const filteredUsers = filterUsersByName(str, usersArray);
+    return {
+      type: 'users',
+      data: filteredUsers
+    }
+  })
+}
+
+export const searchWishes = (str, uid) => {
+  return getList(uid).then(list => {
+    const wishes = Object.keys(list).map(wish => list[wish])
+    const filteredWishes = filterWishesByTitle(str, wishes)
+    return {
+      type: 'wishes',
+      data: filteredWishes
+    }
+  }, err => {
+    console.log(err);
+  })
+}
+
+export const filterUsersByName = (str, users) => {
+  let filteredUsers = [];
+  users.forEach(user => {
+    let name = user.firstName + ' ' + user.lastName;
+    str = str.toLowerCase();
+    name = name.toLowerCase();
+    if (name.indexOf(str) !== -1) {
+      filteredUsers.push(user);
+    }
+  })
+  return filteredUsers;
+}
+
+export const filterWishesByTitle = (str, wishes) => {
+  let filteredWishes = [];
+  wishes.forEach(wish => {
+    str = str.toLowerCase();
+    let title = wish.title.toLowerCase();
+    if (title.indexOf(str) !== -1) {
+      filteredWishes.push(wish);
+    }
+  })
+  return filteredWishes;
+}
+
+export const search = (str, uid) => {
+  return Promise.all([searchFriends(str, uid),
+    searchUsers(str),
+    searchWishes(str, uid)])
+  .then(arr => {
+    return arr;
+  }, err => {
+    return err;
   })
 }
