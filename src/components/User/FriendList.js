@@ -1,5 +1,5 @@
 import React from 'react';
-import { getFriends, getUser } from '../../utils/firebaseHelpers';
+import { getFriendIds, getUser } from '../../utils/firebaseHelpers';
 import { browserHistory } from 'react-router';
 import UserList from './UserList';
 
@@ -13,7 +13,7 @@ class FriendList extends React.Component {
   }
   componentDidMount() {
     let friends = [];
-    getFriends(this.props.uid).then(friendIds => {
+    getFriendIds(this.props.uid).then(friendIds => {
       Object.keys(friendIds).map(uid => {
         getUser(uid).then(user => {
           user.uid = uid;

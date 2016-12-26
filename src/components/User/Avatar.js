@@ -11,7 +11,6 @@ class AvatarContainer extends React.Component {
   }
   componentDidMount() {
     getFile(`images/avatars/${this.props.uid}`).then(avatar => {
-      console.log(avatar)
       this.setState({
         avatar: avatar
       })

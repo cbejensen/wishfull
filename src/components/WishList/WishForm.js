@@ -40,10 +40,9 @@ class WishFormContainer extends React.Component {
     }
   }
   handleChange(field, e) {
-    let val = e.target.value
-    this.setState({
-      [field]: val
-    })
+    const newState = {};
+    newState[field] = e.target.value;
+    this.setState(newState);
   }
   validateUrl() {
     let url = this.state.url
@@ -67,26 +66,22 @@ class WishFormContainer extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault()
-    let wish = this.state;
-    if (wish.price) {
-      wish.price = parseInt(wish.price.replace(/,/g, ''), 10)
+    let wish = {
+      title: this.state.title,
+      description: this.state.description,
+      url: this.state.url,
+      price: this.state.price,
+      priority: this.state.priority
     }
+    if (wish.price) wish.price = parseInt(wish.price.replace(/,/g, ''), 10)
     wish.priority = parseInt(wish.priority, 10)
     validateWish(wish).then(res => {
-      console.log(wish)
+      const onSuccess = res => browserHistory.push('/home')
+      const onError = err => alert('There was an error processing your request. Please try again.')
       if (!this.props.wishId) {
-        addWish(wish, this.props.uid).then(res => {
-          browserHistory.push('/home')
-        }, err => {
-          alert('There was an error processing your request. Please try again.')
-        })
+        addWish(wish, this.props.uid).then(onSuccess, onError)
       } else {
-        updateWish(this.props.uid, this.props.wishId, wish)
-        .then(res => {
-          browserHistory.push('/home')
-        }, err => {
-          alert('There was an error processing your request. Please try again.')
-        })
+        updateWish(this.props.uid, this.props.wishId, wish).then(onSucces, onError)
       }
     }, err => {
       alert(err);
