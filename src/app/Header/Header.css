@@ -1,0 +1,38 @@
+.Header-container {
+  background: #3de2ff;
+  height: 10vh;
+}
+
+.Header-container div {
+  height: 100%;
+}
+
+.Header-col > div {
+  position: relative;
+}
+
+.Header-col span {
+  position: absolute;
+  top: 50%;
+}
+
+.Header-col.left span, .Header-col.right span {
+  color: rgba(255, 255, 255, .9);
+  font-size: 5vh;
+}
+
+.Header-col.left span {
+  transform: translateY(-50%);
+}
+
+.Header-col.right span {
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.Header-col.center span {
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: #ff7f50;
+  font-size: 8vh;
+}
