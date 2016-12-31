@@ -1,6 +1,6 @@
 .Header-container {
   background: #3de2ff;
-  height: 10vh;
+  height: 11vh;
 }
 
 .Header-container div {
@@ -33,6 +33,6 @@
 .Header-col.center span {
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
-  color: #ff7f50;
+  color: #f88379;
   font-size: 8vh;
 }

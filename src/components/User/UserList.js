@@ -7,7 +7,8 @@ const UserList = props => {
       {props.users.map(user => {
         return (
           <UserHeading key={user.uid}
-            user={user}
+            uid={user.uid}
+            name={user.firstName + ' ' + user.lastName}
             handleClickUser={props.handleClickUser.bind(null, user.uid)}/>
         )
       })}

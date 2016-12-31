@@ -5,22 +5,22 @@ import { Row, Col } from 'react-bootstrap';
 import './UserHeading.css';
 
 const UserHeading = props => {
-  const name = props.user.firstName + ' ' + props.user.lastName;
   return (
     <Row className="UserHeading-row"
       onClick={props.handleClickUser}>
       <Col xs={4} sm={3} className="UserHeading-img-col">
-        <Avatar uid={props.user.uid} />
+        <Avatar uid={props.uid} />
       </Col>
       <Col xs={8} sm={9} className="UserHeading-name-col">
-        <div>{name}</div>
+        <div>{props.name}</div>
       </Col>
     </Row>
   )
 };
 
 UserHeading.propTypes = {
-  user: React.PropTypes.object.isRequired
+  name: React.PropTypes.string.isRequired,
+  uid: React.PropTypes.string.isRequired
 }
 
 export default UserHeading;

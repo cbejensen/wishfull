@@ -1,4 +1,5 @@
 import React from 'react';
+import { Search } from 'components/Search';
 import UserHeading from 'components/User/UserHeading';
 import { AvatarForm } from 'components/User/AvatarForm';
 import { CheckAuth } from '../components/CheckAuth';
@@ -38,6 +39,7 @@ const Home = props => {
     textAlign: 'center',
     paddingTop: '10px'
   }
+  const name = props.user.firstName + ' ' + props.user.lastName;
   let activeComponent;
   if (props.activeTab === 1) {
     activeComponent = (
@@ -50,7 +52,8 @@ const Home = props => {
   }
   return (
     <Grid>
-      <UserHeading user={props.user} />
+      <UserHeading uid={props.user.uid}
+        name={name} />
       <Nav bsStyle="tabs" activeKey={props.activeTab}
         onSelect={props.handleTabSelect} justified >
         <NavItem eventKey={1}>My Wish List</NavItem>
