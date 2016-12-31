@@ -30,10 +30,13 @@ class CheckAuth extends React.Component {
     this.removeAuthListener();
   }
   render() {
-    if (!this.state.user) return <div>null</div>;
-    return React.cloneElement(this.props.children, {
-      user: this.state.user
-    })
+    if (!this.state.user) return null;
+    const children = React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, {
+        user: this.state.user
+      })
+    });
+    return <div>{children}</div>
   }
 };
 

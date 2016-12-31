@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search } from 'components/Search';
+// import { Search } from 'components/Search';
 import { Link } from 'react-router';
 import { Grid, Row, Col, Glyphicon } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -26,7 +26,7 @@ const HeaderContainer = React.createClass({
   },
   render() {
     if (!this.state.user) return <Header user={null} />
-    return <Header handleSignOut={this.handleSignOut}
+    return <Header {...this.props} handleSignOut={this.handleSignOut}
       user={this.state.user} />
   }
 });
@@ -50,48 +50,23 @@ export function Header(props) {
       <Grid>
         <Row>
           <Col xs={4} className="Header-col left">
-            <div><Glyphicon glyph="menu-hamburger" /></div>
+            <div>
+              <Glyphicon glyph="menu-hamburger"
+                onClick={props.toggleMenu} />
+            </div>
           </Col>
           <Col xs={4} className="Header-col center">
             <div><span>W</span></div>
           </Col>
           <Col xs={4} className="Header-col right">
-            <div><Glyphicon glyph="search" /></div>
+            <div>
+              <Glyphicon glyph="search"
+                onClick={props.toggleSearch} />
+            </div>
           </Col>
         </Row>
       </Grid>
     </div>
-    // <div>
-    //   <Navbar>
-    //     <Navbar.Header>
-    //       <Navbar.Brand>
-    //         <Link to='/'>
-    //           WISHFULL
-    //         </Link>
-    //       </Navbar.Brand>
-    //       <Navbar.Toggle />
-    //     </Navbar.Header>
-    //     <Navbar.Collapse>
-    //       <Nav>
-    //         <LinkContainer to="/home">
-    //           <NavItem>Home</NavItem>
-    //         </LinkContainer>
-    //         <LinkContainer to="/friends">
-    //           <NavItem>Friends</NavItem>
-    //         </LinkContainer>
-    //         <LinkContainer to={getFriendsPath}>
-    //           <NavItem>Get Some Friends</NavItem>
-    //         </LinkContainer>
-    //       </Nav>
-    //       <Nav pullRight>
-    //         <LinkContainer to="/sign-in">
-    //           {LoginOrOut}
-    //         </LinkContainer>
-    //       </Nav>
-    //     </Navbar.Collapse>
-    //   </Navbar>
-    //   {props.user ? <Search uid={props.user.uid}/> : null}
-    // </div>
   );
 }
 

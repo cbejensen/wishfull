@@ -1,0 +1,10 @@
+.App-main-container {
+  position: relative;
+}
+
+.App-shadow-top {
+  box-shadow: 0px -1px 10px 0px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
