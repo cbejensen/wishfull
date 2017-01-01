@@ -1,9 +1,12 @@
 import React from 'react';
+import './Search.css';
 
 class SearchInput extends React.Component {
   render() {
     return (
-      <input type="text" onChange={this.props.handleChange} />
+      <input className="SearchInput"
+        type="text"
+        onChange={this.props.handleChange} />
     )
   }
 };
