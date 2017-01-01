@@ -1,36 +1,35 @@
-.Header-container {
+.Nav-wrapper {
   background: #3de2ff;
-  height: 11vh;
 }
 
-.Header-container div {
+.Nav-col, .Nav-col div {
   height: 100%;
 }
 
-.Header-col > div {
+.Nav-col > div {
   position: relative;
 }
 
-.Header-col span {
+.Nav-col span {
   position: absolute;
   top: 50%;
 }
 
-.Header-col.left span, .Header-col.right span {
+.Nav-col.left span, .Nav-col.right span {
   color: rgba(255, 255, 255, .9);
-  font-size: 5vh;
+  font-size: 30px;
 }
 
-.Header-col.left span {
+.Nav-col.left span {
   transform: translateY(-50%);
 }
 
-.Header-col.right span {
+.Nav-col.right span {
   right: 0;
   transform: translateY(-50%);
 }
 
-.Header-col.center span {
+.Nav-col.center span {
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   color: #f88379;
