@@ -1,14 +1,9 @@
 import React from 'react';
-import { Search } from 'components/Search';
 import UserHeading from 'components/User/UserHeading';
 import { AvatarForm } from 'components/User/AvatarForm';
 import { CheckAuth } from '../components/CheckAuth';
-import { UserItem } from '../components/User';
-import { browserHistory } from 'react-router';
 import { Grid, Nav, NavItem } from 'react-bootstrap';
 import { WishList } from '../components/WishList/WishList';
-import { getFile, uploadFile } from '../utils/firebaseHelpers';
-import * as firebase from 'firebase';
 
 class HomeContainer extends React.Component {
   constructor(props) {
@@ -35,10 +30,6 @@ class HomeContainer extends React.Component {
 };
 
 const Home = props => {
-  const style = {
-    textAlign: 'center',
-    paddingTop: '10px'
-  }
   const name = props.user.firstName + ' ' + props.user.lastName;
   let activeComponent;
   if (props.activeTab === 1) {

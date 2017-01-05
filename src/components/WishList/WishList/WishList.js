@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { WishItem } from '../WishItem';
 import AddWishBtn from '../AddWishBtn';
+import ItemBox from 'components/ItemBox';
 
 export function WishList(props) {
   const addWishBtn = (
@@ -11,6 +12,7 @@ export function WishList(props) {
   )
   return (
     <Row style={{marginTop: '20px'}}>
+      <Col xs={12}><ItemBox styles={{color: 'red'}} /></Col>
       {/* <Col xs={3} style={{textAlign: 'center'}}>
         <ListFilter value={props.filter}
           onChange={props.handleFilterChange} />

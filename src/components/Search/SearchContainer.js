@@ -16,12 +16,7 @@ class SearchContainer extends React.Component {
     })
   }
   render() {
-    let showResults;
-    if (this.state.query === '') {
-      showResults = false;
-    } else {
-      showResults = true;
-    }
+    let showResults = this.state.query === '' ? false : true;
     return (
       <div>
         <SearchInput type="text" handleChange={this.handleQuery}/>
