@@ -12,7 +12,6 @@ export function WishList(props) {
   )
   return (
     <Row style={{marginTop: '20px'}}>
-      <Col xs={12}><ItemBox styles={{color: 'red'}} /></Col>
       {/* <Col xs={3} style={{textAlign: 'center'}}>
         <ListFilter value={props.filter}
           onChange={props.handleFilterChange} />
