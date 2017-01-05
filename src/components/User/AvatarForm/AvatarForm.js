@@ -1,5 +1,4 @@
 import React from 'react';
-import UserHeading from '../UserHeading';
 import { Button } from 'react-bootstrap';
 
 function AvatarForm(props) {

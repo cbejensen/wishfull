@@ -7,26 +7,43 @@ class WishItemContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showFulfilled: this.props.showFulfilled,
-      highlighted: false,
-      expanded: this.props.selected
+      height: ''
     }
+    this.setHeight = this.setHeight.bind(this);
+    this.openLink = this.openLink.bind(this);
     this.handleFulfill = this.handleFulfill.bind(this);
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
-  handleMouseEnter() {
-    this.setState({highlighted: true})
+  componentDidMount() {
+    this.setHeight(this.props.selected);
   }
-  handleMouseLeave() {
-    this.setState({highlighted: false})
+  componentWillReceiveProps(nextProps) {
+    if (this.props.selected !== nextProps.selected) {
+      console.log('success')
+      this.setHeight(nextProps.selected);
+    }
+  }
+  setHeight(selected) {
+    this.headerHeight = document.getElementById('WishItem-header-' + this.props.index).offsetHeight;
+    let itemBoxHeight = this.headerHeight + 22;
+    console.log(this.props.selected)
+    if (!selected) {
+      this.setState({height: itemBoxHeight})
+    } else { // wish is selected
+      console.log('selected')
+      const bodyHeight = document.getElementById('WishItem-body-' + this.props.index).offsetHeight;
+      this.setState({height: itemBoxHeight + bodyHeight})
+      console.log(bodyHeight)
+    }
+  }
+  openLink(e) {
+    e.stopPropagation();
   }
   handleFulfill() {
     const removeAuthListener = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         fulfillWish(this.props.uid, this.props.id, user.uid)
         .then(res => {}, err => {
-          console.log(err);
+          alert('There was an error processing your request. Please try again later.');
         })
       } else {
         alert('You must be signed in first!');
@@ -71,11 +88,11 @@ class WishItemContainer extends React.Component {
         priorityColor = 'rgb(67, 67, 67)';
     }
     return <WishItem {...this.props}
-      {...this.state}
+      height={this.state.height}
       priorityColor={priorityColor}
-      handleFulfill={this.handleFulfill}
-      handleMouseEnter={this.handleMouseEnter}
-      handleMouseLeave={this.handleMouseLeave} />
+      setHeight={this.setHeight}
+      openLink={this.openLink}
+      handleFulfill={this.handleFulfill} />
   }
 };
 

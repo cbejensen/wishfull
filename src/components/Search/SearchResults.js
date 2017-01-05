@@ -21,14 +21,12 @@ class SearchResults extends React.Component {
     }
     return (
       <div>
-        <CheckAuth>
-          {showFriends && <FriendResults query={this.props.query}
-            category="friends" user={{}} /> }
-          {/* {showUsers && <UserResults query={this.props.query}
-            category="users" user={{}} /> }
-          {showWishes && <WishResults query={this.props.query}
-            category="wishes" user={{}} /> } */}
-        </CheckAuth>
+        {showFriends && <FriendResults query={this.props.query}
+          category="friends" user={{}} /> }
+        {/* {showUsers && <UserResults query={this.props.query}
+          category="users" user={{}} /> }
+        {showWishes && <WishResults query={this.props.query}
+          category="wishes" user={{}} /> } */}
       </div>
     )
   }
