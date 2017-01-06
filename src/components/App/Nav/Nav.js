@@ -53,7 +53,7 @@ export function Nav(props) {
 
         <Row className="Nav-search" style={styles.search}>
           <Col xs={12}>
-            <Search />
+            <Search uid={props.uid}/>
           </Col>
         </Row>
 
@@ -64,6 +64,15 @@ export function Nav(props) {
       </Grid>
     </div>
   );
+}
+
+Nav.propTypes = {
+  uid: React.PropTypes.string.isRequired,
+  showMenu: React.PropTypes.bool.isRequired,
+  showSearch: React.PropTypes.bool.isRequired,
+  toggleMenu: React.PropTypes.func.isRequired,
+  toggleSearch: React.PropTypes.func.isRequired,
+  handleSignOut: React.PropTypes.func.isRequired
 }
 
 export default Nav;

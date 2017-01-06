@@ -17,7 +17,7 @@ class FriendResults extends React.Component {
     if (this.props.query !== prevProps.query) this.getResults();
   }
   getResults() {
-    searchFriends(this.props.query, this.props.user.uid)
+    searchFriends(this.props.query, this.props.uid)
     .then(friends => {
       this.setState({friends: friends})
     }, err => {
@@ -26,6 +26,7 @@ class FriendResults extends React.Component {
   }
   render() {
     if (!this.state.friends) return null;
+    console.log(this.state.friends);
     let heading = this.props.category;
     heading = heading.charAt(0).toUpperCase() + heading.slice(1);
     return (
@@ -45,8 +46,8 @@ class FriendResults extends React.Component {
 
 FriendResults.propTypes = {
   query: React.PropTypes.string.isRequired,
-  category: React.PropTypes.string.isRequired,
-  user: React.PropTypes.object.isRequired
+  uid: React.PropTypes.string.isRequired,
+  category: React.PropTypes.string.isRequired
 }
 
 export default FriendResults;

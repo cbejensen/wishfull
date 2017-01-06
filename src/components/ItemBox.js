@@ -39,7 +39,9 @@ class ItemBox extends React.Component {
         overflow: 'hidden',
         cursor: 'pointer',
         padding: '7px 10px',
-        width: '100%'
+        margin: '5px auto',
+        width: '100%',
+        position: 'relative'
       }
     };
     return (

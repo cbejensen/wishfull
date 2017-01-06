@@ -6,8 +6,7 @@ class NavContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
-      query: '',
+      uid: '',
       showMenu: false,
       showSearch: false
     };
@@ -16,11 +15,12 @@ class NavContainer extends React.Component {
     this.toggleSearch = this.toggleSearch.bind(this);
   }
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({
-        user: user
-      })
+    this.removeListener = firebase.auth().onAuthStateChanged(user => {
+      this.setState({uid: user.uid})
     });
+  }
+  componentWillUnmount() {
+    this.removeListener();
   }
   toggleMenu() {
     this.setState((prevState, props) => {
@@ -40,11 +40,10 @@ class NavContainer extends React.Component {
   }
   handleSignOut() {
     firebase.auth().signOut().then(() => {}, error => {
-      console.log(error)
+      console.log(error);
     });
   }
   render() {
-    if (!this.state.user) return <Nav user={null} />
     return <Nav {...this.state}
       toggleMenu={this.toggleMenu}
       toggleSearch={this.toggleSearch}
