@@ -40,7 +40,7 @@ export function Nav(props) {
             <div><Glyphicon glyph="menu-hamburger" onClick={props.toggleMenu}/></div>
           </Col>
           <Col xs={4} className="Nav-col center">
-            <div><span>W</span></div>
+            <div><Link to="/home"><span>W</span></Link></div>
           </Col>
           <Col xs={4} className="Nav-col right">
             <div><Glyphicon glyph="search" onClick={props.toggleSearch}/></div>
@@ -48,7 +48,11 @@ export function Nav(props) {
         </Row>
 
         <Row className="Nav-menu" style={styles.menu}>
-          <Col xs={12}>test</Col>
+          <Col xs={12} style={{color: 'white'}}>
+            <Link to=""><span>My Profile</span></Link>
+            <Link to="/friends"><span>Friends</span></Link>
+            <Link to=""><span>Sign Out</span></Link>
+          </Col>
         </Row>
 
         <Row className="Nav-search" style={styles.search}>
