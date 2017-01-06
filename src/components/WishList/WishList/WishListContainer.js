@@ -6,8 +6,6 @@ class WishListContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: '',
-      filter: '',
       items: 'loading',
       showFulfilled: false,
       selectedWish: -1
@@ -41,6 +39,7 @@ class WishListContainer extends React.Component {
   handleSelectWish(wishIndex) {
     if (wishIndex === this.state.selectedWish) {
       // if user deselects wish already selected
+      console.log('got')
       this.setState({selectedWish: -1})
     } else {
       this.setState({selectedWish: wishIndex})

@@ -25,14 +25,11 @@ class WishItemContainer extends React.Component {
   setHeight(selected) {
     this.headerHeight = document.getElementById('WishItem-header-' + this.props.index).offsetHeight;
     let itemBoxHeight = this.headerHeight + 22; // itemBox's padding & border
-    console.log(this.props.selected)
     if (!selected) {
       this.setState({height: itemBoxHeight})
     } else { // wish is selected
-      console.log('selected')
       const bodyHeight = document.getElementById('WishItem-body-' + this.props.index).offsetHeight;
       this.setState({height: itemBoxHeight + bodyHeight})
-      console.log(bodyHeight)
     }
   }
   openLink(e) {
