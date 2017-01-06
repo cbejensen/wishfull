@@ -24,7 +24,7 @@ class WishItemContainer extends React.Component {
   }
   setHeight(selected) {
     this.headerHeight = document.getElementById('WishItem-header-' + this.props.index).offsetHeight;
-    let itemBoxHeight = this.headerHeight + 22;
+    let itemBoxHeight = this.headerHeight + 22; // itemBox's padding & border
     console.log(this.props.selected)
     if (!selected) {
       this.setState({height: itemBoxHeight})

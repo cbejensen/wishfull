@@ -21,6 +21,7 @@ class SearchContainer extends React.Component {
       <div>
         <SearchInput type="text" handleChange={this.handleQuery}/>
         {showResults && <SearchResults query={this.state.query}
+          uid={this.props.uid}
           categories={this.props.categories} />}
       </div>
     )
@@ -28,6 +29,7 @@ class SearchContainer extends React.Component {
 };
 
 SearchContainer.propTypes = {
+  uid: React.PropTypes.string.isRequired,
   categories: React.PropTypes.array
 }
 
