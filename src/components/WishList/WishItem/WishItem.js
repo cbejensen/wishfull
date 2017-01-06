@@ -21,10 +21,7 @@ class WishItem extends React.Component {
         opacity: this.props.selected
           ? '1'
           : '0',
-          transition: '.3s ease-out'
-      },
-      priorityBackground: {
-        backgroundColor: this.props.priorityColor
+        transition: '.3s ease-out'
       },
       priorityText: {
         color: this.props.priorityColor,
