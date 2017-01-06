@@ -3,6 +3,7 @@ import { Avatar } from './Avatar';
 import ItemBox from 'components/ItemBox';
 import { getUser, getFile } from '../../utils/firebaseHelpers';
 import { Row, Col } from 'react-bootstrap';
+import randomColor from 'randomcolor';
 import './UserHeading.css';
 
 const UserHeading = props => {
@@ -37,13 +38,16 @@ const UserHeading = props => {
   return (
     <ItemBox styles={styles.itemBox}
       handleClick={props.handleClickUser}
-      colorTheme='#f88379'>
+      colorTheme={randomColor({luminosity: 'light'})}>
       <Row style={styles.container}>
         <Col xs={3} style={{...styles.container, ...styles.avatarCol}}>
           <Avatar uid={props.uid}/>
         </Col>
         <Col xs={9} style={{...styles.container, ...styles.nameCol}}>
-          <span style={styles.nameWrapper}>{props.name}</span>
+          <div style={styles.nameWrapper}>
+            <div>{props.name}</div>
+            <div className="text-muted" style={{fontSize: '14px'}}>sub</div>
+          </div>
         </Col>
       </Row>
     </ItemBox>
