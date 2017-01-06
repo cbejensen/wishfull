@@ -1,4 +1,5 @@
 import React from 'react';
+import { Avatar } from 'components/User/Avatar';
 import { browserHistory } from 'react-router';
 import { Grid } from 'react-bootstrap';
 import { getUser } from 'utils/firebaseHelpers';
@@ -21,6 +22,7 @@ class UserView extends React.Component {
     })
     getUser(uid).then(user => {
       this.setState({user: user})
+
     }, err => {
       console.log(err);
     })
@@ -34,6 +36,9 @@ class UserView extends React.Component {
     return (
       <Grid>
         <div className="h1" style={{textAlign: 'center'}}>{name}</div>
+        <div style={{height: '60px', textAlign: 'center'}}>
+          <Avatar uid={this.props.params.uid} />
+        </div>
         <WishList uid={this.props.params.uid} mutable={false} />
       </Grid>
     );
