@@ -8,7 +8,7 @@ class App extends React.Component {
       <div>
         <Nav />
         <div className="App-main-container">
-          <div className="App-shadow-top"></div>
+          {/* <div className="App-shadow-top"></div> */}
           {this.props.children}
         </div>
       </div>

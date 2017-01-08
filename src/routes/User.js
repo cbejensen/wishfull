@@ -39,7 +39,7 @@ class UserView extends React.Component {
         <div style={{height: '60px', textAlign: 'center'}}>
           <Avatar uid={this.props.params.uid} />
         </div>
-        <WishList uid={this.props.params.uid} mutable={false} />
+        <WishList uid={this.props.params.uid} />
       </Grid>
     );
   }

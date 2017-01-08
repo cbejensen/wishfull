@@ -1,5 +1,6 @@
 import React from 'react';
 import UserHeading from 'components/User/UserHeading';
+import AddWishBtn from 'components/Button/AddWishBtn';
 import { AvatarForm } from 'components/User/AvatarForm';
 import { CheckAuth } from '../components/CheckAuth';
 import { Grid, Nav, NavItem } from 'react-bootstrap';
@@ -34,7 +35,7 @@ const Home = props => {
   let activeComponent;
   if (props.activeTab === 1) {
     activeComponent = (
-      <WishList uid={props.user.uid} mutable={true} />
+      <WishList uid={props.user.uid} mutable showFulfilled />
     )
   } else {
     activeComponent = (
@@ -44,12 +45,14 @@ const Home = props => {
   return (
     <Grid>
       <UserHeading uid={props.user.uid}
-        name={name} />
+        name={name}
+        handleClick={() => {}}/>
       <Nav bsStyle="tabs" activeKey={props.activeTab}
         onSelect={props.handleTabSelect} justified >
         <NavItem eventKey={1}>My Wish List</NavItem>
         <NavItem eventKey={2}>Change Avatar</NavItem>
       </Nav>
+      <AddWishBtn uid={props.uid} />
       {activeComponent}
     </Grid>
   );

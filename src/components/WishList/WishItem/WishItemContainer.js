@@ -50,7 +50,7 @@ class WishItemContainer extends React.Component {
   }
   render() {
     let priorityColor;
-    switch (this.props.item.priority) {
+    switch (this.props.wish.priority) {
       case 1:
         priorityColor = 'rgb(255, 245, 0)';
         break;

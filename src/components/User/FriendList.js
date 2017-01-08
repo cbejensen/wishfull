@@ -9,7 +9,6 @@ class FriendList extends React.Component {
     this.state = {
       friends: null
     }
-    this.handleClickUser = this.handleClickUser.bind(this);
   }
   componentDidMount() {
     let friends = [];
@@ -25,15 +24,10 @@ class FriendList extends React.Component {
       })
     })
   }
-  handleClickUser(uid, e) {
-    const path = `/users/${uid}`
-    browserHistory.push(path);
-  }
   render() {
     if (!this.state.friends) return <div style={{textAlign: 'center'}}>Loading...</div>
     if (this.state.friends.length < 1) return <div style={{textAlign: 'center'}}>You have no friends!</div>
-    return <UserList users={this.state.friends}
-      handleClickUser={this.handleClickUser}/>
+    return <UserList users={this.state.friends} />
   }
 };
 

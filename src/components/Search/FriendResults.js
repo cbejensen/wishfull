@@ -1,5 +1,6 @@
 import React from 'react';
 import UserHeading from '../User/UserHeading';
+import { UserList } from 'components/User';
 import { searchFriends } from 'utils/firebaseHelpers';
 
 class FriendResults extends React.Component {
@@ -14,11 +15,13 @@ class FriendResults extends React.Component {
     this.getResults();
   }
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.query !== prevProps.query) this.getResults();
+    if (this.props.query !== prevProps.query) {
+      this.getResults(); }
   }
   getResults() {
     searchFriends(this.props.query, this.props.uid)
     .then(friends => {
+      console.log('FRIENDS', friends)
       this.setState({friends: friends})
     }, err => {
       console.log(err);
@@ -26,19 +29,20 @@ class FriendResults extends React.Component {
   }
   render() {
     if (!this.state.friends) return null;
-    console.log(this.state.friends);
     let heading = this.props.category;
     heading = heading.charAt(0).toUpperCase() + heading.slice(1);
     return (
       <div>
-        <ul>
-          <li>{heading}</li>
-        </ul>
-        {this.state.friends.map((friend, i) => {
+        <div style={{
+          color: 'white',
+          borderBottom: 'white 1px solid'
+        }}>{heading}</div>
+        <UserList users={this.state.friends} />
+        {/* {this.state.friends.map((friend, i) => {
           return <UserHeading key={i}
             uid={friend.uid}
             name={friend.firstName + ' ' + friend.lastName} />
-        })}
+        })} */}
       </div>
     )
   }
