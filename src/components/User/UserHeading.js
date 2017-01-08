@@ -3,8 +3,8 @@ import { Avatar } from './Avatar';
 import ItemBox from 'components/ItemBox';
 import { getUser, getFile } from '../../utils/firebaseHelpers';
 import { Row, Col } from 'react-bootstrap';
+import { browserHistory } from 'react-router';
 import randomColor from 'randomcolor';
-import './UserHeading.css';
 
 const UserHeading = props => {
   const styles = {
@@ -35,9 +35,14 @@ const UserHeading = props => {
       transform: 'translateY(-50%)'
     }
   }
+  const goToUser = () => {
+    const path = `/users/${props.uid}`
+    browserHistory.push(path);
+  }
+  const handleClick = props.handleClick ? props.handleClick : goToUser;
   return (
     <ItemBox styles={styles.itemBox}
-      handleClick={props.handleClickUser}
+      handleClick={handleClick}
       colorTheme={randomColor({luminosity: 'light'})}>
       <Row style={styles.container}>
         <Col xs={3} style={{...styles.container, ...styles.avatarCol}}>
@@ -58,7 +63,7 @@ UserHeading.propTypes = {
   name: React.PropTypes.string.isRequired,
   uid: React.PropTypes.string.isRequired,
   height: React.PropTypes.string,
-  handleClickUser: React.PropTypes.func
+  handleClick: React.PropTypes.func
 }
 
 export default UserHeading;

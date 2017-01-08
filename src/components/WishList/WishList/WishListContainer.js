@@ -6,56 +6,42 @@ class WishListContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: 'loading',
-      showFulfilled: false,
+      wishes: 'loading',
       selectedWish: -1
     }
     this.handleSelectWish = this.handleSelectWish.bind(this);
-    this.handleSearchChange = this.handleSearchChange.bind(this);
-    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
   componentDidMount() {
-    const removeAuthListener = firebase.auth().onAuthStateChanged(user => {
-      if (user && user.uid !== this.props.uid) {
-        this.setState({
-          showFulfilled: true
-        })
-      }
-    })
-    removeAuthListener();
     const path = `lists/${this.props.uid}`
-    const itemsRef = firebase.database().ref(path);
-    itemsRef.on('value', snap => {
+    this.wishRef = firebase.database().ref(path)
+    this.wishRef.on('value', snap => {
+      let wishesObj = snap.val()
+      let wishesArray = [];
+      for (var key in wishesObj) {
+        wishesObj[key].id = key
+        wishesArray.push(wishesObj[key])
+      }
       this.setState({
-        items: snap.val(),
+        wishes: wishesArray,
       })
     });
   }
   componentWillUnmount() {
-    const path = `lists/${this.props.uid}`
-    const itemsRef = firebase.database().ref(path);
-    itemsRef.off();
+    this.wishRef.off();
   }
   handleSelectWish(wishIndex) {
     if (wishIndex === this.state.selectedWish) {
       // if user deselects wish already selected
-      console.log('got')
       this.setState({selectedWish: -1})
     } else {
       this.setState({selectedWish: wishIndex})
     }
   }
-  handleSearchChange(e) {
-    this.setState({search: e.target.value});
-  }
-  handleFilterChange(e) {
-    this.setState({filter: e.target.value});
-  }
   render() {
-    if (this.state.items === 'loading') return (
+    if (this.state.wishes === 'loading') return (
       <div style={{textAlign: 'center'}}>Loading...</div>
     )
-    if (!this.state.items) {
+    if (!this.state.wishes) {
       return (
         <div style={{textAlign: 'center'}}>
           <h3>No wishes yet!</h3>
@@ -63,13 +49,21 @@ class WishListContainer extends React.Component {
         </div>
       )
     }
-    return <WishList {...this.state}
+    const mutable = this.props.mutable ? this.props.mutable : false;
+    const showFulfilled = this.props.showFulfilled ? this.props.showFulfilled : false;
+    return <WishList
+      {...this.state}
       handleSelectWish={this.handleSelectWish}
-      handleSearchChange={this.handleSearchChange}
-      handleFilterChange={this.handleFilterChange}
       uid={this.props.uid}
-      mutable={this.props.mutable} />
+      mutable={mutable}
+      showFulfilled={showFulfilled} />
   }
 };
+
+WishListContainer.propTypes = {
+  uid: React.PropTypes.string.isRequired,
+  mutable: React.PropTypes.bool,
+  showFulfilled: React.PropTypes.bool
+}
 
 export default WishListContainer;

@@ -9,7 +9,7 @@ const UserList = props => {
           <UserHeading key={user.uid}
             uid={user.uid}
             name={user.firstName + ' ' + user.lastName}
-            handleClickUser={props.handleClickUser.bind(null, user.uid)}/>
+            handleClick={props.handleClick}/>
         )
       })}
     </div>
@@ -17,7 +17,8 @@ const UserList = props => {
 };
 
 UserList.propTypes = {
-  users: React.PropTypes.array.isRequired
+  users: React.PropTypes.array.isRequired,
+  handleClick: React.PropTypes.array
 }
 
 export default UserList;

@@ -24,10 +24,9 @@ class SearchResults extends React.Component {
         {showFriends && <FriendResults query={this.props.query}
           uid={this.props.uid}
           category="friends" /> }
-        {/* {showUsers && <UserResults query={this.props.query}
-          category="users" user={{}} /> }
         {showWishes && <WishResults query={this.props.query}
-          category="wishes" user={{}} /> } */}
+          uid={this.props.uid}
+          category="wishes" /> }
       </div>
     )
   }

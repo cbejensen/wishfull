@@ -1,35 +1,19 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { WishItem } from '../WishItem';
-import AddWishBtn from '../AddWishBtn';
+import AddWishBtn from 'components/Button/AddWishBtn';
 import ItemBox from 'components/ItemBox';
 
 export function WishList(props) {
-  const addWishBtn = (
-    <div style={{textAlign: 'center'}}>
-      <AddWishBtn uid={props.uid} />
-    </div>
-  )
   return (
     <Row style={{marginTop: '20px'}}>
-      {/* <Col xs={3} style={{textAlign: 'center'}}>
-        <ListFilter value={props.filter}
-          onChange={props.handleFilterChange} />
-      </Col>
-      <Col xs={6}>
-        <ListSearch text={props.search}
-          onChange={props.handleSearchChange} />
-      </Col> */}
-      {props.mutable ? addWishBtn : null}
-      {Object.keys(props.items).map((id, index) => {
-        const item = props.items[id];
-        let selected = false;
-        if (props.selectedWish === index) selected = true;
+      {props.wishes.map((wish, index) => {
+        let selected = (props.selectedWish === index) ? true : false;
         return (
-          <Col xs={12} key={id}>
+          <Col xs={12} key={wish.id}>
             <WishItem {...props}
-              item={item}
-              id={id}
+              wish={wish}
+              id={wish.id}
               index={index}
               selected={selected} />
           </Col>
@@ -37,6 +21,15 @@ export function WishList(props) {
       })}
     </Row>
   );
+}
+
+WishList.propTypes = {
+  wishes: React.PropTypes.array.isRequired,
+  uid: React.PropTypes.string.isRequired,
+  showFulfilled: React.PropTypes.bool,
+  mutable: React.PropTypes.bool,
+  selectedWish: React.PropTypes.number,
+  handleSelectWish: React.PropTypes.func
 }
 
 export default WishList;
