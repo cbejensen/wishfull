@@ -35,7 +35,7 @@ class UserResults extends React.Component {
     return (
       <div>
         <CategoryHeading text="Other Users" />
-        <UserList users={this.state.users} />
+        <UserList users={this.state.users} nameColor='#ffffff' />
       </div>
     )
   }

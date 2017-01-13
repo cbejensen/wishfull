@@ -36,6 +36,7 @@ const UserHeading = props => {
       transform: 'translateY(-50%)'
     },
     name: {
+      color: props.nameColor ? props.nameColor : '#434343',
       whiteSpace: 'pre',
       textOverflow: 'ellipsis',
       overflow: 'hidden'
@@ -69,6 +70,7 @@ UserHeading.propTypes = {
   name: React.PropTypes.string.isRequired,
   uid: React.PropTypes.string.isRequired,
   height: React.PropTypes.string,
+  nameColor: React.PropTypes.string,
   handleClick: React.PropTypes.func
 }
 

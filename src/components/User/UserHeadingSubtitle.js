@@ -8,6 +8,7 @@ class UserHeadingSubtitle extends React.Component {
   }
   componentDidMount() {
     getList(this.props.uid).then(list => {
+      if (!list) list = {};
       console.log(list)
       const wishCount = Object.keys(list).length;
       console.log(wishCount)
@@ -17,7 +18,7 @@ class UserHeadingSubtitle extends React.Component {
     })
   }
   render() {
-    if (!this.state.wishCount) return null;
+    if (this.state.wishCount === null) return null;
     return (
       <div className="text-muted" style={{fontSize: '.5em'}}>
         {`${this.state.wishCount} wishes`}
