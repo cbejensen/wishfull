@@ -1,1 +1,1 @@
-export { default as Search } from './SearchContainer';
+export { default as Search } from './Search';

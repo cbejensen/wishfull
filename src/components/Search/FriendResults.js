@@ -1,5 +1,5 @@
 import React from 'react';
-import UserHeading from '../User/UserHeading';
+import CategoryHeading from './CategoryHeading';
 import { UserList } from 'components/User';
 import { searchFriends } from 'utils/firebaseHelpers';
 
@@ -9,19 +9,19 @@ class FriendResults extends React.Component {
     this.state = {
       friends: null
     }
-    this.getResults = this.getResults.bind(this);
+    this.getFriends = this.getFriends.bind(this);
   }
   componentDidMount() {
-    this.getResults();
+    this.getFriends();
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.query !== prevProps.query) {
-      this.getResults(); }
+      this.getFriends();
+    }
   }
-  getResults() {
+  getFriends() {
     searchFriends(this.props.query, this.props.uid)
     .then(friends => {
-      console.log('FRIENDS', friends)
       this.setState({friends: friends})
     }, err => {
       console.log(err);
@@ -29,20 +29,10 @@ class FriendResults extends React.Component {
   }
   render() {
     if (!this.state.friends) return null;
-    let heading = this.props.category;
-    heading = heading.charAt(0).toUpperCase() + heading.slice(1);
     return (
       <div>
-        <div style={{
-          color: 'white',
-          borderBottom: 'white 1px solid'
-        }}>{heading}</div>
+        <CategoryHeading text="Friends" />
         <UserList users={this.state.friends} />
-        {/* {this.state.friends.map((friend, i) => {
-          return <UserHeading key={i}
-            uid={friend.uid}
-            name={friend.firstName + ' ' + friend.lastName} />
-        })} */}
       </div>
     )
   }
@@ -50,8 +40,7 @@ class FriendResults extends React.Component {
 
 FriendResults.propTypes = {
   query: React.PropTypes.string.isRequired,
-  uid: React.PropTypes.string.isRequired,
-  category: React.PropTypes.string.isRequired
+  uid: React.PropTypes.string.isRequired
 }
 
 export default FriendResults;

@@ -4,23 +4,43 @@ import { WishItem } from '../WishItem';
 import AddWishBtn from 'components/Button/AddWishBtn';
 import ItemBox from 'components/ItemBox';
 
-export function WishList(props) {
+export default function WishList(props) {
+  const styles = {
+    wish: {
+      margin: '5px auto'
+    }
+  }
   return (
-    <Row style={{marginTop: '20px'}}>
+    <div>
       {props.wishes.map((wish, index) => {
         let selected = (props.selectedWish === index) ? true : false;
         return (
-          <Col xs={12} key={wish.id}>
-            <WishItem {...props}
+          <div style={styles.wish} key={wish.id}>
+            <WishItem
+              {...props}
               wish={wish}
               id={wish.id}
               index={index}
               selected={selected} />
-          </Col>
+          </div>
         )
       })}
-    </Row>
-  );
+      </div>
+    )
+    // <Row style={{marginTop: '20px'}}>
+    //   {props.wishes.map((wish, index) => {
+    //     let selected = (props.selectedWish === index) ? true : false;
+    //     return (
+    //       <Col xs={12} key={wish.id}>
+    //         <WishItem {...props}
+    //           wish={wish}
+    //           id={wish.id}
+    //           index={index}
+    //           selected={selected} />
+    //       </Col>
+    //     )
+    //   })}
+    // </Row>
 }
 
 WishList.propTypes = {
@@ -31,5 +51,3 @@ WishList.propTypes = {
   selectedWish: React.PropTypes.number,
   handleSelectWish: React.PropTypes.func
 }
-
-export default WishList;

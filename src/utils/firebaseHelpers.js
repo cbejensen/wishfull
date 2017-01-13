@@ -141,7 +141,7 @@ export const getFile = path => {
 
 // SEARCH
 
-export const searchFriends = (str, uid) => {
+export const searchFriends = (str, uid, exclusions) => {
   return getFriendIds(uid).then(friendIds => {
     let promiseArray = [];
     for (var key in friendIds) {
@@ -150,7 +150,7 @@ export const searchFriends = (str, uid) => {
       }
     }
     return Promise.all(promiseArray).then(friends => {
-      const filteredFriends = filterUsersByName(str, friends);
+      const filteredFriends = filterUsersByName(str, friends, exclusions);
       return filteredFriends;
     }, err => {
       console.log(err)
@@ -160,17 +160,19 @@ export const searchFriends = (str, uid) => {
   })
 }
 
-export const searchUsers = (str) => {
+export const searchUsers = (str, uid, exclusions) => {
   return getAllUsers().then(users => {
-    const usersArray = Object.keys(users).map(key => users[key])
-    const filteredUsers = filterUsersByName(str, usersArray);
+    const usersArray = Object.keys(users).map(key => {
+      users[key].uid = key;
+      return users[key];
+    })
+    const filteredUsers = filterUsersByName(str, usersArray, exclusions);
     return filteredUsers;
   })
 }
 
 export const searchWishes = (str, uid) => {
   return getList(uid).then(list => {
-    console.log('LIST:', list)
     const wishes = Object.keys(list).map(wishId => {
       list[wishId].id = wishId;
       return list[wishId];
@@ -182,16 +184,27 @@ export const searchWishes = (str, uid) => {
   })
 }
 
-const filterUsersByName = (str, users) => {
+const filterUsersByName = (str, users, exclusions) => {
   let filteredUsers = [];
   let matches = 0;
+  str = str.toLowerCase();
   for (const user of users) {
     let name = user.firstName + ' ' + user.lastName;
-    str = str.toLowerCase();
     name = name.toLowerCase();
     if (name.indexOf(str) !== -1) {
-      filteredUsers.push(user);
-      matches++;
+      let excluded = false;
+      if (exclusions) {
+        for (const e of exclusions) {
+          if (user.uid === e.uid) {
+            excluded = true;
+            break;
+          }
+        }
+      }
+      if (!excluded) {
+        filteredUsers.push(user);
+        matches++;
+      }
     }
     if (matches === 5) break;
   };

@@ -1,5 +1,7 @@
 import React from 'react';
 import { CheckAuth } from '../CheckAuth';
+import {UserList} from 'components/User';
+import CategoryResults from './CategoryResults';
 import FriendResults from './FriendResults';
 import UserResults from './UserResults';
 import WishResults from './WishResults';
@@ -9,8 +11,8 @@ class SearchResults extends React.Component {
     let showFriends,
         showUsers,
         showWishes;
-    if (!this.props.categories || this.props.categories.length === 0) {
-      // if no categories specified, apply all categories
+    if (!this.props.categories || this.props.categories.length < 1) {
+      // if no categories specified search all categories
       showFriends = showUsers = showWishes = true;
     } else {
       this.props.categories.forEach(category => {
@@ -21,12 +23,15 @@ class SearchResults extends React.Component {
     }
     return (
       <div>
-        {showFriends && <FriendResults query={this.props.query}
-          uid={this.props.uid}
-          category="friends" /> }
-        {showWishes && <WishResults query={this.props.query}
-          uid={this.props.uid}
-          category="wishes" /> }
+        {showFriends && <FriendResults
+          query={this.props.query}
+          uid={this.props.uid} />}
+        {showUsers && <UserResults
+          query={this.props.query}
+          uid={this.props.uid} />}
+        {showWishes && <WishResults
+          query={this.props.query}
+          uid={this.props.uid} />}
       </div>
     )
   }
