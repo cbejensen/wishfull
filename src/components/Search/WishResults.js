@@ -22,7 +22,6 @@ class WishResults extends React.Component {
   getWishes() {
     searchWishes(this.props.query, this.props.uid)
     .then(wishes => {
-      console.log(wishes)
       this.setState({wishes: wishes})
     }, err => {
       console.log(err);
