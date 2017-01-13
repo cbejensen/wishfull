@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar } from './Avatar';
 import ItemBox from 'components/ItemBox';
-import { getUser, getFile } from '../../utils/firebaseHelpers';
+import UserHeadingSubtitle from './UserHeadingSubtitle';
 import { Row, Col } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 import randomColor from 'randomcolor';
@@ -15,7 +15,7 @@ const UserHeading = props => {
       get fontSize() {
         return props.fontSize
           ? props.fontSize
-          : (parseInt(this.height) / 3) + 'px'
+          : (parseInt(this.height, 10) / 3) + 'px'
       },
       maxWidth: '500px'
     },
@@ -32,7 +32,13 @@ const UserHeading = props => {
     nameWrapper: {
       position: 'absolute',
       top: '50%',
+      width: '100%',
       transform: 'translateY(-50%)'
+    },
+    name: {
+      whiteSpace: 'pre',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden'
     }
   }
   const goToUser = () => {
@@ -50,8 +56,8 @@ const UserHeading = props => {
         </Col>
         <Col xs={9} style={{...styles.container, ...styles.nameCol}}>
           <div style={styles.nameWrapper}>
-            <div>{props.name}</div>
-            <div className="text-muted" style={{fontSize: '14px'}}>sub</div>
+            <div style={styles.name}>{props.name}</div>
+            <UserHeadingSubtitle uid={props.uid} />
           </div>
         </Col>
       </Row>
