@@ -18,7 +18,7 @@ class AvatarContainer extends React.Component {
         })
       }
     }, err => {
-      console.log(err)
+      // console.log(err)
     })
   }
   componentWillUnmount() {

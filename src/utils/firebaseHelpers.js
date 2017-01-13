@@ -161,6 +161,7 @@ export const searchFriends = (str, uid, exclusions) => {
 }
 
 export const searchUsers = (str, uid, exclusions) => {
+  console.log(str, uid, exclusions);
   return getAllUsers().then(users => {
     const usersArray = Object.keys(users).map(key => {
       users[key].uid = key;
@@ -185,6 +186,7 @@ export const searchWishes = (str, uid) => {
 }
 
 const filterUsersByName = (str, users, exclusions) => {
+  console.log(str, users, exclusions)
   let filteredUsers = [];
   let matches = 0;
   str = str.toLowerCase();
@@ -195,7 +197,8 @@ const filterUsersByName = (str, users, exclusions) => {
       let excluded = false;
       if (exclusions) {
         for (const e of exclusions) {
-          if (user.uid === e.uid) {
+          if (user.uid === e) {
+            console.log(name)
             excluded = true;
             break;
           }
