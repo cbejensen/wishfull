@@ -1,21 +1,44 @@
 import React from 'react';
+import CategoryHeading from './CategoryHeading';
+import { WishList } from 'components/WishList';
+import { searchFriends } from 'utils/firebaseHelpers';
 
-const CategoryResults = props => {
-  return (
-    <div>
-      <ul>
-        <li>{props.category}</li>
-        {props.results.map((result, i) => {
-          return <li key={i}>{props.results}</li>
-        })}
-      </ul>
-    </div>
-  )
+class WishResults extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      results: null
+    }
+    this.getResults = this.getResults.bind(this);
+  }
+  componentDidMount() {
+    this.getResults();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.query !== prevProps.query) {
+      this.getResults();
+    }
+  }
+  getResults() {
+    searchFriends(this.props.query, this.props.uid)
+    .then(results => {
+      this.setState({results: results})
+    }, err => {
+      console.log(err);
+    })
+  }
+  render() {
+    if (!this.state.results) return null;
+    // let list = <UserList users={this.state.friends} />
+
+    return React.cloneElement(this.props.children,
+      {users: this.state.results})
+  }
 };
 
-CategoryResults.propTypes = {
-  category: React.PropTypes.string.isRequired,
-  results: React.PropTypes.array.isRequired
+WishResults.propTypes = {
+  query: React.PropTypes.string.isRequired,
+  uid: React.PropTypes.string.isRequired
 }
 
-export default CategoryResults;
+export default WishResults;

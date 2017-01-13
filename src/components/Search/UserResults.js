@@ -1,37 +1,49 @@
 import React from 'react';
-import CategoryResults from './CategoryResults';
-import { searchFriends } from 'utils/firebaseHelpers';
+import CategoryHeading from './CategoryHeading';
+import { UserList } from 'components/User';
+import { searchUsers, getFriendIds } from 'utils/firebaseHelpers';
 
-class FriendResults extends React.Component {
+class UserResults extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      friends: null
+      users: null
     }
+    this.getUsers = this.getUsers.bind(this);
   }
   componentDidMount() {
-    searchFriends(this.props.query, this.props.user.uid)
-    .then(friends => {
-      this.setState({
-        friends: friends
+    this.getUsers();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.query !== prevProps.query) {
+      this.getUsers();
+    }
+  }
+  getUsers() {
+    getFriendIds(this.props.uid).then(friendIds => {
+      const friendIdsArray = Object.keys(friendIds).map(id => id);
+      searchUsers(this.props.query, this.props.uid, friendIdsArray)
+      .then(users => {
+        this.setState({users: users})
+      }, err => {
+        console.log(err);
       })
-    }, err => {
-      console.log(err);
     })
   }
   render() {
-    if (!this.state.friends) return null;
-    let heading = this.props.category;
-    heading = heading.charAt(0).toUpperCase() + heading.slice(1);
-    return <CategoryResults heading={heading}
-      results={this.state.results} />
+    if (!this.state.users) return null;
+    return (
+      <div>
+        <CategoryHeading text="Other Users" />
+        <UserList users={this.state.users} />
+      </div>
+    )
   }
 };
 
-FriendResults.propTypes = {
+UserResults.propTypes = {
   query: React.PropTypes.string.isRequired,
-  category: React.PropTypes.string.isRequired,
-  user: React.PropTypes.object.isRequired
+  uid: React.PropTypes.string.isRequired
 }
 
-export default FriendResults;
+export default UserResults;
