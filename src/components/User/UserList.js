@@ -15,6 +15,7 @@ const UserList = props => {
             <UserHeading
               uid={user.uid}
               name={user.firstName + ' ' + user.lastName}
+              nameColor={props.nameColor}
               handleClick={props.handleClick}/>
           </div>
         )
@@ -25,6 +26,7 @@ const UserList = props => {
 
 UserList.propTypes = {
   users: React.PropTypes.array.isRequired,
+  nameColor: React.PropTypes.string,
   handleClick: React.PropTypes.array
 }
 

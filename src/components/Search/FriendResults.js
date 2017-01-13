@@ -32,7 +32,7 @@ class FriendResults extends React.Component {
     return (
       <div>
         <CategoryHeading text="Friends" />
-        <UserList users={this.state.friends} />
+        <UserList users={this.state.friends} nameColor='#ffffff' />
       </div>
     )
   }
