@@ -22,7 +22,8 @@ class CheckAuth extends React.Component {
           console.log(err);
         })
       } else {
-        browserHistory.push('/sign-in')
+        const path = this.props.reroute ? this.props.reroute : '/sign-in';
+        browserHistory.push(path);
       }
     });
   }
@@ -33,11 +34,16 @@ class CheckAuth extends React.Component {
     if (!this.state.user) return null;
     const children = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
-        user: this.state.user
+        user: this.state.user,
+        uid: this.state.user.uid
       })
     });
     return <div>{children}</div>
   }
 };
+
+CheckAuth.propTypes = {
+  reroute: React.PropTypes.string
+}
 
 export default CheckAuth;

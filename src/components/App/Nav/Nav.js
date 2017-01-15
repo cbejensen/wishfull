@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search } from 'components/Search';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { Grid, Row, Col, Glyphicon } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import * as firebase from 'firebase';
@@ -12,10 +12,10 @@ export function Nav(props) {
       height: '50px'
     },
     menu: {
-      display: props.showMenu ? 'inherit' : 'none'
+      display: props.menuVisible ? 'inherit' : 'none'
     },
     search: {
-      display: props.showSearch ? 'inherit' : 'none'
+      display: props.searchVisible ? 'inherit' : 'none'
     }
   }
   // let getFriendsPath;
@@ -31,27 +31,40 @@ export function Nav(props) {
   //     <NavItem>Sign In</NavItem>
   //   )
   // };
+  const goTo = path => {
+    props.toggleMenu();
+    browserHistory.push(path);
+  }
   return (
     <div className="Nav-wrapper">
       <Grid className="Nav-container">
 
         <Row className="Nav-main" style={styles.main}>
           <Col xs={4} className="Nav-col left">
-            <div><Glyphicon glyph="menu-hamburger" onClick={props.toggleMenu}/></div>
+            <Glyphicon glyph="menu-hamburger" onClick={props.toggleMenu}/>
           </Col>
           <Col xs={4} className="Nav-col center">
-            <div><Link to="/home"><span>W</span></Link></div>
+            <Link to={props.uid ? '/home' : '/'}>
+              <span>W</span>
+            </Link>
           </Col>
           <Col xs={4} className="Nav-col right">
-            <div><Glyphicon glyph="search" onClick={props.toggleSearch}/></div>
+            <Glyphicon glyph="search" onClick={props.toggleSearch}/>
           </Col>
         </Row>
 
         <Row className="Nav-menu" style={styles.menu}>
-          <Col xs={12} style={{color: 'white'}}>
-            <Link to=""><span>My Profile</span></Link>
-            <Link to="/friends"><span>Friends</span></Link>
-            <Link to=""><span>Sign Out</span></Link>
+          <Col xs={12} sm={4}
+            onClick={goTo.bind(null, '/home')}>
+            My Profile
+          </Col>
+          <Col xs={12} sm={4}
+            onClick={goTo.bind(null, '/friends')}>
+            Friends
+          </Col>
+          <Col xs={12} sm={4}
+            onClick={props.handleSignOut}>
+            Sign Out
           </Col>
         </Row>
 
@@ -61,10 +74,6 @@ export function Nav(props) {
           </Col>
         </Row>
 
-        <Row className="Nav-search-results">
-          <Col></Col>
-        </Row>
-
       </Grid>
     </div>
   );
@@ -72,8 +81,8 @@ export function Nav(props) {
 
 Nav.propTypes = {
   uid: React.PropTypes.string.isRequired,
-  showMenu: React.PropTypes.bool.isRequired,
-  showSearch: React.PropTypes.bool.isRequired,
+  menuVisible: React.PropTypes.bool.isRequired,
+  searchVisible: React.PropTypes.bool.isRequired,
   toggleMenu: React.PropTypes.func.isRequired,
   toggleSearch: React.PropTypes.func.isRequired,
   handleSignOut: React.PropTypes.func.isRequired

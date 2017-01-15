@@ -1,5 +1,5 @@
 import React from 'react';
-import UserHeading from './UserHeading';
+import UserBox from './UserBox';
 
 const UserList = props => {
   const styles = {
@@ -12,7 +12,7 @@ const UserList = props => {
       {props.users.map(user => {
         return (
           <div key={user.uid} style={styles.user}>
-            <UserHeading
+            <UserBox
               uid={user.uid}
               name={user.firstName + ' ' + user.lastName}
               nameColor={props.nameColor}

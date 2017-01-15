@@ -3,6 +3,7 @@ import { Avatar } from 'components/User/Avatar';
 import { browserHistory } from 'react-router';
 import { Grid } from 'react-bootstrap';
 import { getUser } from 'utils/firebaseHelpers';
+import {UserHeading} from 'components/User';
 import { WishList } from '../components/WishList/WishList';
 import * as firebase from 'firebase';
 
@@ -22,7 +23,6 @@ class UserView extends React.Component {
     })
     getUser(uid).then(user => {
       this.setState({user: user})
-
     }, err => {
       console.log(err);
     })
@@ -32,13 +32,9 @@ class UserView extends React.Component {
   }
   render() {
     if (!this.state.user) return <div>Loading...</div>;
-    const name = this.state.user.firstName + ' ' + this.state.user.lastName;
     return (
       <Grid>
-        <div className="h1" style={{textAlign: 'center'}}>{name}</div>
-        <div style={{height: '60px', textAlign: 'center'}}>
-          <Avatar uid={this.props.params.uid} />
-        </div>
+        <UserHeading user={this.state.user} />
         <WishList uid={this.props.params.uid} />
       </Grid>
     );

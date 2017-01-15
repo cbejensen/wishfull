@@ -1,7 +1,7 @@
 import React from 'react';
 import {getList} from 'utils/firebaseHelpers';
 
-class UserHeadingSubtitle extends React.Component {
+class UserBoxSubtitle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {wishCount: null}
@@ -9,9 +9,7 @@ class UserHeadingSubtitle extends React.Component {
   componentDidMount() {
     getList(this.props.uid).then(list => {
       if (!list) list = {};
-      console.log(list)
       const wishCount = Object.keys(list).length;
-      console.log(wishCount)
       this.setState({wishCount: wishCount})
     }, err => {
       console.log(err);
@@ -27,8 +25,8 @@ class UserHeadingSubtitle extends React.Component {
   }
 };
 
-UserHeadingSubtitle.propTypes = {
+UserBoxSubtitle.propTypes = {
   uid: React.PropTypes.string.isRequired
 }
 
-export default UserHeadingSubtitle;
+export default UserBoxSubtitle;

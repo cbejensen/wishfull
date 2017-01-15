@@ -2,6 +2,29 @@
   background: #383838;
 }
 
+.Nav-main > div {
+  cursor: pointer;
+  color: rgba(255, 255, 255, .7);
+}
+
+.Nav-main > div:hover {
+  color: rgba(255, 255, 255, .9);
+}
+
+.Nav-menu > div {
+  text-align: center;
+  color: rgba(255, 255, 255, .5);
+  font-size: 1.5em;
+  cursor: pointer;
+  margin: 5px auto;
+  transition: .2s;
+}
+
+.Nav-menu > div:hover {
+  color: rgba(255, 255, 255, .7);
+  font-weight: bold;
+}
+
 .Nav-col, .Nav-col div {
   height: 100%;
   font-size: 30px;
@@ -11,25 +34,19 @@
   position: relative;
 }
 
-.Nav-col span {
-  position: absolute;
-  top: 50%;
-}
-
 .Nav-col.left span, .Nav-col.right span {
-  color: rgba(255, 255, 255, .9);
-}
-
-.Nav-col.left span {
+  position: relative;
+  top: 50%;
   transform: translateY(-50%);
 }
 
 .Nav-col.right span {
-  right: 0;
-  transform: translateY(-50%);
+  float: right;
 }
 
 .Nav-col.center span {
+  position: absolute;
+  top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   color: #f88379;

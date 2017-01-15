@@ -1,8 +1,9 @@
 import React from 'react';
-import UserHeading from 'components/User/UserHeading';
+import {UserHeading, UserBox} from 'components/User';
 import AddWishBtn from 'components/Button/AddWishBtn';
 import { AvatarForm } from 'components/User/AvatarForm';
 import { CheckAuth } from '../components/CheckAuth';
+import {browserHistory} from 'react-router';
 import { Grid, Nav, NavItem } from 'react-bootstrap';
 import { WishList } from '../components/WishList/WishList';
 
@@ -22,8 +23,7 @@ class HomeContainer extends React.Component {
   render() {
     return (
       <CheckAuth>
-        <Home user={this.props.user}
-          activeTab={this.state.activeTab}
+        <Home activeTab={this.state.activeTab}
           handleTabSelect={this.handleTabSelect}/>
       </CheckAuth>
     )
@@ -44,9 +44,7 @@ const Home = props => {
   }
   return (
     <Grid>
-      <UserHeading uid={props.user.uid}
-        name={name}
-        handleClick={() => {}}/>
+      <UserHeading user={props.user} />
       <Nav bsStyle="tabs" activeKey={props.activeTab}
         onSelect={props.handleTabSelect} justified >
         <NavItem eventKey={1}>My Wish List</NavItem>
