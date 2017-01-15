@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from './Nav';
+import {browserHistory} from 'react-router';
 import * as firebase from 'firebase';
 
 class NavContainer extends React.Component {
@@ -7,12 +8,12 @@ class NavContainer extends React.Component {
     super(props);
     this.state = {
       uid: '',
-      showMenu: false,
-      showSearch: false
+      menuVisible: false,
+      searchVisible: false
     };
-    this.handleSignOut = this.handleSignOut.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
     this.toggleSearch = this.toggleSearch.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
   componentDidMount() {
     this.removeListener = firebase.auth().onAuthStateChanged(user => {
@@ -25,21 +26,24 @@ class NavContainer extends React.Component {
   toggleMenu() {
     this.setState((prevState, props) => {
       return {
-        showMenu: !prevState.showMenu,
-        showSearch: false
+        menuVisible: !prevState.menuVisible,
+        searchVisible: false
       }
     })
   }
   toggleSearch() {
     this.setState((prevState, props) => {
       return {
-        showMenu: false,
-        showSearch: !prevState.showSearch
+        menuVisible: false,
+        searchVisible: !prevState.searchVisible
       }
     })
   }
   handleSignOut() {
-    firebase.auth().signOut().then(() => {}, error => {
+    firebase.auth().signOut().then(() => {
+      this.toggleMenu();
+      browserHistory.push('/sign-in');
+    }, error => {
       console.log(error);
     });
   }
