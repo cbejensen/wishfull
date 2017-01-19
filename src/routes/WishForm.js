@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { WishForm } from '../components/WishList'
 
 export default function (props) {

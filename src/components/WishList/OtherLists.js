@@ -1,7 +1,7 @@
-import React from 'react';
-import * as firebase from 'firebase';
-import { getOtherUsers, getList } from '../../utils/firebaseHelpers';
-import { UserList } from '../WishList';
+import React from 'react'
+import * as firebase from 'firebase'
+import { getOtherUsers, getList } from '../../utils/firebaseHelpers'
+import { UserList } from '../WishList'
 
 const OtherListsContainer = React.createClass({
   getInitialState() {
@@ -20,15 +20,15 @@ const OtherListsContainer = React.createClass({
     if (!this.state.users) return <div>Loading...</div>
     return <OtherLists users={this.state.users}/>
   }
-});
+})
 
 export function OtherLists(props) {
   const lists = props.users.map(user => {
     console.log(user)
     return <UserList uid={user.uid} />
-  });
+  })
   console.log(lists)
   return <div>{lists}</div>
 }
 
-export default OtherListsContainer;
+export default OtherListsContainer

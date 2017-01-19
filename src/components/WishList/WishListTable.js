@@ -1,5 +1,5 @@
-import React from 'react';
-import { Table } from 'react-bootstrap';
+import React from 'react'
+import { Table } from 'react-bootstrap'
 
 const WishListContainer = React.createClass({
   getInitialState() {
@@ -27,7 +27,7 @@ export function WishList(props) {
         </thead>
         <tbody>
           {Object.keys(props.data).map(function(index) {
-            const item = props.data[index];
+            const item = props.data[index]
             return (
               <tr key={index}>
                 <td></td>
@@ -41,7 +41,7 @@ export function WishList(props) {
         </tbody>
       </Table>
     </div>
-  );
+  )
 }
 
-export default WishListContainer;
+export default WishListContainer

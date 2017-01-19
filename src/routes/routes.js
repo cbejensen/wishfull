@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
-import { App } from 'components/App';
-import Main from './Main';
-import Home from './Home';
-import Friends from './Friends';
-import GetFriends from './GetFriends';
-import User from './User';
-import Login from './Login';
-import WishForm from './WishForm';
-import CreateAccount from './CreateAccount';
+import { App } from 'components/App'
+import Main from './Main'
+import Home from './Home'
+import Friends from './Friends'
+import GetFriends from './GetFriends'
+import User from './User'
+import Login from './Login'
+import WishForm from './WishForm'
+import CreateAccount from './CreateAccount'
 
 const routes = (
   <Router history={browserHistory}>
@@ -27,4 +27,4 @@ const routes = (
   </Router>
 )
 
-export default routes;
+export default routes

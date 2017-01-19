@@ -1,6 +1,6 @@
-import React from 'react';
-import { Nav } from './Nav';
-import './App.css';
+import React from 'react'
+import { Nav } from './Nav'
+import './App.css'
 
 class App extends React.Component {
   render() {
@@ -14,6 +14,6 @@ class App extends React.Component {
       </div>
     )
   }
-};
+}
 
-export default App;
+export default App

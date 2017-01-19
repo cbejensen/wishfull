@@ -1,5 +1,5 @@
-import React from 'react';
-import UserBox from './UserBox';
+import React from 'react'
+import UserBox from './UserBox'
 
 const UserList = props => {
   const styles = {
@@ -22,7 +22,7 @@ const UserList = props => {
       })}
     </div>
   )
-};
+}
 
 UserList.propTypes = {
   users: React.PropTypes.array.isRequired,
@@ -30,4 +30,4 @@ UserList.propTypes = {
   handleClick: React.PropTypes.array
 }
 
-export default UserList;
+export default UserList

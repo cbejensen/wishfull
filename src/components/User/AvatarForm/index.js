@@ -1,1 +1,1 @@
-export { default as AvatarForm } from './AvatarFormContainer';
+export { default as AvatarForm } from './AvatarFormContainer'

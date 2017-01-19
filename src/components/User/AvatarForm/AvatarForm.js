@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React from 'react'
+import { Button } from 'react-bootstrap'
 
 function AvatarForm(props) {
   const style = {
@@ -14,7 +14,7 @@ function AvatarForm(props) {
       Refresh page after uploading to see new avatar.
     </form>
   )
-};
+}
 
 AvatarForm.propTypes = {
   loading: React.PropTypes.string.isRequired,
@@ -22,4 +22,4 @@ AvatarForm.propTypes = {
   selectAvatar: React.PropTypes.func.isRequired
 }
 
-export default AvatarForm;
+export default AvatarForm

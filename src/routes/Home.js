@@ -1,19 +1,19 @@
-import React from 'react';
-import {UserHeading, UserBox} from 'components/User';
-import AddWishBtn from 'components/Button/AddWishBtn';
-import { AvatarForm } from 'components/User/AvatarForm';
-import { CheckAuth } from '../components/CheckAuth';
-import {browserHistory} from 'react-router';
-import { Grid, Nav, NavItem } from 'react-bootstrap';
-import { WishList } from '../components/WishList/WishList';
+import React from 'react'
+import {UserHeading, UserBox} from 'components/User'
+import AddWishBtn from 'components/Button/AddWishBtn'
+import { AvatarForm } from 'components/User/AvatarForm'
+import { CheckAuth } from '../components/CheckAuth'
+import {browserHistory} from 'react-router'
+import { Grid, Nav, NavItem } from 'react-bootstrap'
+import { WishList } from '../components/WishList/WishList'
 
 class HomeContainer extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       activeTab: 1
-    };
-    this.handleTabSelect = this.handleTabSelect.bind(this);
+    }
+    this.handleTabSelect = this.handleTabSelect.bind(this)
   }
   handleTabSelect(e) {
     this.setState({
@@ -28,11 +28,11 @@ class HomeContainer extends React.Component {
       </CheckAuth>
     )
   }
-};
+}
 
 const Home = props => {
-  const name = props.user.firstName + ' ' + props.user.lastName;
-  let activeComponent;
+  const name = props.user.firstName + ' ' + props.user.lastName
+  let activeComponent
   if (props.activeTab === 1) {
     activeComponent = (
       <WishList uid={props.user.uid} mutable showFulfilled />
@@ -53,7 +53,7 @@ const Home = props => {
       <AddWishBtn uid={props.uid} />
       {activeComponent}
     </Grid>
-  );
+  )
 }
 
-export default HomeContainer;
+export default HomeContainer

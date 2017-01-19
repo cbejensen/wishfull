@@ -1,6 +1,6 @@
-import React from 'react';
-import { AllUsersList } from '../components/User';
-import { Grid } from 'react-bootstrap';
+import React from 'react'
+import { AllUsersList } from '../components/User'
+import { Grid } from 'react-bootstrap'
 
 class GetFriends extends React.Component {
   render() {
@@ -10,6 +10,6 @@ class GetFriends extends React.Component {
       </Grid>
     )
   }
-};
+}
 
-export default GetFriends;
+export default GetFriends

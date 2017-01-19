@@ -40,9 +40,9 @@ class WishFormContainer extends React.Component {
     }
   }
   handleChange(field, e) {
-    const newState = {};
-    newState[field] = e.target.value;
-    this.setState(newState);
+    const newState = {}
+    newState[field] = e.target.value
+    this.setState(newState)
   }
   validateUrl() {
     let url = this.state.url
@@ -84,7 +84,7 @@ class WishFormContainer extends React.Component {
         updateWish(this.props.uid, this.props.wishId, wish).then(onSucces, onError)
       }
     }, err => {
-      alert(err);
+      alert(err)
     })
   }
   render() {

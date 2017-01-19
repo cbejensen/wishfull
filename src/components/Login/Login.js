@@ -1,8 +1,8 @@
-import React from 'react';
-import FormInput from '../FormInput';
-import { browserHistory } from 'react-router';
+import React from 'react'
+import FormInput from '../FormInput'
+import { browserHistory } from 'react-router'
 import { Form, Button } from 'react-bootstrap'
-import * as firebase from 'firebase';
+import * as firebase from 'firebase'
 
 const LoginContainer = React.createClass({
   contextTypes: {
@@ -15,20 +15,20 @@ const LoginContainer = React.createClass({
     }
   },
   handleEmailChange(e) {
-    this.setState({email: e.target.value});
+    this.setState({email: e.target.value})
   },
   handlePasswordChange(e) {
-    this.setState({password: e.target.value});
+    this.setState({password: e.target.value})
   },
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     .then(user => {
-      browserHistory.push('/home');
+      browserHistory.push('/home')
     }, error => {
       alert(error.message)
-      console.log(error.code, error.message);
-    });
+      console.log(error.code, error.message)
+    })
   },
   render() {
     return <Login
@@ -38,7 +38,7 @@ const LoginContainer = React.createClass({
       handlePasswordChange={this.handlePasswordChange}
       handleSubmit={this.handleSubmit} />
   }
-});
+})
 
 export function Login(props) {
   return (
@@ -59,7 +59,7 @@ export function Login(props) {
       </Form>
       {/* <ForgotPassword /> */}
     </div>
-  );
+  )
 }
 
 export function ForgotPassword(props) {
@@ -71,4 +71,4 @@ export function ForgotPassword(props) {
   )
 }
 
-export default LoginContainer;
+export default LoginContainer

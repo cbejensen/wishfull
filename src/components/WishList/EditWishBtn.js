@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
-import { Link } from 'react-router';
+import React from 'react'
+import { Button } from 'react-bootstrap'
+import { Link } from 'react-router'
 
 export default function EditWishBtn(props) {
-  const path = `users/${props.uid}/wish-form/${props.id}`;
+  const path = `users/${props.uid}/wish-form/${props.id}`
   return (
     <Link to={path}>
       <Button>

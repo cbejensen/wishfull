@@ -1,22 +1,22 @@
-import React from 'react';
-import CategoryHeading from './CategoryHeading';
-import { WishList } from 'components/WishList';
-import { searchFriends } from 'utils/firebaseHelpers';
+import React from 'react'
+import CategoryHeading from './CategoryHeading'
+import { WishList } from 'components/WishList'
+import { searchFriends } from 'utils/firebaseHelpers'
 
 class WishResults extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       results: null
     }
-    this.getResults = this.getResults.bind(this);
+    this.getResults = this.getResults.bind(this)
   }
   componentDidMount() {
-    this.getResults();
+    this.getResults()
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.query !== prevProps.query) {
-      this.getResults();
+      this.getResults()
     }
   }
   getResults() {
@@ -24,21 +24,21 @@ class WishResults extends React.Component {
     .then(results => {
       this.setState({results: results})
     }, err => {
-      console.log(err);
+      console.log(err)
     })
   }
   render() {
-    if (!this.state.results) return null;
+    if (!this.state.results) return null
     // let list = <UserList users={this.state.friends} />
 
     return React.cloneElement(this.props.children,
       {users: this.state.results})
   }
-};
+}
 
 WishResults.propTypes = {
   query: React.PropTypes.string.isRequired,
   uid: React.PropTypes.string.isRequired
 }
 
-export default WishResults;
+export default WishResults

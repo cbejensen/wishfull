@@ -1,22 +1,22 @@
-import React from 'react';
-import CategoryHeading from './CategoryHeading';
-import { UserList } from 'components/User';
-import { searchFriends } from 'utils/firebaseHelpers';
+import React from 'react'
+import CategoryHeading from './CategoryHeading'
+import { UserList } from 'components/User'
+import { searchFriends } from 'utils/firebaseHelpers'
 
 class FriendResults extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       friends: null
     }
-    this.getFriends = this.getFriends.bind(this);
+    this.getFriends = this.getFriends.bind(this)
   }
   componentDidMount() {
-    this.getFriends();
+    this.getFriends()
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.query !== prevProps.query) {
-      this.getFriends();
+      this.getFriends()
     }
   }
   getFriends() {
@@ -24,11 +24,11 @@ class FriendResults extends React.Component {
     .then(friends => {
       this.setState({friends: friends})
     }, err => {
-      console.log(err);
+      console.log(err)
     })
   }
   render() {
-    if (!this.state.friends) return null;
+    if (!this.state.friends) return null
     return (
       <div>
         <CategoryHeading text="Friends" />
@@ -36,11 +36,11 @@ class FriendResults extends React.Component {
       </div>
     )
   }
-};
+}
 
 FriendResults.propTypes = {
   query: React.PropTypes.string.isRequired,
   uid: React.PropTypes.string.isRequired
 }
 
-export default FriendResults;
+export default FriendResults

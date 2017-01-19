@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const alignment = {
   textAlign: 'center',
@@ -21,4 +21,4 @@ export default function Main(props) {
       <span style={sub2}>And remember - 'tis better to give than to receive!</span>
     </div>
   )
-};
+}

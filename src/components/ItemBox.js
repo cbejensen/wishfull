@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
 class ItemBox extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       highlighted: false,
       selected: this.props.selected ? this.props.selected : false,
     }
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this)
+    this.handleMouseLeave = this.handleMouseLeave.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.selected !== nextProps.selected) {
@@ -25,7 +25,7 @@ class ItemBox extends React.Component {
     this.setState({highlighted: false})
   }
   handleClick() {
-    if (this.props.handleClick) this.props.handleClick();
+    if (this.props.handleClick) this.props.handleClick()
     if (this.state.selected) {
       // if user deselects wish already selected
       this.setState({selected: false})
@@ -34,10 +34,10 @@ class ItemBox extends React.Component {
     }
   }
   render() {
-    let borderColor = 'rgba(181, 181, 181, 0.3';
+    let borderColor = 'rgba(181, 181, 181, 0.3'
     if (this.props.colorTheme && (this.state.highlighted || this.state.selected)) {
-      borderColor = this.props.colorTheme;
-    };
+      borderColor = this.props.colorTheme
+    }
     const styles = {
       default: {
         border: '4px solid',
@@ -50,7 +50,7 @@ class ItemBox extends React.Component {
         width: '100%',
         position: 'relative'
       }
-    };
+    }
     return (
       <div style={{...styles.default, ...this.props.styles}}
         onMouseEnter={this.handleMouseEnter}
@@ -72,4 +72,4 @@ ItemBox.propTypes = {
   handleClick: React.PropTypes.func
 }
 
-export default ItemBox;
+export default ItemBox
