@@ -1,1 +1,1 @@
-export { default as WishList } from './WishListContainer';
+export { default as WishList } from './WishListContainer'

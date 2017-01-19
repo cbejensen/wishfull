@@ -1,22 +1,22 @@
-import React from 'react';
-import CategoryHeading from './CategoryHeading';
-import WishList from 'components/WishList/WishList/WishList';
-import { searchWishes } from 'utils/firebaseHelpers';
+import React from 'react'
+import CategoryHeading from './CategoryHeading'
+import WishList from 'components/WishList/WishList/WishList'
+import { searchWishes } from 'utils/firebaseHelpers'
 
 class WishResults extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       wishes: null
     }
-    this.getWishes = this.getWishes.bind(this);
+    this.getWishes = this.getWishes.bind(this)
   }
   componentDidMount() {
-    this.getWishes();
+    this.getWishes()
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.query !== prevProps.query) {
-      this.getWishes();
+      this.getWishes()
     }
   }
   getWishes() {
@@ -24,11 +24,11 @@ class WishResults extends React.Component {
     .then(wishes => {
       this.setState({wishes: wishes})
     }, err => {
-      console.log(err);
+      console.log(err)
     })
   }
   render() {
-    if (!this.state.wishes) return null;
+    if (!this.state.wishes) return null
     return (
       <div>
         <CategoryHeading text="Wishes" />
@@ -39,11 +39,11 @@ class WishResults extends React.Component {
       </div>
     )
   }
-};
+}
 
 WishResults.propTypes = {
   query: React.PropTypes.string.isRequired,
   uid: React.PropTypes.string.isRequired
 }
 
-export default WishResults;
+export default WishResults

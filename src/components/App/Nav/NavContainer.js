@@ -1,27 +1,27 @@
-import React from 'react';
-import Nav from './Nav';
-import {browserHistory} from 'react-router';
-import * as firebase from 'firebase';
+import React from 'react'
+import Nav from './Nav'
+import {browserHistory} from 'react-router'
+import * as firebase from 'firebase'
 
 class NavContainer extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       uid: '',
       menuVisible: false,
       searchVisible: false
-    };
-    this.toggleMenu = this.toggleMenu.bind(this);
-    this.toggleSearch = this.toggleSearch.bind(this);
-    this.handleSignOut = this.handleSignOut.bind(this);
+    }
+    this.toggleMenu = this.toggleMenu.bind(this)
+    this.toggleSearch = this.toggleSearch.bind(this)
+    this.handleSignOut = this.handleSignOut.bind(this)
   }
   componentDidMount() {
     this.removeListener = firebase.auth().onAuthStateChanged(user => {
       this.setState({uid: user.uid})
-    });
+    })
   }
   componentWillUnmount() {
-    this.removeListener();
+    this.removeListener()
   }
   toggleMenu() {
     this.setState((prevState, props) => {
@@ -41,11 +41,11 @@ class NavContainer extends React.Component {
   }
   handleSignOut() {
     firebase.auth().signOut().then(() => {
-      this.toggleMenu();
-      browserHistory.push('/sign-in');
+      this.toggleMenu()
+      browserHistory.push('/sign-in')
     }, error => {
-      console.log(error);
-    });
+      console.log(error)
+    })
   }
   render() {
     return <Nav {...this.state}
@@ -53,6 +53,6 @@ class NavContainer extends React.Component {
       toggleSearch={this.toggleSearch}
       handleSignOut={this.handleSignOut} />
   }
-};
+}
 
-export default NavContainer;
+export default NavContainer

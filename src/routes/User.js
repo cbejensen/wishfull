@@ -1,19 +1,19 @@
-import React from 'react';
-import { Avatar } from 'components/User/Avatar';
-import { browserHistory } from 'react-router';
-import { Grid } from 'react-bootstrap';
-import { getUser } from 'utils/firebaseHelpers';
-import {UserHeading} from 'components/User';
-import { WishList } from '../components/WishList/WishList';
-import * as firebase from 'firebase';
+import React from 'react'
+import { Avatar } from 'components/User/Avatar'
+import { browserHistory } from 'react-router'
+import { Grid } from 'react-bootstrap'
+import { getUser } from 'utils/firebaseHelpers'
+import {UserHeading} from 'components/User'
+import { WishList } from '../components/WishList/WishList'
+import * as firebase from 'firebase'
 
 class UserView extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {user: null}
   }
   componentDidMount() {
-    const uid = this.props.params.uid;
+    const uid = this.props.params.uid
     this.removeAuthListener = firebase.auth().onAuthStateChanged(user => {
       // if user page is same as auth user
       // redirect to home page
@@ -24,21 +24,21 @@ class UserView extends React.Component {
     getUser(uid).then(user => {
       this.setState({user: user})
     }, err => {
-      console.log(err);
+      console.log(err)
     })
   }
   componentWillUnmount() {
-    this.removeAuthListener();
+    this.removeAuthListener()
   }
   render() {
-    if (!this.state.user) return <div>Loading...</div>;
+    if (!this.state.user) return <div>Loading...</div>
     return (
       <Grid>
         <UserHeading user={this.state.user} />
         <WishList uid={this.props.params.uid} />
       </Grid>
-    );
+    )
   }
 }
 
-export default UserView;
+export default UserView

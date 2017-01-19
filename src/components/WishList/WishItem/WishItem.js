@@ -1,14 +1,14 @@
-import React from 'react';
-import EditWishBtn from '../EditWishBtn';
-import FulfillWishBtn from '../FulfillWishBtn';
-import Fulfilled from '../Fulfilled';
-import ItemBox from 'components/ItemBox';
-import {Row, Col} from 'react-bootstrap';
-import './WishItem.css';
+import React from 'react'
+import EditWishBtn from '../EditWishBtn'
+import FulfillWishBtn from '../FulfillWishBtn'
+import Fulfilled from '../Fulfilled'
+import ItemBox from 'components/ItemBox'
+import {Row, Col} from 'react-bootstrap'
+import './WishItem.css'
 
 class WishItem extends React.Component {
   render() {
-    let btn, fulfilled;
+    let btn, fulfilled
     const styles = {
       itemBox: {
         height: this.props.height,
@@ -38,8 +38,8 @@ class WishItem extends React.Component {
     }
     const handleClick = () => {
       if (this.props.handleSelectWish) {
-        this.props.handleSelectWish(this.props.index);
-      };
+        this.props.handleSelectWish(this.props.index)
+      }
     }
     return (
       <ItemBox styles={styles.itemBox}
@@ -81,8 +81,8 @@ class WishItem extends React.Component {
           </div>
         </div>
       </ItemBox>
-    );
+    )
   }
-};
+}
 
-export default WishItem;
+export default WishItem

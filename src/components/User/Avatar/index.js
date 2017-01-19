@@ -1,1 +1,1 @@
-export { default as Avatar } from './AvatarContainer';
+export { default as Avatar } from './AvatarContainer'

@@ -1,10 +1,10 @@
-import React from 'react';
-import { Search } from 'components/Search';
-import { Link, browserHistory } from 'react-router';
-import { Grid, Row, Col, Glyphicon } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import * as firebase from 'firebase';
-import './Nav.css';
+import React from 'react'
+import { Search } from 'components/Search'
+import { Link, browserHistory } from 'react-router'
+import { Grid, Row, Col, Glyphicon } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import * as firebase from 'firebase'
+import './Nav.css'
 
 export function Nav(props) {
   const styles = {
@@ -18,10 +18,10 @@ export function Nav(props) {
       display: props.searchVisible ? 'inherit' : 'none'
     }
   }
-  // let getFriendsPath;
-  // let LoginOrOut;
+  // let getFriendsPath
+  // let LoginOrOut
   // if (props.user) {
-  //   getFriendsPath = `/get-friends/${props.user.uid}`;
+  //   getFriendsPath = `/get-friends/${props.user.uid}`
   //   LoginOrOut = (
   //     <NavItem onClick={props.handleSignOut}>Sign Out</NavItem>
   //   )
@@ -30,10 +30,10 @@ export function Nav(props) {
   //   LoginOrOut = (
   //     <NavItem>Sign In</NavItem>
   //   )
-  // };
+  // }
   const goTo = path => {
-    props.toggleMenu();
-    browserHistory.push(path);
+    props.toggleMenu()
+    browserHistory.push(path)
   }
   return (
     <div className="Nav-wrapper">
@@ -76,7 +76,7 @@ export function Nav(props) {
 
       </Grid>
     </div>
-  );
+  )
 }
 
 Nav.propTypes = {
@@ -88,4 +88,4 @@ Nav.propTypes = {
   handleSignOut: React.PropTypes.func.isRequired
 }
 
-export default Nav;
+export default Nav

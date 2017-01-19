@@ -1,5 +1,5 @@
-import React from 'react';
-import { FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
+import React from 'react'
+import { FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap'
 
 export default function ({ getValidation, label, help, val, ...props }) {
   return (
@@ -9,5 +9,5 @@ export default function ({ getValidation, label, help, val, ...props }) {
       {getValidation && <FormControl.Feedback />}
       {help && <HelpBlock>{help}</HelpBlock>}
     </FormGroup>
-  );
+  )
 }

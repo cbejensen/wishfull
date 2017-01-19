@@ -1,22 +1,22 @@
-import React from 'react';
-import WishList from './WishList';
-import * as firebase from 'firebase';
+import React from 'react'
+import WishList from './WishList'
+import * as firebase from 'firebase'
 
 class WishListContainer extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       wishes: 'loading',
       selectedWish: -1
     }
-    this.handleSelectWish = this.handleSelectWish.bind(this);
+    this.handleSelectWish = this.handleSelectWish.bind(this)
   }
   componentDidMount() {
     const path = `lists/${this.props.uid}`
     this.wishRef = firebase.database().ref(path)
     this.wishRef.on('value', snap => {
       let wishesObj = snap.val()
-      let wishesArray = [];
+      let wishesArray = []
       for (var key in wishesObj) {
         wishesObj[key].id = key
         wishesArray.push(wishesObj[key])
@@ -24,10 +24,10 @@ class WishListContainer extends React.Component {
       this.setState({
         wishes: wishesArray,
       })
-    });
+    })
   }
   componentWillUnmount() {
-    this.wishRef.off();
+    this.wishRef.off()
   }
   handleSelectWish(wishIndex) {
     if (wishIndex === this.state.selectedWish) {
@@ -49,8 +49,8 @@ class WishListContainer extends React.Component {
         </div>
       )
     }
-    const mutable = this.props.mutable ? this.props.mutable : false;
-    const showFulfilled = this.props.showFulfilled ? this.props.showFulfilled : false;
+    const mutable = this.props.mutable ? this.props.mutable : false
+    const showFulfilled = this.props.showFulfilled ? this.props.showFulfilled : false
     return <WishList
       {...this.state}
       handleSelectWish={this.handleSelectWish}
@@ -58,7 +58,7 @@ class WishListContainer extends React.Component {
       mutable={mutable}
       showFulfilled={showFulfilled} />
   }
-};
+}
 
 WishListContainer.propTypes = {
   uid: React.PropTypes.string.isRequired,
@@ -66,4 +66,4 @@ WishListContainer.propTypes = {
   showFulfilled: React.PropTypes.bool
 }
 
-export default WishListContainer;
+export default WishListContainer

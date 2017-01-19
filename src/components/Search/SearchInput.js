@@ -1,5 +1,5 @@
-import React from 'react';
-import './Search.css';
+import React from 'react'
+import './Search.css'
 
 class SearchInput extends React.Component {
   render() {
@@ -9,10 +9,10 @@ class SearchInput extends React.Component {
         onChange={this.props.handleChange} />
     )
   }
-};
+}
 
 SearchInput.propTypes = {
   handleChange: React.PropTypes.func.isRequired
 }
 
-export default SearchInput;
+export default SearchInput

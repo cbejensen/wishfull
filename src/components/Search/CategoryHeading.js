@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const CategoryHeading = props => {
   const styles = {
@@ -11,10 +11,10 @@ const CategoryHeading = props => {
   return (
     <div style={styles.heading}>{props.text}</div>
   )
-};
+}
 
 CategoryHeading.propTypes = {
   text: React.PropTypes.string.isRequired
 }
 
-export default CategoryHeading;
+export default CategoryHeading

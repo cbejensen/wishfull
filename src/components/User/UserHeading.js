@@ -1,5 +1,5 @@
-import React from 'react';
-import {Avatar} from './Avatar';
+import React from 'react'
+import {Avatar} from './Avatar'
 
 const UserHeading = props => {
   const styles = {
@@ -13,7 +13,7 @@ const UserHeading = props => {
       marginBottom: '10px'
     }
   }
-  const name = props.user.firstName + ' ' + props.user.lastName;
+  const name = props.user.firstName + ' ' + props.user.lastName
   return (
     <div>
       <div style={styles.name}>{name}</div>
@@ -22,10 +22,10 @@ const UserHeading = props => {
       </div>
     </div>
   )
-};
+}
 
 UserHeading.propTypes = {
   user: React.PropTypes.object.isRequired
 }
 
-export default UserHeading;
+export default UserHeading

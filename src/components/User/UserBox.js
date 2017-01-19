@@ -1,10 +1,10 @@
-import React from 'react';
-import { Avatar } from './Avatar';
-import ItemBox from 'components/ItemBox';
-import UserBoxSubtitle from './UserBoxSubtitle';
-import { Row, Col } from 'react-bootstrap';
-import { browserHistory } from 'react-router';
-import randomColor from 'randomcolor';
+import React from 'react'
+import { Avatar } from './Avatar'
+import ItemBox from 'components/ItemBox'
+import UserBoxSubtitle from './UserBoxSubtitle'
+import { Row, Col } from 'react-bootstrap'
+import { browserHistory } from 'react-router'
+import randomColor from 'randomcolor'
 
 const UserBox = props => {
   const styles = {
@@ -44,9 +44,9 @@ const UserBox = props => {
   }
   const goToUser = () => {
     const path = `/users/${props.uid}`
-    browserHistory.push(path);
+    browserHistory.push(path)
   }
-  const handleClick = props.handleClick ? props.handleClick : goToUser;
+  const handleClick = props.handleClick ? props.handleClick : goToUser
   return (
     <ItemBox styles={styles.itemBox}
       handleClick={handleClick}
@@ -64,7 +64,7 @@ const UserBox = props => {
       </Row>
     </ItemBox>
   )
-};
+}
 
 UserBox.propTypes = {
   name: React.PropTypes.string.isRequired,
@@ -74,4 +74,4 @@ UserBox.propTypes = {
   handleClick: React.PropTypes.func
 }
 
-export default UserBox;
+export default UserBox

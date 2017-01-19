@@ -1,10 +1,10 @@
-import React from 'react';
-import AvatarForm from './AvatarForm';
-import { getFile, uploadFile } from 'utils/firebaseHelpers';
+import React from 'react'
+import AvatarForm from './AvatarForm'
+import { getFile, uploadFile } from 'utils/firebaseHelpers'
 
 class AvatarFormContainer extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       newAvatar: null,
       loading: ''
@@ -19,14 +19,14 @@ class AvatarFormContainer extends React.Component {
     })
   }
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
     if (this.state.newAvatar) {
       this.setState({loading: 'Loading...'})
-      const file = this.state.newAvatar;
-      const path = `images/avatars/${this.props.user.uid}`;
+      const file = this.state.newAvatar
+      const path = `images/avatars/${this.props.user.uid}`
       uploadFile(file, path).then(res => {
-        alert('Success!');
-        getFile(`images/avatars/${this.props.user.uid}`).then(avatar => {
+        alert('Success!')
+        getFile(path).then(avatar => {
           this.setState({
             loading: ''
           })
@@ -44,7 +44,7 @@ class AvatarFormContainer extends React.Component {
       selectAvatar={this.selectAvatar}
       handleSubmit={this.handleSubmit}/>
   }
-};
+}
 
 AvatarFormContainer.propTypes = {
   user: React.PropTypes.object.isRequired
