@@ -46,6 +46,8 @@ export default function WishList(props) {
 WishList.propTypes = {
   wishes: React.PropTypes.array.isRequired,
   uid: React.PropTypes.string.isRequired,
+  primaryColor: React.PropTypes.string,
+  secondaryColor: React.PropTypes.string,
   showFulfilled: React.PropTypes.bool,
   mutable: React.PropTypes.bool,
   selectedWish: React.PropTypes.number,

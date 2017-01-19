@@ -53,15 +53,15 @@ class WishListContainer extends React.Component {
     const showFulfilled = this.props.showFulfilled ? this.props.showFulfilled : false
     return <WishList
       {...this.state}
-      handleSelectWish={this.handleSelectWish}
-      uid={this.props.uid}
-      mutable={mutable}
-      showFulfilled={showFulfilled} />
+      {...this.props}
+      handleSelectWish={this.handleSelectWish} />
   }
 }
 
 WishListContainer.propTypes = {
   uid: React.PropTypes.string.isRequired,
+  primaryColor: React.PropTypes.string,
+  secondaryColor: React.PropTypes.string,
   mutable: React.PropTypes.bool,
   showFulfilled: React.PropTypes.bool
 }

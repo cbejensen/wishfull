@@ -35,6 +35,8 @@ class WishResults extends React.Component {
         <WishList
           wishes={this.state.wishes}
           uid={this.props.uid}
+          primaryColor='#ffffff'
+          secondaryColor='#5d5d5d'
           mutable />
       </div>
     )

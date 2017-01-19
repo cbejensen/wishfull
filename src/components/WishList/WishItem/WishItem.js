@@ -48,7 +48,8 @@ class WishItem extends React.Component {
         handleClick={handleClick}>
         <div id={"WishItem-header-" + this.props.index}>
           <div className="WishItem-priority-container">
-            <div className="WishItem-priority-word">
+            <div className="WishItem-priority-word"
+              style={{color: this.props.secondaryColor && this.props.secondaryColor}}>
               PRIORITY
             </div>
             <div className="WishItem-priority"
@@ -56,10 +57,12 @@ class WishItem extends React.Component {
               {this.props.wish.priority}
             </div>
           </div>
-          <div className="WishItem-title">
+          <div className="WishItem-title"
+            style={{color: this.props.primaryColor && this.props.primaryColor}}>
             {this.props.wish.title}
           </div>
-          <div className="WishItem-price">
+          <div className="WishItem-price"
+            style={{color: this.props.secondaryColor && this.props.secondaryColor}}>
             {this.props.wish.price
               ? `$${this.props.wish.price}`
               : ''}
