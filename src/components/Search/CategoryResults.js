@@ -1,44 +1,41 @@
 import React from 'react'
-import CategoryHeading from './CategoryHeading'
-import { WishList } from 'components/WishList'
-import { searchFriends } from 'utils/firebaseHelpers'
+import {makeCancelablePromise} from 'utils/functionHelpers'
 
-class WishResults extends React.Component {
+class CategoryResults extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      results: null
+      results: []
     }
-    this.getResults = this.getResults.bind(this)
+    this.search = this.search.bind(this)
   }
   componentDidMount() {
-    this.getResults()
+    this.search()
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.query !== prevProps.query) {
-      this.getResults()
+      this.search()
     }
   }
-  getResults() {
-    searchFriends(this.props.query, this.props.uid)
-    .then(results => {
-      this.setState({results: results})
+  search() {
+    this.cancelablePromise = makeCancelablePromise(this.props.search())
+    this.cancelablePromise.promise.then(res => {
+      this.setState({results: res})
     }, err => {
       console.log(err)
     })
   }
+  componentWillUnmount() {
+    this.cancelablePromise.cancel()
+  }
   render() {
-    if (!this.state.results) return null
-    // let list = <UserList users={this.state.friends} />
-
-    return React.cloneElement(this.props.children,
-      {users: this.state.results})
+    if (this.state.results.length < 1) return null
+    return React.cloneElement(this.props.children, {results: this.state.results})
   }
 }
 
-WishResults.propTypes = {
-  query: React.PropTypes.string.isRequired,
-  uid: React.PropTypes.string.isRequired
+CategoryResults.propTypes = {
+  search: React.PropTypes.func.isRequired // should be promise
 }
 
-export default WishResults
+export default CategoryResults

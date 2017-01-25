@@ -3,7 +3,6 @@ import EditWishBtn from '../EditWishBtn'
 import FulfillWishBtn from '../FulfillWishBtn'
 import Fulfilled from '../Fulfilled'
 import ItemBox from 'components/ItemBox'
-import {Row, Col} from 'react-bootstrap'
 import './WishItem.css'
 
 class WishItem extends React.Component {

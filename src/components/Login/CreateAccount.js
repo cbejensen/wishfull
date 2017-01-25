@@ -1,5 +1,5 @@
 import React from 'react'
-import {createUser, uploadFile, getFile} from '../../utils/firebaseHelpers'
+import {createUser} from '../../utils/firebaseHelpers'
 import {Button} from 'react-bootstrap'
 import FormInput from '../FormInput'
 import {browserHistory} from 'react-router'

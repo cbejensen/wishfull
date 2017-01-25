@@ -1,5 +1,6 @@
 import React from 'react'
-import {getList} from 'utils/firebaseHelpers'
+import {getWishList} from 'utils/firebaseHelpers'
+import {makeCancelablePromise} from 'utils/functionHelpers'
 
 class UserBoxSubtitle extends React.Component {
   constructor(props) {
@@ -7,13 +8,17 @@ class UserBoxSubtitle extends React.Component {
     this.state = {wishCount: null}
   }
   componentDidMount() {
-    getList(this.props.uid).then(list => {
+    this.cancelablePromise = makeCancelablePromise(getWishList(this.props.uid))
+    this.cancelablePromise.promise.then(list => {
       if (!list) list = {}
       const wishCount = Object.keys(list).length
       this.setState({wishCount: wishCount})
     }, err => {
       console.log(err)
     })
+  }
+  componentWillUnmount() {
+    this.cancelablePromise.cancel()
   }
   render() {
     if (this.state.wishCount === null) return null

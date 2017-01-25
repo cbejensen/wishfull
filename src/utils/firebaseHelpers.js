@@ -9,6 +9,22 @@ firebase.initializeApp(config)
 
 const storageRef = firebase.storage().ref()
 
+export const uploadFile = (file, path) => {
+  return storageRef.child(path).put(file).then(snap => {
+    return snap
+  }, err => {
+    throw err
+  })
+}
+
+export const getFile = path => {
+  return storageRef.child(path).getDownloadURL().then(url => {
+    return url
+  }, err => {
+    throw err
+  })
+}
+
 export const createUser = user => {
   return firebase.auth()
   .createUserWithEmailAndPassword(user.email, user.password)
@@ -25,26 +41,19 @@ export const createUser = user => {
             var progress = (snap.bytesTransferred / snap.totalBytes) * 100
             console.log('Upload is ' + progress + '% done')
             switch (snap.state) {
-              case firebase.storage.TaskState.PAUSED: // or 'paused'
+              case firebase.storage.TaskState.PAUSED:
                 console.log('Upload is paused')
                 break
-              case firebase.storage.TaskState.RUNNING: // or 'running'
+              case firebase.storage.TaskState.RUNNING:
                 console.log('Upload is running')
+                break
+              default:
                 break
             }
           }, err => {
             reject(err);
           }, () => {
             resolve('success')
-          })
-        })
-        uploadFile(avatar, `images/avatars/${auth.uid}`).then(snap => {
-          getFile(`images/avatars/${auth.uid}`).then(res => {
-            console.log(res)
-            return 'success'
-          }, err => {
-            console.log(err)
-            return 'hey'
           })
         })
       }
@@ -84,7 +93,7 @@ export const updateWish = (uid, wishRef, wish) => {
   })
 }
 
-export const getList = uid => {
+export const getWishList = uid => {
   const listRef = firebase.database().ref(`lists/${uid}`)
   return listRef.once('value').then(snap => {
     return snap.val()
@@ -94,7 +103,7 @@ export const getList = uid => {
 }
 
 export const getWish = (uid, itemId) => {
-  return getList(uid).then(list => {
+  return getWishList(uid).then(list => {
     return list[itemId]
   }, err => {
     throw err
@@ -125,6 +134,20 @@ export const getFriendIds = uid => {
   })
 }
 
+export const getFriends = uid => {
+  return getFriendIds(uid).then(ids => {
+    let promises = Object.keys(ids).map(id => {
+      return getUser(id).then(user => {
+        user.uid = id
+        return user
+      })
+    })
+    return Promise.all(promises).then(friends => {
+      return friends
+    })
+  })
+}
+
 export const getAllUsers = () => {
   const usersRef = firebase.database().ref('users')
   return usersRef.once('value').then(snap => {
@@ -151,70 +174,9 @@ export const updateFriend = (uid, friendId) => {
   })
 }
 
-export const uploadFile = (file, path) => {
-  return storageRef.child(path).put(file).then(snap => {
-    return snap
-  }, err => {
-    throw err
-  })
-}
-
-export const getFile = path => {
-  return storageRef.child(path).getDownloadURL().then(url => {
-    return url
-  }, err => {
-    throw err
-  })
-}
-
 // SEARCH
 
-export const searchFriends = (str, uid, exclusions) => {
-  return getFriendIds(uid).then(friendIds => {
-    let promiseArray = []
-    for (var key in friendIds) {
-      if (friendIds.hasOwnProperty(key)) {
-        promiseArray.push(getUser(key))
-      }
-    }
-    return Promise.all(promiseArray).then(friends => {
-      const filteredFriends = filterUsersByName(str, friends, exclusions)
-      return filteredFriends
-    }, err => {
-      console.log(err)
-    })
-  }, err => {
-    console.log(err)
-  })
-}
-
-export const searchUsers = (str, uid, exclusions) => {
-  console.log(str, uid, exclusions)
-  return getAllUsers().then(users => {
-    const usersArray = Object.keys(users).map(key => {
-      users[key].uid = key
-      return users[key]
-    })
-    const filteredUsers = filterUsersByName(str, usersArray, exclusions)
-    return filteredUsers
-  })
-}
-
-export const searchWishes = (str, uid) => {
-  return getList(uid).then(list => {
-    const wishes = Object.keys(list).map(wishId => {
-      list[wishId].id = wishId
-      return list[wishId]
-    })
-    const filteredWishes = filterWishesByTitle(str, wishes)
-    return filteredWishes
-  }, err => {
-    console.log(err)
-  })
-}
-
 const filterUsersByName = (str, users, exclusions) => {
-  console.log(str, users, exclusions)
   let filteredUsers = []
   let matches = 0
   str = str.toLowerCase()
@@ -226,7 +188,6 @@ const filterUsersByName = (str, users, exclusions) => {
       if (exclusions) {
         for (const e of exclusions) {
           if (user.uid === e) {
-            console.log(name)
             excluded = true
             break
           }
@@ -252,6 +213,59 @@ const filterWishesByTitle = (str, wishes) => {
     }
   })
   return filteredWishes
+}
+
+export const searchFriends = (str, uid, exclusions) => {
+  return getFriendIds(uid).then(friendIds => {
+    let promiseArray = []
+    for (var key in friendIds) {
+      if (friendIds.hasOwnProperty(key)) {
+        promiseArray.push(getUser(key))
+      }
+    }
+    return Promise.all(promiseArray).then(friends => {
+      const filteredFriends = filterUsersByName(str, friends, exclusions)
+      return filteredFriends
+    }, err => {
+      console.log(err)
+    })
+  }, err => {
+    console.log(err)
+  })
+}
+
+export const searchUsers = (str, uid, exclusions) => {
+  return getAllUsers().then(users => {
+    const usersArray = Object.keys(users).map(key => {
+      users[key].uid = key
+      return users[key]
+    })
+    const filteredUsers = filterUsersByName(str, usersArray, exclusions)
+    return filteredUsers
+  })
+}
+
+export const searchUsersNotFriends = (str, uid) => {
+  return getFriendIds(uid).then(friendIds => {
+    const arr = Object.keys(friendIds).map(id => id)
+    return searchUsers(str, uid, arr)
+    .then(users => users)
+  }, err => {
+    console.log(err)
+  })
+}
+
+export const searchWishes = (str, uid) => {
+  return getWishList(uid).then(list => {
+    const wishes = Object.keys(list).map(wishId => {
+      list[wishId].id = wishId
+      return list[wishId]
+    })
+    const filteredWishes = filterWishesByTitle(str, wishes)
+    return filteredWishes
+  }, err => {
+    console.log(err)
+  })
 }
 
 export const search = (query, category, uid) => {

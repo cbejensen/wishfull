@@ -7,40 +7,50 @@ class FriendResults extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      friends: null
+      results: []
     }
-    this.getFriends = this.getFriends.bind(this)
+    this.search = this.search.bind(this)
   }
   componentDidMount() {
-    this.getFriends()
+    this.search()
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.query !== prevProps.query) {
-      this.getFriends()
+      this.search()
     }
   }
-  getFriends() {
-    searchFriends(this.props.query, this.props.uid)
-    .then(friends => {
-      this.setState({friends: friends})
+  search() {
+    let hasCanceled_ = false
+    const wrappedPromise = new Promise((resolve, reject) => {
+      this.props.search().then(
+        res => hasCanceled_ ? reject({isCanceled: true}) : resolve(res),
+        err => hasCanceled_ ? reject({isCanceled: true}) : reject(err)
+      )
+    })
+    this.cancelablePromise = {
+      promise: wrappedPromise,
+      cancel() {
+        hasCanceled_ = true
+      },
+    }
+    this.cancelablePromise.promise.then(res => {
+      console.log('res:', res);
+      this.setState({results: res})
     }, err => {
       console.log(err)
     })
   }
+  componentWillUnmount() {
+    // this.cancelablePromise.cancel()
+  }
   render() {
-    if (!this.state.friends) return null
-    return (
-      <div>
-        <CategoryHeading text="Friends" />
-        <UserList users={this.state.friends} nameColor='#ffffff' />
-      </div>
-    )
+    if (this.state.results.length < 1) return null
+    return React.cloneElement(this.props.children, {results: this.state.results})
   }
 }
 
 FriendResults.propTypes = {
-  query: React.PropTypes.string.isRequired,
-  uid: React.PropTypes.string.isRequired
+  search: React.PropTypes.func.isRequired
 }
 
 export default FriendResults

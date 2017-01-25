@@ -1,8 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
 import { WishItem } from '../WishItem'
-import AddWishBtn from 'components/Button/AddWishBtn'
-import ItemBox from 'components/ItemBox'
 
 export default function WishList(props) {
   const styles = {

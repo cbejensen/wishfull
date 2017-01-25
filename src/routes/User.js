@@ -1,5 +1,4 @@
 import React from 'react'
-import { Avatar } from 'components/User/Avatar'
 import { browserHistory } from 'react-router'
 import { Grid } from 'react-bootstrap'
 import { getUser } from 'utils/firebaseHelpers'

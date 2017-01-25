@@ -1,45 +1,71 @@
 import React from 'react'
-import { CheckAuth } from '../CheckAuth'
-import {UserList} from 'components/User'
 import CategoryResults from './CategoryResults'
-import FriendResults from './FriendResults'
 import UserResults from './UserResults'
 import WishResults from './WishResults'
+import {searchFriends,
+        searchUsersNotFriends,
+        searchWishes} from 'utils/firebaseHelpers'
 
 class SearchResults extends React.Component {
-  render() {
-    let showFriends,
-        showUsers,
-        showWishes
+  constructor(props) {
+    super(props)
+    this.getFriends = this.getFriends.bind(this)
+    this.getUsers = this.getUsers.bind(this)
+    this.getWishes = this.getWishes.bind(this)
+  }
+  componentDidMount() {
     if (!this.props.categories || this.props.categories.length < 1) {
       // if no categories specified search all categories
-      showFriends = showUsers = showWishes = true
+      this.showFriends = this.showUsers = this.showWishes = true
     } else {
-      this.props.categories.forEach(category => {
-        if (category === 'friends') showFriends = true
-        if (category === 'users') showUsers = true
-        if (category === 'wishes') showWishes = true
-      })
+      for (const category of this.props.categories) {
+        if (category === 'friends') {
+          this.showFriends = true
+          return
+        } else if (category === 'users') {
+          this.showUsers = true
+          return
+        } else if (category === 'wishes') {
+          this.showWishes = true
+          return
+        }
+      }
     }
+  }
+  getFriends() {
+    return searchFriends(this.props.query, this.props.uid)
+  }
+  getUsers() {
+    return searchUsersNotFriends(this.props.query, this.props.uid)
+  }
+  getWishes() {
+    return searchWishes(this.props.query, this.props.uid)
+  }
+  render() {
     return (
       <div>
-        {showFriends && <FriendResults
-          query={this.props.query}
-          uid={this.props.uid} />}
-        {showUsers && <UserResults
-          query={this.props.query}
-          uid={this.props.uid} />}
-        {showWishes && <WishResults
-          query={this.props.query}
-          uid={this.props.uid} />}
+        <CategoryResults
+          search={this.getFriends}
+          query={this.props.query}>
+          <UserResults />
+        </CategoryResults>
+        <CategoryResults
+          search={this.getUsers}
+          query={this.props.query}>
+          <UserResults />
+        </CategoryResults>
+        <CategoryResults
+          search={this.getWishes}
+          query={this.props.query}>
+          <WishResults uid={this.props.uid}/>
+        </CategoryResults>
       </div>
     )
   }
 }
 
-SearchResults.propTypes = {
-  query: React.PropTypes.string.isRequired,
-  categories: React.PropTypes.array
-}
+// SearchResults.propTypes = {
+//   search: React.PropTypes.func.isRequired
+// }
 
 export default SearchResults

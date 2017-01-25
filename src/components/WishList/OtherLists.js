@@ -1,6 +1,6 @@
 import React from 'react'
 import * as firebase from 'firebase'
-import { getOtherUsers, getList } from '../../utils/firebaseHelpers'
+import {getOtherUsers} from '../../utils/firebaseHelpers'
 import { UserList } from '../WishList'
 
 const OtherListsContainer = React.createClass({

@@ -2,8 +2,6 @@ import React from 'react'
 import { Search } from 'components/Search'
 import { Link, browserHistory } from 'react-router'
 import { Grid, Row, Col, Glyphicon } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
-import * as firebase from 'firebase'
 import './Nav.css'
 
 export function Nav(props) {
