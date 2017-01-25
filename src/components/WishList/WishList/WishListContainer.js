@@ -1,5 +1,6 @@
 import React from 'react'
 import WishList from './WishList'
+import {getWishList} from 'utils/firebaseHelpers';
 import * as firebase from 'firebase'
 
 class WishListContainer extends React.Component {
@@ -12,19 +13,21 @@ class WishListContainer extends React.Component {
     this.handleSelectWish = this.handleSelectWish.bind(this)
   }
   componentDidMount() {
-    const path = `lists/${this.props.uid}`
-    this.wishRef = firebase.database().ref(path)
-    this.wishRef.on('value', snap => {
-      let wishesObj = snap.val()
-      let wishesArray = []
-      for (var key in wishesObj) {
-        wishesObj[key].id = key
-        wishesArray.push(wishesObj[key])
-      }
-      this.setState({
-        wishes: wishesArray,
+    if (this.props.wishes) {
+      this.setState({wishes: this.props.wishes})
+    } else {
+      getWishList(this.props.uid).then(wishes => {
+        // assign wish id to id prop
+        for (let wishId in wishes) {
+          if (wishes.hasOwnProperty(wishId)) {
+            wishes[wishId].id = wishId
+          }
+        }
+        // conver wishes from obj to array
+        const wishesArray = Object.keys(wishes).map(wish => wishes[wish])
+        this.setState({wishes: wishesArray})
       })
-    })
+    }
   }
   componentWillUnmount() {
     this.wishRef.off()
@@ -45,21 +48,21 @@ class WishListContainer extends React.Component {
       return (
         <div style={{textAlign: 'center'}}>
           <h3>No wishes yet!</h3>
-          {this.state.showFulfilled ? null : <AddWishBtn uid={this.props.uid} />}
         </div>
       )
     }
-    const mutable = this.props.mutable ? this.props.mutable : false
-    const showFulfilled = this.props.showFulfilled ? this.props.showFulfilled : false
     return <WishList
       {...this.state}
       {...this.props}
-      handleSelectWish={this.handleSelectWish} />
+      handleSelectWish={this.handleSelectWish}
+      mutable={this.props.mutable}
+      showFulfilled={this.props.showFulfilled} />
   }
 }
 
 WishListContainer.propTypes = {
   uid: React.PropTypes.string.isRequired,
+  wishes: React.PropTypes.array,
   primaryColor: React.PropTypes.string,
   secondaryColor: React.PropTypes.string,
   mutable: React.PropTypes.bool,

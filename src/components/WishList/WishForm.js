@@ -3,9 +3,10 @@ import FormInput from '../FormInput'
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Grid, Row, Col, Button } from 'react-bootstrap'
 import { addWish, updateWish, getWish, deleteWish } from '../../utils/firebaseHelpers'
 import { browserHistory, Link } from 'react-router'
-import { validateWish,
-  validatePrice as validatePriceHelper,
-  validateUrl as validateUrlHelper } from 'utils/validateHelpers'
+import {validateWish,
+        validatePrice as validatePriceHelper,
+        validateUrl as validateUrlHelper
+        } from 'utils/validationHelpers'
 
 class WishFormContainer extends React.Component {
   constructor(props) {
