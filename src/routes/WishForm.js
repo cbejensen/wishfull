@@ -1,9 +1,15 @@
 import React from 'react'
-import { WishForm } from '../components/WishList'
+import {WishForm as Form} from '../components/WishList'
+import {Grid} from 'react-bootstrap'
 
-export default function (props) {
-  if (props.params.wishId) return (
-    <WishForm uid={props.params.uid} wishId={props.params.wishId}/>
+const WishForm = props => {
+  return (
+    <Grid>
+      <Form
+        uid={props.params.uid}
+        wishId={props.params.wishId ? props.params.wishId : false}/>
+    </Grid>
   )
-  return <WishForm uid={props.params.uid} wishId={false}/>
 }
+
+export default WishForm

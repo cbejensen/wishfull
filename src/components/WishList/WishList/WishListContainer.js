@@ -23,14 +23,11 @@ class WishListContainer extends React.Component {
             wishes[wishId].id = wishId
           }
         }
-        // conver wishes from obj to array
+        // convert wishes from obj to array
         const wishesArray = Object.keys(wishes).map(wish => wishes[wish])
         this.setState({wishes: wishesArray})
       })
     }
-  }
-  componentWillUnmount() {
-    this.wishRef.off()
   }
   handleSelectWish(wishIndex) {
     if (wishIndex === this.state.selectedWish) {
@@ -41,6 +38,7 @@ class WishListContainer extends React.Component {
     }
   }
   render() {
+    console.log(this.state);
     if (this.state.wishes === 'loading') return (
       <div style={{textAlign: 'center'}}>Loading...</div>
     )
@@ -52,11 +50,9 @@ class WishListContainer extends React.Component {
       )
     }
     return <WishList
-      {...this.state}
       {...this.props}
-      handleSelectWish={this.handleSelectWish}
-      mutable={this.props.mutable}
-      showFulfilled={this.props.showFulfilled} />
+      {...this.state}
+      handleSelectWish={this.handleSelectWish} />
   }
 }
 

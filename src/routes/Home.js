@@ -1,10 +1,10 @@
 import React from 'react'
 import {UserHeading} from 'components/User'
 import AddWishBtn from 'components/Button/AddWishBtn'
-import { AvatarForm } from 'components/User/AvatarForm'
-import { CheckAuth } from '../components/CheckAuth'
-import { Grid, Nav, NavItem } from 'react-bootstrap'
-import { WishList } from '../components/WishList/WishList'
+import {AvatarForm} from 'components/User/AvatarForm'
+import {CheckAuth} from '../components/CheckAuth'
+import {Grid, Nav, NavItem} from 'react-bootstrap'
+import {WishList} from 'components/WishList'
 
 class HomeContainer extends React.Component {
   constructor(props) {
