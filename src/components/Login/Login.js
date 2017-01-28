@@ -55,7 +55,9 @@ export function Login(props) {
           onChange={props.handlePasswordChange}
           required />
         {' '}
-        <Button type="submit">Sign In</Button>
+        <Button type="submit" bsStyle="primary" bsSize="large">
+          Sign In
+        </Button>
       </Form>
       {/* <ForgotPassword /> */}
     </div>

@@ -1,16 +1,15 @@
 import React from 'react';
-import WishList from 'components/WishList/WishList/WishList';
+import {WishList} from 'components/WishList';
 
-class WishResults extends React.Component {
-  render() {
-    if (!this.props.results) return null
-    return <WishList
-      wishes={this.props.results}
-      uid={this.props.uid}
-      primaryColor='#ffffff'
-      secondaryColor='#5d5d5d'
-      mutable />
-  }
+const WishResults = props => {
+  if (!props.results) return null
+  console.log(props);
+  return <WishList
+    wishes={props.results}
+    uid={props.uid}
+    primaryColor='#ffffff'
+    secondaryColor='#5d5d5d'
+    mutable />
 };
 
-export default WishResults;
+export default WishResults
