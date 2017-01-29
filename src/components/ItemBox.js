@@ -35,7 +35,6 @@ class ItemBox extends React.Component {
   }
   render() {
     let borderColor = 'rgba(181, 181, 181, 0.3'
-    console.log('render');
     if (this.props.colorTheme && (this.state.highlighted || this.state.selected)) {
       borderColor = this.props.colorTheme
     }

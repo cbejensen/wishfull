@@ -10,25 +10,29 @@ class WishItemContainer extends React.Component {
       height: ''
     }
     this.setHeight = this.setHeight.bind(this)
+    this.changeHeight = this.changeHeight.bind(this)
     this.openLink = this.openLink.bind(this)
     this.handleFulfill = this.handleFulfill.bind(this)
   }
   componentDidMount() {
-    this.setHeight(this.props.selected)
+    this.changeHeight(this.props.selected)
+    // console.log(this.props);
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.selected !== nextProps.selected) {
-      console.log('success')
-      this.setHeight(nextProps.selected)
+      this.changeHeight(nextProps.selected)
     }
   }
-  setHeight(selected) {
-    this.headerHeight = document.getElementById('WishItem-header-' + this.props.index).offsetHeight
-    let itemBoxHeight = this.headerHeight + 22 // itemBox's padding & border
+  setHeight(type, height) {
+    if (type === 'header') this.headerHeight = height
+    if (type === 'body') this.bodyHeight = height
+  }
+  changeHeight(selected) {
+    const itemBoxHeight = this.headerHeight + 22 // ItemBox's padding & border
     if (!selected) {
       this.setState({height: itemBoxHeight})
     } else { // wish is selected
-      const bodyHeight = document.getElementById('WishItem-body-' + this.props.index).offsetHeight
+      const bodyHeight = this.bodyHeight
       this.setState({height: itemBoxHeight + bodyHeight})
     }
   }
@@ -38,7 +42,7 @@ class WishItemContainer extends React.Component {
   handleFulfill() {
     const removeAuthListener = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        fulfillWish(this.props.uid, this.props.id, user.uid)
+        fulfillWish(this.props.uid, this.props.wish.id, user.uid)
         .then(res => {}, err => {
           alert('There was an error processing your request. Please try again later.')
         })
@@ -87,10 +91,22 @@ class WishItemContainer extends React.Component {
     return <WishItem {...this.props}
       height={this.state.height}
       priorityColor={priorityColor}
-      setHeight={this.setHeight}
       openLink={this.openLink}
+      setHeight={this.setHeight}
       handleFulfill={this.handleFulfill} />
   }
+}
+
+WishItemContainer.propTypes = {
+  wish: React.PropTypes.object.isRequired,
+  uid: React.PropTypes.string.isRequired,
+  index: React.PropTypes.number.isRequired,
+  selected: React.PropTypes.bool.isRequired,
+  primaryColor: React.PropTypes.string,
+  secondaryColor: React.PropTypes.string,
+  showFulfilled: React.PropTypes.bool,
+  mutable: React.PropTypes.bool,
+  handleSelectWish: React.PropTypes.func
 }
 
 export default WishItemContainer
