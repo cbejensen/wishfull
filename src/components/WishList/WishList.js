@@ -1,9 +1,9 @@
 import React from 'react'
-import WishList from './WishList'
-import {getWishList} from 'utils/firebaseHelpers';
+import {WishItem} from './WishItem'
+import {getWishList} from 'utils/firebaseHelpers'
 import * as firebase from 'firebase'
 
-class WishListContainer extends React.Component {
+class WishList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -38,25 +38,40 @@ class WishListContainer extends React.Component {
     }
   }
   render() {
-    console.log(this.state);
     if (this.state.wishes === 'loading') return (
       <div style={{textAlign: 'center'}}>Loading...</div>
     )
-    if (!this.state.wishes) {
-      return (
-        <div style={{textAlign: 'center'}}>
-          <h3>No wishes yet!</h3>
-        </div>
-      )
+    if (!this.state.wishes) return (
+      <div style={{textAlign: 'center'}}>
+        <h3>No wishes yet!</h3>
+      </div>
+    )
+    const styles = {
+      wish: {
+        margin: '5px auto'
+      }
     }
-    return <WishList
-      {...this.props}
-      {...this.state}
-      handleSelectWish={this.handleSelectWish} />
+    return (
+      <div>
+        {this.state.wishes.map((wish, index) => {
+          let selected = (this.state.selectedWish === index) ? true : false
+          return (
+            <div style={styles.wish} key={wish.id}>
+              <WishItem
+                {...this.props}
+                wish={wish}
+                index={index}
+                selected={selected}
+                handleSelectWish={this.handleSelectWish} />
+            </div>
+          )
+        })}
+      </div>
+    )
   }
 }
 
-WishListContainer.propTypes = {
+WishList.propTypes = {
   uid: React.PropTypes.string.isRequired,
   wishes: React.PropTypes.array,
   primaryColor: React.PropTypes.string,
@@ -65,4 +80,4 @@ WishListContainer.propTypes = {
   showFulfilled: React.PropTypes.bool
 }
 
-export default WishListContainer
+export default WishList
