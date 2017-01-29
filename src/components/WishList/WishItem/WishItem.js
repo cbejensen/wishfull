@@ -7,9 +7,7 @@ import './WishItem.css'
 
 class WishItem extends React.Component {
   render() {
-    let wishHeader, wishBody = null
-    let btn,
-      fulfilled
+    let btn, fulfilled
     const styles = {
       itemBox: {
         height: this.props.height,
@@ -33,6 +31,10 @@ class WishItem extends React.Component {
       priorityText: {
         color: this.props.priorityColor,
         lineHeight: '1em'
+      },
+      hr: {
+        // color: 'initial',
+        margin: '5px 0 5px 0'
       }
     }
     if (this.props.mutable) {
@@ -83,9 +85,7 @@ class WishItem extends React.Component {
         <div
           ref={body => setHeight('body', body)}
           id={"WishItem-body-" + this.props.index} style={styles.body}>
-          <hr style={{
-            margin: '0 0 10px 0'
-          }}/>
+          <hr style={styles.hr}/>
           <div style={styles.primaryColor}>{this.props.wish.description}</div>
           <div className="WishItem-fulfilled" style={styles.priorityText}>
             {fulfilled}
