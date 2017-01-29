@@ -82,7 +82,7 @@ class WishFormContainer extends React.Component {
       if (!this.props.wishId) {
         addWish(wish, this.props.uid).then(onSuccess, onError)
       } else {
-        updateWish(this.props.uid, this.props.wishId, wish).then(onSucces, onError)
+        updateWish(this.props.uid, this.props.wishId, wish).then(onSuccess, onError)
       }
     }, err => {
       alert(err)

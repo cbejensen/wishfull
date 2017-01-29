@@ -1,7 +1,6 @@
 import React from 'react'
 import {WishItem} from './WishItem'
 import {getWishList} from 'utils/firebaseHelpers'
-import * as firebase from 'firebase'
 
 class WishList extends React.Component {
   constructor(props) {
