@@ -53,7 +53,7 @@ class WishItem extends React.Component {
     }
     return (
       <ItemBox
-        styles={styles.itemBox}
+        style={styles.itemBox}
         colorTheme={this.props.priorityColor}
         selected={this.props.selected}
         handleClick={handleClick}>

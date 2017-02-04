@@ -52,7 +52,7 @@ class ItemBox extends React.Component {
       }
     }
     return (
-      <div style={{...styles.default, ...this.props.styles}}
+      <div style={{...styles.default, ...this.props.style}}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
         onClick={this.handleClick}>

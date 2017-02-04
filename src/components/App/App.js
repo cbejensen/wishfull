@@ -1,19 +1,25 @@
 import React from 'react'
 import { Nav } from './Nav'
-import './App.css'
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <Nav />
-        <div className="App-main-container">
-          {/* <div className="App-shadow-top"></div> */}
-          {this.props.children}
-        </div>
-      </div>
-    )
+export default function App(props) {
+  const styles = {
+    nav: {
+      display: (props.location.pathname === '/')
+        ? 'none'
+        : 'block'
+    },
+    app: {
+      position: 'relative'
+    }
   }
+  return (
+    <div>
+      <div style={styles.nav}>
+        <Nav />
+      </div>
+      <div style={styles.app}>
+        {props.children}
+      </div>
+    </div>
+  )
 }
-
-export default App
