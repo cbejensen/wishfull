@@ -1,21 +1,34 @@
 import React from 'react'
-import { Glyphicon } from 'react-bootstrap'
+import {Glyphicon} from 'react-bootstrap'
+import {Link} from 'react-router';
 import galaxyTreeImg from 'images/galaxy-tree.jpg'
 import smoothscroll from 'smoothscroll'
 
 export default function GalaxyPanel(props) {
   const styles = {
-    galaxyPanel: {
+    container: {
       position: 'relative',
       height: '100vh',
       background: `url(${galaxyTreeImg})`,
       backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundPosition: 'bottom',
       textAlign: 'center',
       color: '#ffffff',
-      fontFamily: 'Amatic SC, arial',
-      fontSize: '5em',
-      paddingTop: '10vh'
+      fontFamily: 'Amatic SC, arial'
+    },
+    signIn: {
+      container: {
+        fontSize: '1.2em',
+        textAlign: 'right',
+        padding: '10px'
+      },
+      color: '#ffffff'
+    },
+    title: {
+      fontSize: '5em'
+    },
+    subtitle: {
+      fontSize: '2em'
     },
     downArrow: {
       position: 'absolute',
@@ -25,7 +38,7 @@ export default function GalaxyPanel(props) {
       paddingTop: '15px',
       // tree in img is a bit right of center
       paddingLeft: '10px',
-      color: 'rgba(255, 245, 200, 0.9)',
+      color: '#ffffff',
       fontSize: '20px',
       textAlign: 'center',
       cursor: 'pointer'
@@ -36,8 +49,14 @@ export default function GalaxyPanel(props) {
     smoothscroll(panel.offsetHeight)
   }
   return (
-    <div id='galaxyPanel' style={styles.galaxyPanel}>
-      {props.text}
+    <div id='galaxyPanel' style={styles.container}>
+      <div style={styles.signIn.container}>
+        <Link to='/sign-in' style={styles.signIn}>
+          Sign In <Glyphicon glyph='arrow-right'/>
+        </Link>
+      </div>
+      <div style={styles.title}>{props.title}</div>
+      <div style={styles.subtitle}>{props.subtitle}</div>
       <div style={styles.downArrow} onClick={scrollDown}>
         <Glyphicon glyph="chevron-down" />
       </div>
@@ -46,5 +65,6 @@ export default function GalaxyPanel(props) {
 }
 
 GalaxyPanel.propTypes = {
-  text: React.PropTypes.string.isRequired
+  title: React.PropTypes.string.isRequired,
+  subtitle: React.PropTypes.string.isRequired
 }
