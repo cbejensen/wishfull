@@ -1,12 +1,13 @@
 import React from 'react'
-import { Avatar } from './Avatar'
 import ItemBox from 'components/ItemBox'
+import ImageLeftCentered from 'components/ImageLeftCentered'
+import { Avatar } from './Avatar'
 import UserBoxSubtitle from './UserBoxSubtitle'
 import { Row, Col } from 'react-bootstrap'
 import { browserHistory } from 'react-router'
 import randomColor from 'randomcolor'
 
-const UserBox = props => {
+export default function UserBox(props) {
   const styles = {
     itemBox: {
       height: props.boxHeight
@@ -18,22 +19,6 @@ const UserBox = props => {
           : (parseInt(this.height, 10) / 3) + 'px'
       },
       maxWidth: '500px'
-    },
-    container: {
-      position: 'relative',
-      height: '100%'
-    },
-    avatarCol: {
-      textAlign: 'center'
-    },
-    nameCol: {
-      padding: '0'
-    },
-    nameWrapper: {
-      position: 'absolute',
-      top: '50%',
-      width: '100%',
-      transform: 'translateY(-50%)'
     },
     name: {
       color: props.nameColor ? props.nameColor : '#434343',
@@ -48,20 +33,13 @@ const UserBox = props => {
   }
   const handleClick = props.handleClick ? props.handleClick : goToUser
   return (
-    <ItemBox styles={styles.itemBox}
+    <ItemBox style={styles.itemBox}
       handleClick={handleClick}
       colorTheme={randomColor({luminosity: 'light'})}>
-      <Row style={styles.container}>
-        <Col xs={3} style={{...styles.container, ...styles.avatarCol}}>
-          <Avatar uid={props.uid}/>
-        </Col>
-        <Col xs={9} style={{...styles.container, ...styles.nameCol}}>
-          <div style={styles.nameWrapper}>
-            <div style={styles.name}>{props.name}</div>
-            <UserBoxSubtitle uid={props.uid} />
-          </div>
-        </Col>
-      </Row>
+      <ImageLeftCentered img={<Avatar uid={props.uid}/>} style={{height: '100%'}}>
+        <div style={styles.name}>{props.name}</div>
+        <UserBoxSubtitle uid={props.uid} />
+      </ImageLeftCentered>
     </ItemBox>
   )
 }
@@ -73,5 +51,3 @@ UserBox.propTypes = {
   nameColor: React.PropTypes.string,
   handleClick: React.PropTypes.func
 }
-
-export default UserBox

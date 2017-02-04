@@ -1,24 +1,18 @@
 import React from 'react'
-
-const alignment = {
-  textAlign: 'center',
-  marginTop: '100px'
-}
-
-const sub1 = {
-  color: 'green'
-}
-
-const sub2 = {
-  color: 'red'
-}
+import { GalaxyPanel, SummaryPanel } from 'components/Panels'
+import { Grid } from 'react-bootstrap'
 
 export default function Main(props) {
+  const styles = {
+    main: {
+      zIndex: '999'
+    }
+  }
   return (
-    <div style={alignment}>
-      <span className='h1'>Welcome!</span> <br />
-      <span style={sub1}>Please sign in to start making wishes.</span> <br />
-      <span style={sub2}>And remember - 'tis better to give than to receive!</span>
+    <div style={styles.main}>
+      <GalaxyPanel text='WISHFULL' />
+      <SummaryPanel />
+      <div style={{height: '1000px'}}></div>
     </div>
   )
 }
