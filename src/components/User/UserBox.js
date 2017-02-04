@@ -1,6 +1,6 @@
 import React from 'react'
 import ItemBox from 'components/ItemBox'
-import ImageLeftCentered from 'components/ImageLeftCentered'
+import ImageTextBlock from 'components/ImageTextBlock'
 import { Avatar } from './Avatar'
 import UserBoxSubtitle from './UserBoxSubtitle'
 import { Row, Col } from 'react-bootstrap'
@@ -36,10 +36,10 @@ export default function UserBox(props) {
     <ItemBox style={styles.itemBox}
       handleClick={handleClick}
       colorTheme={randomColor({luminosity: 'light'})}>
-      <ImageLeftCentered img={<Avatar uid={props.uid}/>} style={{height: '100%'}}>
+      <ImageTextBlock img={<Avatar uid={props.uid}/>} style={{height: '100%'}}>
         <div style={styles.name}>{props.name}</div>
         <UserBoxSubtitle uid={props.uid} />
-      </ImageLeftCentered>
+      </ImageTextBlock>
     </ItemBox>
   )
 }

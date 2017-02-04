@@ -1,67 +1,51 @@
 import React from 'react'
-import ImageLeftCentered from 'components/ImageLeftCentered'
-import { Grid, Row, Col } from 'react-bootstrap'
-import {Glyphicon} from 'react-bootstrap'
+import FeaturesBox from './FeaturesBox'
+import ItemBox from 'components/ItemBox'
+import {Link} from 'react-router'
+import galaxyTreeImg from 'images/galaxy-tree-flipped.jpg'
 
 export default function SummaryPanel(props) {
   const styles = {
     container: {
-      paddingTop: '20px'
+      position: 'relative',
+      height: '100vh',
+      background: `url(${galaxyTreeImg})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'top center',
     },
-    feature: {
-      margin: '0 8px',
-      height: '10vmax'
+    features: {
+      padding: '10px',
+      height: '75%'
     },
-    img: {
-      fontSize: '10vmax'
-    },
-    text: {
-      fontSize: '6vmin',
-      // avoid words colliding
-      lineHeignt: '22px'
+    signUpBtn: {
+      container: {
+        padding: '5px',
+        height: '15%',
+      },
+      text: {
+        color: '#000000',
+        fontSize: '2em',
+        textDecoration: 'none'
+      },
+      height: '100%',
+      width: '75%',
+      maxWidth: '500px',
+      textAlign: 'center',
+      backgroundColor: '#ffffff'
     }
   }
-  const featureArray = [{
-    img: <Glyphicon glyph='star-empty' style={styles.img} />,
-    text: 'Create your own wish list',
-    styles: {
-      color: '#c55547'
-    }
-  }, {
-    img: <Glyphicon glyph='user' style={styles.img} />,
-    text: 'See what your friends really want',
-    styles: {
-      color: '#3695ad'
-    }
-  }, {
-    img: <Glyphicon glyph='check' style={styles.img} />,
-    text: 'Know what\'s already been fulfilled',
-    styles: {
-      color: '#14ad5f'
-    }
-  }, {
-    img: <Glyphicon glyph='gift' style={styles.img} />,
-    text: 'Give the perfect gift',
-    styles: {
-      color: '#6f2199'
-    }
-  }]
   return (
-    <div style={{...styles.container, ...props.styles}}>
-      {featureArray.map((feature, i) => {
-        // show hr below every feature but last
-        let showHR = (i !== featureArray.length - 1)
-        return (
-          <div>
-            <ImageLeftCentered
-              img={feature.img}
-              style={{...styles.feature, ...feature.styles}}>
-              <span style={styles.text}>{feature.text}</span>
-            </ImageLeftCentered>
-            {showHR ? <hr /> : null}
-          </div>
-        )
-      })}
+    <div style={{...styles.container, ...props.style}}>
+      <div style={styles.features}>
+        <FeaturesBox />
+      </div>
+      <div style={styles.signUpBtn.container}>
+        <ItemBox colorTheme='#000000' style={styles.signUpBtn}>
+          <Link to='/create-account' style={styles.signUpBtn.text}>
+            Sign Up
+          </Link>
+        </ItemBox>
+      </div>
     </div>
   )
 }

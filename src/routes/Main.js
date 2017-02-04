@@ -1,18 +1,18 @@
 import React from 'react'
-import { GalaxyPanel, SummaryPanel } from 'components/Panels'
+import { GalaxyPanel,
+        SummaryPanel,
+        SearchPanel } from 'components/Panels'
+import ItemBox from 'components/ItemBox';
 import { Grid } from 'react-bootstrap'
 
 export default function Main(props) {
-  const styles = {
-    main: {
-      zIndex: '999'
-    }
-  }
   return (
-    <div style={styles.main}>
-      <GalaxyPanel text='WISHFULL' />
+    <div>
+      <GalaxyPanel title='WISHFULL' subtitle='A place to make and fulfill wishes' />
       <SummaryPanel />
-      <div style={{height: '1000px'}}></div>
+      {/* <LoginPanel /> */}
+      {/* <SearchPanel /> */}
+      <div style={{height: '500px'}}></div>
     </div>
   )
 }

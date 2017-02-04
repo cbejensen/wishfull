@@ -13,12 +13,6 @@ class Search extends React.Component {
   handleQuery(e) {
     this.setState({query: e.target.value})
   }
-  // getUsers(query) {
-  //
-  // }
-  // getWishes(query) {
-  //
-  // }
   render() {
     let showResults = this.state.query === '' ? false : true
     return (
@@ -33,7 +27,7 @@ class Search extends React.Component {
 }
 
 Search.propTypes = {
-  uid: React.PropTypes.string.isRequired,
+  uid: React.PropTypes.string,
   categories: React.PropTypes.array
 }
 
