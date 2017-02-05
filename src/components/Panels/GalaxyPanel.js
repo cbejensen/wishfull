@@ -13,8 +13,7 @@ export default function GalaxyPanel(props) {
       backgroundSize: 'cover',
       backgroundPosition: 'bottom',
       textAlign: 'center',
-      color: '#ffffff',
-      fontFamily: 'Amatic SC, arial'
+      color: '#ffffff'
     },
     signIn: {
       container: {
@@ -25,28 +24,11 @@ export default function GalaxyPanel(props) {
       color: '#ffffff'
     },
     title: {
-      fontSize: '5em'
+      fontSize: '15vmin'
     },
     subtitle: {
-      fontSize: '2em'
-    },
-    downArrow: {
-      position: 'absolute',
-      bottom: '0',
-      width: '100%',
-      height: '60px',
-      paddingTop: '15px',
-      // tree in img is a bit right of center
-      paddingLeft: '10px',
-      color: '#ffffff',
-      fontSize: '20px',
-      textAlign: 'center',
-      cursor: 'pointer'
+      fontSize: '5vmin'
     }
-  }
-  const scrollDown = () => {
-    const panel = document.getElementById('galaxyPanel')
-    smoothscroll(panel.offsetHeight)
   }
   return (
     <div id='galaxyPanel' style={styles.container}>
@@ -57,9 +39,6 @@ export default function GalaxyPanel(props) {
       </div>
       <div style={styles.title}>{props.title}</div>
       <div style={styles.subtitle}>{props.subtitle}</div>
-      <div style={styles.downArrow} onClick={scrollDown}>
-        <Glyphicon glyph="chevron-down" />
-      </div>
     </div>
   )
 }

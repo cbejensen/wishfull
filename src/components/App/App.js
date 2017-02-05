@@ -7,9 +7,6 @@ export default function App(props) {
       display: (props.location.pathname === '/')
         ? 'none'
         : 'block'
-    },
-    app: {
-      position: 'relative'
     }
   }
   return (
@@ -17,9 +14,7 @@ export default function App(props) {
       <div style={styles.nav}>
         <Nav />
       </div>
-      <div style={styles.app}>
-        {props.children}
-      </div>
+      {props.children}
     </div>
   )
 }

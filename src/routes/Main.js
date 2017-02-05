@@ -1,18 +1,28 @@
 import React from 'react'
-import { GalaxyPanel,
-        SummaryPanel,
-        SearchPanel } from 'components/Panels'
+import {AutoScrollContainer,
+  GalaxyPanel,
+  FeaturesPanel,
+  SearchPanel} from 'components/Panels'
 import ItemBox from 'components/ItemBox';
 import { Grid } from 'react-bootstrap'
 
 export default function Main(props) {
+  // container div has position relative
+  // so children can calc offsetTop
   return (
-    <div>
-      <GalaxyPanel title='WISHFULL' subtitle='A place to make and fulfill wishes' />
-      <SummaryPanel />
+    <div style={{position: 'relative'}}>
+      <AutoScrollContainer arrowColor='#ffffff'>
+        <GalaxyPanel
+          title='WISHFULL'
+          subtitle='A place to make and fulfill wishes' />
+      </AutoScrollContainer>
+      <AutoScrollContainer>
+        <FeaturesPanel />
+      </AutoScrollContainer>
+
       {/* <LoginPanel /> */}
       {/* <SearchPanel /> */}
-      <div style={{height: '500px'}}></div>
+      <div style={{height: '1000px'}}></div>
     </div>
   )
 }
