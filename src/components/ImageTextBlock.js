@@ -25,7 +25,7 @@ export default function ImageTextBlock(props) {
     img = props.img
   }
   const imgComponent = (
-    <Col xs={3} style={styles.imgCol}>
+    <Col xs={4} style={styles.imgCol}>
       <VerticalCenter>
         {img}
       </VerticalCenter>
@@ -34,7 +34,7 @@ export default function ImageTextBlock(props) {
   return (
     <Row style={{...styles.container, ...props.style}}>
       {!props.inverted && imgComponent}
-      <Col xs={9} style={styles.textCol}>
+      <Col xs={8} style={styles.textCol}>
         <VerticalCenter>
           {props.children}
         </VerticalCenter>

@@ -2,16 +2,12 @@ import React from 'react'
 import FeaturesBox from './FeaturesBox'
 import ItemBox from 'components/ItemBox'
 import {Link} from 'react-router'
-import galaxyTreeImg from 'images/galaxy-tree-flipped.jpg'
 
-export default function SummaryPanel(props) {
+export default function FeaturesPanel(props) {
   const styles = {
     container: {
       position: 'relative',
-      height: '100vh',
-      background: `url(${galaxyTreeImg})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'top center',
+      height: '100vh'
     },
     features: {
       padding: '10px',
@@ -25,6 +21,7 @@ export default function SummaryPanel(props) {
       text: {
         color: '#000000',
         fontSize: '2em',
+        overflow: 'hidden',
         textDecoration: 'none'
       },
       height: '100%',
@@ -34,10 +31,14 @@ export default function SummaryPanel(props) {
       backgroundColor: '#ffffff'
     }
   }
+  const testing = function() {
+    var test = document.getElementById('hey')
+    console.log(test);
+  }
   return (
-    <div style={{...styles.container, ...props.style}}>
+    <div style={{...styles.container, ...props.style}} ref={container => console.log(container.offsetTop)}>
       <div style={styles.features}>
-        <FeaturesBox />
+        <FeaturesBox id='hey' ref={testing}/>
       </div>
       <div style={styles.signUpBtn.container}>
         <ItemBox colorTheme='#000000' style={styles.signUpBtn}>
@@ -50,6 +51,6 @@ export default function SummaryPanel(props) {
   )
 }
 
-SummaryPanel.propTypes = {
+FeaturesPanel.propTypes = {
   style: React.PropTypes.object
 }
