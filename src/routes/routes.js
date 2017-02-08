@@ -12,14 +12,14 @@ import WishForm from './WishForm'
 import CreateAccount from './CreateAccount'
 
 const routes = (
-  <Router history={browserHistory}>
+  <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={Main}/>
       <Route path='/home' component={Home} />
       <Route path='/friends' component={Friends} />
       <Route path='/get-friends/:uid' component={GetFriends} />
       <Route path='/sign-in' component={Login} />
-      <Route path='/create-account' component={CreateAccount} />
+      <Route path='/sign-up' component={CreateAccount} />
       <Route path='/users/:uid/wish-form' component={WishForm} />
       <Route path='/users/:uid/wish-form/:wishId' component={WishForm} />
       <Route path='/users/:uid' component={User} />
