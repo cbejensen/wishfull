@@ -11,7 +11,7 @@ export default function Login(props) {
       <LoginForm />
       <hr />
       <h2>I don't have an account</h2>
-      <Link to="/create-account">
+      <Link to="/sign-up">
         <h5>...but I want one</h5>
       </Link>
     </Grid>

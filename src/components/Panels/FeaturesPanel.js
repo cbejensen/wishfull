@@ -1,7 +1,8 @@
 import React from 'react'
 import FeaturesBox from './FeaturesBox'
 import ItemBox from 'components/ItemBox'
-import {Link} from 'react-router'
+import {browserHistory} from 'react-router'
+import randomColor from 'randomcolor'
 
 export default function FeaturesPanel(props) {
   const styles = {
@@ -19,8 +20,11 @@ export default function FeaturesPanel(props) {
         height: '15%',
       },
       text: {
+        position: 'relative',
+        top: '50%',
+        transform: 'translateY(-50%)',
         color: '#000000',
-        fontSize: '2em',
+        fontSize: '6vmin',
         overflow: 'hidden',
         textDecoration: 'none'
       },
@@ -31,20 +35,20 @@ export default function FeaturesPanel(props) {
       backgroundColor: '#ffffff'
     }
   }
-  const testing = function() {
-    var test = document.getElementById('hey')
-    console.log(test);
+  const signUp = () => {
+    browserHistory.push('/sign-up')
   }
   return (
-    <div style={{...styles.container, ...props.style}} ref={container => console.log(container.offsetTop)}>
+    <div style={{...styles.container, ...props.style}}>
       <div style={styles.features}>
-        <FeaturesBox id='hey' ref={testing}/>
+        <FeaturesBox id='hey'/>
       </div>
       <div style={styles.signUpBtn.container}>
-        <ItemBox colorTheme='#000000' style={styles.signUpBtn}>
-          <Link to='/create-account' style={styles.signUpBtn.text}>
-            Sign Up
-          </Link>
+        <ItemBox
+          handleClick={signUp}
+          colorTheme='rgba(244, 218, 44, 0.87)'
+          style={styles.signUpBtn}>
+          <div style={styles.signUpBtn.text}>Sign Up</div>
         </ItemBox>
       </div>
     </div>
