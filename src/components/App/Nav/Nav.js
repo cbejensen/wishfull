@@ -78,7 +78,7 @@ export function Nav(props) {
 }
 
 Nav.propTypes = {
-  uid: React.PropTypes.string.isRequired,
+  uid: React.PropTypes.node.isRequired,
   menuVisible: React.PropTypes.bool.isRequired,
   searchVisible: React.PropTypes.bool.isRequired,
   toggleMenu: React.PropTypes.func.isRequired,

@@ -46,7 +46,7 @@ export default function UserBox(props) {
 
 UserBox.propTypes = {
   name: React.PropTypes.string.isRequired,
-  uid: React.PropTypes.string.isRequired,
+  uid: React.PropTypes.node.isRequired,
   height: React.PropTypes.string,
   nameColor: React.PropTypes.string,
   handleClick: React.PropTypes.func

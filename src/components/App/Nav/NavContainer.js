@@ -17,7 +17,8 @@ class NavContainer extends React.Component {
   }
   componentDidMount() {
     this.removeListener = firebase.auth().onAuthStateChanged(user => {
-      this.setState({uid: user.uid})
+      if (user) this.setState({uid: user.uid})
+      else this.setState({uid: false})
     })
   }
   componentWillUnmount() {

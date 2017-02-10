@@ -1,6 +1,8 @@
 import React from 'react'
 import FeaturesBox from './FeaturesBox'
 import ItemBox from 'components/ItemBox'
+import TextLink from 'components/TextLink'
+import {Grid, Glyphicon} from 'react-bootstrap'
 import {browserHistory} from 'react-router'
 import randomColor from 'randomcolor'
 
@@ -10,48 +12,36 @@ export default function FeaturesPanel(props) {
       position: 'relative',
       height: '100vh'
     },
-    features: {
-      padding: '10px',
-      height: '75%'
+    featuresBox: {
+      height: '75%',
+      paddingTop: '10px'
     },
-    signUpBtn: {
-      container: {
-        padding: '5px',
-        height: '15%',
-      },
-      text: {
-        position: 'relative',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        color: '#000000',
-        fontSize: '6vmin',
-        overflow: 'hidden',
-        textDecoration: 'none'
-      },
-      height: '100%',
-      width: '75%',
-      maxWidth: '500px',
-      textAlign: 'center',
-      backgroundColor: '#ffffff'
+    signUp: {
+      padding: '5px',
+      height: '15%',
+      position: 'relative',
+      textAlign: 'center'
+    },
+    verticalCenter: {
+      position: 'relative',
+      top: '50%',
+      transform: 'translateY(-50%)'
     }
   }
-  const signUp = () => {
-    browserHistory.push('/sign-up')
-  }
   return (
-    <div style={{...styles.container, ...props.style}}>
-      <div style={styles.features}>
-        <FeaturesBox id='hey'/>
+    <Grid style={{...styles.container, ...props.style}}>
+      <div style={styles.featuresBox}>
+        <FeaturesBox />
       </div>
-      <div style={styles.signUpBtn.container}>
-        <ItemBox
-          handleClick={signUp}
-          colorTheme='rgba(244, 218, 44, 0.87)'
-          style={styles.signUpBtn}>
-          <div style={styles.signUpBtn.text}>Sign Up</div>
-        </ItemBox>
+      <div style={styles.signUp}>
+        <div style={styles.verticalCenter}>
+          <TextLink
+            text='Sign Up'
+            link='/sign-up'
+            fontSize='7vmax'/>
+        </div>
       </div>
-    </div>
+    </Grid>
   )
 }
 

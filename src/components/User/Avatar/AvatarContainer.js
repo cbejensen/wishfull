@@ -30,7 +30,7 @@ class AvatarContainer extends React.Component {
 }
 
 AvatarContainer.propTypes = {
-  uid: React.PropTypes.string.isRequired
+  uid: React.PropTypes.node.isRequired
 }
 
 export default AvatarContainer

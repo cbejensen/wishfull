@@ -12,9 +12,7 @@ export default function AutoScrollContainer(props) {
       position: 'absolute',
       bottom: '0',
       width: '100%',
-      height: '50px',
-      paddingTop: '15px',
-      fontSize: '20px',
+      fontSize: '6vmin',
       textAlign: 'center',
       cursor: 'pointer'
     }

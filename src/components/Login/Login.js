@@ -45,6 +45,7 @@ export function Login(props) {
     <div>
       <Form onSubmit={props.handleSubmit}>
         <FormInput label='E-mail'
+          autoFocus
           value={props.email}
           onChange={props.handleEmailChange}
           required />

@@ -71,7 +71,7 @@ class WishList extends React.Component {
 }
 
 WishList.propTypes = {
-  uid: React.PropTypes.string.isRequired,
+  uid: React.PropTypes.node.isRequired,
   wishes: React.PropTypes.array,
   primaryColor: React.PropTypes.string,
   secondaryColor: React.PropTypes.string,
