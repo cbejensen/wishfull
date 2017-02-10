@@ -99,7 +99,7 @@ class WishItemContainer extends React.Component {
 
 WishItemContainer.propTypes = {
   wish: React.PropTypes.object.isRequired,
-  uid: React.PropTypes.string.isRequired,
+  uid: React.PropTypes.node.isRequired,
   index: React.PropTypes.number.isRequired,
   selected: React.PropTypes.bool.isRequired,
   primaryColor: React.PropTypes.string,

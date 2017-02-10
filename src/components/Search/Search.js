@@ -27,7 +27,7 @@ class Search extends React.Component {
 }
 
 Search.propTypes = {
-  uid: React.PropTypes.string,
+  uid: React.PropTypes.node,
   categories: React.PropTypes.array
 }
 

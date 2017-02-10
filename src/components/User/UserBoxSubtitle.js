@@ -31,7 +31,7 @@ class UserBoxSubtitle extends React.Component {
 }
 
 UserBoxSubtitle.propTypes = {
-  uid: React.PropTypes.string.isRequired
+  uid: React.PropTypes.node.isRequired
 }
 
 export default UserBoxSubtitle

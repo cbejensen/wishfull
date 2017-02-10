@@ -17,9 +17,9 @@ export default function FeaturesBox(props) {
       fontSize: '12vmax'
     },
     text: {
-      fontSize: '5vmin',
+      fontSize: '6vmin',
       // avoid words colliding
-      lineHeignt: '22px'
+      lineHeignt: '20px'
     }
   }
   const featureArray = [{

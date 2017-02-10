@@ -1,6 +1,6 @@
 import React from 'react'
+import TextLink from 'components/TextLink'
 import {Glyphicon} from 'react-bootstrap'
-import {Link} from 'react-router';
 import galaxyTreeImg from 'images/galaxy-tree.jpg'
 import smoothscroll from 'smoothscroll'
 
@@ -16,12 +16,8 @@ export default function GalaxyPanel(props) {
       color: '#ffffff'
     },
     signIn: {
-      container: {
-        fontSize: '1.2em',
-        textAlign: 'right',
-        padding: '10px'
-      },
-      color: '#ffffff'
+      textAlign: 'right',
+      padding: '10px'
     },
     title: {
       fontSize: '15vmin'
@@ -32,10 +28,8 @@ export default function GalaxyPanel(props) {
   }
   return (
     <div id='galaxyPanel' style={styles.container}>
-      <div style={styles.signIn.container}>
-        <Link to='/sign-in' style={styles.signIn}>
-          Sign In <Glyphicon glyph='arrow-right'/>
-        </Link>
+      <div style={styles.signIn}>
+        <TextLink text='Sign In' link='/sign-in' color='#ffffff' />
       </div>
       <div style={styles.title}>{props.title}</div>
       <div style={styles.subtitle}>{props.subtitle}</div>
