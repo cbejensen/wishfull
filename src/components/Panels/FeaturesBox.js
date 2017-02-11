@@ -14,7 +14,7 @@ export default function FeaturesBox(props) {
       overflow: 'hidden',
     },
     img: {
-      fontSize: '12vmax'
+      fontSize: '12vmin'
     },
     text: {
       fontSize: '6vmin',
@@ -51,23 +51,15 @@ export default function FeaturesBox(props) {
   }]
   return (
     <div style={styles.container}>
-      {featureArray.map((feature, i) => {
-        // every other feature inverts img and text
-        let inverted = (i % 2 !== 0)
-        // show hr below every feature but last
-        let showHR = (i !== featureArray.length - 1)
-        return (
-          <div key={i} style={{height: '25%'}}>
-            <ImageTextBlock
-              img={feature.img}
-              inverted={inverted}
-              style={{...styles.feature, ...feature.styles}}>
-              <span style={styles.text}>{feature.text}</span>
-            </ImageTextBlock>
-            {/* {showHR ? <hr /> : null} */}
-          </div>
-        )
-      })}
+      {featureArray.map((feature, i) => (
+        <div key={i} style={{height: '25%'}}>
+          <ImageTextBlock
+            img={feature.img}
+            style={{...styles.feature, ...feature.styles}}>
+            <span style={styles.text}>{feature.text}</span>
+          </ImageTextBlock>
+        </div>
+      ))}
     </div>
   )
 }
