@@ -12,7 +12,7 @@ export default function FeaturesPanel(props) {
       position: 'relative',
       height: '100vh'
     },
-    featuresBox: {
+    FeaturesBox: {
       height: '75%',
       paddingTop: '10px'
     },
@@ -30,7 +30,7 @@ export default function FeaturesPanel(props) {
   }
   return (
     <Grid style={{...styles.container, ...props.style}}>
-      <div style={styles.featuresBox}>
+      <div style={styles.FeaturesBox}>
         <FeaturesBox />
       </div>
       <div style={styles.signUp}>

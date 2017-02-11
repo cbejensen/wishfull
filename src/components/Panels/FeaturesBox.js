@@ -1,5 +1,5 @@
 import React from 'react'
-import ImageTextBlock from 'components/ImageTextBlock'
+import FeatureBox from './FeatureBox'
 import {Glyphicon} from 'react-bootstrap'
 
 export default function FeaturesBox(props) {
@@ -22,44 +22,26 @@ export default function FeaturesBox(props) {
       lineHeignt: '20px'
     }
   }
-  const featureArray = [{
-    img: <Glyphicon glyph='star-empty' style={styles.img} />,
-    text: 'Create your own wish list',
-    styles: {
-      backgroundColor: 'rgba(35, 134, 196, 0.5)',
-      borderRadius: '10px 10px 0 0'
-    }
-  }, {
-    img: <Glyphicon glyph='user' style={styles.img} />,
-    text: 'See what your friends really want',
-    styles: {
-      backgroundColor: 'rgba(153, 24, 59, 0.5)'
-    }
-  }, {
-    img: <Glyphicon glyph='check' style={styles.img} />,
-    text: 'Know what\'s already been fulfilled',
-    styles: {
-      backgroundColor: 'rgba(65, 113, 23, 0.5)'
-    }
-  }, {
-    img: <Glyphicon glyph='gift' style={styles.img} />,
-    text: 'Give the perfect gift',
-    styles: {
-      backgroundColor: 'rgba(112, 17, 131, 0.5)',
-      borderRadius: '0 0 10px 10px'
-    }
-  }]
   return (
     <div style={styles.container}>
-      {featureArray.map((feature, i) => (
-        <div key={i} style={{height: '25%'}}>
-          <ImageTextBlock
-            img={feature.img}
-            style={{...styles.feature, ...feature.styles}}>
-            <span style={styles.text}>{feature.text}</span>
-          </ImageTextBlock>
-        </div>
-      ))}
+      <div style={{height: '25%'}}>
+        <FeatureBox
+          glyph='star-empty'
+          text='Create your own wish list'
+          backgroundColor='rgba(35, 134, 196, 0.5)' />
+        <FeatureBox
+          glyph='user'
+          text='See what your friends really want'
+          backgroundColor='rgba(153, 24, 59, 0.5)' />
+        <FeatureBox
+          glyph='check'
+          text="Know what's already been fulfilled"
+          backgroundColor='rgba(65, 113, 23, 0.5)' />
+        <FeatureBox
+          glyph='gift'
+          text='Give the perfect gift'
+          backgroundColor='rgba(112, 17, 131, 0.5)' />
+      </div>
     </div>
   )
 }

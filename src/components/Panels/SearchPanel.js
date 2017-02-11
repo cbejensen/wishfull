@@ -5,12 +5,16 @@ import {Grid} from 'react-bootstrap'
 export default function SearchPanel(props) {
   const styles = {
     container: {
-      backgroundColor: 'linear-gradient(#383838, #00000)',
-      height: '500px'
+      background: 'linear-gradient(#383838, #000000)'
+    },
+    header: {
+      color: '#ffffff',
+      textAlign: 'center'
     }
   }
   return (
     <Grid style={styles.container}>
+      <h3 style={styles.header}>See who's on Wishfull</h3>
       <Search categories={['users']} />
     </Grid>
   )

@@ -13,9 +13,7 @@ class UserBoxSubtitle extends React.Component {
       if (!list) list = {}
       const wishCount = Object.keys(list).length
       this.setState({wishCount: wishCount})
-    }, err => {
-      console.log(err)
-    })
+    }, err => {})
   }
   componentWillUnmount() {
     this.cancelablePromise.cancel()

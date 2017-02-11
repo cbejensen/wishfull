@@ -234,7 +234,7 @@ export const searchFriends = (str, uid, exclusions) => {
   })
 }
 
-export const searchUsers = (str, uid, exclusions) => {
+export const searchUsers = (str, exclusions) => {
   return getAllUsers().then(users => {
     const usersArray = Object.keys(users).map(key => {
       users[key].uid = key
@@ -248,7 +248,7 @@ export const searchUsers = (str, uid, exclusions) => {
 export const searchUsersNotFriends = (str, uid) => {
   return getFriendIds(uid).then(friendIds => {
     const arr = Object.keys(friendIds).map(id => id)
-    return searchUsers(str, uid, arr)
+    return searchUsers(str, arr)
     .then(users => users)
   }, err => {
     console.log(err)

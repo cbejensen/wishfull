@@ -32,13 +32,20 @@ export default function UserBox(props) {
     browserHistory.push(path)
   }
   const handleClick = props.handleClick ? props.handleClick : goToUser
+  const text = (
+    <div>
+      <div style={styles.name}>{props.name}</div>
+      <UserBoxSubtitle uid={props.uid} />
+    </div>
+  )
   return (
     <ItemBox style={styles.itemBox}
       handleClick={handleClick}
       colorTheme={randomColor({luminosity: 'light'})}>
-      <ImageTextBlock img={<Avatar uid={props.uid}/>} style={{height: '100%'}}>
-        <div style={styles.name}>{props.name}</div>
-        <UserBoxSubtitle uid={props.uid} />
+      <ImageTextBlock
+        img={<Avatar uid={props.uid}/>}
+        text={text}
+        style={{height: '100%'}}>
       </ImageTextBlock>
     </ItemBox>
   )

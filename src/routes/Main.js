@@ -21,7 +21,6 @@ export default function Main(props) {
         <FeaturesPanel />
       </AutoScrollContainer>
       <SearchPanel />
-      <div style={{height: '1000px'}}></div>
     </div>
   )
 }
