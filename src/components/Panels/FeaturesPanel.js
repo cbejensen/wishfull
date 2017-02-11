@@ -38,7 +38,7 @@ export default function FeaturesPanel(props) {
           <TextLink
             text='Sign Up'
             link='/sign-up'
-            fontSize='7vmax'/>
+            fontSize='7vmin'/>
         </div>
       </div>
     </Grid>

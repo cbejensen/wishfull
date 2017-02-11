@@ -12,7 +12,9 @@ export default function ImageTextBlock(props) {
     },
     textCol: {
       height: '100%',
-      padding: '0',
+      padding: props.inverted
+        ? '0 0 0 10px'
+        : '0 10px 0 0',
       textAlign: props.inverted
         ? 'right'
         : 'left'

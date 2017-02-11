@@ -20,9 +20,7 @@ export default function Main(props) {
       <AutoScrollContainer>
         <FeaturesPanel />
       </AutoScrollContainer>
-      <Search />
-      {/* <LoginPanel /> */}
-      {/* <SearchPanel /> */}
+      <SearchPanel />
       <div style={{height: '1000px'}}></div>
     </div>
   )

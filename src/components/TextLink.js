@@ -31,7 +31,7 @@ class TextLink extends React.Component {
         height: '1px',
         margin: 'auto',
         width: this.state.showUnderline
-          ? '110%'
+          ? '100%'
           : '0%',
         backgroundColor: this.props.color || '#000000',
         transition: '.5s'
