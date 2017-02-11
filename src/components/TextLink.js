@@ -1,5 +1,6 @@
 import React from 'react'
 import {Glyphicon} from 'react-bootstrap'
+import {browserHistory} from 'react-router'
 
 class TextLink extends React.Component {
   constructor(props) {
@@ -7,6 +8,7 @@ class TextLink extends React.Component {
     this.state = {
       showUnderline: false
     }
+    this.signUp = this.signUp.bind(this)
     this.growUnderline = this.growUnderline.bind(this)
     this.shrinkUnderline = this.shrinkUnderline.bind(this)
   }

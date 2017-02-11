@@ -4,7 +4,6 @@ import {UserList} from 'components/User';
 class UserResults extends React.Component {
   render() {
     if (!this.props.results) return null
-    console.log(this.props.results)
     return <UserList
       users={this.props.results}
       nameColor='#ffffff' />

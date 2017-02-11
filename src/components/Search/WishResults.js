@@ -3,7 +3,6 @@ import {WishList} from 'components/WishList';
 
 const WishResults = props => {
   if (!props.results) return null
-  console.log(props);
   return <WishList
     wishes={props.results}
     uid={props.uid}

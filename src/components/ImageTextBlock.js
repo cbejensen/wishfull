@@ -20,49 +20,37 @@ export default function ImageTextBlock(props) {
         : 'left'
     }
   }
-  let img;
-  if (typeof props.img === 'string') {
-    img = <img src={props.img} style={{height: '100%'}}/>
-  } else {
-    img = props.img
-  }
+  // let img;
+  // if (typeof props.img === 'string') {
+  //   img = <img src={props.img} style={{height: '100%'}}/>
+  // } else {
+  //   img = props.img
+  // }
   const imgComponent = (
     <Col xs={4} style={styles.imgCol}>
-      <VerticalCenter>
+      {/* <VerticalCenter>
         {img}
-      </VerticalCenter>
+      </VerticalCenter> */}
+      {props.img}
     </Col>
   )
   return (
     <Row style={{...styles.container, ...props.style}}>
       {!props.inverted && imgComponent}
       <Col xs={8} style={styles.textCol}>
-        <VerticalCenter>
+        {/* <VerticalCenter>
           {props.children}
-        </VerticalCenter>
+        </VerticalCenter> */}
+        {props.text}
       </Col>
       {props.inverted && imgComponent}
     </Row>
   )
 };
 
-function VerticalCenter(props) {
-  const styles = {
-    center: {
-      position: 'relative',
-      top: '50%',
-      transform: 'translateY(-50%)'
-    }
-  }
-  return (
-    <div style={styles.center}>
-      {props.children}
-    </div>
-  )
-}
-
 ImageTextBlock.propTypes = {
   img: React.PropTypes.node.isRequired,
+  text: React.PropTypes.node.isRequired,
   inverted: React.PropTypes.bool,
   style: React.PropTypes.object
 }
