@@ -65,7 +65,7 @@ export function Nav(props) {
         {props.searchVisible &&
           <Row className="Nav-search">
             <Col xs={12}>
-              <Search uid={props.uid}/>
+              <Search uid={props.uid} placeHolder='Search' />
             </Col>
           </Row>
         }
