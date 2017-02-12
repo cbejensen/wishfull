@@ -2,19 +2,10 @@ import React from 'react'
 import { Nav } from './Nav'
 
 export default function App(props) {
-  const styles = {
-    // don't display nav on Main
-    nav: {
-      display: (props.location.pathname === '/')
-        ? 'none'
-        : 'block'
-    }
-  }
+  // don't show Nav on Main
   return (
     <div>
-      <div style={styles.nav}>
-        <Nav />
-      </div>
+      {(props.location.pathname === '/') || <Nav />}
       {props.children}
     </div>
   )
