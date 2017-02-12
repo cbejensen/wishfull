@@ -22,7 +22,10 @@ class Search extends React.Component {
       : true
     return (
       <div>
-        <SearchInput type="text" handleChange={this.handleQuery}/>
+        <SearchInput
+          type="text"
+          handleChange={this.handleQuery}
+          placeHolder={this.props.placeHolder} />
         {showResults && <SearchResults
           query={this.state.query}
           uid={this.props.uid} />}
@@ -32,7 +35,8 @@ class Search extends React.Component {
 }
 
 Search.propTypes = {
-  uid: React.PropTypes.node
+  uid: React.PropTypes.node,
+  placeHolder: React.PropTypes.string
 }
 
 export default Search

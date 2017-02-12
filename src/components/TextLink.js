@@ -27,7 +27,8 @@ class TextLink extends React.Component {
         padding: '0 15px',
         cursor: 'pointer',
         display: 'inline-block',
-        fontSize: this.props.fontSize
+        fontSize: this.props.fontSize,
+        color: this.props.color || 'inherit'
       },
       underline: {
         height: '1px',

@@ -1,18 +1,17 @@
 import React from 'react'
 import './Search.css'
 
-class SearchInput extends React.Component {
-  render() {
-    return (
-      <input className="SearchInput"
-        type="text"
-        onChange={this.props.handleChange} />
-    )
-  }
+export default function SearchInput(props) {
+  return (
+    <input
+      className='SearchInput'
+      type='text'
+      onChange={props.handleChange}
+      placeholder={props.placeHolder} />
+  )
 }
 
 SearchInput.propTypes = {
-  handleChange: React.PropTypes.func.isRequired
+  handleChange: React.PropTypes.func.isRequired,
+  placeHolder: React.PropTypes.string
 }
-
-export default SearchInput
