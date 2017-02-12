@@ -16,7 +16,6 @@ class WishItemContainer extends React.Component {
   }
   componentDidMount() {
     this.changeHeight(this.props.selected)
-    // console.log(this.props);
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.selected !== nextProps.selected) {
@@ -29,14 +28,15 @@ class WishItemContainer extends React.Component {
   }
   changeHeight(selected) {
     const itemBoxHeight = this.headerHeight + 22 // ItemBox's padding & border
-    if (!selected) {
+    if (!selected) { // only show header
       this.setState({height: itemBoxHeight})
-    } else { // wish is selected
+    } else { // show header and body
       const bodyHeight = this.bodyHeight
       this.setState({height: itemBoxHeight + bodyHeight})
     }
   }
   openLink(e) {
+    // just follow link, don't expand/contract wish
     e.stopPropagation()
   }
   handleFulfill() {

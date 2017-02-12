@@ -8,12 +8,6 @@ export function Nav(props) {
   const styles = {
     main: {
       height: '50px'
-    },
-    menu: {
-      display: props.menuVisible ? 'inherit' : 'none'
-    },
-    search: {
-      display: props.searchVisible ? 'inherit' : 'none'
     }
   }
   // let getFriendsPath
@@ -51,26 +45,30 @@ export function Nav(props) {
           </Col>
         </Row>
 
-        <Row className="Nav-menu" style={styles.menu}>
-          <Col xs={12} sm={4}
-            onClick={goTo.bind(null, '/home')}>
-            My Profile
-          </Col>
-          <Col xs={12} sm={4}
-            onClick={goTo.bind(null, '/friends')}>
-            Friends
-          </Col>
-          <Col xs={12} sm={4}
-            onClick={props.handleSignOut}>
-            Sign Out
-          </Col>
-        </Row>
+        {props.menuVisible &&
+          <Row className="Nav-menu">
+            <Col xs={12} sm={4}
+              onClick={goTo.bind(null, '/home')}>
+              My Profile
+            </Col>
+            <Col xs={12} sm={4}
+              onClick={goTo.bind(null, '/friends')}>
+              Friends
+            </Col>
+            <Col xs={12} sm={4}
+              onClick={props.handleSignOut}>
+              Sign Out
+            </Col>
+          </Row>
+        }
 
-        <Row className="Nav-search" style={styles.search}>
-          <Col xs={12}>
-            <Search uid={props.uid}/>
-          </Col>
-        </Row>
+        {props.searchVisible &&
+          <Row className="Nav-search">
+            <Col xs={12}>
+              <Search uid={props.uid}/>
+            </Col>
+          </Row>
+        }
 
       </Grid>
     </div>
