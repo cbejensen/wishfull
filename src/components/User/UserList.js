@@ -15,8 +15,7 @@ const UserList = props => {
             <UserBox
               uid={user.uid}
               name={user.firstName + ' ' + user.lastName}
-              nameColor={props.nameColor}
-              handleClick={props.handleClick}/>
+              nameColor={props.nameColor} />
           </div>
         )
       })}

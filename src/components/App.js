@@ -3,6 +3,7 @@ import { Nav } from './Nav'
 
 export default function App(props) {
   const styles = {
+    // don't display nav on Main
     nav: {
       display: (props.location.pathname === '/')
         ? 'none'
