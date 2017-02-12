@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
-import { App } from 'components/App'
+import App from 'components/App'
 import Main from './Main'
 import Home from './Home'
 import Friends from './Friends'
@@ -11,8 +11,12 @@ import Login from './Login'
 import WishForm from './WishForm'
 import CreateAccount from './CreateAccount'
 
+const handleUpdate = () => {
+  window.scrollTo(0, 0)
+}
+
 const routes = (
-  <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
+  <Router onUpdate={handleUpdate} history={browserHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={Main}/>
       <Route path='/home' component={Home} />

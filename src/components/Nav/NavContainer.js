@@ -24,6 +24,13 @@ class NavContainer extends React.Component {
   componentWillUnmount() {
     this.removeListener()
   }
+  componentWillReceiveProps(nextProps) {
+    // when route changes, set default Nav
+    this.setState({
+      menuVisible: false,
+      searchVisible: false
+    })
+  }
   toggleMenu() {
     this.setState((prevState, props) => {
       return {
