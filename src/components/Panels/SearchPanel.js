@@ -7,7 +7,7 @@ export default function SearchPanel(props) {
   const styles = {
     container: {
       background: 'linear-gradient(#383838, #000000)',
-      minHeight: '100vh'
+      minHeight: '80vh'
     },
     header: {
       color: '#ffffff',
