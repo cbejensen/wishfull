@@ -13,10 +13,9 @@ class NavContainer extends React.Component {
     }
     this.toggleMenu = this.toggleMenu.bind(this)
     this.toggleSearch = this.toggleSearch.bind(this)
-    this.handleSignOut = this.handleSignOut.bind(this)
+    this.signOut = this.signOut.bind(this)
   }
   componentDidMount() {
-    console.log('mounted')
     this.removeListener = firebase.auth().onAuthStateChanged(user => {
       if (user) this.setState({uid: user.uid})
       else this.setState({uid: false})
@@ -48,7 +47,7 @@ class NavContainer extends React.Component {
       }
     })
   }
-  handleSignOut() {
+  signOut() {
     firebase.auth().signOut().then(() => {
       this.toggleMenu()
       browserHistory.push('/sign-in')
@@ -60,7 +59,7 @@ class NavContainer extends React.Component {
     return <Nav {...this.state}
       toggleMenu={this.toggleMenu}
       toggleSearch={this.toggleSearch}
-      handleSignOut={this.handleSignOut} />
+      signOut={this.signOut} />
   }
 }
 

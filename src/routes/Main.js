@@ -17,7 +17,7 @@ export default function Main(props) {
           title='WISHFULL'
           subtitle='A place to make and fulfill wishes' />
       </AutoScrollContainer>
-      <AutoScrollContainer>
+      <AutoScrollContainer >
         <FeaturesPanel />
       </AutoScrollContainer>
       <SearchPanel />
