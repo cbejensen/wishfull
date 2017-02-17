@@ -15,7 +15,9 @@ export default function Footer(props) {
   return (
     <div style={styles.footer}>
       <CenterAlign horizontal={false}>
-        Created by Christian Jensen
+        Created by <a href="users/wcqwJKtZWDY36GTObwZAe8PcVw53">
+          Christian Jensen
+        </a>
       </CenterAlign>
     </div>
   )

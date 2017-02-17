@@ -2,6 +2,10 @@
   background: #383838;
 }
 
+.Nav-main {
+  height: 50px;
+}
+
 .Nav-main > div {
   cursor: pointer;
   color: rgba(255, 255, 255, .7);

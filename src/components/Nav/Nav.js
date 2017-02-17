@@ -1,16 +1,13 @@
 import React from 'react'
-import { Search } from 'components/Search'
-import { Link, browserHistory } from 'react-router'
-import { Grid, Row, Col, Glyphicon } from 'react-bootstrap'
+import NavBar from './NavBar'
+import NavMenu from './NavMenu'
+import NavSearch from './NavSearch'
+import {Link, browserHistory} from 'react-router'
+import {Grid} from 'react-bootstrap'
 import './Nav.css'
 
 export function Nav(props) {
-  const styles = {
-    main: {
-      height: '50px'
-    }
-  }
-  // let getFriendsPath
+  // let menu
   // let LoginOrOut
   // if (props.user) {
   //   getFriendsPath = `/get-friends/${props.user.uid}`
@@ -23,53 +20,18 @@ export function Nav(props) {
   //     <NavItem>Sign In</NavItem>
   //   )
   // }
-  const goTo = path => {
-    props.toggleMenu()
-    browserHistory.push(path)
-  }
   return (
     <div className="Nav-wrapper">
       <Grid className="Nav-container">
-
-        <Row className="Nav-main" style={styles.main}>
-          <Col xs={4} className="Nav-col left">
-            <Glyphicon glyph="menu-hamburger" onClick={props.toggleMenu}/>
-          </Col>
-          <Col xs={4} className="Nav-col center">
-            <Link to={props.uid ? '/home' : '/'}>
-              <span>W</span>
-            </Link>
-          </Col>
-          <Col xs={4} className="Nav-col right">
-            <Glyphicon glyph="search" onClick={props.toggleSearch}/>
-          </Col>
-        </Row>
-
-        {props.menuVisible &&
-          <Row className="Nav-menu">
-            <Col xs={12} sm={4}
-              onClick={goTo.bind(null, '/home')}>
-              My Profile
-            </Col>
-            <Col xs={12} sm={4}
-              onClick={goTo.bind(null, '/friends')}>
-              Friends
-            </Col>
-            <Col xs={12} sm={4}
-              onClick={props.handleSignOut}>
-              Sign Out
-            </Col>
-          </Row>
-        }
-
-        {props.searchVisible &&
-          <Row className="Nav-search">
-            <Col xs={12}>
-              <Search uid={props.uid} placeHolder='Search' />
-            </Col>
-          </Row>
-        }
-
+        <NavBar
+          uid={props.uid}
+          toggleMenu={props.toggleMenu}
+          toggleSearch={props.toggleSearch} />
+        {props.menuVisible && <NavMenu
+          uid={props.uid}
+          signOut={props.signOut}/>}
+        {props.searchVisible && <NavSearch
+          uid={props.uid} />}
       </Grid>
     </div>
   )
@@ -81,7 +43,7 @@ Nav.propTypes = {
   searchVisible: React.PropTypes.bool.isRequired,
   toggleMenu: React.PropTypes.func.isRequired,
   toggleSearch: React.PropTypes.func.isRequired,
-  handleSignOut: React.PropTypes.func.isRequired
+  signOut: React.PropTypes.func.isRequired
 }
 
 export default Nav
