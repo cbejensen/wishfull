@@ -3,6 +3,9 @@ import {RadioBox} from 'components/RadioBox'
 
 export default function SlideBox(props) {
   const styles = {
+    container: {
+      overflow: 'hidden'
+    },
     panelContainer: {
       position: 'relative',
       left: props.leftSelected
@@ -18,7 +21,7 @@ export default function SlideBox(props) {
     }
   }
   return (
-    <div>
+    <div style={styles.container}>
       <div>
         <RadioBox
           radioLeft={props.radioLeft}
