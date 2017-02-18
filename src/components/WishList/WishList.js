@@ -10,12 +10,29 @@ class WishList extends React.Component {
       selectedWish: -1
     }
     this.handleSelectWish = this.handleSelectWish.bind(this)
+    this.getList = this.getList.bind(this)
   }
   componentDidMount() {
-    if (this.props.wishes) {
-      this.setState({wishes: this.props.wishes})
+    this.getList(this.props)
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props !== nextProps) {
+      this.getList(nextProps)
+    }
+  }
+  handleSelectWish(wishIndex) {
+    if (wishIndex === this.state.selectedWish) {
+      // if user deselects wish already selected
+      this.setState({selectedWish: -1})
     } else {
-      getWishList(this.props.uid).then(wishes => {
+      this.setState({selectedWish: wishIndex})
+    }
+  }
+  getList(props) {
+    if (props.wishes) {
+      this.setState({wishes: props.wishes})
+    } else {
+      getWishList(props.uid).then(wishes => {
         // assign wish id to id prop
         for (let wishId in wishes) {
           if (wishes.hasOwnProperty(wishId)) {
@@ -26,14 +43,6 @@ class WishList extends React.Component {
         const wishesArray = Object.keys(wishes).map(wish => wishes[wish])
         this.setState({wishes: wishesArray})
       })
-    }
-  }
-  handleSelectWish(wishIndex) {
-    if (wishIndex === this.state.selectedWish) {
-      // if user deselects wish already selected
-      this.setState({selectedWish: -1})
-    } else {
-      this.setState({selectedWish: wishIndex})
     }
   }
   render() {
