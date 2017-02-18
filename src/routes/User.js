@@ -10,6 +10,7 @@ class UserView extends React.Component {
   constructor(props) {
     super(props)
     this.state = {user: null}
+    this.loadUser = this.loadUser.bind(this)
   }
   componentDidMount() {
     const uid = this.props.params.uid
@@ -20,21 +21,29 @@ class UserView extends React.Component {
         browserHistory.push('/home')
       }
     })
+    this.loadUser(uid)
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.params.uid !== nextProps.params.uid) {
+      this.loadUser(nextProps.params.uid)
+    }
+  }
+  componentWillUnmount() {
+    this.removeAuthListener()
+  }
+  loadUser(uid) {
     getUser(uid).then(user => {
       this.setState({user: user})
     }, err => {
       console.log(err)
     })
   }
-  componentWillUnmount() {
-    this.removeAuthListener()
-  }
   render() {
     if (!this.state.user) return <div>Loading...</div>
     return (
       <Grid>
         <UserHeading user={this.state.user} />
-        <WishList uid={this.props.params.uid} />
+        <WishList uid={this.state.user.uid} />
       </Grid>
     )
   }

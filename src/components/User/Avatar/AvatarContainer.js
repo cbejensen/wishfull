@@ -12,18 +12,20 @@ class AvatarContainer extends React.Component {
   }
   componentDidMount() {
     this.mounted = true
-    getFile(`images/avatars/${this.props.uid}`).then(url => {
-      if (this.mounted) {
-        this.setState({
-          url: url
-        })
-      }
-    }, err => {
-      // console.log(err)
-    })
+    this.getAvatar(this.props)
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props !== nextProps) {
+      this.getAvatar(nextProps)
+    }
   }
   componentWillUnmount() {
     this.mounted = false
+  }
+  getAvatar(props) {
+    getFile(`images/avatars/${props.uid}`).then(url => {
+      if (this.mounted) this.setState({url: url})
+    }, err => {})
   }
   render() {
     return <Avatar url={this.state.url}/>
