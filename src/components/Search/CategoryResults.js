@@ -18,6 +18,7 @@ class CategoryResults extends React.Component {
     }
   }
   search() {
+    this.setState({results: false})
     this.cancelablePromise = makeCancelablePromise(this.props.search())
     this.cancelablePromise.promise.then(res => {
       this.setState({results: res})
@@ -29,13 +30,24 @@ class CategoryResults extends React.Component {
     this.cancelablePromise.cancel()
   }
   render() {
-    if (this.state.results.length < 1) return null
-    return React.cloneElement(this.props.children, {results: this.state.results})
+    if (!this.state.results) {
+      this.props.reportResults(false)
+      return null
+    } else if (this.state.results.length < 1) {
+      this.props.reportResults([])
+      return null
+    } else {
+      this.props.reportResults(true)
+      return React.cloneElement(
+        this.props.children, {results: this.state.results}
+      )
+    }
   }
 }
 
 CategoryResults.propTypes = {
-  search: React.PropTypes.func.isRequired // should be promise
+  search: React.PropTypes.func.isRequired, // should be promise
+  reportResults: React.PropTypes.func
 }
 
 export default CategoryResults

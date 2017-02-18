@@ -6,8 +6,13 @@ class UserResults extends React.Component {
     if (!this.props.results) return null
     return <UserList
       users={this.props.results}
-      nameColor='#ffffff' />
+      nameColor={this.props.nameColor} />
   }
 };
+
+UserResults.propTypes = {
+  results: React.PropTypes.array,
+  nameColor: React.PropTypes.string
+}
 
 export default UserResults;

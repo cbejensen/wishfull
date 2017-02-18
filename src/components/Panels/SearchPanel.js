@@ -23,7 +23,11 @@ export default function SearchPanel(props) {
     <div style={styles.container}>
       <Grid>
         <h3 style={styles.header}>See who's on Wishfull</h3>
-        <Search categories={['users']} placeHolder={'Search a friend\'s name'} />
+        <Search
+          excludeWishes
+          categories={['users']}
+          placeHolder="Search a friend's name"
+          userNameColor="#dadada" />
         <div style={styles.textLink}>
           <TextLink
             text='Join Now'

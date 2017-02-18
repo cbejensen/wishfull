@@ -23,10 +23,10 @@ class WishItem extends React.Component {
         transition: '.3s ease-out'
       },
       primaryColor: {
-        color: this.props.primaryColor || '#000000'
+        color: this.props.primaryColor || '#2f2f2f'
       },
       secondaryColor: {
-        color: this.props.secondaryColor || '#000000'
+        color: this.props.secondaryColor || '#474747'
       },
       priorityText: {
         color: this.props.priorityColor,
