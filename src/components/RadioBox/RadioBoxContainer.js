@@ -4,26 +4,26 @@ import RadioBox from './RadioBox';
 class RadioBoxContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {selected: 0}
+    this.state = {leftSelected: true}
     this.select = this.select.bind(this)
   }
-  select(selected) {
-    this.setState({selected: selected})
-    this.props.handleSelect(selected)
+  select(bool) {
+    this.setState({leftSelected: bool})
+    this.props.handleSelect(bool)
   }
   render() {
     const {handleSelect, ...props} = this.props
     return <RadioBox
       {...props}
-      {...this.state}
+      leftSelected={this.state.leftSelected}
       select={this.select} />
   }
 }
 
 RadioBoxContainer.propTypes = {
   handleSelect: React.PropTypes.func.isRequired,
-  textLeft: React.PropTypes.string,
-  textRight: React.PropTypes.string,
+  radioLeft: React.PropTypes.string,
+  radioRight: React.PropTypes.string,
   style: React.PropTypes.object
 }
 

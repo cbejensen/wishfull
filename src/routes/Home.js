@@ -48,8 +48,12 @@ const Home = props => {
         <NavItem eventKey={1}>My Wish List</NavItem>
         <NavItem eventKey={2}>Change Avatar</NavItem>
       </Nav>
-      <AddWishBtn uid={props.uid} />
+      <div style={{textAlign: 'center'}}>
+        <AddWishBtn uid={props.uid} />
+      </div>
+
       {activeComponent}
+      
     </Grid>
   )
 }
