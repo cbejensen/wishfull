@@ -7,7 +7,12 @@ export default function NavSearch(props) {
   return (
     <Row className="Nav-search">
       <Col xs={12}>
-        <Search uid={props.uid} placeHolder='Search' />
+        <Search
+          uid={props.uid}
+          placeHolder='Search'
+          userNameColor='#dadada'
+          wishPrimaryColor='#dadada'
+          wishSecondaryColor='#5d5d5d'/>
       </Col>
     </Row>
   )

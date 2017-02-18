@@ -6,9 +6,16 @@ const WishResults = props => {
   return <WishList
     wishes={props.results}
     uid={props.uid}
-    primaryColor='#ffffff'
-    secondaryColor='#5d5d5d'
+    primaryColor={props.primaryColor}
+    secondaryColor={props.secondaryColor}
     mutable />
 };
+
+WishResults.propTypes = {
+  results: React.PropTypes.array,
+  uid: React.PropTypes.string,
+  primaryColor: React.PropTypes.string,
+  secondaryColor: React.PropTypes.string,
+}
 
 export default WishResults

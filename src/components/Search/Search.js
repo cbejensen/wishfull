@@ -17,6 +17,7 @@ class Search extends React.Component {
     this.setState({query: e.target.value})
   }
   render() {
+    const {placeHolder, ...props} = this.props
     let showResults = (this.state.query === '')
       ? false
       : true
@@ -25,10 +26,10 @@ class Search extends React.Component {
         <SearchInput
           type="text"
           handleChange={this.handleQuery}
-          placeHolder={this.props.placeHolder} />
+          placeHolder={placeHolder} />
         {showResults && <SearchResults
-          query={this.state.query}
-          uid={this.props.uid} />}
+          {...props}
+          query={this.state.query} />}
       </div>
     )
   }
@@ -36,7 +37,13 @@ class Search extends React.Component {
 
 Search.propTypes = {
   uid: React.PropTypes.node,
-  placeHolder: React.PropTypes.string
+  placeHolder: React.PropTypes.string,
+  excludeFriends: React.PropTypes.bool,
+  excludeUsersNotFriends: React.PropTypes.bool,
+  excludeWishes: React.PropTypes.bool,
+  userNameColor: React.PropTypes.string,
+  wishPrimaryColor: React.PropTypes.string,
+  wishSecondaryColor: React.PropTypes.string
 }
 
 export default Search
