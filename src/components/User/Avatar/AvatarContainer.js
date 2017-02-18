@@ -1,12 +1,13 @@
 import React from 'react'
 import Avatar from './Avatar'
 import { getFile } from 'utils/firebaseHelpers'
+import defaultAvatar from 'images/user-icon.svg'
 
 class AvatarContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      url: 'https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAd4AAAAJDE0OGE3MmM5LTA3M2YtNDRkOC05YzE0LTEyNjNlZTY1MThhNg.jpg'
+      url: defaultAvatar
     }
   }
   componentDidMount() {
