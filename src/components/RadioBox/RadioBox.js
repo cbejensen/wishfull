@@ -14,22 +14,22 @@ export default function RadioBox(props) {
       transition: '.5s'
     },
     radioLeft: {
-      color: props.selected
-        ? '#656565'
-        : '#000000'
-    },
-    radioRight: {
-      color: props.selected
+      color: props.leftSelected
         ? '#000000'
         : '#656565'
+    },
+    radioRight: {
+      color: props.leftSelected
+        ? '#656565'
+        : '#000000'
     },
     underline: {
       width: '50%',
       position: 'absolute',
       bottom: '0',
-      left: props.selected
-        ? '50%'
-        : '0',
+      left: props.leftSelected
+        ? '0'
+        : '50%',
       height: '1px',
       backgroundColor: 'black',
       transition: '.5s'
@@ -39,13 +39,13 @@ export default function RadioBox(props) {
     <div style={{...styles.container, ...props.style}}>
       <div
         style={{...styles.radio, ...styles.radioLeft}}
-        onClick={props.select.bind(null, 0)}>
-        {props.textLeft}
+        onClick={props.select.bind(null, true)}>
+        {props.radioLeft}
       </div>
       <div
         style={{...styles.radio, ...styles.radioRight}}
-        onClick={props.select.bind(null, 1)}>
-        {props.textRight}
+        onClick={props.select.bind(null, false)}>
+        {props.radioRight}
       </div>
       <div style={styles.underline}></div>
     </div>
@@ -54,7 +54,8 @@ export default function RadioBox(props) {
 
 RadioBox.propTypes = {
   select: React.PropTypes.func.isRequired,
-  textLeft: React.PropTypes.string,
-  textRight: React.PropTypes.string,
+  leftSelected: React.PropTypes.bool.isRequired,
+  radioLeft: React.PropTypes.string,
+  radioRight: React.PropTypes.string,
   style: React.PropTypes.object
 }
