@@ -25,19 +25,18 @@ class SearchResults extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.query !== nextProps.query) {
-      console.log(nextProps.query);
       this.search(nextProps.query)
     }
   }
   componentWillUnmount() {
-    this.friendsPromise.cancel()
-    this.usersPromise.cancel()
-    this.wishesPromise.cancel()
+    this.friendsPromise && this.friendsPromise.cancel()
+    this.usersPromise && this.usersPromise.cancel()
+    this.wishesPromise && this.wishesPromise.cancel()
   }
   search(query) {
-    console.log(query)
     // friends
     if (this.props.uid && !this.props.excludeFriends) {
+      console.log('friends');
       this.friendsPromise = makeCancelablePromise(
         searchFriends(query, this.props.uid)
       )
@@ -84,7 +83,6 @@ class SearchResults extends React.Component {
     })
   }
   render() {
-    console.log(this.state.results.wishes)
     const styles = {
       msg: {
         textAlign: 'center',
