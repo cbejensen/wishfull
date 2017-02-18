@@ -8,13 +8,15 @@ class Search extends React.Component {
     this.state = {
       query: ''
     }
-    this.handleQuery = this.handleQuery.bind(this)
+    this.handleQueryChange = this.handleQueryChange.bind(this)
   }
   componentWillUnmount() {
     this.setState({query: ''})
   }
-  handleQuery(e) {
-    this.setState({query: e.target.value})
+  handleQueryChange(e) {
+    const query = e.target.value
+    this.setState({query: query})
+    if (this.props.handleQueryChange) this.props.handleQueryChange(query)
   }
   render() {
     const {placeHolder, ...props} = this.props
@@ -25,7 +27,7 @@ class Search extends React.Component {
       <div>
         <SearchInput
           type="text"
-          handleChange={this.handleQuery}
+          handleChange={this.handleQueryChange}
           placeHolder={placeHolder} />
         {showResults && <SearchResults
           {...props}
@@ -43,7 +45,8 @@ Search.propTypes = {
   excludeWishes: React.PropTypes.bool,
   userNameColor: React.PropTypes.string,
   wishPrimaryColor: React.PropTypes.string,
-  wishSecondaryColor: React.PropTypes.string
+  wishSecondaryColor: React.PropTypes.string,
+  handleQueryChange: React.PropTypes.func
 }
 
 export default Search

@@ -16,7 +16,11 @@ export default function Friends(props) {
       <SlideBox
         radioLeft='My Friends'
         radioRight='Find Friends'
-        panelLeft={<CheckAuth><FriendList /></CheckAuth>}
+        panelLeft={
+          <CheckAuth>
+            <FriendList />
+          </CheckAuth>
+        }
         panelRight={<Search />} />
     </Grid>
   )
