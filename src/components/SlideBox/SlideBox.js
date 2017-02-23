@@ -6,6 +6,9 @@ export default function SlideBox(props) {
     container: {
       overflow: 'hidden'
     },
+    radioContainer: {
+      padding: '10px 0'
+    },
     panelContainer: {
       position: 'relative',
       left: props.leftSelected
@@ -22,7 +25,7 @@ export default function SlideBox(props) {
   }
   return (
     <div style={styles.container}>
-      <div>
+      <div style={styles.radioContainer}>
         <RadioBox
           radioLeft={props.radioLeft}
           radioRight={props.radioRight}

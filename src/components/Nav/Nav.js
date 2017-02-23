@@ -7,19 +7,6 @@ import {Grid} from 'react-bootstrap'
 import './Nav.css'
 
 export function Nav(props) {
-  // let menu
-  // let LoginOrOut
-  // if (props.user) {
-  //   getFriendsPath = `/get-friends/${props.user.uid}`
-  //   LoginOrOut = (
-  //     <NavItem onClick={props.handleSignOut}>Sign Out</NavItem>
-  //   )
-  // } else {
-  //   getFriendsPath = `/sign-in`
-  //   LoginOrOut = (
-  //     <NavItem>Sign In</NavItem>
-  //   )
-  // }
   return (
     <div className="Nav-wrapper">
       <Grid className="Nav-container">

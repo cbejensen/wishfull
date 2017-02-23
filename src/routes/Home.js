@@ -1,61 +1,55 @@
 import React from 'react'
+import {SlideBox} from 'components/SlideBox'
+import {CheckAuth} from '../components/CheckAuth'
 import {UserHeading} from 'components/User'
 import AddWishBtn from 'components/Button/AddWishBtn'
 import {AvatarForm} from 'components/User/AvatarForm'
-import {CheckAuth} from '../components/CheckAuth'
-import {Grid, Nav, NavItem} from 'react-bootstrap'
+import {Grid} from 'react-bootstrap'
 import {WishList} from 'components/WishList'
 
-class HomeContainer extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      activeTab: 1
-    }
-    this.handleTabSelect = this.handleTabSelect.bind(this)
-  }
-  handleTabSelect(e) {
-    this.setState({
-      activeTab: e
-    })
-  }
-  render() {
-    return (
-      <CheckAuth>
-        <Home activeTab={this.state.activeTab}
-          handleTabSelect={this.handleTabSelect}/>
-      </CheckAuth>
-    )
-  }
+export default function Home(props) {
+  return (
+    <CheckAuth>
+      <HomeView {...props} />
+    </CheckAuth>
+  )
 }
 
-const Home = props => {
-  let activeComponent
-  if (props.activeTab === 1) {
-    activeComponent = (
-      <WishList uid={props.user.uid} mutable showFulfilled />
-    )
-  } else {
-    activeComponent = (
-      <AvatarForm user={props.user} />
-    )
+function HomeView(props) {
+  const styles = {
+    heading: {
+      paddingTop: '10px'
+    },
+    btn: {
+      padding: '10px',
+      textAlign: 'center'
+    }
   }
+  if (!props.uid) return null;
   return (
     <Grid>
-      <UserHeading user={props.user} />
-      <Nav bsStyle="tabs" activeKey={props.activeTab}
-        onSelect={props.handleTabSelect} justified >
-        <NavItem eventKey={1}>My Wish List</NavItem>
-        <NavItem eventKey={2}>Change Avatar</NavItem>
-      </Nav>
-      <div style={{textAlign: 'center'}}>
-        <AddWishBtn uid={props.uid} />
+      <div style={styles.heading}>
+        <UserHeading user={props.user} />
       </div>
-
-      {activeComponent}
-      
+      <SlideBox
+        radioLeft='My Wishes'
+        radioRight='My Avatar'
+        panelLeft={
+          <div>
+            <div style={styles.btn}>
+              <AddWishBtn uid={props.uid}/>
+            </div>
+            <WishList uid={props.uid} mutable />
+          </div>
+        }
+        panelRight={
+          <AvatarForm user={props.user} />
+        }
+      />
     </Grid>
   )
 }
 
-export default HomeContainer
+HomeView.propTypes = {
+  uid: React.PropTypes.node.isRequired
+}

@@ -9,7 +9,7 @@ export default function NavSearch(props) {
       <Col xs={12}>
         <Search
           uid={props.uid}
-          placeHolder='Search'
+          placeHolder='Search users and wishes'
           userNameColor='#dadada'
           wishPrimaryColor='#dadada'
           wishSecondaryColor='#5d5d5d'/>

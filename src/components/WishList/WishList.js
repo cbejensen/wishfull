@@ -33,6 +33,7 @@ class WishList extends React.Component {
       this.setState({wishes: props.wishes})
     } else {
       getWishList(props.uid).then(wishes => {
+        if (!wishes) this.setState({wishes: false})
         // assign wish id to id prop
         for (let wishId in wishes) {
           if (wishes.hasOwnProperty(wishId)) {
