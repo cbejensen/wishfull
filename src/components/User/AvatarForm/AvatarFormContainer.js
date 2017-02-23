@@ -6,31 +6,32 @@ class AvatarFormContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      newAvatar: null,
-      loading: ''
+      file: null,
+      fileName: 'No image selected',
+      img: null,
+      loading: false
     }
     this.selectAvatar = this.selectAvatar.bind(this)
+    this.showImg = this.showImg.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  selectAvatar(e) {
-    var img = e.target.files[0]
+  selectAvatar(file) {
     this.setState({
-      newAvatar: img
+      file: file,
+      fileName: file.name
     })
+  }
+  showImg(img) {
+    this.setState({img: img})
   }
   handleSubmit(e) {
     e.preventDefault()
-    if (this.state.newAvatar) {
-      this.setState({loading: 'Loading...'})
-      const file = this.state.newAvatar
-      const path = `images/avatars/${this.props.user.uid}`
+    this.setState({loading: true})
+    if (this.state.file) {
+      const {file} = this.state
+      const path = `images/avatars/${this.props.uid}`
       uploadFile(file, path).then(res => {
-        alert('Success!')
-        getFile(path).then(avatar => {
-          this.setState({
-            loading: ''
-          })
-        })
+        window.location.reload(true)
       }, err => {
         alert('There was an error. Please try again.')
         console.log(err)
@@ -40,14 +41,18 @@ class AvatarFormContainer extends React.Component {
     }
   }
   render() {
-    return <AvatarForm loading={this.state.loading}
+    const {file, ...state} = this.state
+    return <AvatarForm
+      {...state}
+      uid={this.props.uid}
       selectAvatar={this.selectAvatar}
-      handleSubmit={this.handleSubmit}/>
+      showImg={this.showImg}
+      handleSubmit={this.handleSubmit} />
   }
 }
 
 AvatarFormContainer.propTypes = {
-  user: React.PropTypes.object.isRequired
+  uid: React.PropTypes.node.isRequired
 }
 
 export default AvatarFormContainer
