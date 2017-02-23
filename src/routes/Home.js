@@ -43,7 +43,7 @@ function HomeView(props) {
           </div>
         }
         panelRight={
-          <AvatarForm user={props.user} />
+          <AvatarForm uid={props.uid} />
         }
       />
     </Grid>

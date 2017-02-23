@@ -23,17 +23,24 @@ class AvatarContainer extends React.Component {
     this.mounted = false
   }
   getAvatar(props) {
-    getFile(`images/avatars/${props.uid}`).then(url => {
-      if (this.mounted) this.setState({url: url})
-    }, err => {})
+    if (props.url) {
+      this.setState({url: props.url})
+    } else if (props.uid) {
+      getFile(`images/avatars/${props.uid}`).then(url => {
+        if (this.mounted && !this.props.url) {
+          this.setState({url: url})
+        }
+      }, err => {})
+    }
   }
   render() {
-    return <Avatar url={this.state.url}/>
+    return <Avatar url={this.state.url} />
   }
 }
 
 AvatarContainer.propTypes = {
-  uid: React.PropTypes.node.isRequired
+  uid: React.PropTypes.node,
+  url: React.PropTypes.string
 }
 
 export default AvatarContainer
