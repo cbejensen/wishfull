@@ -15,10 +15,16 @@
   color: rgba(255, 255, 255, .9);
 }
 
+.Nav-menu {
+  padding-bottom: 5px;
+}
+
 .Nav-menu > div {
   text-align: center;
   color: rgba(255, 255, 255, .5);
   font-size: 1.5em;
+  font-weight: 200;
+  letter-spacing: 1px;
   cursor: pointer;
   margin: 5px auto;
   transition: .2s;
@@ -26,7 +32,7 @@
 
 .Nav-menu > div:hover {
   color: rgba(255, 255, 255, .7);
-  font-weight: bold;
+  font-weight: 300;
 }
 
 .Nav-col, .Nav-col div {
@@ -48,7 +54,8 @@
   float: right;
 }
 
-.Nav-col.center span {
+.Nav-col.center img {
+  height: 80%;
   position: absolute;
   top: 50%;
   left: 50%;

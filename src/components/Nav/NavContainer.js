@@ -50,7 +50,7 @@ class NavContainer extends React.Component {
   signOut() {
     firebase.auth().signOut().then(() => {
       this.toggleMenu()
-      browserHistory.push('/sign-in')
+      browserHistory.push('/')
     }, error => {
       console.log(error)
     })

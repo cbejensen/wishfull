@@ -17,7 +17,8 @@ export default function GalaxyPanel(props) {
     },
     signIn: {
       textAlign: 'right',
-      padding: '10px'
+      padding: '10px',
+      fontSize: '4vmin'
     },
     title: {
       fontSize: '15vmin'

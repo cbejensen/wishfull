@@ -18,10 +18,13 @@ export default function Friends(props) {
         radioRight='Find Friends'
         panelLeft={
           <CheckAuth>
-            <FriendList />
+            <FriendList uid='test' />
           </CheckAuth>
         }
-        panelRight={<Search />} />
+        panelRight={
+          <Search placeHolder="See who's on Wishfull"/>
+        }
+      />
     </Grid>
   )
 }

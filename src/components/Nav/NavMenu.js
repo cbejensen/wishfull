@@ -22,7 +22,7 @@ export default function NavMenu(props) {
       <Row className="Nav-menu">
         <Col xs={12} sm={4}
           onClick={() => browserHistory.push('/home')}>
-          My Profile
+          Home
         </Col>
         <Col xs={12} sm={4}
           onClick={() => browserHistory.push('/friends')}>

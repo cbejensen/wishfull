@@ -1,6 +1,7 @@
 import React from 'react'
 import {Glyphicon, Row, Col} from 'react-bootstrap'
 import {Link} from 'react-router'
+import logo from 'images/logo.png'
 import './Nav.css'
 
 export default function NavBar(props) {
@@ -11,7 +12,7 @@ export default function NavBar(props) {
       </Col>
       <Col xs={4} className="Nav-col center">
         <Link to={props.uid ? '/home' : '/'}>
-          <span>W</span>
+          <img src={logo} alt="W"/>
         </Link>
       </Col>
       <Col xs={4} className="Nav-col right">
