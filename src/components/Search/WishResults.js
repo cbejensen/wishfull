@@ -1,5 +1,5 @@
-import React from 'react';
-import {WishList} from 'components/WishList';
+import React from 'react'
+import {WishList} from 'components/Wish'
 
 const WishResults = props => {
   if (!props.results) return null

@@ -1,11 +1,11 @@
 import React from 'react'
 import {SlideBox} from 'components/SlideBox'
-import {CheckAuth} from '../components/CheckAuth'
+import {CheckAuth} from 'components/CheckAuth'
 import {UserHeading} from 'components/User'
 import AddWishBtn from 'components/Button/AddWishBtn'
 import {AvatarForm} from 'components/User/AvatarForm'
 import {Grid} from 'react-bootstrap'
-import {WishList} from 'components/WishList'
+import {WishList} from 'components/Wish'
 
 export default function Home(props) {
   return (
