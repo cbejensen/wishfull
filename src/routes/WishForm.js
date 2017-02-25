@@ -1,5 +1,5 @@
 import React from 'react'
-import {WishForm as Form} from '../components/WishList'
+import {WishForm as Form} from 'components/Wish'
 import {Grid} from 'react-bootstrap'
 
 const WishForm = props => {

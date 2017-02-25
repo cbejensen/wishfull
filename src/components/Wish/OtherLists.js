@@ -1,7 +1,7 @@
 import React from 'react'
 import * as firebase from 'firebase'
 import {getOtherUsers} from '../../utils/firebaseHelpers'
-import { UserList } from '../WishList'
+import {UserList} from './WishList'
 
 const OtherListsContainer = React.createClass({
   getInitialState() {

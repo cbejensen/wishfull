@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router'
 import { Grid } from 'react-bootstrap'
 import { getUser } from 'utils/firebaseHelpers'
 import {UserHeading} from 'components/User'
-import { WishList } from '../components/WishList'
+import { WishList } from 'components/Wish'
 import * as firebase from 'firebase'
 
 class UserView extends React.Component {

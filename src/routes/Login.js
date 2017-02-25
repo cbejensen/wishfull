@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import {Grid} from 'react-bootstrap'
 
-import { Login as LoginForm } from '../components/Login'
+import { Login as LoginForm } from 'components/Login'
 
 export default function Login(props) {
   return (

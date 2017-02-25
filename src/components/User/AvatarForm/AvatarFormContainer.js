@@ -7,7 +7,6 @@ class AvatarFormContainer extends React.Component {
     super(props)
     this.state = {
       file: null,
-      fileName: 'No image selected',
       img: null,
       loading: false
     }
@@ -17,8 +16,7 @@ class AvatarFormContainer extends React.Component {
   }
   selectAvatar(file) {
     this.setState({
-      file: file,
-      fileName: file.name
+      file: file
     })
   }
   showImg(img) {

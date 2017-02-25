@@ -8,12 +8,12 @@ function AvatarForm(props) {
       margin: '50px',
       textAlign: 'center'
     },
-    imgContainer: {
-      height: '120px',
-      paddingTop: '20px'
+    imgBox: {
+      margin: '0 auto 20px',
+      width: '200px'
     },
-    img: {
-      width: '100%'
+    imgContainer: {
+      height: '120px'
     },
     fileName: {
       margin: '20px',
@@ -42,7 +42,6 @@ function AvatarForm(props) {
   }
   return (
     <form onSubmit={props.handleSubmit} style={styles.form}>
-      <Button onClick={openFileModal}>Select Image</Button>
       <input
         ref={e => {fileInput = e}}
         type="file"
@@ -50,18 +49,28 @@ function AvatarForm(props) {
         style={styles.input}
         onChange={chooseImage} />
 
-      <div style={styles.imgContainer}>
-        <Avatar url={props.img} uid={props.uid} />
+      <div style={styles.imgBox}>
+        <div style={styles.imgContainer}>
+          <Avatar url={props.img} uid={props.uid} />
+        </div>
       </div>
-      <div style={styles.fileName}>{props.fileName}</div>
+      <div style={{textAlign: 'center'}}>
+        <Button
+          style={{marginRight: '10px'}}
+          bsStyle="warning"
+          bsSize="large"
+          onClick={openFileModal}>
+          Change
+        </Button>
+        <Button
+          type="submit"
+          bsStyle="primary"
+          bsSize="large"
+          disabled={props.loading}>
+          {props.loading ? 'Loading...' : 'Submit'}
+        </Button>
+      </div>
 
-      <Button
-        type="submit"
-        bsStyle="primary"
-        bsSize="large"
-        disabled={props.loading}>
-        {props.loading ? 'Loading...' : 'Submit'}
-      </Button>
     </form>
   )
 }

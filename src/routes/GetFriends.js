@@ -1,5 +1,5 @@
 import React from 'react'
-import { AllUsersList } from '../components/User'
+import { AllUsersList } from 'components/User'
 import { Grid } from 'react-bootstrap'
 
 class GetFriends extends React.Component {

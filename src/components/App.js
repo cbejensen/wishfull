@@ -3,7 +3,6 @@ import {Nav} from './Nav'
 import {Footer} from './Footer'
 
 export default function App(props) {
-  // don't show Nav on Main
   return (
     <div>
       <div style={{minHeight: 'calc(100vh - 50px)'}}>
