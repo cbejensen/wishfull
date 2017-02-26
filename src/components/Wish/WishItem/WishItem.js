@@ -11,6 +11,7 @@ class WishItem extends React.Component {
     const styles = {
       itemBox: {
         height: this.props.height,
+        maxWidth: '500px',
         transition: '0.3s ease-out'
       },
       body: {

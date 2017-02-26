@@ -9,7 +9,6 @@ export default function Footer(props) {
       color: '#6e6e6e',
       fontSize: '.8em',
       textAlign: 'right',
-      marginTop: '20px',
       paddingRight: '10px'
     }
   }
