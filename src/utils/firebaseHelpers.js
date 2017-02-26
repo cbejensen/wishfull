@@ -136,6 +136,7 @@ export const getFriendIds = uid => {
 
 export const getFriends = uid => {
   return getFriendIds(uid).then(ids => {
+    if (!ids) return [] // no friends
     let promises = Object.keys(ids).map(id => {
       return getUser(id).then(user => {
         user.uid = id
@@ -217,6 +218,7 @@ const filterWishesByTitle = (str, wishes) => {
 
 export const searchFriends = (str, uid, exclusions) => {
   return getFriendIds(uid).then(friendIds => {
+    if (!friendIds) return [] // no friends
     let promiseArray = []
     for (var key in friendIds) {
       if (friendIds.hasOwnProperty(key)) {
