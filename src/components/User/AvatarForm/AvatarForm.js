@@ -77,7 +77,6 @@ function AvatarForm(props) {
 
 AvatarForm.propTypes = {
   uid: React.PropTypes.node.isRequired,
-  fileName: React.PropTypes.string.isRequired,
   img: React.PropTypes.string,
   handleSubmit: React.PropTypes.func.isRequired,
   selectAvatar: React.PropTypes.func.isRequired

@@ -84,6 +84,9 @@ class SearchResults extends React.Component {
   }
   render() {
     const styles = {
+      container: {
+        padding: '10px 0'
+      },
       msg: {
         textAlign: 'center',
         padding: '10px',
@@ -99,7 +102,7 @@ class SearchResults extends React.Component {
     } else {
       const {friends, users, wishes} = this.state.results
       return (
-        <div>
+        <div style={styles.container}>
           {friends && <UserResults
             results={this.state.results.friends}
             nameColor={this.props.userNameColor} />}
@@ -112,36 +115,6 @@ class SearchResults extends React.Component {
             primaryColor={this.props.wishPrimaryColor}
             secondaryColor={this.props.wishSecondaryColor} />}
         </div>
-
-        // <div>
-        //   {this.props.uid && !this.props.excludeFriends &&
-        //     <CategoryResults
-        //       search={this.getFriends}
-        //       query={this.props.query}
-        //       noResultsColor={this.props.userNameColor}
-        //       reportResults={this.reportResults.bind(null, 'friends')}>
-        //       <UserResults nameColor={this.props.userNameColor} />
-        //     </CategoryResults>}
-        //   {!this.props.excludeUsersNotFriends &&
-        //     <CategoryResults
-        //       search={this.getUsers}
-        //       query={this.props.query}
-        //       noResultsColor={this.props.userNameColor}
-        //       reportResults={this.reportResults.bind(null, 'users')}>
-        //       <UserResults nameColor={this.props.userNameColor} />
-        //     </CategoryResults>}
-        //   {this.props.uid && !this.props.excludeWishes &&
-        //     <CategoryResults
-        //       search={this.getWishes}
-        //       query={this.props.query}
-        //       noResultsColor={this.props.wishPrimaryColor}
-        //       reportResults={this.reportResults.bind(null, 'wishes')}>
-        //       <WishResults
-        //         uid={this.props.uid}
-        //         primaryColor={this.props.wishPrimaryColor}
-        //         secondaryColor={this.props.wishSecondaryColor} />
-        //     </CategoryResults>}
-        // </div>
       )
     }
   }

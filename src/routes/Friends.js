@@ -1,6 +1,6 @@
 import React from 'react'
 import {SlideBox} from 'components/SlideBox'
-import {CheckAuth} from 'components/CheckAuth'
+import CheckAuth from 'components/CheckAuth'
 import {FriendList} from 'components/User'
 import {Search} from 'components/Search'
 import {Grid} from 'react-bootstrap'
@@ -18,11 +18,12 @@ export default function Friends(props) {
         radioRight='Find Friends'
         panelLeft={
           <CheckAuth>
-            <FriendList uid='test' />
+            <FriendList uid='test' focusInput />
           </CheckAuth>
         }
         panelRight={
-          <Search placeHolder="See who's on Wishfull"/>
+          <Search
+            placeHolder="See who's on Wishfull" />
         }
       />
     </Grid>

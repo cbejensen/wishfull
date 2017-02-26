@@ -1,6 +1,6 @@
 import React from 'react'
 import {SlideBox} from 'components/SlideBox'
-import {CheckAuth} from 'components/CheckAuth'
+import CheckAuth from 'components/CheckAuth'
 import {UserHeading} from 'components/User'
 import AddWishBtn from 'components/Button/AddWishBtn'
 import {AvatarForm} from 'components/User/AvatarForm'
