@@ -5,27 +5,34 @@ import {FriendList} from 'components/User'
 import {Search} from 'components/Search'
 import {Grid} from 'react-bootstrap'
 
-export default function Friends(props) {
-  const styles = {
-    container: {
-      paddingTop: '20px'
-    }
+class Friends extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {leftSelected: true}
+    this.handleSlide = this.handleSlide.bind(this)
   }
-  return (
-    <Grid style={styles.container}>
-      <SlideBox
-        radioLeft='My Friends'
-        radioRight='Find Friends'
-        panelLeft={
-          <CheckAuth>
-            <FriendList uid='test' focusInput />
-          </CheckAuth>
-        }
-        panelRight={
-          <Search
-            placeHolder="See who's on Wishfull" />
-        }
-      />
-    </Grid>
-  )
+  handleSlide(bool) {
+    this.setState({leftSelected: bool})
+  }
+  render() {
+    return (
+      <Grid style={{paddingTop: '20px'}}>
+        <SlideBox
+          radioLeft='My Friends'
+          radioRight='Find Friends'
+          handleSlide={this.handleSlide}
+          panelLeft={
+            <CheckAuth>
+              <FriendList focusInput />
+            </CheckAuth>
+          }
+          panelRight={
+            <Search placeHolder="See who's on Wishfull" />
+          }
+        />
+      </Grid>
+    )
+  }
 }
+
+export default Friends

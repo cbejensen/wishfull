@@ -36,7 +36,6 @@ class SearchResults extends React.Component {
   search(query) {
     // friends
     if (this.props.uid && !this.props.excludeFriends) {
-      console.log('friends');
       this.friendsPromise = makeCancelablePromise(
         searchFriends(query, this.props.uid)
       )
@@ -77,7 +76,6 @@ class SearchResults extends React.Component {
   reportResults(res, type) {
     this.setState((prevState, props) => {
       let newState = prevState
-      console.log(res);
       newState.results[type] = res
       return newState
     })

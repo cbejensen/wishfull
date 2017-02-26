@@ -29,7 +29,7 @@ export default function SlideBox(props) {
         <RadioBox
           radioLeft={props.radioLeft}
           radioRight={props.radioRight}
-          handleSelect={props.select} />
+          handleSelect={props.slide} />
       </div>
       <div style={styles.panelContainer}>
         <div style={styles.panel}>
@@ -44,7 +44,7 @@ export default function SlideBox(props) {
 }
 
 SlideBox.propTypes = {
-  select: React.PropTypes.func,
+  slide: React.PropTypes.func,
   leftSelected: React.PropTypes.bool.isRequired,
   panelLeft: React.PropTypes.node.isRequired,
   panelRight: React.PropTypes.node.isRequired,

@@ -19,7 +19,6 @@ class CreateAccountContainer extends React.Component {
     }
     this.validatePassword = this.validatePassword.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleAvatarChange = this.handleAvatarChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   validatePassword() {
@@ -32,13 +31,7 @@ class CreateAccountContainer extends React.Component {
       return 'success'
     }
   handleChange(field, e) {
-    // const user = {}
-    // user[field] = e.target.value
     this.setState({user: {...this.state.user, [field]: e.target.value}})
-  }
-  handleAvatarChange(e) {
-    var img = e.target.files[0]
-    this.setState({user: {...this.state.user, avatar: img}})
   }
   handleSubmit(e) {
     e.preventDefault()
@@ -89,9 +82,6 @@ export function CreateAccount(props) {
         getValidation={props.validatePassword()}
         value={props.user.password}
         onChange={props.handleChange.bind(null, 'password')}/>
-      <FormInput label='Profile Picture'
-        type='file'
-        onChange={props.handleAvatarChange}/>
       <Button type={props.creatingUser ? 'button' : 'submit'}
         bsStyle="primary"
         bsSize="large"

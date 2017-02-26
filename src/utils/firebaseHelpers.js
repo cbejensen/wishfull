@@ -247,11 +247,15 @@ export const searchUsers = (str, exclusions) => {
 
 export const searchUsersNotFriends = (str, uid) => {
   return getFriendIds(uid).then(friendIds => {
-    const arr = Object.keys(friendIds).map(id => id)
-    return searchUsers(str, arr)
-    .then(users => users)
+    if (!friendIds) { // if no friends yet
+      return searchUsers(str)
+    } else {
+      const arr = Object.keys(friendIds).map(id => id)
+      return searchUsers(str, arr)
+      .then(users => users)
+    }
   }, err => {
-    console.log(err)
+    throw err
   })
 }
 
@@ -264,7 +268,7 @@ export const searchWishes = (str, uid) => {
     const filteredWishes = filterWishesByTitle(str, wishes)
     return filteredWishes
   }, err => {
-    console.log(err)
+    throw err
   })
 }
 
