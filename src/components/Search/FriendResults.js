@@ -1,7 +1,6 @@
 import React from 'react'
 import CategoryHeading from './CategoryHeading'
 import { UserList } from 'components/User'
-import { searchFriends } from 'utils/firebaseHelpers'
 
 class FriendResults extends React.Component {
   constructor(props) {
@@ -34,7 +33,6 @@ class FriendResults extends React.Component {
       },
     }
     this.cancelablePromise.promise.then(res => {
-      console.log('res:', res);
       this.setState({results: res})
     }, err => {
       console.log(err)
