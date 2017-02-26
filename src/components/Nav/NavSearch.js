@@ -12,7 +12,8 @@ export default function NavSearch(props) {
           placeHolder='Search users and wishes'
           userNameColor='#dadada'
           wishPrimaryColor='#dadada'
-          wishSecondaryColor='#5d5d5d'/>
+          wishSecondaryColor='#5d5d5d'
+          focusInput />
       </Col>
     </Row>
   )

@@ -31,6 +31,7 @@ class FriendList extends React.Component {
           uid={this.props.uid}
           placeHolder='Search by name'
           handleQueryChange={this.handleSearch}
+          focusInput={this.props.focusInput}
           excludeUsersNotFriends
           excludeWishes />
         {this.state.showUserList &&
@@ -43,7 +44,8 @@ class FriendList extends React.Component {
 }
 
 FriendList.propTypes = {
-  uid: React.PropTypes.node.isRequired
+  uid: React.PropTypes.node.isRequired,
+  focusInput: React.PropTypes.bool
 }
 
 export default FriendList

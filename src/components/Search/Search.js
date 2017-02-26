@@ -16,7 +16,7 @@ class Search extends React.Component {
   handleQueryChange(e) {
     const query = e.target.value
     this.setState({query: query})
-    if (this.props.handleQueryChange) this.props.handleQueryChange(query)
+    this.props.handleQueryChange && this.props.handleQueryChange(query)
   }
   render() {
     const {placeHolder, ...props} = this.props
@@ -26,7 +26,7 @@ class Search extends React.Component {
     return (
       <div>
         <SearchInput
-          type="text"
+          focusInput={this.props.focusInput}
           handleChange={this.handleQueryChange}
           placeHolder={placeHolder} />
         {showResults && <SearchResults
@@ -46,7 +46,8 @@ Search.propTypes = {
   userNameColor: React.PropTypes.string,
   wishPrimaryColor: React.PropTypes.string,
   wishSecondaryColor: React.PropTypes.string,
-  handleQueryChange: React.PropTypes.func
+  handleQueryChange: React.PropTypes.func,
+  focusInput: React.PropTypes.bool
 }
 
 export default Search

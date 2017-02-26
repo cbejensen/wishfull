@@ -1,24 +1,55 @@
 import React from 'react'
+import CenterAlign from 'components/CenterAlign'
 import {Glyphicon, Row, Col} from 'react-bootstrap'
 import {Link} from 'react-router'
 import logo from 'images/logo.png'
 import './Nav.css'
 
 export default function NavBar(props) {
+  const styles = {
+    container: {
+      height: '70px',
+      position: 'relative'
+    },
+    side: {
+      position: 'absolute',
+      top: '0',
+      height: '100%',
+      fontSize: '30px'
+    },
+    left: {
+      left: '5px'
+    },
+    center: {
+      height: '100%',
+      padding: '5px 0',
+      textAlign: 'center'
+    },
+    right: {
+      right: '25px'
+    },
+    logo: {
+      height: '90%'
+    }
+  }
   return (
-    <Row className="Nav-main">
-      <Col xs={4} className="Nav-col left">
-        <Glyphicon glyph="menu-hamburger" onClick={props.toggleMenu}/>
-      </Col>
-      <Col xs={4} className="Nav-col center">
+    <div style={styles.container} className='Nav-main'>
+      <div style={{...styles.side, ...styles.left}}>
+        <CenterAlign horizontal={false}>
+          <Glyphicon glyph="menu-hamburger" onClick={props.toggleMenu}/>
+        </CenterAlign>
+      </div>
+      <div style={styles.center}>
         <Link to={props.uid ? '/home' : '/'}>
-          <img src={logo} alt="W"/>
+          <img style={styles.logo} src={logo} alt="W"/>
         </Link>
-      </Col>
-      <Col xs={4} className="Nav-col right">
-        <Glyphicon glyph="search" onClick={props.toggleSearch}/>
-      </Col>
-    </Row>
+      </div>
+      <div style={{...styles.side, ...styles.right}}>
+        <CenterAlign horizontal={false}>
+          <Glyphicon glyph="search" onClick={props.toggleSearch}/>
+        </CenterAlign>
+      </div>
+    </div>
   )
 }
 

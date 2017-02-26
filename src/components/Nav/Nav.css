@@ -21,7 +21,7 @@
 
 .Nav-menu > div {
   text-align: center;
-  color: rgba(255, 255, 255, .5);
+  color: rgba(255, 255, 255, .7);
   font-size: 1.5em;
   font-weight: 200;
   letter-spacing: 1px;
@@ -31,27 +31,8 @@
 }
 
 .Nav-menu > div:hover {
-  color: rgba(255, 255, 255, .7);
+  color: rgba(255, 255, 255, .9);
   font-weight: 300;
-}
-
-.Nav-col, .Nav-col div {
-  height: 100%;
-  font-size: 30px;
-}
-
-.Nav-col > div {
-  position: relative;
-}
-
-.Nav-col.left span, .Nav-col.right span {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.Nav-col.right span {
-  float: right;
 }
 
 .Nav-col.center img {
