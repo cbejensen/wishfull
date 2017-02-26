@@ -41,7 +41,7 @@ class WishItem extends React.Component {
     if (this.props.mutable) {
       btn = <EditWishBtn uid={this.props.uid} id={this.props.wish.id}/>
     } else {
-      btn = <FulfillWishBtn handleFulfill={this.props.handleFulfill}/>
+      // btn = <FulfillWishBtn handleFulfill={this.props.handleFulfill}/>
     }
     if (this.props.showFulfilled && this.props.wish.fulfilled) {
       fulfilled = <Fulfilled uid={this.props.wish.fulfilled}/>
@@ -85,12 +85,15 @@ class WishItem extends React.Component {
         </div>
         <div
           ref={body => setHeight('body', body)}
-          id={"WishItem-body-" + this.props.index} style={styles.body}>
+          id={"WishItem-body-" + this.props.index}
+          style={styles.body}>
           <hr style={styles.hr}/>
-          <div style={styles.primaryColor}>{this.props.wish.description}</div>
-          <div className="WishItem-fulfilled" style={styles.priorityText}>
-            {fulfilled}
+          <div style={{...styles.primaryColor, paddingBottom: '5px'}}>
+            {this.props.wish.description || 'No description'}
           </div>
+          {/* <div className="WishItem-fulfilled" style={styles.priorityText}>
+            {fulfilled}
+          </div> */}
           <div className="WishItem-btn-group">
             {btn}
           </div>

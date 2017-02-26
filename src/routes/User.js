@@ -1,4 +1,5 @@
 import React from 'react'
+import ToggleFriendButton from 'components/ToggleFriendButton'
 import { browserHistory } from 'react-router'
 import { Grid } from 'react-bootstrap'
 import { getUser } from 'utils/firebaseHelpers'
@@ -9,16 +10,21 @@ import * as firebase from 'firebase'
 class UserView extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {user: null}
+    this.state = {
+      uid: null,
+      user: null
+    }
     this.loadUser = this.loadUser.bind(this)
   }
   componentDidMount() {
     const uid = this.props.params.uid
-    this.removeAuthListener = firebase.auth().onAuthStateChanged(user => {
+    this.removeAuthListener = firebase.auth().onAuthStateChanged(authUser => {
       // if user page is same as auth user
       // redirect to home page
-      if (user.uid === uid) {
+      if (authUser.uid === uid) {
         browserHistory.push('/home')
+      } else {
+        this.setState({uid: authUser.uid})
       }
     })
     this.loadUser(uid)
@@ -43,6 +49,10 @@ class UserView extends React.Component {
     return (
       <Grid>
         <UserHeading user={this.state.user} />
+        {this.state.uid && <ToggleFriendButton
+          uid={this.state.uid}
+          friendId={this.state.user.uid} />
+        }
         <WishList uid={this.state.user.uid} />
       </Grid>
     )
