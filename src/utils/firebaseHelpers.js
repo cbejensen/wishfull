@@ -158,14 +158,24 @@ export const getAllUsers = () => {
   })
 }
 
-export const updateFriend = (uid, friendId) => {
+export const getFriendStatus = (uid, friendId) => {
+  const ref = firebase.database().ref(`users/${uid}/friends/${friendId}`)
+  return ref.once('value').then(snap => {
+    return snap.val()
+  }, err => {
+    throw err
+  })
+}
+
+export const toggleFriend = (uid, friendId) => {
   const ref = firebase.database().ref(`users/${uid}/friends/${friendId}`)
   return ref.once('value').then(snap => {
     if (snap.val()) {
       ref.remove()
+      return false
     } else {
-      ref.set(true).then(res =>{
-        return res
+      return ref.set(true).then(res => {
+        return true
       }, err => {
         throw err
       })

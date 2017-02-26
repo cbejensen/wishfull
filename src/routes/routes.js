@@ -5,7 +5,6 @@ import App from 'components/App'
 import Main from './Main'
 import Home from './Home'
 import Friends from './Friends'
-import GetFriends from './GetFriends'
 import User from './User'
 import Login from './Login'
 import WishForm from './WishForm'
@@ -21,7 +20,6 @@ const routes = (
       <IndexRoute component={Main}/>
       <Route path='/home' component={Home} />
       <Route path='/friends' component={Friends} />
-      <Route path='/get-friends/:uid' component={GetFriends} />
       <Route path='/sign-in' component={Login} />
       <Route path='/sign-up' component={CreateAccount} />
       <Route path='/users/:uid/wish-form' component={WishForm} />
