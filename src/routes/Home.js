@@ -51,5 +51,5 @@ function HomeView(props) {
 }
 
 HomeView.propTypes = {
-  uid: React.PropTypes.node.isRequired
+  uid: React.PropTypes.node
 }

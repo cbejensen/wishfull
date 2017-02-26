@@ -8,8 +8,6 @@ import ItemBox from 'components/ItemBox';
 import { Grid } from 'react-bootstrap'
 
 export default function Main(props) {
-  // container div has position relative
-  // so children can calc offsetTop
   return (
     <div style={{position: 'relative'}}>
       <AutoScrollContainer arrowColor='#ffffff'>

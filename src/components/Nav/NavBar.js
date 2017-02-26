@@ -17,16 +17,13 @@ export default function NavBar(props) {
       height: '100%',
       fontSize: '30px'
     },
-    left: {
-      left: '5px'
-    },
     center: {
       height: '100%',
       padding: '5px 0',
       textAlign: 'center'
     },
     right: {
-      right: '25px'
+      right: '0'
     },
     logo: {
       height: '90%'
@@ -34,7 +31,7 @@ export default function NavBar(props) {
   }
   return (
     <div style={styles.container} className='Nav-main'>
-      <div style={{...styles.side, ...styles.left}}>
+      <div style={styles.side}>
         <CenterAlign horizontal={false}>
           <Glyphicon glyph="menu-hamburger" onClick={props.toggleMenu}/>
         </CenterAlign>

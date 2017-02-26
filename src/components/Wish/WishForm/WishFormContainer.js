@@ -1,5 +1,5 @@
 import React from 'react'
-import {WishForm} from './WishForm'
+import WishForm from './WishForm'
 import {browserHistory} from 'react-router'
 import {addWish,
   updateWish,
@@ -90,7 +90,8 @@ class WishFormContainer extends React.Component {
     })
   }
   render() {
-    return <WishForm {...this.state}
+    return <WishForm
+      {...this.state}
       handleChange={this.handleChange}
       validateUrl={this.validateUrl}
       validatePrice={this.validatePrice}

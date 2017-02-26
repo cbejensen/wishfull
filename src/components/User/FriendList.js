@@ -21,7 +21,6 @@ class FriendList extends React.Component {
     this.setState({showUserList: query === ''})
   }
   render() {
-    console.log(this.props);
     if (!this.props.uid) return null;
     if (!this.state.friends) return <div style={{textAlign: 'center'}}>Loading...</div>
     if (this.state.friends.length < 1) return <div style={{textAlign: 'center'}}>You have no friends!</div>
@@ -44,7 +43,7 @@ class FriendList extends React.Component {
 }
 
 FriendList.propTypes = {
-  uid: React.PropTypes.node.isRequired,
+  uid: React.PropTypes.node,
   focusInput: React.PropTypes.bool
 }
 

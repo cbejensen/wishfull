@@ -3,6 +3,14 @@ import './Search.css'
 
 class SearchInput extends React.Component {
   componentDidMount() {
+    this.focus()
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.focusInput !== prevProps.focusInput) {
+      this.focus()
+    }
+  }
+  focus() {
     if (this.props.focusInput) this.textInput.focus()
   }
   render() {

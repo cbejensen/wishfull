@@ -33,16 +33,20 @@ class WishList extends React.Component {
       this.setState({wishes: props.wishes})
     } else {
       getWishList(props.uid).then(wishes => {
-        if (!wishes) this.setState({wishes: false})
-        // assign wish id to id prop
-        for (let wishId in wishes) {
-          if (wishes.hasOwnProperty(wishId)) {
-            wishes[wishId].id = wishId
+        if (!wishes) {
+          this.setState({wishes: false})
+          return
+        } else {
+          // assign wish id to id prop
+          for (let wishId in wishes) {
+            if (wishes.hasOwnProperty(wishId)) {
+              wishes[wishId].id = wishId
+            }
           }
+          // convert wishes from obj to array
+          const wishesArray = Object.keys(wishes).map(wish => wishes[wish])
+          this.setState({wishes: wishesArray})
         }
-        // convert wishes from obj to array
-        const wishesArray = Object.keys(wishes).map(wish => wishes[wish])
-        this.setState({wishes: wishesArray})
       })
     }
   }

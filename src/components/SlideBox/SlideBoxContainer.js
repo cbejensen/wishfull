@@ -5,15 +5,16 @@ class SlideBoxContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {leftSelected: true}
-    this.select = this.select.bind(this)
+    this.slide = this.slide.bind(this)
   }
-  select(bool) {
+  slide(bool) {
     this.setState({leftSelected: bool})
+    this.props.handleSlide && this.props.handleSlide(bool)
   }
   render() {
     return <SlideBox
       {...this.props}
-      select={this.select}
+      slide={this.slide}
       leftSelected={this.state.leftSelected} />
   }
 }
@@ -22,7 +23,8 @@ SlideBoxContainer.propTypes = {
   panelLeft: React.PropTypes.node.isRequired,
   panelRight: React.PropTypes.node.isRequired,
   radioLeft: React.PropTypes.string,
-  radioRight: React.PropTypes.string
+  radioRight: React.PropTypes.string,
+  handleSlide: React.PropTypes.func
 }
 
 export default SlideBoxContainer

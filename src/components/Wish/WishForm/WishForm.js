@@ -10,11 +10,12 @@ import {FormGroup,
   Button} from 'react-bootstrap'
 import {Link} from 'react-router'
 
-
 export default function WishForm(props) {
   return (
     <form onSubmit={props.handleSubmit}>
       <FormInput label='Title'
+        autoFocus
+        ref={e => focus(e)}
         value={props.title}
         onChange={props.handleChange.bind(null, 'title')}
         required />
