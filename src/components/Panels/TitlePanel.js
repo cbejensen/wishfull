@@ -2,18 +2,14 @@ import React from 'react'
 import TextLink from 'components/TextLink'
 import {Glyphicon} from 'react-bootstrap'
 import logo from 'images/logo.png'
-import galaxyTreeImg from 'images/galaxy-tree.jpg'
 import smoothscroll from 'smoothscroll'
 
-export default function GalaxyPanel(props) {
+export default function TitlePanel(props) {
   const styles = {
     container: {
       position: 'relative',
       height: '100vh',
       background: 'linear-gradient(#000000, #383838)',
-      // background: `url(${galaxyTreeImg})`,
-      // backgroundSize: 'cover',
-      // backgroundPosition: 'bottom',
       textAlign: 'center',
       color: '#ffffff'
     },
@@ -37,7 +33,7 @@ export default function GalaxyPanel(props) {
     }
   }
   return (
-    <div id='galaxyPanel' style={styles.container}>
+    <div id='TitlePanel' style={styles.container}>
       <div style={styles.signIn}>
         <TextLink text='Sign In' link='/sign-in' color='#ffffff' />
       </div>
@@ -50,7 +46,7 @@ export default function GalaxyPanel(props) {
   )
 }
 
-GalaxyPanel.propTypes = {
+TitlePanel.propTypes = {
   title: React.PropTypes.string.isRequired,
   subtitle: React.PropTypes.string.isRequired
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap'
+import { FormGroup, FormControl, Col, ControlLabel, HelpBlock } from 'react-bootstrap'
 
 export default function FormInput({ getValidation, label, help, val, ...props }) {
   return (

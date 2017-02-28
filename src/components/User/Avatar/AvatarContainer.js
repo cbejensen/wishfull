@@ -1,7 +1,7 @@
 import React from 'react'
 import Avatar from './Avatar'
 import { getFile } from 'utils/firebaseHelpers'
-import defaultAvatar from 'images/user-icon.svg'
+import defaultAvatar from 'images/default-avatar.svg'
 
 class AvatarContainer extends React.Component {
   constructor(props) {
