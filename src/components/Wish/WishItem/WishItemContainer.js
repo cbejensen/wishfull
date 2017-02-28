@@ -39,11 +39,15 @@ class WishItemContainer extends React.Component {
     // just follow link, don't expand/contract wish
     e.stopPropagation()
   }
-  handleFulfill() {
+  handleFulfill(e) {
+    e.stopPropagation()
     const removeAuthListener = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         fulfillWish(this.props.uid, this.props.wish.id, user.uid)
-        .then(res => {}, err => {
+        .then(res => {
+          // adjust height to account for fulfilled text
+          this.changeHeight(true)
+        }, err => {
           alert('There was an error processing your request. Please try again later.')
         })
       } else {

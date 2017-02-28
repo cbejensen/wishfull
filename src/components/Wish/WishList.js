@@ -1,6 +1,7 @@
 import React from 'react'
 import {WishItem} from './WishItem'
 import {getWishList} from 'utils/firebaseHelpers'
+import * as firebase from 'firebase'
 
 class WishList extends React.Component {
   constructor(props) {
@@ -13,7 +14,27 @@ class WishList extends React.Component {
     this.getList = this.getList.bind(this)
   }
   componentDidMount() {
-    this.getList(this.props)
+    // this.getList(this.props)
+    const listRef = firebase.database().ref(`lists/${this.props.uid}`)
+    return listRef.on('value', snap => {
+      const wishes = snap.val()
+      if (!wishes) {
+        this.setState({wishes: false})
+        return
+      } else {
+        // assign wish id to id prop
+        for (let wishId in wishes) {
+          if (wishes.hasOwnProperty(wishId)) {
+            wishes[wishId].id = wishId
+          }
+        }
+        // convert wishes from obj to array
+        const wishesArray = Object.keys(wishes).map(wish => wishes[wish])
+        this.setState({wishes: wishesArray})
+      }
+    }, err => {
+      throw err
+    })
   }
   componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps) {

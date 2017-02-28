@@ -53,7 +53,9 @@ class UserView extends React.Component {
           uid={this.state.uid}
           friendId={this.state.user.uid} />
         }
-        <WishList uid={this.state.user.uid} />
+        <WishList
+          uid={this.state.user.uid}
+          showFulfilled={this.state.uid ? true : false} />
       </Grid>
     )
   }
