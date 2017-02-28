@@ -1,6 +1,6 @@
 import React from 'react'
 import {AutoScrollContainer,
-  GalaxyPanel,
+  TitlePanel,
   FeaturesPanel,
   SearchPanel} from 'components/Panels'
 import {Search} from 'components/Search'
@@ -11,7 +11,7 @@ export default function Main(props) {
   return (
     <div style={{position: 'relative'}}>
       <AutoScrollContainer arrowColor='#ffffff'>
-        <GalaxyPanel
+        <TitlePanel
           title='WISHFULL'
           subtitle='A place to make and fulfill wishes' />
       </AutoScrollContainer>

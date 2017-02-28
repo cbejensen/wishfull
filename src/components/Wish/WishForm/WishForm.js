@@ -11,8 +11,14 @@ import {FormGroup,
 import {Link} from 'react-router'
 
 export default function WishForm(props) {
+  const styles = {
+    form: {
+      maxWidth: '500px',
+      margin: 'auto'
+    }
+  }
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form style={styles.form} onSubmit={props.handleSubmit}>
       <FormInput label='Title'
         autoFocus
         ref={e => focus(e)}
