@@ -19,6 +19,7 @@ class SearchInput extends React.Component {
         ref={e => {this.textInput = e}}
         className='SearchInput'
         type='text'
+        style={{width: '95%'}}
         onChange={this.props.handleChange}
         placeholder={this.props.placeHolder} />
     )

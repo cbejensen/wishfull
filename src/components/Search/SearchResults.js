@@ -29,9 +29,9 @@ class SearchResults extends React.Component {
     }
   }
   componentWillUnmount() {
-    this.friendsPromise && this.friendsPromise.cancel()
-    this.usersPromise && this.usersPromise.cancel()
-    this.wishesPromise && this.wishesPromise.cancel()
+    if (this.friendsPromise) this.friendsPromise.cancel()
+    if (this.usersPromise) this.usersPromise.cancel()
+    if (this.wishesPromise) this.wishesPromise.cancel()
   }
   search(query) {
     // friends

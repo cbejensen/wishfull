@@ -1,6 +1,6 @@
 import React from 'react'
 import CenterAlign from 'components/CenterAlign'
-import {Glyphicon, Row, Col} from 'react-bootstrap'
+import {Glyphicon} from 'react-bootstrap'
 import {Link} from 'react-router'
 import logo from 'images/logo.png'
 import './Nav.css'

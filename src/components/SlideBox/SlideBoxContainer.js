@@ -9,7 +9,7 @@ class SlideBoxContainer extends React.Component {
   }
   slide(bool) {
     this.setState({leftSelected: bool})
-    this.props.handleSlide && this.props.handleSlide(bool)
+    if (this.props.handleSlide) this.props.handleSlide(bool)
   }
   render() {
     return <SlideBox

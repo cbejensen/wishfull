@@ -1,8 +1,6 @@
 import React from 'react'
 import TextLink from 'components/TextLink'
-import {Glyphicon} from 'react-bootstrap'
 import logo from 'images/logo.png'
-import smoothscroll from 'smoothscroll'
 
 export default function TitlePanel(props) {
   const styles = {

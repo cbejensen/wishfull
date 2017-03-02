@@ -2,7 +2,6 @@ import React from 'react'
 import NavBar from './NavBar'
 import NavMenu from './NavMenu'
 import NavSearch from './NavSearch'
-import {Link, browserHistory} from 'react-router'
 import {Grid} from 'react-bootstrap'
 import './Nav.css'
 

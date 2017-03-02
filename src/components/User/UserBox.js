@@ -3,7 +3,6 @@ import ItemBox from 'components/ItemBox'
 import ImageTextBlock from 'components/ImageTextBlock'
 import { Avatar } from './Avatar'
 import UserBoxSubtitle from './UserBoxSubtitle'
-import { Row, Col } from 'react-bootstrap'
 import { browserHistory } from 'react-router'
 import randomColor from 'randomcolor'
 

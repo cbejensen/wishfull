@@ -23,13 +23,11 @@ function AvatarForm(props) {
       display: 'none'
     }
   }
-  let submitText = 'Submit'
   let fileInput
   function openFileModal() {
     fileInput.click()
   }
   function chooseImage(e) {
-    submitText = 'Loading...'
     const file = e.target.files[0]
     props.selectAvatar(file)
     // show image

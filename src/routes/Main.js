@@ -3,9 +3,6 @@ import {AutoScrollContainer,
   TitlePanel,
   FeaturesPanel,
   SearchPanel} from 'components/Panels'
-import {Search} from 'components/Search'
-import ItemBox from 'components/ItemBox';
-import { Grid } from 'react-bootstrap'
 
 export default function Main(props) {
   return (
