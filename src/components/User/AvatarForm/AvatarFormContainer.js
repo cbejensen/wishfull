@@ -1,6 +1,6 @@
 import React from 'react'
 import AvatarForm from './AvatarForm'
-import { getFile, uploadFile } from 'utils/firebaseHelpers'
+import {uploadFile} from 'utils/firebaseHelpers'
 
 class AvatarFormContainer extends React.Component {
   constructor(props) {

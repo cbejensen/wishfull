@@ -40,6 +40,7 @@ class CreateAccountContainer extends React.Component {
       createUser(this.state.user).then(res => {
         browserHistory.push('/home')
       }, err => {
+        this.setState({creatingUser: false})
         alert(err)
       })
     } else {

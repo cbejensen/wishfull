@@ -1,6 +1,5 @@
 import React from 'react'
 import FeatureBox from './FeatureBox'
-import {Glyphicon} from 'react-bootstrap'
 
 export default function FeaturesBox(props) {
   const styles = {

@@ -1,10 +1,7 @@
 import React from 'react'
 import FeaturesBox from './FeaturesBox'
-import ItemBox from 'components/ItemBox'
 import TextLink from 'components/TextLink'
-import {Grid, Glyphicon} from 'react-bootstrap'
-import {browserHistory} from 'react-router'
-import randomColor from 'randomcolor'
+import {Grid} from 'react-bootstrap'
 
 export default function FeaturesPanel(props) {
   const styles = {

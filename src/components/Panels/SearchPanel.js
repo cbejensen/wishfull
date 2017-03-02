@@ -1,14 +1,13 @@
 import React from 'react'
 import {Search} from 'components/Search'
 import TextLink from 'components/TextLink'
-import {Grid} from 'react-bootstrap'
 
 export default function SearchPanel(props) {
   const styles = {
     container: {
       background: 'linear-gradient(#383838, #000000)',
-      minHeight: '100vh',
-      paddingTop: '15px'
+      padding: '15px 0',
+      minHeight: '100vh'
     },
     header: {
       color: '#ffffff',
@@ -33,7 +32,7 @@ export default function SearchPanel(props) {
         <Search
           excludeWishes
           placeHolder="Search a friend's name"
-          userNameColor="#dadada" />
+          userNameColor='#dadada' />
       </div>
       <div style={styles.textLink}>
         <TextLink
@@ -45,7 +44,3 @@ export default function SearchPanel(props) {
     </div>
   )
 };
-
-// SearchPanel.propTypes = {
-//   PROP: React.PropTypes.TYPE.isRequired
-// }

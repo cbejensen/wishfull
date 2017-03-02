@@ -7,13 +7,9 @@ export default function NavMenu(props) {
   if (!props.uid) {
     return (
       <Row className="Nav-menu">
-        <Col xs={12} sm={6}
+        <Col xs={12}
           onClick={() => browserHistory.push('/sign-in')}>
           Sign In
-        </Col>
-        <Col xs={12} sm={6}
-          onClick={() => browserHistory.push('/')}>
-          Find Friends
         </Col>
       </Row>
     )
