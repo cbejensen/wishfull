@@ -4,7 +4,6 @@ import {FormGroup,
   ControlLabel,
   FormControl,
   HelpBlock,
-  Grid,
   Row,
   Col,
   Button} from 'react-bootstrap'
@@ -15,6 +14,10 @@ export default function WishForm(props) {
     form: {
       maxWidth: '500px',
       margin: 'auto'
+    },
+    btnRow: {
+      textAlign: 'center',
+      width: '100%'
     }
   }
   return (
@@ -63,23 +66,23 @@ export default function WishForm(props) {
           10 = I practically need this to survive
         </HelpBlock>
       </FormGroup>
-      <Grid>
-        <Row style={{textAlign: 'center'}}>
-          <Col xs={12} sm={4} style={{marginBottom: '30px'}}>
-            <Button bsStyle="primary" type="submit">Save</Button>
-          </Col>
-          <Col xs={12} sm={4} style={{marginBottom: '30px'}}>
-            <Link to='/home'>
-              <Button bsStyle="warning">Cancel</Button>
-            </Link>
-          </Col>
-          <Col xs={12} sm={4} style={{marginBottom: '30px'}}>
-            <Button bsStyle="danger" onClick={props.handleDelete}>
-              Delete
-            </Button>
-          </Col>
-        </Row>
-      </Grid>
+      <Row style={styles.btnRow}>
+        <Col xs={props.wishId ? 4 : 6} style={{marginBottom: '30px'}}>
+          <Button bsStyle="primary" type="submit">
+            {props.wishId ? 'Save' : 'Submit'}
+          </Button>
+        </Col>
+        <Col xs={props.wishId ? 4 : 6} style={{marginBottom: '30px'}}>
+          <Link to='/home'>
+            <Button bsStyle="warning">Cancel</Button>
+          </Link>
+        </Col>
+        {props.wishId && <Col xs={4} style={{marginBottom: '30px'}}>
+          <Button bsStyle="danger" onClick={props.handleDelete}>
+            Delete
+          </Button>
+        </Col>}
+      </Row>
     </form>
   )
 }

@@ -21,24 +21,35 @@ class FriendList extends React.Component {
     this.setState({showUserList: query === ''})
   }
   render() {
-    if (!this.props.uid) return null;
-    if (!this.state.friends) return <div style={{textAlign: 'center'}}>Loading...</div>
-    if (this.state.friends.length < 1) return <div style={{textAlign: 'center'}}>You have no friends!</div>
-    return (
-      <div>
-        <Search
-          uid={this.props.uid}
-          placeHolder='Search by name'
-          handleQueryChange={this.handleSearch}
-          focusInput={this.props.focusInput}
-          excludeUsersNotFriends
-          excludeWishes />
-        {this.state.showUserList &&
-          <UserList users={this.state.friends} />
-        }
-      </div>
-
-    )
+    const styles = {
+      textBox: {
+        fontSize: '1.2em',
+        paddingTop: '30px',
+        textAlign: 'center'
+      }
+    }
+    if (!this.props.uid) {
+      return null
+    } else if (!this.state.friends) {
+      return <div style={styles.textBox}>Loading...</div>
+    } else if (this.state.friends.length < 1) {
+      return <div style={styles.textBox}>You have no friends!</div>
+    } else {
+      return (
+        <div>
+          <Search
+            uid={this.props.uid}
+            placeHolder='Search by name'
+            handleQueryChange={this.handleSearch}
+            focusInput={this.props.focusInput}
+            excludeUsersNotFriends
+            excludeWishes />
+          {this.state.showUserList &&
+            <UserList users={this.state.friends} />
+          }
+        </div>
+      )
+    }
   }
 }
 
