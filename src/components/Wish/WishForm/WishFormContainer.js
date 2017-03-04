@@ -92,6 +92,7 @@ class WishFormContainer extends React.Component {
   render() {
     return <WishForm
       {...this.state}
+      wishId={this.props.wishId}
       handleChange={this.handleChange}
       validateUrl={this.validateUrl}
       validatePrice={this.validatePrice}

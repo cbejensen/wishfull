@@ -21,7 +21,6 @@ export function validateUrl(url) {
 export function validatePrice(price) {
   if (price) {
     const reg = /^\d+$/
-    console.log(reg.test(price))
     return reg.test(price)
   }
   return true
