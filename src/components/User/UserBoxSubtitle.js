@@ -20,9 +20,11 @@ class UserBoxSubtitle extends React.Component {
   }
   render() {
     if (this.state.wishCount === null) return null
+    let wishCount = this.state.wishCount
+    wishCount = (wishCount === 1) ? wishCount + ' wish' : wishCount + ' wishes'
     return (
       <div className="text-muted" style={{fontSize: '.5em'}}>
-        {`${this.state.wishCount} wishes`}
+        {wishCount}
       </div>
     )
   }
