@@ -9,6 +9,11 @@ export default function Login(props) {
     wrapper: {
       maxWidth: '500px',
       margin: 'auto'
+    },
+    hr: {
+      backgroundColor: '#cccccc',
+      color: '#cccccc',
+      borderColor: '#cccccc'
     }
   }
   return (
@@ -16,7 +21,7 @@ export default function Login(props) {
       <div style={styles.wrapper}>
         <h2>I have an account</h2>
         <LoginForm />
-        <hr />
+        <hr style={styles.hr} />
         <h2>I don't have an account</h2>
         <Link to="/sign-up">
           <h5>...but I want one</h5>
