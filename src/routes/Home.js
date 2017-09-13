@@ -1,18 +1,18 @@
-import React from 'react'
-import {SlideBox} from 'components/SlideBox'
-import CheckAuth from 'components/CheckAuth'
-import {UserHeading} from 'components/User'
-import AddWishBtn from 'components/Button/AddWishBtn'
-import {AvatarForm} from 'components/User/AvatarForm'
-import {Grid} from 'react-bootstrap'
-import {WishList} from 'components/Wish'
+import React from 'react';
+import { SlideBox } from 'components/SlideBox';
+import CheckAuth from 'components/CheckAuth';
+import { UserHeading } from 'components/User';
+import AddWishBtn from 'components/Button/AddWishBtn';
+import { AvatarForm } from 'components/User/AvatarForm';
+import { Grid } from 'react-bootstrap';
+import { WishList } from 'components/Wish/WishList';
 
 export default function Home(props) {
   return (
     <CheckAuth>
       <HomeView {...props} />
     </CheckAuth>
-  )
+  );
 }
 
 function HomeView(props) {
@@ -24,7 +24,7 @@ function HomeView(props) {
       padding: '10px',
       textAlign: 'center'
     }
-  }
+  };
   if (!props.uid) return null;
   return (
     <Grid>
@@ -32,24 +32,22 @@ function HomeView(props) {
         <UserHeading user={props.user} />
       </div>
       <SlideBox
-        radioLeft='My Wishes'
-        radioRight='My Avatar'
+        radioLeft="My Wishes"
+        radioRight="My Avatar"
         panelLeft={
           <div>
             <div style={styles.btn}>
-              <AddWishBtn uid={props.uid}/>
+              <AddWishBtn uid={props.uid} />
             </div>
             <WishList uid={props.uid} mutable />
           </div>
         }
-        panelRight={
-          <AvatarForm uid={props.uid} />
-        }
+        panelRight={<AvatarForm uid={props.uid} />}
       />
     </Grid>
-  )
+  );
 }
 
 HomeView.propTypes = {
   uid: React.PropTypes.node
-}
+};
