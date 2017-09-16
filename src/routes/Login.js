@@ -1,8 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router'
-import {Grid} from 'react-bootstrap'
+import React from 'react';
+import { Link } from 'react-router';
+import { Grid } from 'react-bootstrap';
 
-import { Login as LoginForm } from 'components/Login'
+import { Login as LoginForm } from 'components/Login';
 
 export default function Login(props) {
   const styles = {
@@ -10,7 +10,7 @@ export default function Login(props) {
       maxWidth: '500px',
       margin: 'auto'
     }
-  }
+  };
   return (
     <Grid>
       <div style={styles.wrapper}>
@@ -19,9 +19,9 @@ export default function Login(props) {
         <hr />
         <h2>I don't have an account</h2>
         <Link to="/sign-up">
-          <h5>...but I want one</h5>
+          <h5>but I want one</h5>
         </Link>
       </div>
     </Grid>
-  )
+  );
 }
