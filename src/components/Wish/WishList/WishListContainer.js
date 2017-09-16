@@ -122,14 +122,16 @@ class WishListContainer extends React.Component {
     const { wishes, ...propsToPass } = this.props;
     return (
       <div>
-        <WishListFilters
-          sort={this.state.sort}
-          filter={this.state.filter}
-          ascending={this.state.ascending}
-          handleSort={this.handleSort}
-          handleFilter={this.handleFilter}
-          handleAscending={this.handleAscending}
-        />
+        {!this.props.fromSearch && (
+          <WishListFilters
+            sort={this.state.sort}
+            filter={this.state.filter}
+            ascending={this.state.ascending}
+            handleSort={this.handleSort}
+            handleFilter={this.handleFilter}
+            handleAscending={this.handleAscending}
+          />
+        )}
         <WishList
           {...propsToPass}
           wishes={this.state.wishes}
@@ -150,7 +152,8 @@ WishListContainer.propTypes = {
   primaryColor: React.PropTypes.string,
   secondaryColor: React.PropTypes.string,
   mutable: React.PropTypes.bool,
-  showFulfilled: React.PropTypes.bool
+  showFulfilled: React.PropTypes.bool,
+  fromSearch: React.PropTypes.bool
 };
 
 export default WishListContainer;

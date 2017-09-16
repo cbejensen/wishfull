@@ -5,6 +5,7 @@ const WishResults = props => {
   if (!props.results) return null;
   return (
     <WishList
+      fromSearch={true}
       wishes={props.results}
       uid={props.uid}
       primaryColor={props.primaryColor}
