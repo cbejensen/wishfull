@@ -1,6 +1,6 @@
 import React from 'react';
 import FormInput from 'components/FormInput';
-import { browserHistory, Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import { Form, Button } from 'react-bootstrap';
 import * as firebase from 'firebase';
 
@@ -77,17 +77,6 @@ export function Login(props) {
           Sign In
         </Button>
       </Form>
-      <ForgotPassword />
-    </div>
-  );
-}
-
-export function ForgotPassword(props) {
-  return (
-    <div style={{ marginTop: '10px' }}>
-      <Link to="password-reset">
-        but I forgot my password
-      </Link>
     </div>
   );
 }
