@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Grid } from 'react-bootstrap';
-
 import { Login as LoginForm } from 'components/Login';
 
 export default function Login(props) {
@@ -20,6 +19,9 @@ export default function Login(props) {
     <Grid>
       <div style={styles.wrapper}>
         <h2>I have an account</h2>
+        <Link to="password-reset">
+          <h5>but I forgot my password</h5>
+        </Link>
         <LoginForm />
         <hr style={styles.hr} />
         <h2>I don't have an account</h2>
