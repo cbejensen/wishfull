@@ -10,9 +10,9 @@ class WishListContainer extends React.Component {
     this.state = {
       wishes: 'loading',
       selectedWish: -1,
-      sort: '',
+      sort: 'priority',
       filter: '',
-      ascending: true
+      ascending: false
     };
     this.handleSelectWish = this.handleSelectWish.bind(
       this
