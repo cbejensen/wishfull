@@ -9,7 +9,7 @@ import { WishList } from 'components/Wish/WishList';
 
 export default function Home(props) {
   return (
-    <CheckAuth>
+    <CheckAuth redirect>
       <HomeView {...props} />
     </CheckAuth>
   );

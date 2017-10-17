@@ -1,103 +1,113 @@
-import React from 'react'
-import WishItem from './WishItem'
-import { fulfillWish } from 'utils/firebaseHelpers'
-import * as firebase from 'firebase'
+import React from 'react';
+import WishItemHeader from './WishItemHeader';
+import WishItemBody from './WishItemBody';
+import ItemBox from 'components/ItemBox';
+import { fulfillWish } from 'utils/firebaseHelpers';
+import * as firebase from 'firebase';
 
 class WishItemContainer extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      height: ''
-    }
-    this.setHeight = this.setHeight.bind(this)
-    this.changeHeight = this.changeHeight.bind(this)
-    this.openLink = this.openLink.bind(this)
-    this.handleFulfill = this.handleFulfill.bind(this)
+      headerHeight: '',
+      bodyHeight: ''
+    };
+    this.setHeight = this.setHeight.bind(this);
+    this.openLink = this.openLink.bind(this);
   }
   componentDidMount() {
-    this.changeHeight(this.props.selected)
+    console.log('container mounted');
+    this.setHeight();
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.selected !== nextProps.selected) {
-      this.changeHeight(nextProps.selected)
+      this.setHeight();
     }
   }
-  setHeight(type, height) {
-    if (type === 'header') this.headerHeight = height
-    if (type === 'body') this.bodyHeight = height
-  }
-  changeHeight(selected) {
-    const itemBoxHeight = this.headerHeight + 22 // ItemBox's padding & border
-    if (!selected) { // only show header
-      this.setState({height: itemBoxHeight})
-    } else { // show header and body
-      const bodyHeight = this.bodyHeight
-      this.setState({height: itemBoxHeight + bodyHeight})
-    }
+  setHeight() {
+    this.setState({
+      headerHeight: this.header.offsetHeight + 22,
+      bodyHeight: this.body.offsetHeight
+    });
   }
   openLink(e) {
     // just follow link, don't expand/contract wish
-    e.stopPropagation()
-  }
-  handleFulfill(e) {
-    e.stopPropagation()
-    const removeAuthListener = firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        fulfillWish(this.props.uid, this.props.wish.id, user.uid)
-        .then(res => {
-          // adjust height to account for fulfilled text
-          this.changeHeight(true)
-        }, err => {
-          alert('There was an error processing your request. Please try again later.')
-        })
-      } else {
-        alert('You must be signed in first!')
-      }
-    })
-    removeAuthListener()
+    e.stopPropagation();
   }
   render() {
-    let priorityColor
+    const styles = {
+      itemBox: {
+        height: this.props.selected
+          ? this.state.headerHeight + this.state.bodyHeight
+          : this.state.headerHeight,
+        maxWidth: '500px',
+        transition: '0.3s ease-out'
+      }
+    };
+    let priorityColor;
     switch (this.props.wish.priority) {
       case 1:
-        priorityColor = 'rgb(255, 245, 0)'
-        break
+        priorityColor = 'rgb(255, 245, 0)';
+        break;
       case 2:
-        priorityColor = 'rgb(255, 220, 0)'
-        break
+        priorityColor = 'rgb(255, 220, 0)';
+        break;
       case 3:
-        priorityColor = 'rgb(255, 200, 0)'
-        break
+        priorityColor = 'rgb(255, 200, 0)';
+        break;
       case 4:
-        priorityColor = 'rgb(255, 175, 0)'
-        break
+        priorityColor = 'rgb(255, 175, 0)';
+        break;
       case 5:
-        priorityColor = 'rgb(255, 150, 0)'
-        break
+        priorityColor = 'rgb(255, 150, 0)';
+        break;
       case 6:
-        priorityColor = 'rgb(255, 125, 0)'
-        break
+        priorityColor = 'rgb(255, 125, 0)';
+        break;
       case 7:
-        priorityColor = 'rgb(255, 100, 0)'
-        break
+        priorityColor = 'rgb(255, 100, 0)';
+        break;
       case 8:
-        priorityColor = 'rgb(255, 80, 0)'
-        break
+        priorityColor = 'rgb(255, 80, 0)';
+        break;
       case 9:
-        priorityColor = 'rgb(255, 50, 0)'
-        break
+        priorityColor = 'rgb(255, 50, 0)';
+        break;
       case 10:
-        priorityColor = 'rgb(255, 0, 0)'
-        break
+        priorityColor = 'rgb(255, 0, 0)';
+        break;
       default:
-        priorityColor = 'rgb(67, 67, 67)'
+        priorityColor = 'rgb(67, 67, 67)';
     }
-    return <WishItem {...this.props}
-      height={this.state.height}
-      priorityColor={priorityColor}
-      openLink={this.openLink}
-      setHeight={this.setHeight}
-      handleFulfill={this.handleFulfill} />
+    return (
+      <ItemBox
+        style={styles.itemBox}
+        colorTheme={priorityColor}
+        selected={this.props.selected}
+        handleClick={() => this.props.handleSelectWish(this.props.index)}
+      >
+        <div ref={header => (this.header = header)}>
+          <WishItemHeader
+            {...this.props}
+            priorityColor={priorityColor}
+            openLink={this.openLink}
+            changeHeight={this.changeHeight}
+            setHeight={this.setHeight}
+            handleFulfill={this.handleFulfill}
+          />
+        </div>
+        <div ref={body => (this.body = body)}>
+          <WishItemBody
+            {...this.props}
+            priorityColor={priorityColor}
+            openLink={this.openLink}
+            changeHeight={this.changeHeight}
+            setHeight={this.setHeight}
+            handleFulfill={this.handleFulfill}
+          />
+        </div>
+      </ItemBox>
+    );
   }
 }
 
@@ -108,9 +118,8 @@ WishItemContainer.propTypes = {
   selected: React.PropTypes.bool.isRequired,
   primaryColor: React.PropTypes.string,
   secondaryColor: React.PropTypes.string,
-  showFulfilled: React.PropTypes.bool,
   mutable: React.PropTypes.bool,
   handleSelectWish: React.PropTypes.func
-}
+};
 
-export default WishItemContainer
+export default WishItemContainer;

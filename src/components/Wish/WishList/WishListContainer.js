@@ -14,15 +14,11 @@ class WishListContainer extends React.Component {
       filter: '',
       ascending: false
     };
-    this.handleSelectWish = this.handleSelectWish.bind(
-      this
-    );
+    this.handleSelectWish = this.handleSelectWish.bind(this);
     this.getList = this.getList.bind(this);
   }
   componentDidMount() {
-    const listRef = firebase
-      .database()
-      .ref(`lists/${this.props.uid}`);
+    const listRef = firebase.database().ref(`lists/${this.props.uid}`);
     return listRef.on(
       'value',
       snap => {
@@ -38,9 +34,7 @@ class WishListContainer extends React.Component {
             }
           }
           // convert wishes from obj to array
-          const list = Object.keys(wishes).map(
-            wish => wishes[wish]
-          );
+          const list = Object.keys(wishes).map(wish => wishes[wish]);
           this.setState({
             wishes: list
           });
@@ -97,9 +91,7 @@ class WishListContainer extends React.Component {
             }
           }
           // convert wishes from obj to array
-          const wishesArray = Object.keys(wishes).map(
-            wish => wishes[wish]
-          );
+          const wishesArray = Object.keys(wishes).map(wish => wishes[wish]);
           this.setState({ wishes: wishesArray });
         }
       });
@@ -107,11 +99,7 @@ class WishListContainer extends React.Component {
   }
   render() {
     if (this.state.wishes === 'loading') {
-      return (
-        <div style={{ textAlign: 'center' }}>
-          Loading...
-        </div>
-      );
+      return <div style={{ textAlign: 'center' }}>Loading...</div>;
     } else if (!this.state.wishes) {
       return (
         <div style={{ textAlign: 'center' }}>
@@ -152,7 +140,6 @@ WishListContainer.propTypes = {
   primaryColor: React.PropTypes.string,
   secondaryColor: React.PropTypes.string,
   mutable: React.PropTypes.bool,
-  showFulfilled: React.PropTypes.bool,
   fromSearch: React.PropTypes.bool
 };
 
