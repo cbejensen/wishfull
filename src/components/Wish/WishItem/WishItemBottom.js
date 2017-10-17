@@ -78,7 +78,9 @@ class WishItemBottom extends React.PureComponent {
         <div style={{ textAlign: 'right', color: this.props.priorityColor }}>
           <Fulfillment
             fulfiller={this.state.fulfilled}
+            fulfillerId={this.props.fulfilled}
             updateFulfilledStatus={this.updateFulfilledStatus}
+            openLink={this.props.openLink}
           />
         </div>
       );
@@ -94,7 +96,8 @@ WishItemBottom.propTypes = {
   handleFulfill: React.PropTypes.func,
   priorityColor: React.PropTypes.string,
   mutable: React.PropTypes.bool,
-  setHeight: React.PropTypes.func
+  setHeight: React.PropTypes.func,
+  openLink: React.PropTypes.func
 };
 
 export default WishItemBottom;
