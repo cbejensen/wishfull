@@ -22,7 +22,9 @@ export default function Fulfillment(props) {
     return (
       <div>
         Fulfilled by{' '}
-        <Link to={`users/${props.fulfillerId}`}>{props.fulfiller}</Link>
+        <Link onClick={props.openLink} to={`users/${props.fulfillerId}`}>
+          {props.fulfiller}
+        </Link>
       </div>
     );
   }
