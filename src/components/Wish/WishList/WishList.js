@@ -7,13 +7,7 @@ export default function WishList(props) {
       margin: '5px auto'
     }
   };
-  const {
-    wishes,
-    sort,
-    filter,
-    ascending,
-    ...propsToPass
-  } = props;
+  const { wishes, sort, filter, ascending, ...propsToPass } = props;
   let list = [...wishes];
   if (sort) {
     if (ascending) {
@@ -25,9 +19,7 @@ export default function WishList(props) {
   // currently the filter only acts as max price
   // TODO: make full-featured filter
   if (filter) {
-    list = list.filter(
-      wish => parseInt(wish.price) < filter || !wish.price
-    );
+    list = list.filter(wish => parseInt(wish.price) < filter || !wish.price);
   }
   if (!sort && !ascending) {
     list.reverse();
@@ -35,8 +27,7 @@ export default function WishList(props) {
   return (
     <div>
       {list.map((wish, index) => {
-        let selected =
-          props.selected === index ? true : false;
+        let selected = props.selected === index ? true : false;
         return (
           <div style={styles.wish} key={wish.id}>
             <WishItem
@@ -58,7 +49,6 @@ WishList.propTypes = {
   primaryColor: React.PropTypes.string,
   secondaryColor: React.PropTypes.string,
   mutable: React.PropTypes.bool,
-  showFulfilled: React.PropTypes.bool,
   handleSelectWish: React.PropTypes.func,
   sort: React.PropTypes.node.isRequired,
   filter: React.PropTypes.node.isRequired

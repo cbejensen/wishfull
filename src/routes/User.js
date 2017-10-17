@@ -18,17 +18,15 @@ class UserView extends React.Component {
   }
   componentDidMount() {
     const uid = this.props.params.uid;
-    this.removeAuthListener = firebase
-      .auth()
-      .onAuthStateChanged(authUser => {
-        // if user page is same as auth user
-        // redirect to home page
-        if (authUser.uid === uid) {
-          browserHistory.push('/home');
-        } else {
-          this.setState({ uid: authUser.uid });
-        }
-      });
+    this.removeAuthListener = firebase.auth().onAuthStateChanged(authUser => {
+      // if user page is same as auth user
+      // redirect to home page
+      if (authUser.uid === uid) {
+        browserHistory.push('/home');
+      } else {
+        this.setState({ uid: authUser.uid });
+      }
+    });
     this.loadUser(uid);
   }
   componentWillReceiveProps(nextProps) {
@@ -60,10 +58,8 @@ class UserView extends React.Component {
             friendId={this.state.user.uid}
           />
         )}
-        <WishList
-          uid={this.state.user.uid}
-          showFulfilled={this.state.uid ? true : false}
-        />
+        <WishList uid={this.state.user.uid}
+        mutable={false} />
       </Grid>
     );
   }
