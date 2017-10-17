@@ -32,5 +32,6 @@ export default function Fulfillment(props) {
 
 Fulfillment.propTypes = {
   fulfiller: React.PropTypes.node,
+  fulfilleId: React.PropTypes.string,
   updateFulfilledStatus: React.PropTypes.func
 };
