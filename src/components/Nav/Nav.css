@@ -2,17 +2,21 @@
   background: #383838;
 }
 
+.Nav-container {
+  max-width: 500px;
+}
+
 .Nav-main {
   height: 50px;
 }
 
 .Nav-main > div {
   cursor: pointer;
-  color: rgba(255, 255, 255, .7);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .Nav-main > div:hover {
-  color: rgba(255, 255, 255, .9);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .Nav-menu {
@@ -21,17 +25,17 @@
 
 .Nav-menu > div {
   text-align: center;
-  color: rgba(255, 255, 255, .7);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 1.5em;
   font-weight: 200;
   letter-spacing: 1px;
   cursor: pointer;
   margin: 5px auto;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .Nav-menu > div:hover {
-  color: rgba(255, 255, 255, .9);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 300;
 }
 
