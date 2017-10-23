@@ -148,10 +148,23 @@ export const getWishList = uid => {
   );
 };
 
-export const getWish = (uid, itemId) => {
-  return getWishList(uid).then(
-    list => {
-      return list[itemId];
+export async function getWish(uid, itemId) {
+  const ref = firebase.database().ref(`lists/${uid}/${itemId}`);
+  return ref.once('value').then(
+    snap => {
+      return snap.val();
+    },
+    err => {
+      throw err;
+    }
+  );
+}
+
+export const getAllWishLists = () => {
+  const ref = firebase.database().ref('lists');
+  return ref.once('value').then(
+    snap => {
+      return snap.val();
     },
     err => {
       throw err;
@@ -159,13 +172,43 @@ export const getWish = (uid, itemId) => {
   );
 };
 
+export async function getFulfilledWishIds(uid) {
+  const ref = firebase.database().ref(`users/${uid}/fulfilled`);
+  return ref.once('value').then(
+    snap => {
+      return snap.val();
+    },
+    err => {
+      throw err;
+    }
+  );
+}
+
+export async function getFufilledWishes(uid) {
+  const wishes = [];
+  const fulfilled = await getFulfilledWishIds(uid);
+  console.log(fulfilled);
+  for (let wishId in fulfilled) {
+    console.log(wishId, fulfilled[wishId].uid);
+    const wish = await getWish(fulfilled[wishId].uid, wishId);
+    wish.uid = fulfilled[wishId].uid;
+    wish.id = wishId;
+    wishes.push(wish);
+  }
+  console.log(wishes);
+  return wishes;
+}
+
 export const updateFulfillment = (uid, wishId, fulfiller, fulfilled) => {
-  console.log(uid, wishId, fulfiller, fulfilled);
   const shouldFulfill = fulfilled ? true : null;
   const updates = {};
+  const fulfillmentInfo = {
+    uid,
+    timestamp: Date.now()
+  };
   updates[`lists/${uid}/${wishId}/fulfilled`] = shouldFulfill && fulfiller;
-  updates[`users/${fulfiller}/fulfilled/${wishId}`] = shouldFulfill && uid;
-  console.log(updates);
+  updates[`users/${fulfiller}/fulfilled/${wishId}`] =
+    shouldFulfill && fulfillmentInfo;
   const ref = firebase.database().ref();
   return ref.update(updates).then(
     res => {
