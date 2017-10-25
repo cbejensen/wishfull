@@ -19,7 +19,7 @@ export default function WishList(props) {
   // currently the filter only acts as max price
   // TODO: make full-featured filter
   if (filter) {
-    list = list.filter(wish => parseInt(wish.price) < filter || !wish.price);
+    list = list.filter(wish => parseInt(wish.price) <= filter || !wish.price);
   }
   if (!sort && !ascending) {
     list.reverse();
