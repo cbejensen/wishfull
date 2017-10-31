@@ -4,6 +4,10 @@ import { WishHeader, WishBody } from 'components/Wish';
 
 export default function WishList(props) {
   const styles = {
+    container: {
+      maxWidth: '500px',
+      margin: 'auto'
+    },
     wish: {
       margin: '5px auto'
     }
@@ -64,37 +68,39 @@ export default function WishList(props) {
     list.reverse();
   }
   return (
-    <BoxList>
-      {list.map((wish, index) => {
-        const color = getColor(wish.priority);
-        const headerProps = {
-          color: color,
-          price: wish.price,
-          priority: wish.priority,
-          title: wish.title,
-          url: wish.url
-        };
-        const bodyProps = {
-          color: color,
-          description: wish.description,
-          fulfilled: wish.fulfilled,
-          mutable: props.mutable,
-          uid: props.uid,
-          userId: props.userId,
-          wishId: wish.id
-        };
-        return (
-          <ExpandingBox key={wish.id} color={color}>
-            <BoxHeader>
-              <WishHeader {...headerProps} />
-            </BoxHeader>
-            <BoxBody>
-              <WishBody {...bodyProps} />
-            </BoxBody>
-          </ExpandingBox>
-        );
-      })}
-    </BoxList>
+    <div style={styles.container}>
+      <BoxList>
+        {list.map((wish, index) => {
+          const color = getColor(wish.priority);
+          const headerProps = {
+            color: color,
+            price: wish.price,
+            priority: wish.priority,
+            title: wish.title,
+            url: wish.url
+          };
+          const bodyProps = {
+            color: color,
+            description: wish.description,
+            fulfilled: wish.fulfilled,
+            mutable: props.mutable,
+            uid: props.uid,
+            userId: props.userId,
+            wishId: wish.id
+          };
+          return (
+            <ExpandingBox key={wish.id} color={color}>
+              <BoxHeader>
+                <WishHeader {...headerProps} />
+              </BoxHeader>
+              <BoxBody>
+                <WishBody {...bodyProps} />
+              </BoxBody>
+            </ExpandingBox>
+          );
+        })}
+      </BoxList>
+    </div>
   );
 }
 

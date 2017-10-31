@@ -15,6 +15,9 @@ class WishHeader extends React.PureComponent {
         color: '#353535'
       }
     };
+    const openLink = e => {
+      e.stopPropagation();
+    };
     return (
       <div>
         <div className="WishItem-priority-container">
@@ -35,7 +38,7 @@ class WishHeader extends React.PureComponent {
               style={{
                 marginLeft: 10
               }}
-              onClick={this.props.openLink}
+              onClick={openLink}
             >
               <a href={this.props.url} target="_blank">
                 Open link
