@@ -4,35 +4,35 @@ import { Link } from 'react-router';
 import Fulfillment from './Fulfillment';
 import { getUser, updateFulfillment } from 'utils/firebaseHelpers';
 
-class WishItemBottom extends React.PureComponent {
+class WishBodyBottom extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      fulfilled: null
+      fufillerName: null
     };
   }
   componentDidMount() {
     if (!this.props.fulfilled) {
-      this.setState({ fulfilled: false });
+      this.setState({ fufillerName: false });
     } else if (this.props.fulfilled === this.props.uid) {
       // if signed in user is the one who fulfilled it
-      this.setState({ fulfilled: 'you' });
+      this.setState({ fufillerName: 'you' });
     } else {
       getUser(this.props.fulfilled).then(
         user => {
           const name = `${user.firstName} ${user.lastName}`;
           this.setState({
-            fulfilled: name
+            fufillerName: name
           });
         },
         err => {
-          console.log(err);
+          console.error(err);
         }
       );
     }
   }
   updateFulfilledStatus = (fulfill, e) => {
-    this.setState({ fulfilled: null });
+    this.setState({ fufillerName: null });
     // if fulfill is false, unfulfill the wish
     e.stopPropagation();
     updateFulfillment(
@@ -43,11 +43,11 @@ class WishItemBottom extends React.PureComponent {
     )
       .then(res => {
         if (fulfill) {
-          this.setState({ fulfilled: 'you' });
+          this.setState({ fufillerName: 'you' });
         } else {
-          this.setState({ fulfilled: false });
+          this.setState({ fufillerName: false });
         }
-        this.props.setHeight();
+        this.props.setBoxHeight();
       })
       .catch(err => {
         alert(
@@ -57,15 +57,15 @@ class WishItemBottom extends React.PureComponent {
   };
   render() {
     let content;
-    if (this.state.fulfilled === null) {
-      content = <span>'Loading...'</span>;
+    if (this.state.fufillerName === null) {
+      content = <span>Loading...</span>;
     } else if (!this.props.uid) {
       content = (
         <span>
           Please <Link to="sign-in">sign in</Link> to fulfill or edit wishes
         </span>
       );
-    } else if (this.props.mutable) {
+    } else if (this.props.uid && this.props.uid === this.props.userId) {
       // user signed in is owner of wish
       content = (
         <Link to={`users/${this.props.userId}/wish-form/${this.props.wishId}`}>
@@ -75,9 +75,9 @@ class WishItemBottom extends React.PureComponent {
     } else {
       // user is signed in, but this is someone else's wish
       content = (
-        <div style={{ textAlign: 'right', color: this.props.priorityColor }}>
+        <div style={{ color: this.props.color }}>
           <Fulfillment
-            fulfiller={this.state.fulfilled}
+            fulfillerName={this.state.fufillerName}
             fulfillerId={this.props.fulfilled}
             updateFulfilledStatus={this.updateFulfilledStatus}
             openLink={this.props.openLink}
@@ -89,15 +89,17 @@ class WishItemBottom extends React.PureComponent {
   }
 }
 
-WishItemBottom.propTypes = {
+WishBodyBottom.propTypes = {
   wishId: React.PropTypes.string,
   userId: React.PropTypes.string,
+  uid: React.PropTypes.node,
   fulfilled: React.PropTypes.string,
   handleFulfill: React.PropTypes.func,
-  priorityColor: React.PropTypes.string,
   mutable: React.PropTypes.bool,
   setHeight: React.PropTypes.func,
-  openLink: React.PropTypes.func
+  openLink: React.PropTypes.func,
+  color: React.PropTypes.string,
+  setBoxHeight: React.PropTypes.func
 };
 
-export default WishItemBottom;
+export default WishBodyBottom;

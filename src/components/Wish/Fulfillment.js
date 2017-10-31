@@ -3,18 +3,18 @@ import { Link } from 'react-router';
 import { Button } from 'react-bootstrap';
 
 export default function Fulfillment(props) {
-  const fulfillWish = e => props.updateFulfilledStatus(!props.fulfiller, e);
+  const fulfillWish = e => props.updateFulfilledStatus(!props.fulfillerId, e);
   const btn = (
     <Button onClick={fulfillWish}>
-      {props.fulfiller ? 'Unfulfill' : 'Fulfill'}
+      {props.fulfillerName ? 'Unfulfill' : 'Fulfill'}
     </Button>
   );
-  if (!props.fulfiller) {
+  if (!props.fulfillerName) {
     return btn;
-  } else if (props.fulfiller === 'you') {
+  } else if (props.fulfillerName === 'you') {
     return (
       <div>
-        <div>Fullfilled by {props.fulfiller}</div>
+        <div>Fullfilled by {props.fulfillerName}</div>
         <div>{btn}</div>
       </div>
     );
@@ -23,7 +23,7 @@ export default function Fulfillment(props) {
       <div>
         Fulfilled by{' '}
         <Link onClick={props.openLink} to={`users/${props.fulfillerId}`}>
-          {props.fulfiller}
+          {props.fulfillerName}
         </Link>
       </div>
     );
@@ -31,7 +31,7 @@ export default function Fulfillment(props) {
 }
 
 Fulfillment.propTypes = {
-  fulfiller: React.PropTypes.node,
+  fulfillerName: React.PropTypes.node,
   fulfillerId: React.PropTypes.string,
   updateFulfilledStatus: React.PropTypes.func
 };

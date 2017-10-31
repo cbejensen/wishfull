@@ -35,78 +35,79 @@ class WishItemContainer extends React.Component {
     e.stopPropagation();
   }
   render() {
-    const styles = {
-      itemBox: {
-        height: this.props.selected
-          ? this.state.headerHeight + this.state.bodyHeight
-          : this.state.headerHeight,
-        maxWidth: '500px',
-        transition: '0.3s ease-out'
-      }
-    };
-    let priorityColor;
-    switch (this.props.wish.priority) {
-      case 1:
-        priorityColor = 'rgb(255, 245, 0)';
-        break;
-      case 2:
-        priorityColor = 'rgb(255, 220, 0)';
-        break;
-      case 3:
-        priorityColor = 'rgb(255, 200, 0)';
-        break;
-      case 4:
-        priorityColor = 'rgb(255, 175, 0)';
-        break;
-      case 5:
-        priorityColor = 'rgb(255, 150, 0)';
-        break;
-      case 6:
-        priorityColor = 'rgb(255, 125, 0)';
-        break;
-      case 7:
-        priorityColor = 'rgb(255, 100, 0)';
-        break;
-      case 8:
-        priorityColor = 'rgb(255, 80, 0)';
-        break;
-      case 9:
-        priorityColor = 'rgb(255, 50, 0)';
-        break;
-      case 10:
-        priorityColor = 'rgb(255, 0, 0)';
-        break;
-      default:
-        priorityColor = 'rgb(67, 67, 67)';
-    }
+    // const styles = {
+    //   itemBox: {
+    //     height: this.props.selected
+    //       ? this.state.headerHeight + this.state.bodyHeight
+    //       : this.state.headerHeight,
+    //     maxWidth: '500px',
+    //     transition: '0.3s ease-out'
+    //   }
+    // };
+    // let priorityColor;
+    // switch (this.props.wish.priority) {
+    //   case 1:
+    //     priorityColor = 'rgb(255, 245, 0)';
+    //     break;
+    //   case 2:
+    //     priorityColor = 'rgb(255, 220, 0)';
+    //     break;
+    //   case 3:
+    //     priorityColor = 'rgb(255, 200, 0)';
+    //     break;
+    //   case 4:
+    //     priorityColor = 'rgb(255, 175, 0)';
+    //     break;
+    //   case 5:
+    //     priorityColor = 'rgb(255, 150, 0)';
+    //     break;
+    //   case 6:
+    //     priorityColor = 'rgb(255, 125, 0)';
+    //     break;
+    //   case 7:
+    //     priorityColor = 'rgb(255, 100, 0)';
+    //     break;
+    //   case 8:
+    //     priorityColor = 'rgb(255, 80, 0)';
+    //     break;
+    //   case 9:
+    //     priorityColor = 'rgb(255, 50, 0)';
+    //     break;
+    //   case 10:
+    //     priorityColor = 'rgb(255, 0, 0)';
+    //     break;
+    //   default:
+    //     priorityColor = 'rgb(67, 67, 67)';
+    // }
     return (
-      <ItemBox
-        style={styles.itemBox}
-        colorTheme={priorityColor}
-        selected={this.props.selected}
-        handleClick={() => this.props.handleSelectWish(this.props.index)}
-      >
-        <div ref={header => (this.header = header)}>
-          <WishItemHeader
-            {...this.props}
-            priorityColor={priorityColor}
-            openLink={this.openLink}
-            changeHeight={this.changeHeight}
-            setHeight={this.setHeight}
-            handleFulfill={this.handleFulfill}
-          />
-        </div>
-        <div ref={body => (this.body = body)}>
-          <WishItemBody
-            {...this.props}
-            priorityColor={priorityColor}
-            openLink={this.openLink}
-            changeHeight={this.changeHeight}
-            setHeight={this.setHeight}
-            handleFulfill={this.handleFulfill}
-          />
-        </div>
-      </ItemBox>
+      // <ItemBox
+      //   style={styles.itemBox}
+      //   colorTheme={priorityColor}
+      //   selected={this.props.selected}
+      //   handleClick={() => this.props.handleSelectWish(this.props.index)}
+      // >
+      //   <div ref={header => (this.header = header)}>
+      //     <WishItemHeader
+      //       {...this.props}
+      //       priorityColor={priorityColor}
+      //       openLink={this.openLink}
+      //       changeHeight={this.changeHeight}
+      //       setHeight={this.setHeight}
+      //       handleFulfill={this.handleFulfill}
+      //     />
+      //   </div>
+      //   <div ref={body => (this.body = body)}>
+      //     <WishItemBody
+      //       {...this.props}
+      //       priorityColor={priorityColor}
+      //       openLink={this.openLink}
+      //       changeHeight={this.changeHeight}
+      //       setHeight={this.setHeight}
+      //       handleFulfill={this.handleFulfill}
+      //     />
+      //   </div>
+      // </ItemBox>
+      <pre>{JSON.stringify(this.props)}</pre>
     );
   }
 }

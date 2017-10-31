@@ -39,7 +39,7 @@ function HomeView(props) {
             <div style={styles.btn}>
               <AddWishBtn uid={props.uid} />
             </div>
-            <WishList uid={props.uid} mutable />
+            <WishList userId={props.uid} uid={props.uid} mutable />
           </div>
         }
         panelRight={<AvatarForm uid={props.uid} />}
