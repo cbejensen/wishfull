@@ -58,8 +58,11 @@ class UserView extends React.Component {
             friendId={this.state.user.uid}
           />
         )}
-        <WishList uid={this.state.user.uid}
-        mutable={false} />
+        <WishList
+          userId={this.state.user.uid}
+          uid={this.state.uid}
+          mutable={false}
+        />
       </Grid>
     );
   }

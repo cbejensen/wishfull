@@ -1,5 +1,7 @@
 import React from 'react';
 import WishList from './WishList';
+// import { BoxList } from 'components/BoxList';
+// import { WishItem } from 'components/Wish/WishItem';
 import WishListFilters from './WishListFilters';
 import { getWishList } from 'utils/firebaseHelpers';
 import * as firebase from 'firebase';
@@ -9,16 +11,14 @@ class WishListContainer extends React.Component {
     super(props);
     this.state = {
       wishes: 'loading',
-      selectedWish: -1,
       sort: 'priority',
       filter: '',
       ascending: false
     };
-    this.handleSelectWish = this.handleSelectWish.bind(this);
     this.getList = this.getList.bind(this);
   }
   componentDidMount() {
-    const listRef = firebase.database().ref(`lists/${this.props.uid}`);
+    const listRef = firebase.database().ref(`lists/${this.props.userId}`);
     return listRef.on(
       'value',
       snap => {
@@ -50,14 +50,6 @@ class WishListContainer extends React.Component {
       this.getList(nextProps);
     }
   }
-  handleSelectWish(wishIndex) {
-    if (wishIndex === this.state.selectedWish) {
-      // if user deselects wish already selected
-      this.setState({ selectedWish: -1 });
-    } else {
-      this.setState({ selectedWish: wishIndex });
-    }
-  }
   handleSort = e => {
     this.setState({
       sort: e.target.value,
@@ -77,9 +69,12 @@ class WishListContainer extends React.Component {
   };
   getList(props) {
     if (props.wishes) {
+      // if we received wishes prop,
+      // just use that
       this.setState({ wishes: props.wishes });
     } else {
-      getWishList(props.uid).then(wishes => {
+      // otherwise, get wishes from db
+      getWishList(props.userId).then(wishes => {
         if (!wishes) {
           this.setState({ wishes: false });
           return;
@@ -107,7 +102,7 @@ class WishListContainer extends React.Component {
         </div>
       );
     }
-    const { wishes, ...propsToPass } = this.props;
+    const { wishes, fromSearch, ...propsToPass } = this.props;
     return (
       <div>
         {!this.props.fromSearch && (
@@ -120,25 +115,16 @@ class WishListContainer extends React.Component {
             handleAscending={this.handleAscending}
           />
         )}
-        <WishList
-          {...propsToPass}
-          wishes={this.state.wishes}
-          selected={this.state.selectedWish}
-          sort={this.state.sort}
-          filter={this.state.filter}
-          ascending={this.state.ascending}
-          handleSelectWish={this.handleSelectWish}
-        />
+        <WishList {...this.state} {...propsToPass} />
       </div>
     );
   }
 }
 
 WishListContainer.propTypes = {
-  uid: React.PropTypes.node.isRequired,
+  userId: React.PropTypes.node.isRequired,
+  uid: React.PropTypes.node,
   wishes: React.PropTypes.array,
-  primaryColor: React.PropTypes.string,
-  secondaryColor: React.PropTypes.string,
   mutable: React.PropTypes.bool,
   fromSearch: React.PropTypes.bool
 };

@@ -28,9 +28,13 @@ class FulfillmentsContainer extends React.Component {
       // if there was an error
       return <div>Apologies - there was an error. Please try again later.</div>;
     } else {
-      return <Fulfillments wishes={this.state.wishes} />;
+      return <Fulfillments wishes={this.state.wishes} uid={this.props.uid} />;
     }
   }
 }
+
+FulfillmentsContainer.propTypes = {
+  uid: React.PropTypes.node
+};
 
 export default FulfillmentsContainer;
