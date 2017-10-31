@@ -28,7 +28,8 @@ const Fulfillments = props => {
             const headerProps = {
               pricePaid: wish.pricePaid,
               title: wish.title,
-              url: wish.url
+              url: wish.url,
+              userId: wish.uid
             };
             const bodyProps = {
               description: wish.description,

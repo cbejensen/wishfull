@@ -15,6 +15,13 @@ const FulfillmentHeader = props => {
       alignSelf: 'center',
       color: '#e89925'
     },
+    link: {
+      flex: 1,
+      textAlign: 'right'
+    },
+    name: {
+      flex: 1
+    },
     dollar: {
       fontVariant: 'all-petite-caps'
     }
@@ -31,11 +38,16 @@ const FulfillmentHeader = props => {
           {props.pricePaid}
         </h3>
       </div>
-      <span onClick={handleLink}>
-        <a href={props.url} rel="noopener">
-          Open link
-        </a>
-      </span>
+      <div style={styles.container}>
+        <div style={styles.name}>{props.name}</div>
+        <div style={styles.link}>
+          <span onClick={handleLink}>
+            <a href={props.url} rel="noopener">
+              Open link
+            </a>
+          </span>
+        </div>
+      </div>
     </div>
   );
 };

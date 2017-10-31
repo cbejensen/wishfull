@@ -14,12 +14,18 @@ const FulfillmentBody = props => {
       textAlign: 'right'
     }
   };
-  const unfulfill = () => {
-    updateFulfillment(props.userId, props.wishId, props.uid, false)
-      .then(res => {
-        props.handleUnfulfill(props.index);
-      })
-      .catch(err => console.error(err));
+  const unfulfill = e => {
+    e.stopPropagation();
+    const confirmation = confirm(
+      'Are you sure you want to unfulfill this wish?'
+    );
+    if (confirmation) {
+      updateFulfillment(props.userId, props.wishId, props.uid, false)
+        .then(res => {
+          props.handleUnfulfill(props.index);
+        })
+        .catch(err => console.error(err));
+    }
   };
   return (
     <div style={styles.container}>
