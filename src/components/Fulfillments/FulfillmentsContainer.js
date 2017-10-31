@@ -8,6 +8,13 @@ class FulfillmentsContainer extends React.Component {
     this.state = { wishes: null };
   }
   componentDidMount() {
+    this.getFulfillments();
+  }
+  handleUnfulfill = () => {
+    console.log('got it');
+    this.getFulfillments();
+  };
+  getFulfillments = () => {
     getFufilledWishes(this.props.uid)
       .then(wishes => {
         // this.setState({ wishes: 'loading' });
@@ -16,9 +23,9 @@ class FulfillmentsContainer extends React.Component {
       })
       .catch(err => {
         this.setState({ wishes: false });
-        console.error('ERROR', err);
+        console.error(err);
       });
-  }
+  };
   render() {
     if (this.state.wishes === null) {
       return null;
@@ -28,7 +35,13 @@ class FulfillmentsContainer extends React.Component {
       // if there was an error
       return <div>Apologies - there was an error. Please try again later.</div>;
     } else {
-      return <Fulfillments wishes={this.state.wishes} uid={this.props.uid} />;
+      return (
+        <Fulfillments
+          wishes={this.state.wishes}
+          handleUnfulfill={this.handleUnfulfill}
+          uid={this.props.uid}
+        />
+      );
     }
   }
 }

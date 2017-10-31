@@ -1,11 +1,21 @@
 import React from 'react';
-import Fulfillment from './Fulfillment';
 import { BoxList, ExpandingBox, BoxHeader, BoxBody } from 'components/BoxList';
 import { FulfillmentHeader, FulfillmentBody } from 'components/Fulfillments';
 
 const Fulfillments = props => {
+  const styles = {
+    noFulfillments: {
+      fontSize: '2rem',
+      textAlign: 'center',
+      paddingTop: '20px'
+    }
+  };
   if (!props.wishes.length) {
-    return <div>Wishes you fulfill will appear here.</div>;
+    return (
+      <div style={styles.noFulfillments}>
+        Wishes you fulfill will appear here.
+      </div>
+    );
   } else {
     return (
       <BoxList>
@@ -17,6 +27,8 @@ const Fulfillments = props => {
           };
           const bodyProps = {
             description: wish.description,
+            handleUnfulfill: props.handleUnfulfill,
+            index,
             uid: props.uid,
             userId: wish.uid,
             wishId: wish.id
@@ -38,7 +50,7 @@ const Fulfillments = props => {
 };
 
 Fulfillments.propTypes = {
-  uid: React.PropTypes.node,
+  handleUnfulfill: React.PropTypes.func.isRequired,
   wishes: React.PropTypes.array
 };
 

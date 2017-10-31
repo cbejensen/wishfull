@@ -5,7 +5,10 @@ import { Button } from 'react-bootstrap';
 export default function Fulfillment(props) {
   const fulfillWish = e => props.updateFulfilledStatus(!props.fulfillerId, e);
   const btn = (
-    <Button onClick={fulfillWish}>
+    <Button
+      bsStyle={props.fulfillerName ? 'danger' : 'primary'}
+      onClick={fulfillWish}
+    >
       {props.fulfillerName ? 'Unfulfill' : 'Fulfill'}
     </Button>
   );
