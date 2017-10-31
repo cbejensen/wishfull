@@ -19,6 +19,9 @@ const FulfillmentHeader = props => {
       fontVariant: 'all-petite-caps'
     }
   };
+  const handleLink = e => {
+    e.stopPropagation();
+  };
   return (
     <div>
       <div style={styles.container}>
@@ -28,7 +31,9 @@ const FulfillmentHeader = props => {
           {props.price}
         </h3>
       </div>
-      <a href={props.url}>Open link</a>
+      <div onClick={handleLink}>
+        <a href={props.url}>Open link</a>
+      </div>
     </div>
   );
 };
