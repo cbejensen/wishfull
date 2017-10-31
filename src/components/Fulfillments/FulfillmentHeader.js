@@ -27,13 +27,15 @@ const FulfillmentHeader = props => {
       <div style={styles.container}>
         <h2 style={styles.title}>{props.title}</h2>
         <h3 style={styles.price}>
-          {props.price && <span style={styles.dollar}>$</span>}
-          {props.price}
+          {props.pricePaid && <span style={styles.dollar}>$</span>}
+          {props.pricePaid}
         </h3>
       </div>
-      <div onClick={handleLink}>
-        <a href={props.url}>Open link</a>
-      </div>
+      <span onClick={handleLink}>
+        <a href={props.url} rel="noopener">
+          Open link
+        </a>
+      </span>
     </div>
   );
 };

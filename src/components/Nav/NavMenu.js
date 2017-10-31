@@ -26,7 +26,7 @@ export default function NavMenu(props) {
           md={3}
           onClick={() => browserHistory.push('/fulfilled-wishes')}
         >
-          My Fulfillments
+          Fulfillments
         </Col>
         <Col xs={12} md={3} onClick={props.signOut}>
           Sign Out

@@ -33,27 +33,39 @@ class WishBodyBottom extends React.PureComponent {
   }
   updateFulfilledStatus = (fulfill, e) => {
     this.setState({ fufillerName: null });
-    // if fulfill is false, unfulfill the wish
     e.stopPropagation();
-    updateFulfillment(
-      this.props.userId,
-      this.props.wishId,
-      this.props.uid,
-      fulfill
-    )
-      .then(res => {
-        if (fulfill) {
-          this.setState({ fufillerName: 'you' });
-        } else {
-          this.setState({ fufillerName: false });
-        }
-        this.props.setBoxHeight();
-      })
-      .catch(err => {
-        alert(
-          'There was an error processing your request. Please try again later.'
-        );
-      });
+    // if fulfill is false, unfulfill the wish
+    // but if true, ask for price paid
+    let price;
+    if (fulfill) {
+      // TODO: validate price
+      price = prompt('How much did you pay for this item? (No dollar sign)');
+    }
+    if (fulfill && !price) {
+      // if user tried to fulfill without setting price
+      return;
+    } else {
+      updateFulfillment(
+        this.props.userId,
+        this.props.wishId,
+        this.props.uid,
+        fulfill,
+        price
+      )
+        .then(res => {
+          if (fulfill) {
+            this.setState({ fufillerName: 'you' });
+          } else {
+            this.setState({ fufillerName: false });
+          }
+          this.props.setBoxHeight();
+        })
+        .catch(err => {
+          alert(
+            'There was an error processing your request. Please try again later.'
+          );
+        });
+    }
   };
   render() {
     let content;

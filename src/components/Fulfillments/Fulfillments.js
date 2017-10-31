@@ -4,6 +4,10 @@ import { FulfillmentHeader, FulfillmentBody } from 'components/Fulfillments';
 
 const Fulfillments = props => {
   const styles = {
+    container: {
+      maxWidth: '500px',
+      margin: 'auto'
+    },
     noFulfillments: {
       fontSize: '2rem',
       textAlign: 'center',
@@ -18,33 +22,35 @@ const Fulfillments = props => {
     );
   } else {
     return (
-      <BoxList>
-        {props.wishes.map((wish, index) => {
-          const headerProps = {
-            price: wish.price,
-            title: wish.title,
-            url: wish.url
-          };
-          const bodyProps = {
-            description: wish.description,
-            handleUnfulfill: props.handleUnfulfill,
-            index,
-            uid: props.uid,
-            userId: wish.uid,
-            wishId: wish.id
-          };
-          return (
-            <ExpandingBox key={wish.id}>
-              <BoxHeader>
-                <FulfillmentHeader {...headerProps} />
-              </BoxHeader>
-              <BoxBody>
-                <FulfillmentBody {...bodyProps} />
-              </BoxBody>
-            </ExpandingBox>
-          );
-        })}
-      </BoxList>
+      <div style={styles.container}>
+        <BoxList>
+          {props.wishes.map((wish, index) => {
+            const headerProps = {
+              pricePaid: wish.pricePaid,
+              title: wish.title,
+              url: wish.url
+            };
+            const bodyProps = {
+              description: wish.description,
+              handleUnfulfill: props.handleUnfulfill,
+              index,
+              uid: props.uid,
+              userId: wish.uid,
+              wishId: wish.id
+            };
+            return (
+              <ExpandingBox key={wish.id}>
+                <BoxHeader>
+                  <FulfillmentHeader {...headerProps} />
+                </BoxHeader>
+                <BoxBody>
+                  <FulfillmentBody {...bodyProps} />
+                </BoxBody>
+              </ExpandingBox>
+            );
+          })}
+        </BoxList>
+      </div>
     );
   }
 };

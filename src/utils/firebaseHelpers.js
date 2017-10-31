@@ -187,24 +187,24 @@ export async function getFulfilledWishIds(uid) {
 export async function getFufilledWishes(uid) {
   const wishes = [];
   const fulfilled = await getFulfilledWishIds(uid);
-  console.log(fulfilled);
   for (let wishId in fulfilled) {
-    console.log(wishId, fulfilled[wishId].uid);
     const wish = await getWish(fulfilled[wishId].uid, wishId);
     wish.uid = fulfilled[wishId].uid;
     wish.id = wishId;
+    wish.pricePaid = fulfilled[wishId].price;
     wishes.push(wish);
   }
   console.log(wishes);
   return wishes;
 }
 
-export const updateFulfillment = (uid, wishId, fulfiller, fulfilled) => {
+export const updateFulfillment = (uid, wishId, fulfiller, fulfilled, price) => {
   const shouldFulfill = fulfilled ? true : null;
   const updates = {};
   const fulfillmentInfo = {
     uid,
-    timestamp: Date.now()
+    timestamp: Date.now(),
+    price: price || null
   };
   updates[`lists/${uid}/${wishId}/fulfilled`] = shouldFulfill && fulfiller;
   updates[`users/${fulfiller}/fulfilled/${wishId}`] =
