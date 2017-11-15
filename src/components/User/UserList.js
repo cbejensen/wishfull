@@ -1,32 +1,41 @@
-import React from 'react'
-import UserBox from './UserBox'
+import React from 'react';
+import UserBoxHeader from './UserBoxHeader';
+import UserBoxBody from './UserBoxBody';
+import { BoxList, ExpandingBox, BoxHeader, BoxBody } from 'components/BoxList';
+import randomColor from 'randomcolor';
 
 const UserList = props => {
-  const styles = {
-    user: {
-      margin: '5px auto'
-    }
-  }
   return (
-    <div>
-      {props.users.map(user => {
+    <BoxList>
+      {props.users.map((user, index) => {
+        const userId = user.uid;
+        const color = randomColor({ luminosity: props.colorType || 'dark' });
+        const headerProps = {
+          userId,
+          uid: props.uid,
+          name: `${user.firstName} ${user.lastName}`
+        };
+        const bodyProps = {
+          userId
+        };
         return (
-          <div key={user.uid} style={styles.user}>
-            <UserBox
-              uid={user.uid}
-              name={user.firstName + ' ' + user.lastName}
-              nameColor={props.nameColor} />
-          </div>
-        )
+          <ExpandingBox key={userId} color={color}>
+            <BoxHeader>
+              <UserBoxHeader {...headerProps} />
+            </BoxHeader>
+            <BoxBody>
+              <UserBoxBody {...bodyProps} />
+            </BoxBody>
+          </ExpandingBox>
+        );
       })}
-    </div>
-  )
-}
+    </BoxList>
+  );
+};
 
 UserList.propTypes = {
   users: React.PropTypes.array.isRequired,
-  nameColor: React.PropTypes.string,
-  handleClick: React.PropTypes.array
-}
+  uid: React.PropTypes.node
+};
 
-export default UserList
+export default UserList;

@@ -34,13 +34,15 @@ class AvatarContainer extends React.Component {
     }
   }
   render() {
-    return <Avatar url={this.state.url} />
+    return <Avatar url={this.state.url} size={this.props.size} style={this.props.style} />
   }
 }
 
 AvatarContainer.propTypes = {
   uid: React.PropTypes.node,
-  url: React.PropTypes.string
+  url: React.PropTypes.string,
+  size: React.PropTypes.string,
+  style: React.PropTypes.object
 }
 
 export default AvatarContainer

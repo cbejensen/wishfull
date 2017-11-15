@@ -45,7 +45,7 @@ class FriendList extends React.Component {
             excludeUsersNotFriends
             excludeWishes />
           {this.state.showUserList &&
-            <UserList users={this.state.friends} />
+            <UserList users={this.state.friends} uid={this.props.uid} />
           }
         </div>
       )
