@@ -26,7 +26,11 @@ class Friends extends React.Component {
               <FriendList focusInput />
             </CheckAuth>
           }
-          panelRight={<Search placeHolder="See who's on Wishfull" />}
+          panelRight={
+            <CheckAuth redirect>
+              <Search placeHolder="See who's on Wishfull" excludeFriends excludeWishes />
+            </CheckAuth>
+          }
         />
       </Grid>
     );

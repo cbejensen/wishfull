@@ -1,5 +1,5 @@
 import React from 'react';
-import ToggleFriendButton from 'components/ToggleFriendButton';
+import {ToggleFriend} from 'components/ToggleFriend';
 import { browserHistory } from 'react-router';
 import { Grid } from 'react-bootstrap';
 import { getUser } from 'utils/firebaseHelpers';
@@ -53,7 +53,7 @@ class UserView extends React.Component {
       <Grid>
         <UserHeading user={this.state.user} />
         {this.state.uid && (
-          <ToggleFriendButton
+          <ToggleFriend
             uid={this.state.uid}
             friendId={this.state.user.uid}
           />

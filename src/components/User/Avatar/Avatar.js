@@ -1,36 +1,22 @@
-import React from 'react'
+import React from 'react';
 
-class Avatar extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {width: ''}
-  }
-  componentDidMount() {
-    this.setState({width: this.avatar.offsetHeight})
-  }
-  render() {
-    const url = `url("${this.props.url}")`
-    const style = {
-      backgroundImage: url,
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      height: '100%',
-      width: this.state.width,
-      borderRadius: '100%',
-      overflow: 'hidden',
-      display: 'inline-block'
-    }
-    return (
-      <div
-        style={style}
-        ref={e => {this.avatar = e}}>
-      </div>
-    )
-  }
+export default function Avatar(props) {
+  const url = `url("${props.url}")`;
+  const size = props.size || '50px';
+  const styles = {
+    backgroundImage: url,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    height: size,
+    width: size,
+    borderRadius: '100%',
+    overflow: 'hidden',
+    display: 'inline-block'
+  };
+  return <div style={{...styles, ...props.style}} />;
 }
 
 Avatar.propTypes = {
-  url: React.PropTypes.string.isRequired
-}
-
-export default Avatar
+  url: React.PropTypes.string.isRequired,
+  style: React.PropTypes.object
+};
