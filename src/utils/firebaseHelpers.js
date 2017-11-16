@@ -13,28 +13,12 @@ export const uploadFile = (file, path) => {
   return storageRef
     .child(path)
     .put(file)
-    .then(
-      snap => {
-        return snap;
-      },
-      err => {
-        throw err;
-      }
-    );
 };
 
 export const getFile = path => {
   return storageRef
     .child(path)
     .getDownloadURL()
-    .then(
-      url => {
-        return url;
-      },
-      err => {
-        throw err;
-      }
-    );
 };
 
 export const createUser = user => {
@@ -126,14 +110,6 @@ export const updateWish = (uid, wishRef, wish) => {
     .database()
     .ref(`/lists/${uid}/${wishRef}`)
     .update(wish)
-    .then(
-      res => {
-        return res;
-      },
-      err => {
-        throw err;
-      }
-    );
 };
 
 export const getWishList = uid => {
@@ -194,7 +170,6 @@ export async function getFufilledWishes(uid) {
     wish.pricePaid = fulfilled[wishId].price;
     wishes.push(wish);
   }
-  console.log(wishes);
   return wishes;
 }
 
@@ -416,31 +391,10 @@ export const searchWishes = (str, uid) => {
 
 export const search = (query, category, uid) => {
   if (category === 'friends') {
-    return searchFriends(query, uid).then(
-      res => {
-        return res;
-      },
-      err => {
-        return err;
-      }
-    );
+    return searchFriends(query, uid)
   } else if (category === 'users') {
-    return searchUsers(query).then(
-      res => {
-        return res;
-      },
-      err => {
-        return err;
-      }
-    );
+    return searchUsers(query)
   } else if (category === 'wishes') {
-    return searchWishes(query, uid).then(
-      res => {
-        return res;
-      },
-      err => {
-        return err;
-      }
-    );
+    return searchWishes(query, uid)
   }
 };
