@@ -1,5 +1,4 @@
 import React from 'react';
-import { Avatar } from 'components/User/Avatar';
 import {Button} from 'react-bootstrap';
 import {browserHistory} from 'react-router';
 

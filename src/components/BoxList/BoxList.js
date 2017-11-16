@@ -1,5 +1,4 @@
 import React from 'react';
-import ExpandingBox from './ExpandingBox';
 
 class BoxList extends React.Component {
   constructor(props) {

@@ -50,21 +50,26 @@ export default function WishList(props) {
     }
     return color;
   };
-  const { wishes, sort, filter, ascending, ...otherProps } = props;
+  const { wishes, sortBy, filter, ascending, ...otherProps } = props;
   let list = [...wishes];
-  if (sort) {
-    if (ascending) {
-      list.sort((a, b) => (a[sort] <= b[sort] ? -1 : 1));
-    } else {
-      list.sort((a, b) => (a[sort] <= b[sort] ? 1 : -1));
+  if (sortBy) {
+    // if sorting by strings, we make them uppercase
+    // to sort alphabetically properly
+    const makeUpperCase = (str) => {
+      return typeof str === "string" ? str.toUpperCase() : str;
     }
+    list.sort((aWish, bWish) => {
+      const a = makeUpperCase(aWish[sortBy]);
+      const b = makeUpperCase(bWish[sortBy]);
+      return a <= b ? -1 : 1
+    });
   }
   // currently the filter only acts as max price
   // TODO: make full-featured filter
   if (filter) {
-    list = list.filter(wish => parseInt(wish.price) <= filter || !wish.price);
+    list = list.filter(wish => parseInt(wish.price, 10) <= filter || !wish.price);
   }
-  if (!sort && !ascending) {
+  if (!ascending) {
     list.reverse();
   }
   return (
@@ -110,7 +115,7 @@ WishList.propTypes = {
   wishes: React.PropTypes.array,
   mutable: React.PropTypes.bool,
   handleSelectWish: React.PropTypes.func,
-  sort: React.PropTypes.node.isRequired,
+  sortBy: React.PropTypes.node.isRequired,
   filter: React.PropTypes.node.isRequired,
   ascending: React.PropTypes.bool.isRequired
 };

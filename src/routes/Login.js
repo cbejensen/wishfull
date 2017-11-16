@@ -13,9 +13,6 @@ export default function LoginContainer(props) {
 }
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     if (this.props.uid) {
       browserHistory.push('home');
