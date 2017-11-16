@@ -1,7 +1,5 @@
 import React from 'react';
 import WishList from './WishList';
-// import { BoxList } from 'components/BoxList';
-// import { WishItem } from 'components/Wish/WishItem';
 import WishListFilters from './WishListFilters';
 import { getWishList } from 'utils/firebaseHelpers';
 import * as firebase from 'firebase';
@@ -11,7 +9,7 @@ class WishListContainer extends React.Component {
     super(props);
     this.state = {
       wishes: 'loading',
-      sort: 'priority',
+      sortBy: 'priority',
       filter: '',
       ascending: false
     };
@@ -52,7 +50,7 @@ class WishListContainer extends React.Component {
   }
   handleSort = e => {
     this.setState({
-      sort: e.target.value,
+      sortBy: e.target.value,
       selectedWish: -1
     });
   };
@@ -64,7 +62,7 @@ class WishListContainer extends React.Component {
   };
   handleAscending = e => {
     // convert string to boolean
-    const bool = e.target.value == 'true';
+    const bool = e.target.value === 'true';
     this.setState({ ascending: bool, selectedWish: -1 });
   };
   getList(props) {
@@ -107,7 +105,7 @@ class WishListContainer extends React.Component {
       <div>
         {!this.props.fromSearch && (
           <WishListFilters
-            sort={this.state.sort}
+            sortBy={this.state.sortBy}
             filter={this.state.filter}
             ascending={this.state.ascending}
             handleSort={this.handleSort}

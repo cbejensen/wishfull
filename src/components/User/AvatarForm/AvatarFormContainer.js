@@ -39,9 +39,9 @@ class AvatarFormContainer extends React.Component {
     }
   }
   render() {
-    const {file, ...state} = this.state
     return <AvatarForm
-      {...state}
+      img={this.state.img}
+      loading={this.state.loading}
       uid={this.props.uid}
       selectAvatar={this.selectAvatar}
       showImg={this.showImg}

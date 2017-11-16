@@ -4,7 +4,7 @@ export default function WishListFilters(props) {
   return (
     <div style={{ textAlign: 'center' }}>
       <select
-        value={props.sort}
+        value={props.sortBy}
         onChange={props.handleSort}
       >
         <option value="">Date Created</option>

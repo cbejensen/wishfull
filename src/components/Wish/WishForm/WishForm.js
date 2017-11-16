@@ -9,7 +9,7 @@ import {
   Col,
   Button
 } from 'react-bootstrap';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 
 export default function WishForm(props) {
   const styles = {

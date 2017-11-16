@@ -124,7 +124,7 @@ export const getWishList = uid => {
   );
 };
 
-export async function getWish(uid, itemId) {
+export function getWish(uid, itemId) {
   const ref = firebase.database().ref(`lists/${uid}/${itemId}`);
   return ref.once('value').then(
     snap => {
@@ -148,7 +148,7 @@ export const getAllWishLists = () => {
   );
 };
 
-export async function getFulfilledWishIds(uid) {
+export function getFulfilledWishIds(uid) {
   const ref = firebase.database().ref(`users/${uid}/fulfilled`);
   return ref.once('value').then(
     snap => {
@@ -164,11 +164,13 @@ export async function getFufilledWishes(uid) {
   const wishes = [];
   const fulfilled = await getFulfilledWishIds(uid);
   for (let wishId in fulfilled) {
-    const wish = await getWish(fulfilled[wishId].uid, wishId);
-    wish.uid = fulfilled[wishId].uid;
-    wish.id = wishId;
-    wish.pricePaid = fulfilled[wishId].price;
-    wishes.push(wish);
+    if (fulfilled.hasOwnProperty(wishId)) {
+      const wish = await getWish(fulfilled[wishId].uid, wishId);
+      wish.uid = fulfilled[wishId].uid;
+      wish.id = wishId;
+      wish.pricePaid = fulfilled[wishId].price;
+      wishes.push(wish);
+    }
   }
   return wishes;
 }

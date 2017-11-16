@@ -1,6 +1,4 @@
 import React from 'react';
-import BoxHeader from './BoxHeader';
-import BoxBody from './BoxBody';
 
 class ExpandingBox extends React.PureComponent {
   constructor(props) {
