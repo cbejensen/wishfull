@@ -11,7 +11,7 @@ class ToggleFriendContainer extends React.Component {
   componentDidMount() {
     getFriendStatus(this.props.uid, this.props.friendId).then(
       res => {
-        this.setState({ friend: res });
+        this.setState({ friend: !!res });
       },
       err => {
         console.log(err);
