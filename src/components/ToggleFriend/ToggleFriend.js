@@ -9,18 +9,20 @@ export default function ToggleFriend(props) {
     status = <Glyphicon glyph="plus" />;
   }
   return (
-    <div style={{ textAlign: 'center', margin: '10px' }}>
-      <Button
-        onClick={e => props.handleClick(e)}
-        bsStyle={props.isFriend ? 'info' : 'warning'}
-      >
-        {props.isFriend ? 'Friends ' : 'Add Friend '}{status}
-      </Button>
-    </div>
+    <Button
+      onClick={e => props.handleClick(e)}
+      bsStyle={props.isFriend ? 'info' : 'warning'}
+      bsSize={props.size || 'small'}
+      style={{ ...props.style }}
+    >
+      {props.isFriend ? 'Friends ' : 'Add Friend '}
+      <Glyphicon glyph={props.isFriend ? 'ok' : 'plus'} />
+    </Button>
   );
 }
 
 ToggleFriend.propTypes = {
   isFriend: React.PropTypes.bool.isRequired,
-  handleClick: React.PropTypes.func.isRequired
+  handleClick: React.PropTypes.func.isRequired,
+  size: React.PropTypes.string
 };

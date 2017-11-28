@@ -1,6 +1,8 @@
 import React from 'react';
 import { Avatar } from 'components/User/Avatar';
-import {ToggleFriend} from 'components/ToggleFriend';
+import { ToggleFriend } from 'components/ToggleFriend';
+import { Link } from 'react-router';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 export default function UserBoxHeader(props) {
   const styles = {
@@ -11,35 +13,42 @@ export default function UserBoxHeader(props) {
     avatar: {
       marginRight: '20px'
     },
-    middle: {
+    main: {
       flex: 1,
       overflow: 'hidden'
     },
     name: {
-      fontSize: '3rem',
+      color: props.luminosity === 'dark' ? '#1c1c1c' : '#ffffff',
+      fontSize: '2.5rem',
       fontWeight: 'bolder',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis'
     },
-    // subname: {
-    //   fontSize: '1.5rem'
-    // },
-    friend: {
-      marginLeft: '0 10px'
+    profileBtn: {
+      marginLeft: '8px',
+      background: props.luminosity === 'dark' ? '#ffffff' : '#1c1c1c',
+      color: props.luminosity === 'dark' ? '#1c1c1c' : '#ffffff'
     }
   };
   return (
     <div style={styles.container}>
-      <Avatar uid={props.userId} style={styles.avatar} size="75px" />
-      <div style={styles.middle}>
+      <Avatar uid={props.userId} style={styles.avatar} size="65px" />
+      <div style={styles.main}>
         <div style={styles.name}>{props.name}</div>
+        {props.uid && (
+          <ToggleFriend
+            uid={props.uid}
+            friendId={props.userId}
+            handleToggle={e => e.stopPropagation()}
+          />
+        )}
+        <Link to={`users/${props.userId}`}>
+          <Button bsSize="small" style={styles.profileBtn}>
+            View Profile <Glyphicon glyph="new-window" />
+          </Button>
+        </Link>
       </div>
-      {props.uid && (
-        <div style={styles.friend}>
-          <ToggleFriend uid={props.uid} friendId={props.userId} handleToggle={e => e.stopPropagation()} />
-        </div>
-      )}
     </div>
   );
 }

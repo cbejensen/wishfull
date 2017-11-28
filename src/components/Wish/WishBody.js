@@ -10,7 +10,8 @@ class WishBody extends React.PureComponent {
         margin: '5px 0 5px 0'
       },
       description: {
-        paddingBottom: '5px'
+        paddingBottom: '5px',
+        color: this.props.luminosity === 'dark' ? '#252525' : '#ffffff'
       }
     };
     return (

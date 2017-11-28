@@ -2,7 +2,6 @@ import React from 'react';
 
 class BoxHeader extends React.PureComponent {
   render() {
-    console.log(this.props);
     const numChildren = React.Children.count(this.props.children);
     if (!numChildren) {
       throw Error(`Expected 1 child. Showing ${numChildren}`);

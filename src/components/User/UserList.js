@@ -9,14 +9,18 @@ const UserList = props => {
     <BoxList>
       {props.users.map((user, index) => {
         const userId = user.uid;
-        const color = randomColor({ luminosity: props.colorType || 'dark' });
+        const color = randomColor({ luminosity: props.luminosity || 'dark' });
         const headerProps = {
+          color,
+          luminosity: props.luminosity,
           userId,
           uid: props.uid,
           name: `${user.firstName} ${user.lastName}`
         };
         const bodyProps = {
-          userId
+          userId,
+          bio: user.bio,
+          luminosity: props.luminosity
         };
         return (
           <ExpandingBox key={userId} color={color}>
@@ -35,7 +39,8 @@ const UserList = props => {
 
 UserList.propTypes = {
   users: React.PropTypes.array.isRequired,
-  uid: React.PropTypes.node
+  uid: React.PropTypes.node,
+  luminosity: React.PropTypes.string
 };
 
 export default UserList;
