@@ -1,6 +1,6 @@
 import React from 'react';
-import WishBodyBottom from './WishBodyBottom';
-import CheckAuth from 'components/CheckAuth';
+import WishButton from './WishButton';
+import { Link } from 'react-router';
 import './WishItem.css';
 
 class WishBody extends React.PureComponent {
@@ -13,14 +13,27 @@ class WishBody extends React.PureComponent {
         paddingBottom: '5px'
       }
     };
-    const { description, fulfilled, ...propsToPass } = this.props;
     return (
       <div>
         <hr style={styles.hr} />
         <div style={styles.description}>
           {this.props.description || 'No description'}
         </div>
-        <WishBodyBottom {...propsToPass} fulfilled={fulfilled || null} />
+        <div style={{ textAlign: 'right' }}>
+          {this.props.uid ? (
+            <WishButton
+              fulfilled={this.props.fulfilled}
+              uid={this.props.uid}
+              userId={this.props.userId}
+              wishId={this.props.wishId}
+            />
+          ) : (
+            <div style={{ textAlign: 'center' }}>
+              Please <Link to="sign-in">sign in</Link> to interact with this
+              wish
+            </div>
+          )}
+        </div>
       </div>
     );
   }
@@ -31,6 +44,7 @@ WishBody.propTypes = {
   wishId: React.PropTypes.string.isRequired,
   uid: React.PropTypes.node,
   wishes: React.PropTypes.array,
+  fulfilled: React.PropTypes.node,
   mutable: React.PropTypes.bool,
   description: React.PropTypes.string,
   color: React.PropTypes.string,

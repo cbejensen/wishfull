@@ -22,6 +22,22 @@
   min-height: 15px;
 }
 
+.WishItem-link:hover {
+  text-decoration: none;
+}
+
+.WishItem-button {
+  color: #ffffff;
+  background: #9ea7ac;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  border: none;
+}
+
+.WishItem-button:hover {
+  background: #337ab8;
+}
+
 .WishItem-btn-group {
   text-align: right;
   padding-bottom: 5px;

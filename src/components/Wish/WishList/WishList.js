@@ -55,19 +55,21 @@ export default function WishList(props) {
   if (sortBy) {
     // if sorting by strings, we make them uppercase
     // to sort alphabetically properly
-    const makeUpperCase = (str) => {
-      return typeof str === "string" ? str.toUpperCase() : str;
-    }
+    const makeUpperCase = str => {
+      return typeof str === 'string' ? str.toUpperCase() : str;
+    };
     list.sort((aWish, bWish) => {
       const a = makeUpperCase(aWish[sortBy]);
       const b = makeUpperCase(bWish[sortBy]);
-      return a <= b ? -1 : 1
+      return a <= b ? -1 : 1;
     });
   }
   // currently the filter only acts as max price
   // TODO: make full-featured filter
   if (filter) {
-    list = list.filter(wish => parseInt(wish.price, 10) <= filter || !wish.price);
+    list = list.filter(
+      wish => parseInt(wish.price, 10) <= filter || !wish.price
+    );
   }
   if (!ascending) {
     list.reverse();
@@ -75,26 +77,40 @@ export default function WishList(props) {
   return (
     <div style={styles.container}>
       <BoxList>
-        {list.map((wish, index) => {
+        {list.map(wish => {
           const color = getColor(wish.priority);
+          const {
+            comments,
+            description,
+            id,
+            fulfilled,
+            price,
+            priority,
+            title,
+            url
+          } = wish;
           const headerProps = {
             color: color,
-            price: wish.price,
-            priority: wish.priority,
-            title: wish.title,
-            url: wish.url
+            fulfilled,
+            price,
+            priority,
+            mutable: props.mutable,
+            uid: props.uid,
+            title,
+            url
           };
           const bodyProps = {
             color: color,
-            description: wish.description,
-            fulfilled: wish.fulfilled,
+            comments,
+            description,
+            fulfilled,
             mutable: props.mutable,
             uid: props.uid,
             userId: props.userId,
-            wishId: wish.id
+            wishId: id
           };
           return (
-            <ExpandingBox key={wish.id} color={color}>
+            <ExpandingBox color={color} key={id}>
               <BoxHeader>
                 <WishHeader {...headerProps} />
               </BoxHeader>
