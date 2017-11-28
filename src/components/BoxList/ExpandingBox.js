@@ -49,11 +49,9 @@ class ExpandingBox extends React.PureComponent {
       const height = this.props.selected
         ? totalHeight
         : this.state.headerHeight;
-      const highlightColor = this.props.color || '#353535';
+      const color = this.props.color || '#353535';
       const borderColor =
-        this.state.highlighted || this.props.selected
-          ? highlightColor
-          : '#d2d2d2';
+        this.state.highlighted || this.props.selected ? color : '#d2d2d2';
       const styles = {
         default: {
           height,
@@ -92,7 +90,8 @@ class ExpandingBox extends React.PureComponent {
 
 ExpandingBox.propTypes = {
   styles: React.PropTypes.object,
-  handleClick: React.PropTypes.func
+  handleClick: React.PropTypes.func,
+  color: React.PropTypes.string
 };
 
 export default ExpandingBox;

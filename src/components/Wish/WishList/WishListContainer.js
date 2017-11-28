@@ -120,7 +120,7 @@ class WishListContainer extends React.Component {
 }
 
 WishListContainer.propTypes = {
-  userId: React.PropTypes.node.isRequired,
+  userId: React.PropTypes.node,
   uid: React.PropTypes.node,
   wishes: React.PropTypes.array,
   mutable: React.PropTypes.bool,

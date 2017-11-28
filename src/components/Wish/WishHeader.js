@@ -20,7 +20,8 @@ class WishHeader extends React.PureComponent {
         justifyContent: 'space-evenly'
       },
       priorityText: {
-        fontSize: '.7rem'
+        fontSize: '1rem',
+        color: this.props.luminosity === 'dark' ? '#252525' : '#bdbdbd'
       },
       priorityNumber: {
         color: this.props.color,
@@ -28,11 +29,11 @@ class WishHeader extends React.PureComponent {
         lineHeight: 1
       },
       title: {
-        color: '#1c1c1c',
+        color: this.props.luminosity === 'dark' ? '#1c1c1c' : '#ffffff',
         fontSize: '2.5rem'
       },
       subtitle: {
-        color: '#353535'
+        color: this.props.luminosity === 'dark' ? '#252525' : '#bdbdbd'
       }
     };
     const openLink = e => {
@@ -71,7 +72,7 @@ class WishHeader extends React.PureComponent {
           </div>
         </div>
         <div style={styles.priority}>
-          <div>PRIORITY</div>
+          <div style={styles.priorityText}>PRIORITY</div>
           <div style={styles.priorityNumber}>{this.props.priority}</div>
         </div>
       </div>
@@ -88,7 +89,8 @@ WishHeader.propTypes = {
   mutable: React.PropTypes.bool.isRequired,
   uid: React.PropTypes.node.isRequired,
   url: React.PropTypes.string,
-  setBoxHeight: React.PropTypes.func
+  setBoxHeight: React.PropTypes.func,
+  luminosity: React.PropTypes.string
 };
 
 export default WishHeader;

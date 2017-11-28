@@ -79,6 +79,7 @@ export default function WishList(props) {
       <BoxList>
         {list.map(wish => {
           const color = getColor(wish.priority);
+          const luminosity = props.luminosity || 'dark';
           const {
             comments,
             description,
@@ -92,6 +93,7 @@ export default function WishList(props) {
           const headerProps = {
             color: color,
             fulfilled,
+            luminosity,
             price,
             priority,
             mutable: props.mutable,
@@ -104,6 +106,7 @@ export default function WishList(props) {
             comments,
             description,
             fulfilled,
+            luminosity,
             mutable: props.mutable,
             uid: props.uid,
             userId: props.userId,
@@ -126,12 +129,13 @@ export default function WishList(props) {
 }
 
 WishList.propTypes = {
-  userId: React.PropTypes.node.isRequired,
+  userId: React.PropTypes.node,
   uid: React.PropTypes.node,
   wishes: React.PropTypes.array,
   mutable: React.PropTypes.bool,
   handleSelectWish: React.PropTypes.func,
   sortBy: React.PropTypes.node.isRequired,
   filter: React.PropTypes.node.isRequired,
-  ascending: React.PropTypes.bool.isRequired
+  ascending: React.PropTypes.bool.isRequired,
+  luminosity: React.PropTypes.string
 };

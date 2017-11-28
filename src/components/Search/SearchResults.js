@@ -111,14 +111,25 @@ class SearchResults extends React.Component {
       const { friends, users, wishes } = this.state.results;
       return (
         <div style={styles.container}>
-          {friends && <UserList users={this.state.results.friends} uid={this.props.uid} />}
-          {users && <UserList users={this.state.results.users} uid={this.props.uid} />}
+          {friends && (
+            <UserList
+              users={this.state.results.friends}
+              uid={this.props.uid}
+              luminosity="bright"
+            />
+          )}
+          {users && (
+            <UserList
+              users={this.state.results.users}
+              uid={this.props.uid}
+              luminosity="bright"
+            />
+          )}
           {wishes && (
             <WishResults
               results={this.state.results.wishes}
               uid={this.props.uid}
-              primaryColor={this.props.wishPrimaryColor}
-              secondaryColor={this.props.wishSecondaryColor}
+              luminosity="bright"
             />
           )}
         </div>
