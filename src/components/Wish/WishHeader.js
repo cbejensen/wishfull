@@ -1,17 +1,37 @@
 import React from 'react';
+import FulfillmentStatus from './FulfillmentStatus';
+import { Glyphicon } from 'react-bootstrap';
 import './WishItem.css';
 
 class WishHeader extends React.PureComponent {
   render() {
     const styles = {
+      container: {
+        display: 'flex'
+      },
+      head: {
+        flex: 1,
+        paddingRight: '10px'
+      },
+      priority: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+      },
       priorityText: {
+        fontSize: '.7rem'
+      },
+      priorityNumber: {
         color: this.props.color,
-        lineHeight: '1em'
+        fontSize: '4rem',
+        lineHeight: 1
       },
-      darkText: {
-        color: '#1c1c1c'
+      title: {
+        color: '#1c1c1c',
+        fontSize: '2.5rem'
       },
-      standardText: {
+      subtitle: {
         color: '#353535'
       }
     };
@@ -19,36 +39,56 @@ class WishHeader extends React.PureComponent {
       e.stopPropagation();
     };
     return (
-      <div>
-        <div className="WishItem-priority-container">
-          <div className="WishItem-priority-word" style={styles.standardText}>
-            PRIORITY
-          </div>
-          <div className="WishItem-priority" style={styles.priorityText}>
-            {this.props.priority}
+      <div style={styles.container}>
+        <div style={styles.head}>
+          <div style={styles.title}>{this.props.title}</div>
+          <div style={styles.subtitle}>
+            {this.props.fulfilled && !this.props.mutable ? (
+              <FulfillmentStatus
+                fulfillerId={this.props.fulfilled}
+                uid={this.props.uid}
+                setBoxHeight={this.props.setBoxHeight}
+              />
+            ) : (
+              this.props.price && `$${this.props.price}`
+            )}
+            {this.props.url && (
+              <span
+                style={{
+                  marginLeft: 10
+                }}
+                onClick={openLink}
+              >
+                <a
+                  href={this.props.url}
+                  className="WishItem-link"
+                  target="_blank"
+                >
+                  Open link <Glyphicon glyph="new-window" />
+                </a>
+              </span>
+            )}
           </div>
         </div>
-        <div className="WishItem-title" style={styles.darkText}>
-          {this.props.title}
-        </div>
-        <div className="WishItem-price" style={styles.standardText}>
-          {this.props.price ? `$${this.props.price}` : ''}
-          {this.props.url && (
-            <span
-              style={{
-                marginLeft: 10
-              }}
-              onClick={openLink}
-            >
-              <a href={this.props.url} target="_blank">
-                Open link
-              </a>
-            </span>
-          )}
+        <div style={styles.priority}>
+          <div>PRIORITY</div>
+          <div style={styles.priorityNumber}>{this.props.priority}</div>
         </div>
       </div>
     );
   }
 }
+
+WishHeader.propTypes = {
+  color: React.PropTypes.string,
+  fulfilled: React.PropTypes.node,
+  price: React.PropTypes.number,
+  priority: React.PropTypes.number,
+  title: React.PropTypes.string,
+  mutable: React.PropTypes.bool.isRequired,
+  uid: React.PropTypes.node.isRequired,
+  url: React.PropTypes.string,
+  setBoxHeight: React.PropTypes.func
+};
 
 export default WishHeader;

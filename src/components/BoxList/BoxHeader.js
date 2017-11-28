@@ -1,11 +1,27 @@
 import React from 'react';
 
-const BoxHeader = props => {
-  const numChildren = React.Children.count(props.children);
-  if (!numChildren) {
-    throw Error(`Expected 1 child. Showing ${numChildren}`);
+class BoxHeader extends React.PureComponent {
+  render() {
+    console.log(this.props);
+    const numChildren = React.Children.count(this.props.children);
+    if (!numChildren) {
+      throw Error(`Expected 1 child. Showing ${numChildren}`);
+    }
+    return (
+      <div ref={header => this.props.setHeader(header)}>
+        {React.Children.map(this.props.children, child =>
+          React.cloneElement(child, {
+            setBoxHeight: this.props.setBoxHeight
+          })
+        )}
+      </div>
+    );
   }
-  return <div ref={header => props.setHeader(header)}>{props.children}</div>;
+}
+
+BoxHeader.propTypes = {
+  setBoxHeight: React.PropTypes.func,
+  setHeader: React.PropTypes.func
 };
 
 export default BoxHeader;
