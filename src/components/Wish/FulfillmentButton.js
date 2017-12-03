@@ -33,7 +33,6 @@ class FulfillmentButton extends React.Component {
       )
         .then(res => {
           // this.setState({loading: false})
-          // this.props.setBoxHeight();
         })
         .catch(err => {
           alert(

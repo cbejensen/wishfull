@@ -48,7 +48,6 @@ class WishHeader extends React.PureComponent {
               <FulfillmentStatus
                 fulfillerId={this.props.fulfilled}
                 uid={this.props.uid}
-                setBoxHeight={this.props.setBoxHeight}
               />
             ) : (
               this.props.price && `$${this.props.price}`
@@ -93,7 +92,6 @@ WishHeader.propTypes = {
   mutable: React.PropTypes.bool.isRequired,
   uid: React.PropTypes.node.isRequired,
   url: React.PropTypes.string,
-  setBoxHeight: React.PropTypes.func,
   luminosity: React.PropTypes.string
 };
 

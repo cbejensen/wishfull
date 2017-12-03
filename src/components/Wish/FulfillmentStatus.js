@@ -29,9 +29,7 @@ class FulfillmentStatus extends React.Component {
       );
     }
   }
-  componentDidUpdate() {
-    this.props.setBoxHeight();
-  }
+  componentDidUpdate() {}
   render() {
     let content;
     if (this.state.name === null) {
@@ -54,8 +52,7 @@ class FulfillmentStatus extends React.Component {
 
 FulfillmentStatus.propTypes = {
   fulfillerId: React.PropTypes.string.isRequired,
-  uid: React.PropTypes.string.isRequired,
-  setBoxHeight: React.PropTypes.func.isRequired
+  uid: React.PropTypes.string.isRequired
 };
 
 export default FulfillmentStatus;

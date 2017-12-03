@@ -8,18 +8,13 @@ class BoxHeader extends React.PureComponent {
     }
     return (
       <div ref={header => this.props.setHeader(header)}>
-        {React.Children.map(this.props.children, child =>
-          React.cloneElement(child, {
-            setBoxHeight: () => {}
-          })
-        )}
+        {this.props.children}
       </div>
     );
   }
 }
 
 BoxHeader.propTypes = {
-  // setBoxHeight: React.PropTypes.func,
   setHeader: React.PropTypes.func
 };
 
