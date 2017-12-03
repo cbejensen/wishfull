@@ -10,7 +10,7 @@ class BoxHeader extends React.PureComponent {
       <div ref={header => this.props.setHeader(header)}>
         {React.Children.map(this.props.children, child =>
           React.cloneElement(child, {
-            setBoxHeight: this.props.setBoxHeight
+            setBoxHeight: () => {}
           })
         )}
       </div>
@@ -19,7 +19,7 @@ class BoxHeader extends React.PureComponent {
 }
 
 BoxHeader.propTypes = {
-  setBoxHeight: React.PropTypes.func,
+  // setBoxHeight: React.PropTypes.func,
   setHeader: React.PropTypes.func
 };
 

@@ -65,7 +65,11 @@ class WishHeader extends React.PureComponent {
                   className="WishItem-link"
                   target="_blank"
                 >
-                  Open link <Glyphicon glyph="new-window" />
+                  Open link{' '}
+                  <Glyphicon
+                    style={{ fontSize: '1.1rem' }}
+                    glyph="new-window"
+                  />
                 </a>
               </span>
             )}

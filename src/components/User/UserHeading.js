@@ -22,14 +22,15 @@ class UserHeading extends React.Component {
         <div style={styles.avatar}>
           <Avatar uid={this.props.user.uid} />
         </div>
-        <Bio uid={this.props.user.uid} />
+        {this.props.mutable && <Bio uid={this.props.user.uid} />}
       </div>
     );
   }
 }
 
 UserHeading.propTypes = {
-  user: React.PropTypes.object.isRequired
+  user: React.PropTypes.object.isRequired,
+  mutable: React.PropTypes.bool
 };
 
 export default UserHeading;
