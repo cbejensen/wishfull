@@ -8,6 +8,7 @@ const WishResults = props => {
       fromSearch={true}
       wishes={props.results}
       uid={props.uid}
+      userId={props.uid}
       primaryColor={props.primaryColor}
       secondaryColor={props.secondaryColor}
       luminosity={props.luminosity}
