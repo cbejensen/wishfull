@@ -9,15 +9,13 @@ class Bio extends React.Component {
   }
   componentDidMount() {
     this.path = `users/${this.props.uid}/bio`;
-    this.removeListener = firebase
-      .database()
-      .ref(this.path)
-      .on('value', snap => {
-        this.setState({ bio: snap.val() });
-      });
+    this.firebaseListener = firebase.database().ref(this.path);
+    this.firebaseListener.on('value', snap => {
+      this.setState({ bio: snap.val() });
+    });
   }
   componentWillUnmount() {
-    this.removeListener();
+    this.firebaseListener.off();
   }
   handleChange = e => {
     this.setState({ bio: e.target.value, dirty: true });
@@ -68,5 +66,9 @@ class Bio extends React.Component {
     );
   }
 }
+
+Bio.propTypes = {
+  uid: React.PropTypes.node.isRequired
+};
 
 export default Bio;

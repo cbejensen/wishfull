@@ -23,7 +23,7 @@ class BoxList extends React.Component {
             selected: this.state.selectedItem === index,
             index,
             handleClick: this.handleClick,
-            styles: {
+            style: {
               margin: '5px auto'
             }
           })

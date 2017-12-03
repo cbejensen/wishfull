@@ -1,19 +1,26 @@
 import React from 'react';
 
 class BoxBody extends React.PureComponent {
+  componentDidMount() {
+    console.log('BoxBody mounted');
+  }
+  componentWillUnmount() {
+    console.log('BoxBody will unmount');
+  }
   render() {
     const styles = {
       body: {
         visibility: this.props.selected ? 'visible' : 'hidden',
         opacity: this.props.selected ? '1' : '0',
-        transition: '.3s'
+        transition: '.6s'
       }
     };
     return (
-      <div ref={body => this.props.setBody(body)} style={styles.body}>
+      <div style={styles.body}>
         {React.Children.map(this.props.children, child =>
           React.cloneElement(child, {
-            ...this.props
+            selected: this.props.selected,
+            setBoxHeight: () => console.log('old setbox body')
           })
         )}
       </div>
@@ -22,8 +29,6 @@ class BoxBody extends React.PureComponent {
 }
 
 BoxBody.propTypes = {
-  setBody: React.PropTypes.func,
-  setBoxHeight: React.PropTypes.func,
   selected: React.PropTypes.bool
 };
 

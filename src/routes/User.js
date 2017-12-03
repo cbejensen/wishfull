@@ -1,5 +1,5 @@
 import React from 'react';
-import {ToggleFriend} from 'components/ToggleFriend';
+import { ToggleFriend } from 'components/ToggleFriend';
 import { browserHistory } from 'react-router';
 import { Grid } from 'react-bootstrap';
 import { getUser } from 'utils/firebaseHelpers';
@@ -48,15 +48,20 @@ class UserView extends React.Component {
     );
   }
   render() {
+    const styles = {
+      toggleFriend: {
+        textAlign: 'center',
+        marginBottom: '20px'
+      }
+    };
     if (!this.state.user) return <div>Loading...</div>;
     return (
       <Grid>
         <UserHeading user={this.state.user} />
         {this.state.uid && (
-          <ToggleFriend
-            uid={this.state.uid}
-            friendId={this.state.user.uid}
-          />
+          <div style={styles.toggleFriend}>
+            <ToggleFriend uid={this.state.uid} friendId={this.state.user.uid} />
+          </div>
         )}
         <WishList
           userId={this.state.user.uid}
