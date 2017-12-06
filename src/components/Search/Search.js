@@ -1,39 +1,36 @@
-import React from 'react'
-import SearchInput from './SearchInput'
+import React from 'react';
+import SearchInput from './SearchInput';
 import SearchResults from './SearchResults';
 
 class Search extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       query: ''
-    }
-    this.handleQueryChange = this.handleQueryChange.bind(this)
+    };
+    this.handleQueryChange = this.handleQueryChange.bind(this);
   }
   componentWillUnmount() {
-    this.setState({query: ''})
+    this.setState({ query: '' });
   }
   handleQueryChange(e) {
-    const query = e.target.value
-    this.setState({query: query})
-    if (this.props.handleQueryChange) this.props.handleQueryChange(query)
+    const query = e.target.value;
+    this.setState({ query: query });
+    if (this.props.handleQueryChange) this.props.handleQueryChange(query);
   }
   render() {
-    const {placeHolder, ...props} = this.props
-    let showResults = (this.state.query === '')
-      ? false
-      : true
+    const { placeHolder, ...props } = this.props;
+    let showResults = this.state.query === '' ? false : true;
     return (
       <div>
         <SearchInput
           focusInput={this.props.focusInput}
           handleChange={this.handleQueryChange}
-          placeHolder={placeHolder} />
-        {showResults && <SearchResults
-          {...props}
-          query={this.state.query} />}
+          placeHolder={placeHolder}
+        />
+        {showResults && <SearchResults {...props} query={this.state.query} />}
       </div>
-    )
+    );
   }
 }
 
@@ -47,7 +44,8 @@ Search.propTypes = {
   wishPrimaryColor: React.PropTypes.string,
   wishSecondaryColor: React.PropTypes.string,
   handleQueryChange: React.PropTypes.func,
-  focusInput: React.PropTypes.bool
-}
+  focusInput: React.PropTypes.bool,
+  luminosity: React.PropTypes.string
+};
 
-export default Search
+export default Search;

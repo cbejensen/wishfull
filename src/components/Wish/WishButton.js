@@ -10,7 +10,7 @@ const WishButton = props => {
   } else if (props.uid === props.userId) {
     // user signed in is owner of wish
     return (
-      <Link to={`users/${props.userId}/wish-form/${props.wishId}`}>
+      <Link to={`/users/${props.userId}/wish-form/${props.wishId}`}>
         <Button>Edit</Button>
       </Link>
     );

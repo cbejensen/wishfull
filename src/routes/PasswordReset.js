@@ -14,7 +14,7 @@ export default function PasswordReset(props) {
     <Grid>
       <div style={styles.wrapper}>
         <h2>I forgot my password</h2>
-        <Link to="sign-in">
+        <Link to="/sign-in">
           <h5>wait, I remember it</h5>
         </Link>
         <ResetForm />

@@ -1,7 +1,7 @@
-import React from 'react'
-import {Search} from 'components/Search'
-import {Row, Col} from 'react-bootstrap'
-import './Nav.css'
+import React from 'react';
+import { Search } from 'components/Search';
+import { Row, Col } from 'react-bootstrap';
+import './Nav.css';
 
 export default function NavSearch(props) {
   return (
@@ -9,16 +9,18 @@ export default function NavSearch(props) {
       <Col xs={12}>
         <Search
           uid={props.uid}
-          placeHolder='Search users and wishes'
-          userNameColor='#dadada'
-          wishPrimaryColor='#dadada'
-          wishSecondaryColor='#5d5d5d'
-          focusInput />
+          placeHolder="Search users and wishes"
+          userNameColor="#dadada"
+          wishPrimaryColor="#dadada"
+          wishSecondaryColor="#5d5d5d"
+          luminosity="bright"
+          focusInput
+        />
       </Col>
     </Row>
-  )
+  );
 }
 
 NavSearch.propTypes = {
   uid: React.PropTypes.node.isRequired
-}
+};

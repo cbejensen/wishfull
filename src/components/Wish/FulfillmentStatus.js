@@ -40,7 +40,7 @@ class FulfillmentStatus extends React.Component {
           Fulfilled by{' '}
           <Link
             onClick={this.props.openLink}
-            to={`users/${this.props.fulfillerId}`}
+            to={`/users/${this.props.fulfillerId}`}
           >
             <button className="WishItem-button">{this.state.name}</button>
           </Link>

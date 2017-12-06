@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { Button, Glyphicon } from 'react-bootstrap';
 
 export default function UserBoxHeader(props) {
+  const dark = props.luminosity === 'dark' || !props.luminosity;
   const styles = {
     container: {
       display: 'flex',
@@ -18,7 +19,7 @@ export default function UserBoxHeader(props) {
       overflow: 'hidden'
     },
     name: {
-      color: props.luminosity === 'dark' ? '#1c1c1c' : '#ffffff',
+      color: dark ? '#1c1c1c' : '#ffffff',
       fontSize: '2.5rem',
       fontWeight: 'bolder',
       whiteSpace: 'nowrap',
@@ -27,8 +28,8 @@ export default function UserBoxHeader(props) {
     },
     profileBtn: {
       marginLeft: '8px',
-      background: props.luminosity === 'dark' ? '#ffffff' : '#1c1c1c',
-      color: props.luminosity === 'dark' ? '#1c1c1c' : '#ffffff'
+      background: dark ? '#ffffff' : '#1c1c1c',
+      color: dark ? '#1c1c1c' : '#ffffff'
     }
   };
   return (
@@ -43,7 +44,7 @@ export default function UserBoxHeader(props) {
             handleToggle={e => e.stopPropagation()}
           />
         )}
-        <Link to={`users/${props.userId}`}>
+        <Link to={`/users/${props.userId}`}>
           <Button bsSize="small" style={styles.profileBtn}>
             View Profile <Glyphicon glyph="new-window" />
           </Button>
