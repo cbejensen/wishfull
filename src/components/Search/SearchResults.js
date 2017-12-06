@@ -26,13 +26,19 @@ class SearchResults extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.query !== nextProps.query) {
-      this.search(nextProps.query);
+      if (this.props.query === '') {
+        this.cancelPromises();
+      } else {
+        if (this.timer) clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+          console.log('timer ended');
+          this.search(this.props.query);
+        }, 500);
+      }
     }
   }
   componentWillUnmount() {
-    if (this.friendsPromise) this.friendsPromise.cancel();
-    if (this.usersPromise) this.usersPromise.cancel();
-    if (this.wishesPromise) this.wishesPromise.cancel();
+    this.cancelPromises();
   }
   search(query) {
     // friends
@@ -90,6 +96,11 @@ class SearchResults extends React.Component {
       return newState;
     });
   }
+  cancelPromises = () => {
+    if (this.friendsPromise) this.friendsPromise.cancel();
+    if (this.usersPromise) this.usersPromise.cancel();
+    if (this.wishesPromise) this.wishesPromise.cancel();
+  };
   render() {
     const styles = {
       container: {
