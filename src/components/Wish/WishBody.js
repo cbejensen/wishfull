@@ -30,7 +30,7 @@ class WishBody extends React.PureComponent {
             />
           ) : (
             <div style={{ textAlign: 'center' }}>
-              Please <Link to="sign-in">sign in</Link> to interact with this
+              Please <Link to="/sign-in">sign in</Link> to interact with this
               wish
             </div>
           )}

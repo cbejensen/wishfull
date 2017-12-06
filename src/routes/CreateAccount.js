@@ -14,7 +14,7 @@ export default function CreateAccount(props) {
     <Grid>
       <div style={styles.wrapper}>
         <h2>Create Account</h2>
-        <Link to="sign-in">
+        <Link to="/sign-in">
           <h5>wait, I already have one</h5>
         </Link>
         <Form />

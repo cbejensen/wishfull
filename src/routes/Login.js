@@ -34,7 +34,7 @@ class Login extends React.Component {
       <Grid>
         <div style={styles.wrapper}>
           <h2>I have an account</h2>
-          <Link to="password-reset">
+          <Link to="/password-reset">
             <h5>but I forgot my password</h5>
           </Link>
           <LoginForm />

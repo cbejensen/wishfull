@@ -115,21 +115,21 @@ class SearchResults extends React.Component {
             <UserList
               users={this.state.results.friends}
               uid={this.props.uid}
-              luminosity="bright"
+              luminosity={this.props.luminosity}
             />
           )}
           {users && (
             <UserList
               users={this.state.results.users}
               uid={this.props.uid}
-              luminosity="bright"
+              luminosity={this.props.luminosity}
             />
           )}
           {wishes && (
             <WishResults
               results={this.state.results.wishes}
               uid={this.props.uid}
-              luminosity="bright"
+              luminosity={this.props.luminosity}
             />
           )}
         </div>
@@ -145,7 +145,8 @@ SearchResults.propTypes = {
   excludeWishes: React.PropTypes.bool,
   userNameColor: React.PropTypes.string,
   wishPrimaryColor: React.PropTypes.string,
-  wishSecondaryColor: React.PropTypes.string
+  wishSecondaryColor: React.PropTypes.string,
+  luminosity: React.PropTypes.string
 };
 
 export default SearchResults;
