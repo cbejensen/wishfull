@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Avatar(props) {
   const url = `url("${props.url}")`;
-  const size = props.size || '50px';
+  const size = props.size || '100px';
   const styles = {
     backgroundImage: url,
     backgroundPosition: 'center',
@@ -11,12 +11,13 @@ export default function Avatar(props) {
     width: size,
     borderRadius: '100%',
     overflow: 'hidden',
-    display: 'inline-block'
+    cursor: props.mutable ? 'pointer' : 'default'
   };
-  return <div style={{...styles, ...props.style}} />;
+  return <div onClick={props.onClick} style={{ ...styles, ...props.style }} />;
 }
 
 Avatar.propTypes = {
   url: React.PropTypes.string.isRequired,
-  style: React.PropTypes.object
+  style: React.PropTypes.object,
+  mutable: React.PropTypes.bool
 };

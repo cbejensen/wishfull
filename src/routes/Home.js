@@ -29,11 +29,11 @@ function HomeView(props) {
   return (
     <Grid>
       <div style={styles.heading}>
-        <UserHeading user={props.user} />
+        <UserHeading user={props.user} mutable />
       </div>
       <SlideBox
         radioLeft="My Wishes"
-        radioRight="My Avatar"
+        radioRight="Notifications"
         panelLeft={
           <div>
             <div style={styles.btn}>
@@ -42,7 +42,13 @@ function HomeView(props) {
             <WishList userId={props.uid} uid={props.uid} mutable />
           </div>
         }
-        panelRight={<AvatarForm uid={props.uid} />}
+        panelRight={
+          <h2
+            style={{ textAlign: 'center', marginTop: '75px', color: '#d85454' }}
+          >
+            Coming Soon!
+          </h2>
+        }
       />
     </Grid>
   );
