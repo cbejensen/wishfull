@@ -40,7 +40,8 @@ class Bio extends React.Component {
       bio: {
         width: '300px',
         maxWidth: '100%',
-        resize: 'vertical'
+        resize: 'vertical',
+        padding: '10px'
       },
       btn: {
         display: 'block',

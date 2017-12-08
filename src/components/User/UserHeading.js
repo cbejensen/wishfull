@@ -10,18 +10,18 @@ class UserHeading extends React.Component {
         fontSize: '2em'
       },
       avatar: {
-        height: '60px',
-        textAlign: 'center',
-        marginBottom: '10px'
+        margin: '0 auto 10px'
       }
     };
     const name = this.props.user.firstName + ' ' + this.props.user.lastName;
     return (
       <div>
         <div style={styles.name}>{name}</div>
-        <div style={styles.avatar}>
-          <Avatar uid={this.props.user.uid} />
-        </div>
+        <Avatar
+          uid={this.props.user.uid}
+          mutable={this.props.mutable}
+          style={styles.avatar}
+        />
         {this.props.mutable && <Bio uid={this.props.user.uid} />}
       </div>
     );
