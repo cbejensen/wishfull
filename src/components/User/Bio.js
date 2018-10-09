@@ -35,7 +35,8 @@ class Bio extends React.Component {
   render() {
     const styles = {
       container: {
-        textAlign: 'center'
+        textAlign: 'center',
+        margin: '20px auto 0'
       },
       bio: {
         width: '300px',

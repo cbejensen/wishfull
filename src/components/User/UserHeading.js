@@ -8,12 +8,13 @@ class UserHeading extends React.Component {
       container: {
         display: 'flex',
         flexWrap: 'wrap',
+        justifyContent: 'center',
         alignItems: 'center',
         margin: '20px  auto',
         ...this.props.style
       },
       name: {
-        flex: 1,
+        // flex: 1,
         textAlign: 'left',
         fontSize: '4rem',
         fontWeight: 'bold',
@@ -24,13 +25,15 @@ class UserHeading extends React.Component {
     };
     const name = this.props.user.firstName + ' ' + this.props.user.lastName;
     return (
-      <div style={styles.container}>
-        <Avatar
-          uid={this.props.user.uid}
-          mutable={this.props.mutable}
-          style={{margin: 'auto'}}
-        />
-        <h1 style={styles.name}>{name}</h1>
+      <div>
+        <div style={styles.container}>
+          <Avatar
+            uid={this.props.user.uid}
+            mutable={this.props.mutable}
+            style={{margin: 'auto'}}
+          />
+          <h1 style={styles.name}>{name}</h1>
+        </div>
         {this.props.mutable && <Bio uid={this.props.user.uid} />}
       </div>
     );
