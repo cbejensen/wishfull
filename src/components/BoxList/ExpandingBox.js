@@ -101,7 +101,7 @@ class ExpandingBox extends React.PureComponent {
           margin: 'auto',
           width: '100%',
           position: 'relative',
-          transition: '1s'
+          transition: '.4s'
         }
       };
       return (

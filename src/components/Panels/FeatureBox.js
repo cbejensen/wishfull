@@ -17,8 +17,6 @@ export default function FeatureBox(props) {
     },
     text: {
       fontSize: '6vmin',
-      // avoid words colliding
-      lineHeignt: '20px'
     }
   }
   const img = (
