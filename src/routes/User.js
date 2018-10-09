@@ -56,7 +56,7 @@ class UserView extends React.Component {
     };
     if (!this.state.user) return <div>Loading...</div>;
     return (
-      <Grid>
+      <Grid style={{maxWidth: 480}}>
         <UserHeading user={this.state.user} />
         {this.state.uid && (
           <div style={styles.toggleFriend}>
