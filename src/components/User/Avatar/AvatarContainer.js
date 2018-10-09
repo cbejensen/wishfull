@@ -26,7 +26,9 @@ class AvatarContainer extends React.Component {
     this.mounted = false;
   }
   selectAvatar = () => {
-    this.fileInput.click();
+    if (this.props.mutable) {
+      this.fileInput.click();
+    }
   };
   submitAvatar = () => {
     const file = this.fileInput.files[0];
@@ -77,7 +79,7 @@ class AvatarContainer extends React.Component {
             size={size}
             style={this.props.style}
             onClick={this.selectAvatar}
-            mutable
+            mutable={this.props.mutable}
           />
         )}
       </div>
