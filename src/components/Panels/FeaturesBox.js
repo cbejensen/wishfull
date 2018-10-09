@@ -27,19 +27,23 @@ export default function FeaturesBox(props) {
         <FeatureBox
           glyph='star-empty'
           text='Create your own wish list'
-          backgroundColor='rgba(35, 134, 196, 0.5)' />
+          backgroundColor='#e8c724'
+          style={{margin: '0 50px 10px 0'}} />
         <FeatureBox
           glyph='user'
           text='See what your friends really want'
-          backgroundColor='rgba(153, 24, 59, 0.5)' />
+          backgroundColor='#363636'
+          style={{margin: '0 0 10px 50px'}} />
         <FeatureBox
           glyph='check'
           text="Know what's already been fulfilled"
-          backgroundColor='rgba(65, 113, 23, 0.5)' />
+          backgroundColor='#15b153'
+          style={{margin: '0 50px 10px 0'}} />
         <FeatureBox
           glyph='gift'
           text='Give the perfect gift'
-          backgroundColor='rgba(112, 17, 131, 0.5)' />
+          backgroundColor='#363636'
+          style={{margin: '0 0 10px 50px'}} />
       </div>
     </div>
   )

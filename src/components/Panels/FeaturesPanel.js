@@ -10,14 +10,15 @@ export default function FeaturesPanel(props) {
       height: '100vh'
     },
     FeaturesBox: {
-      height: '75%',
+      height: '70%',
       paddingTop: '10px'
     },
     signUp: {
       padding: '5px',
       height: '15%',
       position: 'relative',
-      textAlign: 'center'
+      textAlign: 'center',
+      marginTop: '30px'
     },
     verticalCenter: {
       position: 'relative',

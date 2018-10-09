@@ -32,7 +32,7 @@ export default function SearchPanel(props) {
         <Search
           excludeWishes
           placeHolder="Search a friend's name"
-          userNameColor='#dadada' />
+          luminosity='light' />
       </div>
       <div style={styles.textLink}>
         <TextLink
