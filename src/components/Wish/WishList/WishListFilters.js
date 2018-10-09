@@ -15,6 +15,27 @@ export default function WishListFilters(props) {
       webkitAppearance: 'none',
       mozAppearance: 'none',
       border: '1px solid black'
+    },
+    maxPriceContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingLeft: 0,
+      paddingRight: 0,
+      minWidth: 160,
+      whiteSpace: 'nowrap',
+      border: 'none'
+    },
+    maxPriceInput: {
+      flex: 1,
+      width: '100%',
+      marginLeft: 3,
+      border: 'none',
+      borderBottom: '1px solid black'
+    },
+    bolderBiggerText: {
+      fontSize: '1.2em',
+      fontWeight: 'bold',
     }
   }
   return (
@@ -29,13 +50,6 @@ export default function WishListFilters(props) {
         <option value="priority">Priority</option>
         <option value="price">Price</option>
       </select>
-      <input
-        type="text"
-        value={props.filter}
-        onChange={props.handleFilter}
-        placeholder="Max price"
-        style={{...styles.filter, maxWidth: '100%', borderTop: 0, borderRight: 0, borderLeft: 0}}
-      />
       <select
         value={props.ascending}
         onChange={props.handleAscending}
@@ -44,6 +58,15 @@ export default function WishListFilters(props) {
         <option value="true">Ascending</option>
         <option value="false">Descending</option>
       </select>
+      <div style={{...styles.filter, ...styles.maxPriceContainer}}>
+        <span>Max Price: <span style={{...styles.bolderBiggerText, marginLeft: 5}}>$</span></span>
+        <input
+          type="number"
+          value={props.filter}
+          onChange={props.handleFilter}
+          style={{...styles.maxPriceInput, ...styles.bolderBiggerText}}
+        />
+      </div>
     </div>
   );
 }
