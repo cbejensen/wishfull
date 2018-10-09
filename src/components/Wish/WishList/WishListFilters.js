@@ -34,7 +34,7 @@ export default function WishListFilters(props) {
         value={props.filter}
         onChange={props.handleFilter}
         placeholder="Max price"
-        style={styles.filter}
+        style={{...styles.filter, maxWidth: '100%', borderTop: 0, borderRight: 0, borderLeft: 0}}
       />
       <select
         value={props.ascending}

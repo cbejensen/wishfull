@@ -5,23 +5,32 @@ import Bio from './Bio';
 class UserHeading extends React.Component {
   render() {
     const styles = {
-      name: {
-        textAlign: 'center',
-        fontSize: '2em'
+      container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        margin: '20px  auto',
+        ...this.props.style
       },
-      avatar: {
-        margin: '0 auto 10px'
+      name: {
+        flex: 1,
+        textAlign: 'left',
+        fontSize: '4rem',
+        fontWeight: 'bold',
+        letterSpacing: '1px',
+        lineHeight: '1',
+        margin: '0 0 0 30px'
       }
     };
     const name = this.props.user.firstName + ' ' + this.props.user.lastName;
     return (
-      <div>
-        <div style={styles.name}>{name}</div>
+      <div style={styles.container}>
         <Avatar
           uid={this.props.user.uid}
           mutable={this.props.mutable}
-          style={styles.avatar}
+          style={{margin: 'auto'}}
         />
+        <h1 style={styles.name}>{name}</h1>
         {this.props.mutable && <Bio uid={this.props.user.uid} />}
       </div>
     );
