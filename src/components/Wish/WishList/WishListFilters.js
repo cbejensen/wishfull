@@ -1,11 +1,28 @@
 import React from 'react';
 
 export default function WishListFilters(props) {
+  const styles = {
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      margin: 'auto',
+      ...props.style
+    },
+    filter: {
+      flex: 1,
+      padding: 10,
+      margin: 10,
+      webkitAppearance: 'none',
+      mozAppearance: 'none',
+      border: '1px solid black'
+    }
+  }
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={styles.container}>
       <select
         value={props.sortBy}
         onChange={props.handleSort}
+        style={styles.filter}
       >
         <option value="">Date Created</option>
         <option value="title">Title</option>
@@ -17,11 +34,12 @@ export default function WishListFilters(props) {
         value={props.filter}
         onChange={props.handleFilter}
         placeholder="Max price"
-        style={{ padding: '5px', margin: '0 10px' }}
+        style={styles.filter}
       />
       <select
         value={props.ascending}
         onChange={props.handleAscending}
+        style={styles.filter}
       >
         <option value="true">Ascending</option>
         <option value="false">Descending</option>
