@@ -15,8 +15,9 @@ class FulfillmentsContainer extends React.Component {
     this.getFulfillments();
   };
   getFulfillments = () => {
+    console.log('id:', this.props.uid);
     getFufilledWishes(this.props.uid)
-      .then(wishes => {
+    .then(wishes => {
         // this.setState({ wishes: 'loading' });
         // const wishes = getMyFulfillments(lists, this.props.uid);
         this.setState({ wishes });
