@@ -166,10 +166,12 @@ export async function getFufilledWishes(uid) {
   for (let wishId in fulfilled) {
     if (fulfilled.hasOwnProperty(wishId)) {
       const wish = await getWish(fulfilled[wishId].uid, wishId);
-      wish.uid = fulfilled[wishId].uid;
-      wish.id = wishId;
-      wish.pricePaid = fulfilled[wishId].price;
-      wishes.push(wish);
+      if (wish) {
+        wish.uid = fulfilled[wishId].uid;
+        wish.id = wishId;
+        wish.pricePaid = fulfilled[wishId].price;
+        wishes.push(wish);
+      }
     }
   }
   return wishes;
