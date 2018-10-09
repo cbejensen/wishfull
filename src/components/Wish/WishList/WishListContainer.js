@@ -101,6 +101,7 @@ class WishListContainer extends React.Component {
       );
     }
     const { wishes, fromSearch, ...propsToPass } = this.props;
+    const maxWidth = '500px';
     return (
       <div>
         {!this.props.fromSearch && (
@@ -111,9 +112,10 @@ class WishListContainer extends React.Component {
             handleSort={this.handleSort}
             handleFilter={this.handleFilter}
             handleAscending={this.handleAscending}
+            style={{maxWidth}}
           />
         )}
-        <WishList {...this.state} {...propsToPass} />
+        <WishList {...this.state} {...propsToPass} style={{maxWidth}} />
       </div>
     );
   }

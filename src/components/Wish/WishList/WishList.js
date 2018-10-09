@@ -6,7 +6,8 @@ export default function WishList(props) {
   const styles = {
     container: {
       maxWidth: '500px',
-      margin: 'auto'
+      margin: 'auto',
+      ...props.style
     },
     wish: {
       margin: '5px auto'
