@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "date-fns": "^1.29.0",
     "firebase": "^3.9.0",
     "normalize.css": "^4.2.0",
     "randomcolor": "^0.4.4",

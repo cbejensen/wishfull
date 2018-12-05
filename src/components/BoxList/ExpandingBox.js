@@ -1,95 +1,94 @@
-import React from 'react';
+import React from 'react'
 
 class ExpandingBox extends React.PureComponent {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       highlighted: false,
       height: 'auto',
       showBody: false
-    };
+    }
   }
   componentDidMount() {
-    this.verticalPaddingAndBorder = 22;
+    this.verticalPaddingAndBorder = 22
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.selected !== this.props.selected) {
       if (this.props.selected) {
-        this.setState({ height: `${this.box.scrollHeight + 8}px` });
+        this.setState({ height: `${this.box.scrollHeight + 8}px` })
       } else {
         this.setState({
           height: `${this.header.offsetHeight +
             this.verticalPaddingAndBorder}px`
-        });
+        })
       }
     }
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.selected && this.state.showBody && !nextProps.selected) {
-      this.setState({ height: `${this.box.scrollHeight + 8}px` });
+      this.setState({ height: `${this.box.scrollHeight + 8}px` })
     }
   }
   setHeaderHeight = header => {
-    if (header) this.header = header;
-  };
+    if (header) this.header = header
+  }
   handleClick = () => {
     this.setState(
       (prevState, props) => {
         if (props.selected) {
           // deselecting
-          return { height: `${this.box.scrollHeight}px` };
+          return { height: `${this.box.scrollHeight}px` }
         } else {
           // selecting
           return {
             height: `${this.header.offsetHeight +
               this.verticalPaddingAndBorder}px`,
             showBody: true
-          };
+          }
         }
       },
       () => {
-        this.props.handleClick(this.props.index);
+        this.props.handleClick(this.props.index)
       }
-    );
-  };
+    )
+  }
   handleTransitionEnd = e => {
     if (e.propertyName === 'height') {
       if (this.props.selected) {
-        this.setState({ height: 'auto', transitioning: false });
+        this.setState({ height: 'auto', transitioning: false })
       } else {
         this.setState({
           height: 'auto',
           transitioning: false,
           showBody: false
-        });
+        })
       }
     }
-  };
+  }
   openLink = e => {
     // just follow link, don't expand/contract wish
-    e.stopPropagation();
-  };
+    e.stopPropagation()
+  }
   handleMouseEnter = () => {
-    this.setState({ highlighted: true });
-  };
+    this.setState({ highlighted: true })
+  }
   handleMouseLeave = () => {
-    this.setState({ highlighted: false });
-  };
+    this.setState({ highlighted: false })
+  }
   handleTouchEnd = () => {
     if (!this.props.selected) {
-      this.setState({ highlighted: false });
+      this.setState({ highlighted: false })
     }
-  };
+  }
   render() {
-    console.warn('rendered', this.state.height);
-    const numChildren = React.Children.count(this.props.children);
+    const numChildren = React.Children.count(this.props.children)
     if (numChildren !== 2) {
-      return null;
+      return null
     } else {
-      const childArray = React.Children.toArray(this.props.children);
-      const color = this.props.color || '#353535';
+      const childArray = React.Children.toArray(this.props.children)
+      const color = this.props.color || '#353535'
       const borderColor =
-        this.state.highlighted || this.props.selected ? color : '#d2d2d2';
+        this.state.highlighted || this.props.selected ? color : '#d2d2d2'
       const styles = {
         default: {
           height: this.state.height,
@@ -103,7 +102,7 @@ class ExpandingBox extends React.PureComponent {
           position: 'relative',
           transition: '.4s'
         }
-      };
+      }
       return (
         <div
           style={{ ...styles.default, ...this.props.style }}
@@ -122,7 +121,7 @@ class ExpandingBox extends React.PureComponent {
               selected: this.props.selected
             })}
         </div>
-      );
+      )
     }
   }
 }
@@ -132,6 +131,6 @@ ExpandingBox.propTypes = {
   handleClick: React.PropTypes.func,
   color: React.PropTypes.string,
   selected: React.PropTypes.bool.isRequired
-};
+}
 
-export default ExpandingBox;
+export default ExpandingBox
