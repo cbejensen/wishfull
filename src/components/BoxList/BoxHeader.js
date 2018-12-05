@@ -1,21 +1,22 @@
-import React from 'react';
+import React from 'react'
 
 class BoxHeader extends React.PureComponent {
   render() {
-    const numChildren = React.Children.count(this.props.children);
+    const { children, setHeader, ...rest } = this.props
+    const numChildren = React.Children.count(children)
     if (!numChildren) {
-      throw Error(`Expected 1 child. Showing ${numChildren}`);
+      throw Error(`Expected 1 child. Showing ${numChildren}`)
     }
     return (
-      <div ref={header => this.props.setHeader(header)}>
-        {this.props.children}
+      <div ref={header => setHeader(header)} {...rest}>
+        {children}
       </div>
-    );
+    )
   }
 }
 
 BoxHeader.propTypes = {
   setHeader: React.PropTypes.func
-};
+}
 
-export default BoxHeader;
+export default BoxHeader

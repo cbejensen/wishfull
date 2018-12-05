@@ -6,6 +6,7 @@ export default class WishComments extends React.Component {
   render() {
     return (
       <div>
+        <hr style={{ margin: '5px 0 5px 0' }} />
         <WishCommentInput
           uid={this.props.uid}
           userId={this.props.userId}
