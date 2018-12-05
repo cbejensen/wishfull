@@ -45,7 +45,7 @@ export default class WishCommentsList extends React.Component {
       },
       message: {
         color: 'white',
-        padding: 10,
+        padding: '5px 10px',
         margin: 0,
         display: 'inline-block',
         borderRadius: '5px'
