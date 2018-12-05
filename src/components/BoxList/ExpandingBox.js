@@ -95,7 +95,6 @@ class ExpandingBox extends React.PureComponent {
           border: `4px solid ${borderColor}`,
           borderRadius: '15px',
           overflow: 'hidden',
-          cursor: 'pointer',
           padding: '7px 10px',
           margin: 'auto',
           width: '100%',
@@ -108,13 +107,14 @@ class ExpandingBox extends React.PureComponent {
           style={{ ...styles.default, ...this.props.style }}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
-          onTouchEnd={this.handleTouchEnd}
-          onClick={this.handleClick}
           onTransitionEnd={this.handleTransitionEnd}
           ref={e => (this.box = e)}
         >
           {React.cloneElement(childArray[0], {
-            setHeader: this.setHeaderHeight
+            setHeader: this.setHeaderHeight,
+            onClick: this.handleClick,
+            onTouchEnd: this.handleTouchEnd,
+            style: { cursor: 'pointer' }
           })}
           {this.state.showBody &&
             React.cloneElement(childArray[1], {

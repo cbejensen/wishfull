@@ -23,13 +23,14 @@ class WishBody extends React.PureComponent {
         </p>
         {this.props.uid ? (
           <div>
-            <WishButton
-              fulfilled={this.props.fulfilled}
-              uid={this.props.uid}
-              userId={this.props.userId}
-              wishId={this.props.wishId}
-              style={{ display: 'block', textAlign: 'right' }}
-            />
+            <div style={{ textAlign: 'right' }}>
+              <WishButton
+                fulfilled={this.props.fulfilled}
+                uid={this.props.uid}
+                userId={this.props.userId}
+                wishId={this.props.wishId}
+              />
+            </div>
             <WishComments
               uid={this.props.uid}
               userId={this.props.userId}

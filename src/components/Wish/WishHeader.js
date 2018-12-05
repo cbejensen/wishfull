@@ -1,7 +1,7 @@
-import React from 'react';
-import FulfillmentStatus from './FulfillmentStatus';
-import { Glyphicon } from 'react-bootstrap';
-import './WishItem.css';
+import React from 'react'
+import FulfillmentStatus from './FulfillmentStatus'
+import { Glyphicon } from 'react-bootstrap'
+import './WishItem.css'
 
 class WishHeader extends React.PureComponent {
   render() {
@@ -35,10 +35,10 @@ class WishHeader extends React.PureComponent {
       subtitle: {
         color: this.props.luminosity === 'dark' ? '#252525' : '#bdbdbd'
       }
-    };
+    }
     const openLink = e => {
-      e.stopPropagation();
-    };
+      e.stopPropagation()
+    }
     return (
       <div style={styles.container}>
         <div style={styles.head}>
@@ -79,7 +79,7 @@ class WishHeader extends React.PureComponent {
           <div style={styles.priorityNumber}>{this.props.priority}</div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -93,6 +93,6 @@ WishHeader.propTypes = {
   uid: React.PropTypes.node.isRequired,
   url: React.PropTypes.string,
   luminosity: React.PropTypes.string
-};
+}
 
-export default WishHeader;
+export default WishHeader

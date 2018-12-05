@@ -1,5 +1,6 @@
 import React from 'react'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
+import { Avatar } from '../User/Avatar'
 import * as firebase from 'firebase'
 
 export default class WishCommentsList extends React.Component {
@@ -10,8 +11,12 @@ export default class WishCommentsList extends React.Component {
     }
   }
   componentDidMount() {
-    const ref = firebase.database().ref(`comments/${this.props.wishId}`)
-    ref.on('value', snap => {
+    this.firebaseListener = firebase
+      .database()
+      .ref(`comments/${this.props.wishId}`)
+      .orderByChild('timestamp')
+    this.firebaseListener.on('value', snap => {
+      if (!snap.val()) return
       const commentsObj = snap.val()
       // convert obj to array
       const comments = Object.keys(commentsObj).map(commentId => ({
@@ -22,7 +27,7 @@ export default class WishCommentsList extends React.Component {
     })
   }
   componentWillUnmount() {
-    // unsubscribe?
+    this.firebaseListener.off()
   }
   render() {
     if (this.state.comments === null) return null
@@ -35,17 +40,15 @@ export default class WishCommentsList extends React.Component {
         padding: 10,
         fontSize: '1em',
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
       },
       message: {
-        background: 'blue',
         color: 'white',
         padding: 10,
+        margin: 0,
         display: 'inline-block',
         borderRadius: '5px'
-      },
-      messageByOwner: {
-        background: 'gray'
       },
       timestamp: {
         color: 'gray',
@@ -56,40 +59,37 @@ export default class WishCommentsList extends React.Component {
     }
     return (
       <ul style={styles.list}>
-        {this.state.comments.map(
-          ({ message, timestamp, userId, commentId }) => {
-            let isOwner = userId === this.props.uid
-            const timeElem = (
-              <div style={styles.timestamp}>
-                {distanceInWordsToNow(timestamp)}
-              </div>
-            )
-            const msgElem = (
-              <p
-                style={
-                  isOwner
-                    ? styles.message
-                    : { ...styles.message, ...styles.messageByOwner }
-                }
-              >
-                {message}
-              </p>
-            )
-            // switch order of message and timestamp if owner
-            let comment = isOwner ? (
-              <li style={styles.comment} key={commentId}>
-                {timeElem}
-                {msgElem}
+        {this.state.comments
+          .reverse()
+          .map(({ message, timestamp, author, id }) => {
+            let isOwnComment = author && author === this.props.uid
+            return (
+              <li style={styles.comment} key={id}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  {isOwnComment && (
+                    <Avatar
+                      uid={this.props.uid}
+                      size="40px"
+                      style={{ marginRight: 10 }}
+                    />
+                  )}
+                  <p
+                    style={{
+                      ...styles.message,
+                      background: isOwnComment ? '#337ab6' : 'gray'
+                    }}
+                  >
+                    {message}
+                  </p>
+                </div>
+                {timestamp && (
+                  <div style={styles.timestamp}>
+                    {distanceInWordsToNow(timestamp)}
+                  </div>
+                )}
               </li>
-            ) : (
-              <li style={styles.comment} key={commentId}>
-                {msgElem}
-                {timeElem}
-              </li>
             )
-            return comment
-          }
-        )}
+          })}
       </ul>
     )
   }
