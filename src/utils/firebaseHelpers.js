@@ -145,11 +145,22 @@ export const getAllWishLists = () => {
 }
 
 export const addWishComment = (uid, wishId, commentObj) => {
+  const commentKey = firebase
+    .database()
+    .ref()
+    .child(`/comments/${wishId}`)
+    .push().key
+  const updates = {}
+  updates[`/comments/${wishId}/${commentKey}`] = commentObj
+  updates[`/notifications/${uid}/${commentKey}`] = {
+    type: 'WISH_COMMENT',
+    wishId,
+    timestamp: commentObj.timestamp
+  }
   return firebase
     .database()
-    .ref(`/comments/${wishId}`)
-    .push()
-    .update(commentObj)
+    .ref()
+    .update(updates)
     .then(res => res, err => err)
 }
 
