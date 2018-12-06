@@ -144,19 +144,27 @@ export const getAllWishLists = () => {
   )
 }
 
-export const addWishComment = (uid, wishId, commentObj) => {
-  const commentKey = firebase
+export const addWishComment = (uid, userId, wishId, comment) => {
+  const newKey = firebase
     .database()
     .ref()
     .child(`/comments/${wishId}`)
     .push().key
   const updates = {}
-  updates[`/comments/${wishId}/${commentKey}`] = commentObj
-  updates[`/notifications/${uid}/${commentKey}`] = {
+  updates[`/comments/${wishId}/${newKey}`] = {
+    message: comment,
+    timestamp: Date.now(),
+    author: userId
+  }
+  updates[`/notifications/${userId}/${newKey}`] = {
     type: 'WISH_COMMENT',
     wishId,
-    timestamp: commentObj.timestamp
+    timestamp: Date.now()
   }
+  updates[`/lists/${userId}/${wishId}/comments`] = {
+    [newKey]: newKey
+  }
+  updates[`/lists/${userId}/${wishId}/newActivity`] = true
   return firebase
     .database()
     .ref()

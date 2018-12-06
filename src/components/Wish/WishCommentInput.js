@@ -1,7 +1,8 @@
 import React from 'react'
 import FormInput from '../FormInput'
 import { Button } from 'react-bootstrap'
-import { addWishComment } from 'utils/firebaseHelpers'
+import { addWishComment, getUser } from 'utils/firebaseHelpers'
+import { emailWishComment } from 'utils/emailHelpers'
 
 export default class WishCommentInput extends React.Component {
   constructor(props) {
@@ -16,12 +17,23 @@ export default class WishCommentInput extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     if (this.state.comment) {
-      addWishComment(this.props.uid, this.props.wishId, {
-        message: this.state.comment,
-        timestamp: Date.now(),
-        author: this.props.userId
-      })
-        .then(res => this.setState({ comment: '' }))
+      addWishComment(
+        this.props.uid,
+        this.props.userId,
+        this.props.wishId,
+        this.state.comment
+      )
+        .then(res => {
+          getUser(this.props.userId).then(user => {
+            emailWishComment(
+              this.props.wishTitle,
+              this.state.comment,
+              user.email
+            )
+              .then(res => this.setState({ comment: '' }))
+              .catch(err => console.error(err))
+          })
+        })
         .catch(err => {
           console.error(err)
           alert('Sorry, there was an error. Please try again later.')
