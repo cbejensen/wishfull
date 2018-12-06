@@ -14,6 +14,7 @@ export default class WishCommentsList extends React.Component {
     this.firebaseListener = firebase
       .database()
       .ref(`comments/${this.props.wishId}`)
+      .orderByChild('timestamp')
     this.firebaseListener.on('value', snap => {
       if (!snap.val()) return
       const commentsObj = snap.val()
@@ -60,6 +61,7 @@ export default class WishCommentsList extends React.Component {
       <ul style={styles.list}>
         {this.state.comments
           .reverse()
+          .sort((a, b) => (a.timestamp < b.timestamp ? -1 : 1))
           .map(({ message, timestamp, author, id }) => {
             let isOwnComment = author && author === this.props.uid
             return (
