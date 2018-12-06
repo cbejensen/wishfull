@@ -32,8 +32,10 @@ class WishBody extends React.PureComponent {
               />
             </div>
             <WishComments
+              wishTitle={this.props.title}
               uid={this.props.uid}
               userId={this.props.userId}
+              user={this.props.user}
               wishId={this.props.wishId}
             />
           </div>
@@ -49,8 +51,9 @@ class WishBody extends React.PureComponent {
 
 WishBody.propTypes = {
   userId: React.PropTypes.node.isRequired,
-  wishId: React.PropTypes.string.isRequired,
   uid: React.PropTypes.node,
+  user: React.PropTypes.node,
+  wishId: React.PropTypes.string.isRequired,
   wishes: React.PropTypes.array,
   fulfilled: React.PropTypes.node,
   mutable: React.PropTypes.bool,

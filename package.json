@@ -7,6 +7,7 @@
     "react-scripts": "0.4.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^3.3.7",
     "date-fns": "^1.29.0",
     "firebase": "^3.9.0",
