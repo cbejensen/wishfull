@@ -7,7 +7,11 @@ export default class WishComments extends React.Component {
     return (
       <div>
         <hr style={{ margin: '5px 0 5px 0' }} />
-        <WishCommentsList uid={this.props.uid} wishId={this.props.wishId} />
+        <WishCommentsList
+          uid={this.props.uid}
+          userId={this.props.userId}
+          wishId={this.props.wishId}
+        />
         <WishCommentInput
           uid={this.props.uid}
           userId={this.props.userId}

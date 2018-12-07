@@ -24,15 +24,17 @@ export default class WishCommentInput extends React.Component {
         this.state.comment
       )
         .then(res => {
-          getUser(this.props.userId).then(user => {
-            emailWishComment(
-              this.props.wishTitle,
-              this.state.comment,
-              user.email
-            )
-              .then(res => this.setState({ comment: '' }))
-              .catch(err => console.error(err))
-          })
+          if (this.props.uid !== this.props.userId) {
+            getUser(this.props.userId).then(user => {
+              emailWishComment(
+                this.props.wishTitle,
+                this.state.comment,
+                user.email
+              )
+                .then(res => this.setState({ comment: '' }))
+                .catch(err => console.error(err))
+            })
+          }
         })
         .catch(err => {
           console.error(err)
