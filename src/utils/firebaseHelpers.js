@@ -145,6 +145,7 @@ export const getAllWishLists = () => {
 }
 
 export const addWishComment = (uid, userId, wishId, comment) => {
+  console.log(uid, userId, wishId, comment)
   const newKey = firebase
     .database()
     .ref()
@@ -154,7 +155,7 @@ export const addWishComment = (uid, userId, wishId, comment) => {
   updates[`/comments/${wishId}/${newKey}`] = {
     message: comment,
     timestamp: Date.now(),
-    author: userId
+    author: uid
   }
   updates[`/notifications/${userId}/${newKey}`] = {
     type: 'WISH_COMMENT',

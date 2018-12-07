@@ -37,7 +37,7 @@ export default class WishCommentsList extends React.Component {
         listStyle: 'none'
       },
       comment: {
-        padding: 10,
+        padding: 5,
         fontSize: '1em',
         display: 'flex',
         justifyContent: 'space-between',
@@ -52,9 +52,10 @@ export default class WishCommentsList extends React.Component {
       },
       timestamp: {
         color: 'gray',
-        float: 'right',
         fontSize: '.8rem',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginLeft: 15,
+        whiteSpace: 'nowrap'
       }
     }
     return (
@@ -63,13 +64,14 @@ export default class WishCommentsList extends React.Component {
           .reverse()
           .sort((a, b) => (a.timestamp < b.timestamp ? -1 : 1))
           .map(({ message, timestamp, author, id }) => {
-            let isOwnComment = author && author === this.props.uid
+            let isOwnComment =
+              author === this.props.uid || author === this.props.userId
             return (
               <li style={styles.comment} key={id}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   {isOwnComment && (
                     <Avatar
-                      uid={this.props.uid}
+                      uid={author}
                       size="40px"
                       style={{ marginRight: 10 }}
                     />
@@ -77,7 +79,8 @@ export default class WishCommentsList extends React.Component {
                   <p
                     style={{
                       ...styles.message,
-                      background: isOwnComment ? '#337ab6' : 'gray'
+                      background:
+                        author === this.props.userId ? '#337ab6' : 'gray'
                     }}
                   >
                     {message}
