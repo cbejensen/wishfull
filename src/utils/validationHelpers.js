@@ -12,7 +12,7 @@ export function validateWish(wish) {
 
 export function validateUrl(url) {
   if (url) {
-    const reg = /https?:\/\/.*\.\b/
+    const reg = /^https?:\/\/.*\.\b/
     return reg.test(url)
   }
   return true
