@@ -1,0 +1,20 @@
+.wish-action {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 5px 15px 0;
+  border: none;
+  background: none;
+  color: #464646;
+}
+.wish-action:hover {
+  background: none;
+  border: none;
+  text-decoration: none;
+  color: black;
+}
+.wish-action--good:hover {
+  color: #2e7bb2;
+}
+.wish-action--bad:hover {
+  color: #ce2d30;
+}

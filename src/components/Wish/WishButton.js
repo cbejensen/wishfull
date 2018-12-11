@@ -1,7 +1,6 @@
 import React from 'react'
 import FulfillmentButton from './FulfillmentButton'
 import { Link } from 'react-router'
-import { Button } from 'react-bootstrap'
 
 const WishButton = props => {
   if (!props.uid) {
@@ -11,8 +10,12 @@ const WishButton = props => {
     // user signed in is owner of wish
     const { userId, wishId, ...otherProps } = props
     return (
-      <Link to={`/users/${userId}/wish-form/${wishId}`} {...otherProps}>
-        <Button>Edit</Button>
+      <Link
+        className="wish-action"
+        to={`/users/${userId}/wish-form/${wishId}`}
+        {...otherProps}
+      >
+        Edit
       </Link>
     )
   } else if (!props.fulfilled || props.fulfilled === props.uid) {

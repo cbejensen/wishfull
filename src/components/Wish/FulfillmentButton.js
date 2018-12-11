@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 import { Button } from 'react-bootstrap'
 import { updateFulfillment } from 'utils/firebaseHelpers'
 
@@ -45,6 +44,9 @@ class FulfillmentButton extends React.Component {
     const { fulfilled, ...otherProps } = this.props
     return (
       <Button
+        className={`wish-action ${
+          this.props.fulfilled ? 'wish-action--bad' : 'wish-action--good'
+        }`}
         bsStyle={fulfilled ? 'danger' : 'primary'}
         onClick={e => this.updateFulfilledStatus(!fulfilled, e)}
         {...otherProps}
