@@ -2,9 +2,21 @@ import React from 'react'
 import WishButton from './WishButton'
 import WishComments from './WishComments'
 import { Link } from 'react-router'
+import './wish-actions.css'
 import './WishItem.css'
 
 class WishBody extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showComments: false
+    }
+  }
+  toggleShowComments = () => {
+    this.setState(state => ({
+      showComments: !state.showComments
+    }))
+  }
   render() {
     const styles = {
       hr: {
@@ -13,6 +25,11 @@ class WishBody extends React.PureComponent {
       description: {
         paddingBottom: '5px',
         color: this.props.luminosity === 'dark' ? '#252525' : '#ffffff'
+      },
+      btnRow: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
       }
     }
     return (
@@ -23,7 +40,10 @@ class WishBody extends React.PureComponent {
         </p>
         {this.props.uid ? (
           <div>
-            <div style={{ textAlign: 'right' }}>
+            <div style={styles.btnRow}>
+              <button className="wish-action" onClick={this.toggleShowComments}>
+                {this.state.showComments ? 'Hide' : 'Show'} comments
+              </button>
               <WishButton
                 fulfilled={this.props.fulfilled}
                 uid={this.props.uid}
@@ -31,13 +51,15 @@ class WishBody extends React.PureComponent {
                 wishId={this.props.wishId}
               />
             </div>
-            <WishComments
-              wishTitle={this.props.title}
-              uid={this.props.uid}
-              userId={this.props.userId}
-              user={this.props.user}
-              wishId={this.props.wishId}
-            />
+            {this.state.showComments && (
+              <WishComments
+                wishTitle={this.props.title}
+                uid={this.props.uid}
+                userId={this.props.userId}
+                user={this.props.user}
+                wishId={this.props.wishId}
+              />
+            )}
           </div>
         ) : (
           <strong style={{ textAlign: 'center' }}>
