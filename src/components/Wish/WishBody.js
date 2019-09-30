@@ -9,28 +9,28 @@ class WishBody extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      showComments: false
+      showComments: true,
     }
   }
   toggleShowComments = () => {
     this.setState(state => ({
-      showComments: !state.showComments
+      showComments: !state.showComments,
     }))
   }
   render() {
     const styles = {
       hr: {
-        margin: '5px 0 5px 0'
+        margin: '5px 0 5px 0',
       },
       description: {
         paddingBottom: '5px',
-        color: this.props.luminosity === 'dark' ? '#252525' : '#ffffff'
+        color: this.props.luminosity === 'dark' ? '#252525' : '#ffffff',
       },
       btnRow: {
         display: 'flex',
         justifyContent: 'flex-end',
-        alignItems: 'center'
-      }
+        alignItems: 'center',
+      },
     }
     return (
       <div>
@@ -81,7 +81,7 @@ WishBody.propTypes = {
   mutable: React.PropTypes.bool,
   description: React.PropTypes.string,
   color: React.PropTypes.string,
-  setBoxHeight: React.PropTypes.func
+  setBoxHeight: React.PropTypes.func,
 }
 
 export default WishBody
