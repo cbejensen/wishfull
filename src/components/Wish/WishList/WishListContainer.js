@@ -81,7 +81,7 @@ class WishListContainer extends React.Component {
           for (let wishId in wishes) {
             if (wishes.hasOwnProperty(wishId)) {
               wishes[wishId].id = wishId
-            }
+            } 
           }
           // convert wishes from obj to array
           const wishesArray = Object.keys(wishes).map(wish => wishes[wish])
@@ -104,7 +104,7 @@ class WishListContainer extends React.Component {
     const maxWidth = '500px'
     return (
       <div>
-        {!this.props.fromSearch && (
+        {!fromSearch && (
           <WishListFilters
             sortBy={this.state.sortBy}
             filter={this.state.filter}

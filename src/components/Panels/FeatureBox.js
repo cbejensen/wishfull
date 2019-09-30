@@ -1,39 +1,38 @@
 import React from 'react'
-import CenterAlign from 'components/CenterAlign'
-import {Glyphicon} from 'react-bootstrap'
-import ImageTextBlock from 'components/ImageTextBlock'
+import { Glyphicon } from 'react-bootstrap'
 
 export default function FeatureBox(props) {
   const styles = {
+    row: {
+      position: 'relative',
+      height: '25%'
+    },
     feature: {
-      margin: '0 8px',
-      height: '100%',
+      display: 'inline-flex',
+      alignItems: 'center',
+      position: 'absolute',
+      padding: '15px',
       color: props.color || '#ffffff',
-      backgroundColor: props.backgroundColor || '#000000',
-      overflow: 'hidden'
+      backgroundColor: props.backgroundColor || '#000000'
     },
     img: {
-      fontSize: '12vmin'
+      fontSize: '12vmin',
+      marginRight: '15px'
     },
     text: {
-      fontSize: '6vmin',
+      fontSize: '5vmin',
+      whiteSpace: 'nowrap'
     }
   }
-  const img = (
-    <CenterAlign>
-      <Glyphicon glyph={props.glyph} style={styles.img} />
-    </CenterAlign>
+  return (
+    <div style={styles.row}>
+      <div style={{ ...styles.feature, ...props.style }}>
+        <Glyphicon glyph={props.glyph} style={styles.img} />
+        <span style={styles.text}>{props.text}</span>
+      </div>
+    </div>
   )
-  const text = (
-    <CenterAlign horizontal={false}>
-      <span style={styles.text}>{props.text}</span>
-    </CenterAlign>
-  )
-  return <ImageTextBlock
-          img={img}
-          text={text}
-          style={{...styles.feature, ...props.style}} />
-};
+}
 
 FeatureBox.propTypes = {
   glyph: React.PropTypes.string.isRequired,
